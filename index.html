@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="./assets/css/index.css">
+    <script src="./assets/js/index.js" type="module" defer></script>
+</head>
+
+<body>
+    <div id="app">
+
+        <div class="inner" :style="header">
+            <div class="container flex center">
+                <div>
+                    <img :src="logo">
+                    <label for="on_logo">
+                        <img class="edit" src="./assets/icon/image.svg">
+                        <input  class="none-input" type="file" id="on_logo" ref="logo" @change="preview()">
+                    </label>
+                </div>
+            </div>
+            <div class="edit_box">
+                <label for="on_color_top">
+                    <img class="edit" src="./assets/icon/bg.svg">
+                    <input class="none-input" type="color" id="on_color_top" v-model="header.backgroundColor">
+                </label>
+                
+                <img class="edit" src="./assets/icon/image.svg">
+            </div>
+        </div>
+
+        <div class="inner">
+            <div class="container">
+                <div class="grid g-2 center">
+                    <div>
+                        <img src="">
+                        <img class="edit" src="./assets/icon/image.svg">
+                    </div>
+                    <div>
+                        <img src="">
+                        <img class="edit" src="./assets/icon/image.svg">
+                    </div>
+                </div>
+            </div>
+            <div class="edit_box">
+                <img class="edit" src="./assets/icon/bg.svg">
+                <img class="edit" src="./assets/icon/image.svg">
+            </div>
+        </div>
+
+        <div class="inner">
+            <div class="container">
+                <h2 contenteditable="true" class="title">Porque Ajudar Bethânia?</h2>
+                <div class="grid g-4">
+                    <div class="videos" v-for="video in videos" @click="pop_status=true">
+                        <img :src="video | getIdYoutube | getTumb">
+                        <span></span>
+                    </div>
+                </div>
+                <form action="javascript:void(0)" @submit="addVideo()">
+                    <input type="url" v-model="urlVideo" placeholder="https://www.youtube.com/watch?v=*****" required>
+                    <button type="submit">Adicionar</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="popup" v-if="pop_status">
+            <span @click="pop_status=false">x</span>
+            <div>
+                <iframe width="100%" height="315" :src="'https://www.youtube.com/embed/'+pop_id " title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="inner">
+            <div class="container">
+                <h2 contenteditable="true" class="title">O Maior Ensinamento de Padre Léo!</h2>
+                <div>
+                    <div>
+                        <img src="">
+                        <img src="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="inner">
+            <div class="container">
+                <h1 contenteditable="true" class="center">Sua "Doação" Ajuda a Salvar Vidas</h1>
+                <p contenteditable="true">
+                    O Sonho de Padre Léo de acolher pessoas com dependência química,
+                    que inicialmente se materializou em São João Batista (SC),
+                    alcançou também outros estados e municípios.
+                    O carisma da Comunidade Bethânia frutificou e hoje está presente
+                    em outros 7 recantos no país: Curitiba (PR), Irati (PR),
+                    Guarapuava (PR), Cianorte (PR), Lorena (SP), Uberlândia (MG) e
+                    Itaperuna (RJ), Disponibilizando juntos, por meio de um projeto
+                    pedagógico,170 vagas de acolhimento gratuitas para adultos com
+                    idades entre 18 a 59 anos. Confira algumas das atividades que
+                    previstas no projeto:
+                </p>
+                <div>
+                    <div class="grid g-4">
+                        <div v-for="img in galerys" class="item_galery">
+                            <img :src="img.src" alt="foto galeria">
+                            <span>{{ img.title }}</span>
+                        </div>
+                    </div>
+                </div>
+                <form action="javascript:void(0)" @submit="add_galery()">
+                    <input type="text" placeholder="title" v-model="galery_title">
+                    <input type="file" ref="image_galery">
+                    <button type="submit">Add IMG</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="inner">
+            <div class="container grid g-2">
+                <div>
+                    <img src="">
+                    <p contenteditable="true">
+                        Se você sente no coração o desejo de ajudar a acolher e dar
+                        vida nova a tantas pessoas fragilizadas pela dependência
+                        química, você é convidado a se tornar um Amigo de Bethânia.
+                    </p>
+                </div>
+                <div>
+                    <h2 contenteditable="true" class="center">“A providência de Deus se manifesta por meio de você!” Pe.
+                        Léo, scj</h2>
+                    <a href="" contenteditable="true"> DOAR AGORA </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="inner" :style="header">
+            <div>
+                <div class="flex between">
+                    <div contenteditable="true"> Copyright © Bethânia 2019 Direitos Reservados. </div>
+                    <div> <img src=""> </div>
+                </div>
+                <div class="copy" > Sistema de Doações Desenvolvido por Digital Combo </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
