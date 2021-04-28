@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generator: Adobe Illustrator 18.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -13,15 +13,23 @@
    id="Capa_1"
    x="0px"
    y="0px"
-   viewBox="0 0 142.448 142.448"
-   style="enable-background:new 0 0 142.448 142.448;"
+   width="35px"
+   height="35px"
+   viewBox="0 0 35 35"
+   style="enable-background:new 0 0 35 35;"
    xml:space="preserve"
-   sodipodi:docname="play.svg"
+   sodipodi:docname="1-col.svg"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"><metadata
-   id="metadata43"><rdf:RDF><cc:Work
+   id="metadata47"><rdf:RDF><cc:Work
        rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
          rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
-   id="defs41" /><sodipodi:namedview
+   id="defs45">
+	
+
+		
+		
+		
+	</defs><sodipodi:namedview
    pagecolor="#ffffff"
    bordercolor="#666666"
    borderopacity="1"
@@ -32,33 +40,27 @@
    inkscape:pageshadow="2"
    inkscape:window-width="1366"
    inkscape:window-height="705"
-   id="namedview39"
+   id="namedview43"
    showgrid="false"
-   inkscape:zoom="1.6567449"
-   inkscape:cx="-9.0538982"
-   inkscape:cy="71.223999"
+   showguides="true"
+   inkscape:guide-bbox="true"
+   inkscape:zoom="6.7428571"
+   inkscape:cx="-2.2245763"
+   inkscape:cy="17.5"
    inkscape:window-x="-8"
    inkscape:window-y="-8"
    inkscape:window-maximized="1"
    inkscape:current-layer="Capa_1" />
-<g
-   id="g6"
-   style="fill:#000000">
-	<path
-   style="fill:#000000"
-   d="M142.411,68.9C141.216,31.48,110.968,1.233,73.549,0.038c-20.361-0.646-39.41,7.104-53.488,21.639   C6.527,35.65-0.584,54.071,0.038,73.549c1.194,37.419,31.442,67.667,68.861,68.861c0.779,0.025,1.551,0.037,2.325,0.037   c19.454,0,37.624-7.698,51.163-21.676C135.921,106.799,143.033,88.377,142.411,68.9z M111.613,110.336   c-10.688,11.035-25.032,17.112-40.389,17.112c-0.614,0-1.228-0.01-1.847-0.029c-29.532-0.943-53.404-24.815-54.348-54.348   c-0.491-15.382,5.122-29.928,15.806-40.958c10.688-11.035,25.032-17.112,40.389-17.112c0.614,0,1.228,0.01,1.847,0.029   c29.532,0.943,53.404,24.815,54.348,54.348C127.91,84.76,122.296,99.306,111.613,110.336z"
-   id="path2" />
-	<path
-   style="fill:#000000"
-   d="M94.585,67.086L63.001,44.44c-3.369-2.416-8.059-0.008-8.059,4.138v45.293   c0,4.146,4.69,6.554,8.059,4.138l31.583-22.647C97.418,73.331,97.418,69.118,94.585,67.086z"
-   id="path4" />
-</g>
-<g
-   id="g8">
-</g>
-<g
-   id="g10">
-</g>
+<path
+   d="M 0,0 V 35 H 35 V 0 Z M 33,33 H 2 V 2 h 31 z"
+   id="path2"
+   inkscape:connector-curvature="0" /><rect
+   x="4.5"
+   y="4.5"
+   width="26.050846"
+   height="26"
+   id="rect4"
+   style="stroke-width:1.50508833" />
 <g
    id="g12">
 </g>
@@ -97,5 +99,11 @@
 </g>
 <g
    id="g36">
+</g>
+<g
+   id="g38">
+</g>
+<g
+   id="g40">
 </g>
 </svg>

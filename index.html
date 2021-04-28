@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
+    <title>Doar Digital</title>
     <link rel="stylesheet" href="./assets/css/index.css">
+    <link rel="shortcut icon" href="./assets/logo/icopng.png" type="image/x-icon">
     <script src="./assets/js/index.js" type="module" defer></script>
 </head>
 
@@ -16,7 +17,7 @@
         <div class="inner" :style="header">
             <div class="container flex center">
                 <div>
-                    <img :src="logo">
+                    <img :src="logo" class="logo">
                     <label for="on_logo">
                         <img class="edit" src="./assets/icon/image.svg">
                         <input  class="none-input" type="file" id="on_logo" ref="logo" @change="preview()">
@@ -131,11 +132,14 @@
                 <div>
                     <h2 contenteditable="true" class="center">“A providência de Deus se manifesta por meio de você!” Pe.
                         Léo, scj</h2>
-                    <a href="" contenteditable="true"> DOAR AGORA </a>
+                    
                 </div>
             </div>
         </div>
-
+        <a href="./doar.html" class="call_action" > 
+            <img src="./assets/icon/donative.svg">
+            <span contenteditable="true">DOAR AGORA </span> 
+        </a>
         <div class="inner" :style="header">
             <div>
                 <div class="flex between">
