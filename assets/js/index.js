@@ -3,11 +3,16 @@ import Vue from './library/vue.js'
 globalThis.app = new Vue({
     data: {
         title: 'Betania',
-        header: {            
+        logo: {
+            top: './sass/doacoesbethania.com.br/logo/2.png',
+            footer: './sass/doacoesbethania.com.br/logo/1.png'
+        },
+        backgroundColor: '#25b3c2',
+        header: {
+            align: '',     
             backgroundColor: '#25b3c2',
             backgoundImage: './sass/doacoesbethania.com.br/galery/1.jpg',
         },
-        logo: './assets/logo/logo.svg',
         urlVideo: 'https://www.youtube.com/watch?v=H-GrnWRc2i4',
         videos: [
             'https://www.youtube.com/watch?v=NatrfQRSJMU',

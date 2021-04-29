@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,68 +7,98 @@
     <title>Document</title>
 </head>
 <body>
-    
-<div class="card_form">
     <div>
-        <div class="escolha_tipo">
-            <?php foreach ($option_play as $meio_pagamento) : ?>
-                <input type="radio" oninput="globalThis.opcao_pagamento( '<?= $meio_pagamento['value'] ?>' )" name="type_pagamento" value="<?= $meio_pagamento['value'] ?>" id="<?= $meio_pagamento['id'] ?>" hidden>
-                <label for="<?= $meio_pagamento['id'] ?>" <?= is_option_valid( $modo_de_pagamento, $meio_pagamento['value'] ) ?> >
-                    <img src="<?= $meio_pagamento['ico'] ?>" alt="card">
-                    <small><?= $meio_pagamento['text'] ?></small>
+        <div> <img src="./sass/doacoesbethania.com.br/logo/1.png"> </div>
+        <div>
+            <form action="javascript:void(0)">
+                <label for="">Escolha tipo</label> <br>
+                <input type="radio"name="transaction_type" checked> Doação Única <br>
+                <input type="radio"name="transaction_type" > Doação Mensal <br>
+                <label for="">Escolha Valor para Doação</label> <br>
+
+                <input type="radio"name="donative_price" value="2500" checked > R$ 25,00 <br>
+                <input type="radio"name="donative_price" value="5000" > R$ 50,00 <br>
+                <input type="radio"name="donative_price" value="7500" > R$ 75,00 <br>
+                <input type="radio"name="donative_price" value="10000" > R$ 100,00 <br>
+                <input type="radio"name="donative_price" value="20000" > R$ 200,00 <br>
+                <input type="radio"name="donative_price" value="CUSTON" > Outro <br>
+                <label for="">Informe um valor</label> <br>
+                <input type="text" name="price_custon" placeholder="150,00"> <br>
+                
+                <h2>DIGITE SUAS INFORMAÇÕES</h2>
+                <input type="text" placeholder="Nome*" name="nome" required>
+                <input type="email" placeholder="email*" name="email" required>
+                <input type="text" placeholder="CPF*" name="cpf" required>
+                <input type="text" placeholder="Telefone*" name="telefone" required>
+                <input type="text" placeholder="CEP*" name="cep" required>
+                <input type="text" placeholder="Endereço*" name="endereco" required>
+                <input type="text" placeholder="Numero*" name="endereco_numero" required>
+                <input type="text" placeholder="Bairro*" name="bairro" required>
+                <input type="text" placeholder="Estado*" name="estado" required>
+                <input type="text" placeholder="Cidade*" name="cidade" required>
+            </form>
+            <div>
+                <h2>SUA DOAÇÃO</h2>
+                <div>
+                    <span>tipo</span> <span>Total</span>
+                    <span>Pagamento Unico</span> <span>R$ 25,00 </span>
+                </div>
+                <h2>INFORMAÇÃO DE PAGAMENTO</h2>
+                <p>
+                    Todas as transações são seguras e criptografadas. 
+                    As informações do cartão de crédito nunca são 
+                    armazenadas em nossos servidores.
+                </p>
+            </div>
+            <div>
+                <input type="radio" name="payment_type" value="card" checked>
+                <label for="for_card">
+                    <img src="./assets/icon/card.svg" id="for_card">
                 </label>
-            <?php endforeach; ?>
+                <input type="radio" name="payment_type" value="boleto">
+                <label for="for_boleto">
+                    <img src="./assets/icon/barcode.svg" id="for_boleto">
+                </label>
+            </div>
+            <div>
+                <img src="./assets/img/chip.png">
+                <img src="./assets/img/ico.png">
+                <span>0000 0000 0000 0000</span>
+                <span>
+                    <span>VALID</span>
+                    <span>02/2027</span>
+                </span>
+                <span>
+                    <span>CVV</span>
+                    <span>1234</span>
+                </span>
+                <span>NOME COMPLETO</span>
+            </div>
+            <div>
+                <input type="text" name="numero" placeholder="0000 0000 0000 0000" required>
+                <input type="text" name="validade" placeholder="02/2027" required>
+                <input type="text" name="cvv" placeholder="1234" required>
+                <input type="text" name="nome_completo" placeholder="NOME COMPLETO" required>
+            </div>
+
+            <button type="submit"> Dor Agora! </button>
+            <p> Error: Preencha os dados com * </p>
+            <p>
+                Os seus dados pessoais serão utilizados para processar a sua compra, 
+                apoiar a sua experiência em todo este site e para outros 
+                fins descritos na nossa 
+                <a href="./politica-de-privacidade.html">
+                    política de privacidade.
+                </a>
+            </p>
+            <div>
+                <img src="./assets/img/bandeiras.png">
+            </div>
         </div>
+        <div> Copyright © 2020 Comunidade Bethânia </div>
     </div>
-</div>
-<div id="card_digital_combo" hidden >
-    <div class="card" style="background-image: url( '<?= DCP['BG_CARD'] ?>' );">
-        <div class="card__branch">
-            <img src="<?= DCP['CHIP_CARD'] ?>" alt="">
-            <span></span>
-            <img src="<?= DCP['ICO'] ?>" alt="">
-        </div>
-        <div class="card_number" id="vNumber">0000 0000 0000 0000</div>
-        <div class="card__valid_cvv">
-            <div>
-                <span>VALID</span>
-                <b id="vValid">02/2020</b>
-            </div>
-            <div>
-                <span>CVV</span>
-                <b id="vCvv">123</b>
-            </div>
-        </div>
-        <div class="card_name" id="vName">DIGITA AQUI SEU NOME</div>
+    <div>
+        <img src="./assets/img/Loading.gif">
     </div>
-    <div class="card_form">
-        <div>
-            <label for="">Número<b>*</b></label>
-            <input type="text" -value="4539 0033 7072 5497" name="card_number" id="iNumber" oninput="globalThis.card_number()" placeholder="0000 0000 0000 0000" require>
-        </div>
-        <div>
-            <label for="">Nome<b>*</b></label>
-            <input type="text" -value="Bruno AP R VIEIRA" name="card_name" id="iName" placeholder="DIGITA AQUI SEU NOME" oninput="globalThis.card_name()" require>
-        </div>
-        <div class="card_grid_cvv_valid">
-            <div>
-                <label for="">Validade<b>*</b></label>
-                <input type="text" name="card_valid" -value="12/30" id="iValid" placeholder="MM/AAAA" oninput="globalThis.card_valid()" require>
-            </div>
-            <div>
-                <label for="">CVV<b>*</b></label>
-                <input type="text" -value="123" name="card_cvv" id="iCvv" placeholder="123" oninput="globalThis.card_cvv()" require>
-            </div>
-        </div>
-        <div>
-            <label for="">Parcelar em </label>
-            <select name="number_installments">
-                <?php foreach( $parcelas as $parcela ) : ?>
-                    <option value="<?= $parcela["id"] ?>"><?= $parcela["text"] ?></option>
-                <?php endforeach; ?>
-            </select>
-        </div>
-    </div>
-</div>
 </body>
 </html>

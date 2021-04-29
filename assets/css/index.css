@@ -2,11 +2,19 @@
 * {
     box-sizing: border-box;
 }
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 15px;
+}
 body {
     margin: 0;
     padding: 0;
     border: 0;
     font-family: 'Noto Sans JP', sans-serif;
+}
+[hidden] {
+    display: none !important;
 }
 .edit {
     display: block;
@@ -41,6 +49,7 @@ body {
     width: 1200px;
     max-width: 90vw;
     position: relative;
+    margin: 0 auto;
 }
 .space {
     --line: 30px;
@@ -111,13 +120,6 @@ body {
     top: 0;
     left: 0;
 }
-.copy {
-    display: block;
-    font-size: 12px;
-    text-align: center;
-    background-color: rgba(0, 0, 0, .2);
-    width: 100%;
-}
 .none-input {
     position: absolute;
     width: 0px;
@@ -167,6 +169,7 @@ body {
 .logo {
     display: block;
     height: 50px;
+    margin: 30px 0;
 }
 .call_action {
     display: inline-grid;
@@ -197,6 +200,106 @@ body {
     width: 40px;
     height: 40px;
     padding: 10px;
+}
+.footer {
+    display: block;
+    width: 100%;
+    max-width: 100vw;
+}
+.footer_content {
+    padding: 20px;
+    align-items: center;
+    color: #FFF;
+}
+.copy {
+    display: block;
+    font-size: 12px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, .2);
+    width: 100%;
+    line-height: 50px;
+    color: #FFF;
+}
+.gap-box {
+    padding: 100px 0;
+}
+.background {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% 100%;
+}
+.right {
+    justify-content: flex-end;
+}
+.form-edit {
+    display: grid;
+    grid-template-columns: 1fr 30px;
+    padding: 10px 20px;
+    background-color: #2ecc71;
+    border-radius: 50px;
+    width: 500px;
+    max-width: 90vw;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+.form-edit input {
+    display: inline-block;
+    border-radius: 50px;
+    border: none;
+    line-height: 30px;
+    padding: 0 12px;
+    background-color: transparent;
+    color: #FFF;
+}
+.form-edit input::placeholder {
+    color: #FFF;
+}
+.form-edit button {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    border: 0;
+    background-color: #27ae60;
+    width: 30px;
+    height: 30px;
+    border-radius: 40px;
+    cursor: pointer;
+    box-shadow: inset 0 0 7px rgba(0, 0, 0, .3);
+}
+.form-edit img {
+    display: inline-block;
+    filter: invert(100);
+    width: 30px;
+    height: 30px;
+    padding: 7px;
+}
+.grid_add_galery {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+}
+.donative_now {
+    display: grid;
+    width: 320px;
+    grid-template-columns: 1fr 40px;
+    align-items: center;
+    background-color: #27ae60;
+    margin: 0 auto;
+    border-radius: 8px;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #FFF;
+    text-decoration: none;
+    box-shadow: inset 0 0 7px rgba(0, 0, 0, .3);
+    cursor: pointer;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, .3);
+}
+.donative_now img {
+    display: block;
+    width: 40px;
+    height: 40px;
+    padding: 7px;
+    filter: invert(100) drop-shadow(2px 2px 0px rgba(0, 0, 0, .3));
 }
 @media (max-width: 761px) {
     .g-2,

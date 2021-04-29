@@ -14,13 +14,13 @@
 <body>
     <div id="app">
 
-        <div class="inner" :style="header">
-            <div class="container flex center">
-                <div>
-                    <img :src="logo" class="logo">
+        <div class="inner background" style="background-image: url(./sass/doacoesbethania.com.br/bg/bg-top.svg);">
+            <div class="container flex right">
+                <div class="flex">
+                    <img :src="logo.top" class="logo">
                     <label for="on_logo">
                         <img class="edit" src="./assets/icon/image.svg">
-                        <input  class="none-input" type="file" id="on_logo" ref="logo" @change="preview()">
+                        <input class="none-input" type="file" id="on_logo" ref="logo" @change="preview()">
                     </label>
                 </div>
             </div>
@@ -29,66 +29,85 @@
                     <img class="edit" src="./assets/icon/bg.svg">
                     <input class="none-input" type="color" id="on_color_top" v-model="header.backgroundColor">
                 </label>
-                
                 <img class="edit" src="./assets/icon/image.svg">
             </div>
         </div>
-
-        <div class="inner">
+        <div class="inner center gap-box">
             <div class="container">
                 <div class="grid g-2 center">
                     <div>
-                        <img src="">
-                        <img class="edit" src="./assets/icon/image.svg">
+                        <div>
+                            <img src="./sass/doacoesbethania.com.br/logo/3.png">
+                            <img class="edit" src="./assets/icon/image.svg">
+                        </div>
+                        <div>
+                            <img src="./sass/doacoesbethania.com.br/image/2.png">
+                            <img class="edit" src="./assets/icon/image.svg">
+                        </div>
                     </div>
                     <div>
-                        <img src="">
+                        <img src="./sass/doacoesbethania.com.br/image/3.png">
                         <img class="edit" src="./assets/icon/image.svg">
                     </div>
                 </div>
+                <a href="./doar.html" class="donative_now">
+                    <span>Faça sua doação agora!</span>                     
+                    <img src="./assets/icon/donative.svg">
+                </a>
             </div>
             <div class="edit_box">
                 <img class="edit" src="./assets/icon/bg.svg">
                 <img class="edit" src="./assets/icon/image.svg">
             </div>
         </div>
-
-        <div class="inner">
-            <div class="container">
-                <h2 contenteditable="true" class="title">Porque Ajudar Bethânia?</h2>
-                <div class="grid g-4">
+        <div class="inner center gap-box">
+            <div class="container ">
+                <h2 contenteditable="true" class="title" style="color: #25b3c2">Porque Ajudar Bethânia?</h2>
+                <div class="space"></div>
+                <div class="grid g-2">
                     <div class="videos" v-for="video in videos" @click="pop_status=true">
                         <img :src="video | getIdYoutube | getTumb">
                         <span></span>
                     </div>
                 </div>
-                <form action="javascript:void(0)" @submit="addVideo()">
+                <form action="javascript:void(0)" @submit="addVideo()" class="form-edit">
                     <input type="url" v-model="urlVideo" placeholder="https://www.youtube.com/watch?v=*****" required>
-                    <button type="submit">Adicionar</button>
+                    <button type="submit">
+                        <img src="./assets/icon/plus.svg">
+                    </button>
                 </form>
             </div>
         </div>
-
         <div class="popup" v-if="pop_status">
             <span @click="pop_status=false">x</span>
             <div>
-                <iframe width="100%" height="315" :src="'https://www.youtube.com/embed/'+pop_id " title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="100%" height="315" :src="'https://www.youtube.com/embed/'+pop_id "
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
             </div>
         </div>
-
-        <div class="inner">
+        <div class="inner gap-box center">
             <div class="container">
-                <h2 contenteditable="true" class="title">O Maior Ensinamento de Padre Léo!</h2>
-                <div>
-                    <div>
-                        <img src="">
-                        <img src="">
+                <h2 contenteditable="true" class="title" style="color: #25b3c2">O Maior Ensinamento de Padre Léo!</h2>
+                <div class="space"></div>
+                <div class="grid g-2">
+                    <div class="videos" v-for="video in videos" @click="pop_status=true">
+                        <img :src="video | getIdYoutube | getTumb">
+                        <span></span>
                     </div>
                 </div>
+                <form action="javascript:void(0)" @submit="addVideo()" class="form-edit">
+                    <input type="url" v-model="urlVideo" placeholder="https://www.youtube.com/watch?v=*****" required>
+                    <button type="submit">
+                        <img src="./assets/icon/plus.svg">
+                    </button>
+                </form>
             </div>
         </div>
-
-        <div class="inner">
+        <div class="inner gap-box background center"
+            style="color: #FFF; background-image: url(./sass/doacoesbethania.com.br/bg/bg.svg);">
             <div class="container">
                 <h1 contenteditable="true" class="center">Sua "Doação" Ajuda a Salvar Vidas</h1>
                 <p contenteditable="true">
@@ -103,6 +122,7 @@
                     idades entre 18 a 59 anos. Confira algumas das atividades que
                     previstas no projeto:
                 </p>
+                <div class="space"></div>
                 <div>
                     <div class="grid g-4">
                         <div v-for="img in galerys" class="item_galery">
@@ -111,18 +131,24 @@
                         </div>
                     </div>
                 </div>
-                <form action="javascript:void(0)" @submit="add_galery()">
-                    <input type="text" placeholder="title" v-model="galery_title">
-                    <input type="file" ref="image_galery">
-                    <button type="submit">Add IMG</button>
+                <form action="javascript:void(0)" @submit="add_galery()" class="form-edit">
+                    <div class="grid_add_galery">
+                        <label for="for_add_galery">
+                            <img src="./assets/icon/image.svg">
+                            <input type="file" hidden id="for_add_galery" ref="image_galery">
+                        </label>
+                        <input type="text" placeholder="title"  v-model="galery_title">
+                    </div>
+                    <button type="submit">
+                        <img src="./assets/icon/plus.svg">
+                    </button>
                 </form>
             </div>
         </div>
-
-        <div class="inner">
-            <div class="container grid g-2">
+        <div class="inner gap-box background">
+            <div class="container grid g-2 center">
                 <div>
-                    <img src="">
+                    <img src="./sass/doacoesbethania.com.br/image/1.jpg">
                     <p contenteditable="true">
                         Se você sente no coração o desejo de ajudar a acolher e dar
                         vida nova a tantas pessoas fragilizadas pela dependência
@@ -130,24 +156,25 @@
                     </p>
                 </div>
                 <div>
-                    <h2 contenteditable="true" class="center">“A providência de Deus se manifesta por meio de você!” Pe.
-                        Léo, scj</h2>
-                    
+                    <h2 contenteditable="true" class="center" style="color: #25b3c2">
+                        “A providência de Deus se manifesta por meio de você!”
+                        Pe. Léo, scj
+                    </h2>
                 </div>
             </div>
         </div>
-        <a href="./doar.html" class="call_action" > 
+        <a href="./doar.html" class="call_action">
             <img src="./assets/icon/donative.svg">
-            <span contenteditable="true">DOAR AGORA </span> 
+            <span contenteditable="true">DOAR AGORA </span>
         </a>
-        <div class="inner" :style="header">
-            <div>
-                <div class="flex between">
+        <div class="footer" :style="header">
+            <div class="container">
+                <div class="flex between footer_content">
                     <div contenteditable="true"> Copyright © Bethânia 2019 Direitos Reservados. </div>
-                    <div> <img src=""> </div>
+                    <div> <img :src="logo.footer"> </div>
                 </div>
-                <div class="copy" > Sistema de Doações Desenvolvido por Digital Combo </div>
             </div>
+            <div class="copy"> Sistema de Doações Desenvolvido por Digital Combo </div>
         </div>
     </div>
 
