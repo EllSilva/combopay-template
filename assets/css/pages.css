@@ -1,0 +1,54 @@
+* {
+    box-sizing: border-box;
+    outline: none;
+}
+:root {
+    --azul: #1577be;
+    --roxo: #161b2e; 
+    --vermelho: #d01415;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 15px;
+    color: #DDD;
+}
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: sans-serif;
+    background-image: url(../img/abraco.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+[hidden] {
+    display: none !important;
+}
+img { 
+    max-width: 100%;
+}
+.space {
+    display: block;
+    height: 50px;
+}
+.logo {
+    display: block;
+    height: 50px;
+    margin: 0 auto;
+}
+.main {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #161b2ef8;
+    color: #FFF;
+}
+.main h1 {
+    text-transform: uppercase;
+}
+.main p {
+    color: var(--azul);
+}
