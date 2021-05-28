@@ -60,7 +60,7 @@ class App {
     }
 
     async get_institution_by_domain(domain) {
-        return await this.get(`/instituicao-by-domain/${domain}`, {})
+        return await this.get(`/instituicao/por-dominio/${domain}`, {})
     }
     async get_institution(id) {
         return await this.get(`/instituicao/${id}`, {})
@@ -84,11 +84,11 @@ class App {
     async flag_get(id) {
         return this.get(`/configuracao/${id}`, {});
     }
-    async flag_put(id, playload) {
-        return await this.put(`/configuracao/${id}`, playload);
+    async flag_put(id, {base64,flag,instituicao_id}) {
+        return await this.put(`/configuracao/${id}`, {base64,flag,instituicao_id});
     }
-    async flag_post(playload) {
-        return await this.post(`/configuracao`, playload);
+    async flag_post({base64,flag,instituicao_id}) {
+        return await this.post(`/configuracao`, {base64,flag,instituicao_id});
     }
     async flag_get_by_institution(id) {
         return await this.get(`/configuracao/por-instituicao/${id}`, {});
@@ -97,6 +97,7 @@ class App {
     async upload( instituicao_id, images ) {
         return await this.post( `/v1/upload`, { images, instituicao_id } )
     }
+
 
 }
 

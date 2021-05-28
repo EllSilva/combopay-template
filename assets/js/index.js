@@ -1,10 +1,12 @@
 import Vue from './library/vue.js'
 import SuperApp from './library/SuperApp.js'
+import Domain from './library/Domain.js'
 
 const Super = new SuperApp
 globalThis.app = new Vue({
     data: {
         Super,
+        Domain,
         institution_id: null,
         title: 'Betania',
         logo: {
@@ -45,6 +47,7 @@ globalThis.app = new Vue({
         },
         institution: {},
         flags: [],
+        flagsIds: {},
     },
     methods: {
         preview() {
@@ -67,10 +70,38 @@ globalThis.app = new Vue({
             }
             reader.readAsDataURL(input.files[0]);
         },
-        addVideo() { this.videos.push(this.urlVideo) },
+        addVideo() {
+            this.videos.push(this.urlVideo)
+            this.put_videos()
+        },
         getDomain() {
             return window.location.hostname
         },
+        is_site_active(status = true) {
+            if (!status)
+                window.location.href = "/pagina-em-manutencao.html"
+        },
+        async exist_flags() {
+            let list_flags = Object.keys(this.flags)
+            this.Domain.default_flags.forEach(flag_name => {
+                if (!list_flags.includes(flag_name)) {
+                    let playload = {
+                        base64: this.Domain.default_flags_content[flag_name] || btoa(JSON.stringify({})),
+                        flag: flag_name,
+                        instituicao_id: this.institution_id
+                    }
+                    this.Super.flag_post(playload)
+                }
+            })
+        },
+        async put_videos() {
+            let res = await this.Super.flag_put(this.flagsIds.VIDEOS, {
+                base64: btoa(JSON.stringify(this.videos)),
+                flag: 'VIDEOS',
+                instituicao_id: this.institution_id
+            })
+        },
+
     },
     filters: {
         getIdYoutube: url => new URL(url).searchParams.get('v'),
@@ -78,16 +109,22 @@ globalThis.app = new Vue({
     },
     async mounted() {
 
-        let all_institution = (await this.Super.all_institution()).data
-        let domain = this.getDomain()
-        let validacao = institution => institution.dominio == domain || institution.dominio_personalizado == domain
-        let institution = all_institution.find( validacao )
-        this.institution_id = institution.id
+        let instituicao = (await this.Super.get_institution_by_domain(this.Domain.corruent()))
+        instituicao.ativo = true
+        this.is_site_active(instituicao?.ativo)
+        this.institution_id = instituicao?.id
 
-        this.institution = await this.Super.get_institution(institution.id)
-        this.flags = (await this.Super.flag_get_by_institution(institution.id)).data
 
-        console.log('ok')
+        let all_flags = await this.Super.flag_get_by_institution(this.institution_id)
+        this.flagsIds = this.Domain.flags_ids(all_flags)
+        this.flags = this.Domain.render_flag(all_flags)
+
+        console.log( this.flagsIds )
+
+        this.exist_flags()
         
+        this.videos = this.flags.VIDEOS
+
+
     }
 }).$mount("#app");
