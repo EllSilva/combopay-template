@@ -62,15 +62,15 @@
         </div>
         <div class="inner center gap-box">
             <div class="container ">
-                <h2 contenteditable="true" class="title" style="color: #25b3c2">Porque Ajudar Bethânia?</h2>
-                <div class="space"></div>
+                <h2 @blur="put_layout" name="title_depoimento" contenteditable="true" class="title" style="color: #25b3c2"  > {{ layout.title_depoimento }} </h2>
+                <div class="space"></div> 
                 <div class="grid g-2">
-                    <div class="videos" v-for="video in videos" @click="pop_status=true">
-                        <img :src="video | getIdYoutube | getTumb">
+                    <div class="videos" v-for="depoimento in depoimento_video" @click="pop_status=true">
+                        <img :src="depoimento | getIdYoutube | getTumb">
                         <span></span>
                     </div>
                 </div>
-                <form action="javascript:void(0)" @submit="addVideo()" class="form-edit">
+                <form action="javascript:void(0)" @submit="addDepoimentos()" class="form-edit">
                     <input type="url" v-model="urlVideo" placeholder="https://www.youtube.com/watch?v=*****" required>
                     <button type="submit">
                         <img src="./assets/icon/plus.svg">
@@ -90,7 +90,7 @@
         </div>
         <div class="inner gap-box center">
             <div class="container">
-                <h2 contenteditable="true" class="title" style="color: #25b3c2">O Maior Ensinamento de Padre Léo!</h2>
+                <h2 @blur="put_layout" name="title_video" contenteditable="true" class="title" style="color: #25b3c2">{{ layout.title_video }}</h2>
                 <div class="space"></div>
                 <div class="grid g-2">
                     <div class="videos" v-for="video in videos" @click="pop_status=true">
@@ -109,18 +109,11 @@
         <div class="inner gap-box background center"
             style="color: #FFF; background-image: url(./sass/doacoesbethania.com.br/bg/bg.svg);">
             <div class="container">
-                <h1 contenteditable="true" class="center">Sua "Doação" Ajuda a Salvar Vidas</h1>
-                <p contenteditable="true">
-                    O Sonho de Padre Léo de acolher pessoas com dependência química,
-                    que inicialmente se materializou em São João Batista (SC),
-                    alcançou também outros estados e municípios.
-                    O carisma da Comunidade Bethânia frutificou e hoje está presente
-                    em outros 7 recantos no país: Curitiba (PR), Irati (PR),
-                    Guarapuava (PR), Cianorte (PR), Lorena (SP), Uberlândia (MG) e
-                    Itaperuna (RJ), Disponibilizando juntos, por meio de um projeto
-                    pedagógico,170 vagas de acolhimento gratuitas para adultos com
-                    idades entre 18 a 59 anos. Confira algumas das atividades que
-                    previstas no projeto:
+                <h1 @blur="put_layout" name="title_galeria" contenteditable="true" class="center">
+                    {{ layout.title_galeria }}
+                </h1>
+                <p contenteditable="true" @blur="put_layout" name="decription_galeria">
+                    {{ layout.decription_galeria }}
                 </p>
                 <div class="space"></div>
                 <div>
@@ -149,16 +142,13 @@
             <div class="container grid g-2 center">
                 <div>
                     <img src="./sass/doacoesbethania.com.br/image/1.jpg">
-                    <p contenteditable="true">
-                        Se você sente no coração o desejo de ajudar a acolher e dar
-                        vida nova a tantas pessoas fragilizadas pela dependência
-                        química, você é convidado a se tornar um Amigo de Bethânia.
+                    <p contenteditable="true" @blur="put_layout" name="bio">
+                        {{ layout.bio }}
                     </p>
                 </div>
                 <div>
-                    <h2 contenteditable="true" class="center" style="color: #25b3c2">
-                        “A providência de Deus se manifesta por meio de você!”
-                        Pe. Léo, scj
+                    <h2 contenteditable="true" class="center" style="color: #25b3c2" @blur="put_layout" name="sitacao">
+                      {{ layout.sitacao }}
                     </h2>
                 </div>
             </div>
@@ -170,7 +160,7 @@
         <div class="footer" :style="header">
             <div class="container">
                 <div class="flex between footer_content">
-                    <div contenteditable="true"> Copyright © Bethânia 2019 Direitos Reservados. </div>
+                    <div contenteditable="true" @blur="put_layout" name="copy"> {{ layout.copy }} </div>
                     <div> <img :src="logo.footer"> </div>
                 </div>
             </div>
