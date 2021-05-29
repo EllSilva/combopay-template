@@ -35,7 +35,7 @@ img {
 }
 .loading img {
     display: block;
-    width: 100px;
+    width: 200px;
 }
 .layout {
     display: grid;

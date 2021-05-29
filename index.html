@@ -13,45 +13,65 @@
 
 <body>
     <div id="app">
-
-        <div class="inner background" style="background-image: url(./sass/doacoesbethania.com.br/bg/bg-top.svg);">
+        <div class="loading" v-if="loading"></div>
+        <div class="fix-top">
+            <a href="https://painel.doardigital.com.br/#/">
+                <img src="./assets/icon/systen.svg">
+            </a>
+            <label for="on_color">
+                <img src="./assets/icon/bg.svg">
+                <input type="color" id="on_color" v-model="layout.color" @change="put_layout" hidden>
+            </label>
+            <label for="on_bg_top">
+                <img src="./assets/icon/image.svg">
+                <input class="none-input" type="file" id="on_bg_top" data-name="bg_top" @change="preview">
+            </label>
+        </div>
+        <div class="inner background"
+            :style="{ backgroundImage: 'url(https://api.doardigital.com.br/storage/app/public/'+ institution_id +'/' + layout.bg_top + ')' }">
             <div class="container flex right">
-                <div class="flex">
-                    <img :src="logo.top" class="logo">
+                <div class="flex edit_box">
+                    <img :src="layout.logo | getImage" class="logo">
                     <label for="on_logo">
                         <img class="edit" src="./assets/icon/image.svg">
-                        <input class="none-input" type="file" id="on_logo" ref="logo" @change="preview()">
+                        <input class="none-input" type="file" id="on_logo" data-name="logo" @change="preview">
                     </label>
                 </div>
-            </div>
-            <div class="edit_box">
-                <label for="on_color_top">
-                    <img class="edit" src="./assets/icon/bg.svg">
-                    <input class="none-input" type="color" id="on_color_top" v-model="header.backgroundColor">
-                </label>
-                <img class="edit" src="./assets/icon/image.svg">
             </div>
         </div>
         <div class="inner center gap-box">
             <div class="container">
                 <div class="grid g-2 center">
                     <div>
-                        <div>
-                            <img src="./sass/doacoesbethania.com.br/logo/3.png">
-                            <img class="edit" src="./assets/icon/image.svg">
+                        <div class="edit_box">
+                            <img :src="layout.image_1 | getImage" @error="error_image">
+                            <label for="on_image_1">
+                                <img class="edit" src="./assets/icon/image.svg">
+                                <input class="none-input" type="file" id="on_image_1" data-name="image_1"
+                                    @change="preview">
+                            </label>
                         </div>
-                        <div>
-                            <img src="./sass/doacoesbethania.com.br/image/2.png">
-                            <img class="edit" src="./assets/icon/image.svg">
+                        <div class="edit_box">
+                            <img :src="layout.image_2 | getImage" @error="error_image">
+                            <label for="on_image_2">
+                                <img class="edit" src="./assets/icon/image.svg">
+                                <input class="none-input" type="file" id="on_image_2" data-name="image_2"
+                                    @change="preview">
+                            </label>
                         </div>
                     </div>
-                    <div>
-                        <img src="./sass/doacoesbethania.com.br/image/3.png">
-                        <img class="edit" src="./assets/icon/image.svg">
+                    <div class="edit_box">
+                        <img :src="layout.image_3 | getImage" @error="error_image">
+                        <label for="on_image_3">
+                            <img class="edit" src="./assets/icon/image.svg">
+                            <input class="none-input" type="file" id="on_image_3" data-name="image_3" @change="preview">
+                        </label>
                     </div>
                 </div>
+                <div class="space"></div>
+                <div class="space"></div>
                 <a href="./doar.html" class="donative_now">
-                    <span>Faça sua doação agora!</span>                     
+                    <span>Faça sua doação agora!</span>
                     <img src="./assets/icon/donative.svg">
                 </a>
             </div>
@@ -62,8 +82,9 @@
         </div>
         <div class="inner center gap-box">
             <div class="container ">
-                <h2 @blur="put_layout" name="title_depoimento" contenteditable="true" class="title" style="color: #25b3c2"  > {{ layout.title_depoimento }} </h2>
-                <div class="space"></div> 
+                <h2 @blur="put_layout" name="title_depoimento" contenteditable="true" class="title"
+                    :style="{color: layout.color}"> {{ layout.title_depoimento }} </h2>
+                <div class="space"></div>
                 <div class="grid g-2">
                     <div class="videos" v-for="depoimento in depoimento_video" @click="pop_status=true">
                         <img :src="depoimento | getIdYoutube | getTumb">
@@ -90,7 +111,8 @@
         </div>
         <div class="inner gap-box center">
             <div class="container">
-                <h2 @blur="put_layout" name="title_video" contenteditable="true" class="title" style="color: #25b3c2">{{ layout.title_video }}</h2>
+                <h2 @blur="put_layout" name="title_video" contenteditable="true" class="title"
+                    :style="{color: layout.color}">{{ layout.title_video }}</h2>
                 <div class="space"></div>
                 <div class="grid g-2">
                     <div class="videos" v-for="video in videos" @click="pop_status=true">
@@ -107,7 +129,7 @@
             </div>
         </div>
         <div class="inner gap-box background center"
-            style="color: #FFF; background-image: url(./sass/doacoesbethania.com.br/bg/bg.svg);">
+            :style="{ backgroundImage: 'url(https://api.doardigital.com.br/storage/app/public/'+ institution_id +'/' + layout.bg_top + ')', color: '#FFF' }">
             <div class="container">
                 <h1 @blur="put_layout" name="title_galeria" contenteditable="true" class="center">
                     {{ layout.title_galeria }}
@@ -119,18 +141,19 @@
                 <div>
                     <div class="grid g-4">
                         <div v-for="img in galerys" class="item_galery">
-                            <img :src="img.src" alt="foto galeria">
+                            <img :src="img.src| getImage" @error="error_image" alt="foto galeria">
                             <span>{{ img.title }}</span>
                         </div>
                     </div>
                 </div>
+                <div class="space"></div>
                 <form action="javascript:void(0)" @submit="add_galery()" class="form-edit">
                     <div class="grid_add_galery">
                         <label for="for_add_galery">
                             <img src="./assets/icon/image.svg">
                             <input type="file" hidden id="for_add_galery" ref="image_galery">
                         </label>
-                        <input type="text" placeholder="title"  v-model="galery_title">
+                        <input type="text" placeholder="title" v-model="galery_title">
                     </div>
                     <button type="submit">
                         <img src="./assets/icon/plus.svg">
@@ -141,15 +164,28 @@
         <div class="inner gap-box background">
             <div class="container grid g-2 center">
                 <div>
-                    <img src="./sass/doacoesbethania.com.br/image/1.jpg">
+                    <div class="edit_box">
+                        <img :src="layout.image_4 | getImage" @error="error_image">
+                        <label for="on_image_4">
+                            <img class="edit" src="./assets/icon/image.svg">
+                            <input class="none-input" type="file" id="on_image_4" data-name="image_4" @change="preview">
+                        </label>
+                    </div>
                     <p contenteditable="true" @blur="put_layout" name="bio">
                         {{ layout.bio }}
                     </p>
                 </div>
                 <div>
-                    <h2 contenteditable="true" class="center" style="color: #25b3c2" @blur="put_layout" name="sitacao">
-                      {{ layout.sitacao }}
+                    <h2 contenteditable="true" class="center" :style="{color: layout.color}" @blur="put_layout"
+                        name="sitacao">
+                        {{ layout.sitacao }}
                     </h2>
+                    <div class="space"></div>
+                    <div class="space"></div>
+                    <a href="./doar.html" class="donative_now">
+                        <span>Faça sua doação agora!</span>
+                        <img src="./assets/icon/donative.svg">
+                    </a>
                 </div>
             </div>
         </div>
@@ -157,11 +193,17 @@
             <img src="./assets/icon/donative.svg">
             <span contenteditable="true">DOAR AGORA </span>
         </a>
-        <div class="footer" :style="header">
+        <div class="footer" :style="{background: layout.color}">
             <div class="container">
                 <div class="flex between footer_content">
                     <div contenteditable="true" @blur="put_layout" name="copy"> {{ layout.copy }} </div>
-                    <div> <img :src="logo.footer"> </div>
+                    <div class="edit_box">
+                        <img :src="layout.image_5 | getImage" @error="error_image" class="logo-footer">
+                        <label for="on_image_5">
+                            <img class="edit" src="./assets/icon/image.svg">
+                            <input class="none-input" type="file" id="on_image_5" data-name="image_5" @change="preview">
+                        </label>
+                    </div>
                 </div>
             </div>
             <div class="copy"> Sistema de Doações Desenvolvido por Digital Combo </div>

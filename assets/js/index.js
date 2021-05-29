@@ -8,6 +8,7 @@ globalThis.app = new Vue({
         Super,
         Domain,
         institution_id: null,
+        loading: false,
         title: 'Betania',
         logo: {
             top: './sass/doacoesbethania.com.br/logo/2.png',
@@ -22,16 +23,7 @@ globalThis.app = new Vue({
         urlVideo: 'https://www.youtube.com/watch?v=H-GrnWRc2i4',
         videos: [],
         depoimento_video: [],
-        galerys: [
-            { src: './sass/doacoesbethania.com.br/galery/1.jpg', title: 'Dinâmicas de Grupo' },
-            { src: './sass/doacoesbethania.com.br/galery/2.jpg', title: 'Momentos de Partilhas' },
-            { src: './sass/doacoesbethania.com.br/galery/3.jpg', title: 'Espiritualidade Encarnada' },
-            { src: './sass/doacoesbethania.com.br/galery/4.jpg', title: 'Projeto de Vida' },
-            { src: './sass/doacoesbethania.com.br/galery/5.jpg', title: 'Alimentação Saudável' },
-            { src: './sass/doacoesbethania.com.br/galery/6.jpg', title: 'Pedagogia em Prática' },
-            { src: './sass/doacoesbethania.com.br/galery/7.jpg', title: 'Virtude da Disciplina' },
-            { src: './sass/doacoesbethania.com.br/galery/8.jpg', title: 'Adoração ao Santíssimo' },
-        ],
+        galerys: [],
         layout: {
             title_depoimento: "?",
             title_video: "?",
@@ -39,7 +31,18 @@ globalThis.app = new Vue({
             decription_galeria: "?",
             sitacao: "?",
             bio: "?",
-            copy: "?"
+            copy: "?",
+            logo_topo: '',
+            color: '#C00',
+            logo: 'default',
+            image_1: 'default.png',
+            image_2: 'default.png',
+            image_3: 'default.png',
+            image_4: 'default.png',
+            image_5: 'default.png',
+            image_6: 'default.png',
+            bg_top: 'default.png',
+            bg_footer: 'default.png',
         },
         galery_title: null,
         pop_id: 'QpxA_ZxGX_M',
@@ -53,25 +56,43 @@ globalThis.app = new Vue({
         flagsIds: {},
     },
     methods: {
-        preview() {
-            let input = this.$refs.logo
+        preview( e ) {
+            let input = e.target
+            let name = e.target.getAttribute('data-name')            
             var reader = new FileReader();
-            reader.onload = (e) => {
+            reader.onload = async (e) => {
+                this.loading = true
                 this.logo = e.target.result
+                let res = await this.Super.upload(this.institution_id, input.files[0])
+                this.layout[name] = res.nomeImagem
+                await this.Super.flag_put(this.flagsIds.LAYOUT, {
+                    base64: btoa(JSON.stringify(this.layout)),
+                    flag: 'LAYOUT',
+                    instituicao_id: this.institution_id
+                })
+                this.loading = false
             }
-
             reader.readAsDataURL(input.files[0]);
         },
-        add_galery() {
+        error_image( e ) {
+            e.target.src = './assets/img/default.png'
+        },
+        async add_galery() {
             let input = this.$refs.image_galery
-            var reader = new FileReader();
-            reader.onload = (e) => {
-                this.galerys.push({
-                    src: e.target.result,
-                    title: this.galery_title
-                })
+            this.loading = true
+            let res = await this.Super.upload(this.institution_id, input.files[0])
+            let playload = {
+                src: res.nomeImagem,
+                title: this.galery_title,
             }
-            reader.readAsDataURL(input.files[0]);
+            this.galerys.push(playload)
+            await this.Super.flag_put(this.flagsIds.GALERIA, {
+                base64: btoa(JSON.stringify(this.galerys)),
+                flag: 'GALERIA',
+                instituicao_id: this.institution_id
+            })
+            this.loading = false
+
         },
         addVideo() {
             this.videos.push(this.urlVideo)
@@ -124,12 +145,13 @@ globalThis.app = new Vue({
                 instituicao_id: this.institution_id
             })
         },
-        
+
 
     },
     filters: {
         getIdYoutube: url => new URL(url).searchParams.get('v'),
         getTumb: id => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
+        getImage: nameImage => `https://api.doardigital.com.br/storage/app/public/1/${nameImage}`,
     },
     async mounted() {
 
@@ -145,10 +167,11 @@ globalThis.app = new Vue({
 
 
         this.exist_flags()
-        
+
         this.videos = this.flags.VIDEOS
         this.depoimento_video = this.flags.DEPOIMENTOS
-        this.layout = { ...this.layout, ...this.flags.LAYOUT}
+        this.galerys = this.flags.GALERIA
+        this.layout = { ...this.layout, ...this.flags.LAYOUT }
 
 
     }

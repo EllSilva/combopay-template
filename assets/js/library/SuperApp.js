@@ -58,7 +58,6 @@ class App {
             }
         }
     }
-
     async get_institution_by_domain(domain) {
         return await this.get(`/instituicao/por-dominio/${domain}`, {})
     }
@@ -77,7 +76,6 @@ class App {
     async post_institution(playload = {}) {
         return await this.post(`/instituicao`, playload)
     }
-
     async flag_all() {
         return await this.get(`/configuracoes`, {});
     }
@@ -93,11 +91,21 @@ class App {
     async flag_get_by_institution(id) {
         return await this.get(`/configuracao/por-instituicao/${id}`, {});
     }
-
     async upload( instituicao_id, images ) {
-        return await this.post( `/v1/upload`, { images, instituicao_id } )
+        const formData  = new FormData();
+        formData.append('instituicao_id', instituicao_id);
+        formData.append('images', images);
+        let res = await fetch( `${this.base}/upload`, {
+            method: 'POST',
+            body: formData
+        } )
+        return await res.json()
+        
     }
 
+    async pay( instituicao_id, playload ) {
+        return await this.post( `/pagamento`, { instituicao_id, ...playload } )
+    }
 
 }
 
