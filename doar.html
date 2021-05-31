@@ -68,14 +68,22 @@
                             <h3>DIGITE SUAS INFORMAÇÕES</h3>
                             <div class="g g-2">
                                 <input type="text" placeholder="Nome*" v-model="doacao.nome" required>
+                                <input type="text" placeholder="Sobre Nome*" v-model="doacao.sobrenome" required>
+                                <div>
+                                    <label for="">Data Nascimento</label>
+                                    <input type="date" placeholder="Data Nascimento*" v-model="doacao.dataNascimento" required>
+                                </div>
+                                <div>
+                                    <label for="">.</label>
+                                    <input type="text" placeholder="CPF*" @input="mask_cpf" v-model="doacao.cpf" required>
+                                </div>
                                 <input type="email" placeholder="email*" v-model="doacao.email" required>
-                                <input type="text" placeholder="CPF*" v-model="doacao.cpf" required>
-                                <input type="text" placeholder="Telefone*" v-model="doacao.telefone" required>
+                                <input type="text" placeholder="Telefone*" @input="mask_tel" v-model="doacao.telefone" required>
                             </div>
                             <div class="space"></div>
                             <h3>INFORME SEU ENDEREÇO</h3>
                             <div class="g g-2">
-                                <input type="text" placeholder="CEP*" v-model="doacao.cep" required>
+                                <input type="text" @blur="viaCep" @input="mask_cep" placeholder="CEP*" v-model="doacao.cep" required>
                                 <input type="text" placeholder="Endereço*" v-model="doacao.endereco" required>
                                 <input type="text" placeholder="Numero*" v-model="doacao.numero" required>
                                 <input type="text" placeholder="Bairro*" v-model="doacao.bairro" required>
@@ -138,7 +146,7 @@
                                 </div>
                             </div>
                             <button type="submit"> Dor Agora! </button>
-                            <p class="error"> Error: Preencha os dados com * </p>
+                            <p class="error" v-if="error.status" > {{error.text}} </p>
                             <p>
                                 Os seus dados pessoais serão utilizados para processar a sua compra,
                                 apoiar a sua experiência em todo este site e para outros

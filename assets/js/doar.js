@@ -54,11 +54,17 @@ globalThis.app = new Vue({
         institution: {},
         flags: [],
         flagsIds: {},
+        error: {
+            status: false,
+            text: 'error ao finalizar tente novamente mais tarde'
+        },
         doacao: {
             recorrente: 1,
             valor: 2500,
             valor_custon: 0,
             nome: null,
+            sobrenome: null,
+            dataNascimento: null,
             email: null,
             telefone: null,
             cpf: null,
@@ -74,6 +80,7 @@ globalThis.app = new Vue({
             nome_card: null,
             payment_type: 'card',
         }
+
     },
     methods: {
         preview(e) {
@@ -226,11 +233,47 @@ globalThis.app = new Vue({
             mascara = mascara.replace(/(\d{4}\s)(\d{4}\s)(\d{4}\s)(\d{4})(.*)/gi, '$1$2$3$4')
             this.doacao.card = mascara
         },
+        mask_cep() {
+            let mascara = this.doacao.cep
+            mascara = mascara.replace(/\D/gi, '')
+            mascara = mascara.replace(/(\d{5})(.*)/gi, '$1-$2')
+            mascara = mascara.replace(/(\d{4}\s)(\d{1,3})(.*)/gi, '$1-$2')
+            this.doacao.cep = mascara
+        },
+        mask_cpf() {
+            let mascara = this.doacao.cpf
+            mascara = mascara.replace(/\D/gi, '')
+            mascara = mascara.replace(/(\d{3})(.*)/gi, '$1.$2')
+            mascara = mascara.replace(/(\d{3}\.)(\d{3})(.*)/gi, '$1$2.$3')
+            mascara = mascara.replace(/(\d{3}\.)(\d{3}\.)(\d{3})(.*)/gi, '$1$2$3-$4')
+            mascara = mascara.replace(/(\d{3}\.)(\d{3}\.)(\d{3})-(\d{2})(.*)/gi, '$1$2$3-$4')
+            this.doacao.cpf = mascara
+        },
+        mask_tel() {
+            let mascara = this.doacao.telefone
+            mascara = mascara.replace(/\D/gi, '')
+            mascara = mascara.replace(/(\d{2})(.*)/gi, '($1) $2')
+            mascara = mascara.replace(/\((\d{2})\)\s(\d{1})(.*)/gi, '($1) $2 $3')
+            mascara = mascara.replace(/\((\d{2})\)\s(\d{1})\s(\d{4})(.*)/gi, '($1) $2 $3-$4')
+            mascara = mascara.replace(/\((\d{2})\)\s(\d{1})\s(\d{4})-(\d{4})(.*)/gi, '($1) $2 $3-$4')
+            this.doacao.telefone = mascara
+        },
         async pay() {
             this.loading = true
             let res = await this.Super.pay( this.institution_id, this.doacao )
             
             this.loading = false
+        },
+        async viaCep() {
+            this.loading = true
+            let res = await fetch( `https://viacep.com.br/ws/${this.doacao.cep}/json/` )
+            let address = await res.json()
+            this.doacao.endereco = address.logradouro
+            this.doacao.bairro = address.bairro
+            this.doacao.cidade = address.localidade
+            this.doacao.estado = address.uf
+            this.loading = false
+            
         }
 
 
