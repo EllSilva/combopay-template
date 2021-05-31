@@ -3,7 +3,7 @@ export default {
         return `https://api.doardigital.com.br/storage/app/public/${id_instituicao}/${name_image}`
     },
     corruent() {
-        return 'tillman.com'
+        // return 'tillman.com'
         return window.location.hostname
     },
     render_flag(lista = []) {
