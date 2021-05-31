@@ -1,12 +1,15 @@
 import Vue from './library/vue.js'
 import SuperApp from './library/SuperApp.js'
 import Domain from './library/Domain.js'
+import cache from './library/cache.js'
 
 const Super = new SuperApp
 globalThis.app = new Vue({
     data: {
         Super,
         Domain,
+        cache,
+        edit: false,
         institution_id: null,
         loading: false,
         title: 'Betania',
@@ -56,9 +59,9 @@ globalThis.app = new Vue({
         flagsIds: {},
     },
     methods: {
-        preview( e ) {
+        preview(e) {
             let input = e.target
-            let name = e.target.getAttribute('data-name')            
+            let name = e.target.getAttribute('data-name')
             var reader = new FileReader();
             reader.onload = async (e) => {
                 this.loading = true
@@ -74,7 +77,7 @@ globalThis.app = new Vue({
             }
             reader.readAsDataURL(input.files[0]);
         },
-        error_image( e ) {
+        error_image(e) {
             e.target.src = './assets/img/default.png'
         },
         async add_galery() {
@@ -145,7 +148,14 @@ globalThis.app = new Vue({
                 instituicao_id: this.institution_id
             })
         },
-
+        sair() {
+            this.cache.edit = false
+        },
+        error_domain(response) {
+            if ( response.status == 'error') {
+                window.location.href = '/pagina-em-manutencao.html'
+            }
+        }
 
     },
     filters: {
@@ -156,10 +166,11 @@ globalThis.app = new Vue({
     async mounted() {
 
         let instituicao = (await this.Super.get_institution_by_domain(this.Domain.corruent()))
-        instituicao.ativo = true
-        this.is_site_active(instituicao?.ativo)
+        // this.error_domain(instituicao)
+
         this.institution_id = instituicao?.id
 
+        this.edit = this.cache.edit
 
         let all_flags = await this.Super.flag_get_by_institution(this.institution_id)
         this.flagsIds = this.Domain.flags_ids(all_flags)

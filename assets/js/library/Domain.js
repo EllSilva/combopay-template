@@ -3,8 +3,7 @@ export default {
         return `https://api.doardigital.com.br/storage/app/public/${id_instituicao}/${name_image}`
     },
     corruent() {
-        // return 'kautzer.com'
-        return 'gleichner.com'
+        return 'hartmann.com'
         return window.location.hostname
     },
     render_flag(lista = []) {

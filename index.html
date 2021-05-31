@@ -14,15 +14,15 @@
 <body>
     <div id="app">
         <div class="loading" v-if="loading"></div>
-        <div class="fix-top">
-            <a href="https://painel.doardigital.com.br/#/">
+        <div class="fix-top" v-if="edit">
+            <a href="https://painel.doardigital.com.br/#/" @click="sair()">
                 <img src="./assets/icon/systen.svg">
             </a>
             <label for="on_color">
                 <img src="./assets/icon/bg.svg">
                 <input type="color" id="on_color" v-model="layout.color" @change="put_layout" hidden>
             </label>
-            <label for="on_bg_top">
+            <label for="on_bg_top" v-if="edit">
                 <img src="./assets/icon/image.svg">
                 <input class="none-input" type="file" id="on_bg_top" data-name="bg_top" @change="preview">
             </label>
@@ -31,8 +31,8 @@
             :style="{ backgroundImage: 'url(https://api.doardigital.com.br/storage/app/public/'+ institution_id +'/' + layout.bg_top + ')' }">
             <div class="container flex right">
                 <div class="flex edit_box">
-                    <img :src="layout.logo | getImage" class="logo">
-                    <label for="on_logo">
+                    <img :src="layout.logo | getImage" class="logo" @error="error_image">
+                    <label for="on_logo" v-if="edit">
                         <img class="edit" src="./assets/icon/image.svg">
                         <input class="none-input" type="file" id="on_logo" data-name="logo" @change="preview">
                     </label>
@@ -45,7 +45,7 @@
                     <div>
                         <div class="edit_box">
                             <img :src="layout.image_1 | getImage" @error="error_image">
-                            <label for="on_image_1">
+                            <label for="on_image_1" v-if="edit">
                                 <img class="edit" src="./assets/icon/image.svg">
                                 <input class="none-input" type="file" id="on_image_1" data-name="image_1"
                                     @change="preview">
@@ -53,7 +53,7 @@
                         </div>
                         <div class="edit_box">
                             <img :src="layout.image_2 | getImage" @error="error_image">
-                            <label for="on_image_2">
+                            <label for="on_image_2" v-if="edit">
                                 <img class="edit" src="./assets/icon/image.svg">
                                 <input class="none-input" type="file" id="on_image_2" data-name="image_2"
                                     @change="preview">
@@ -62,7 +62,7 @@
                     </div>
                     <div class="edit_box">
                         <img :src="layout.image_3 | getImage" @error="error_image">
-                        <label for="on_image_3">
+                        <label for="on_image_3" v-if="edit">
                             <img class="edit" src="./assets/icon/image.svg">
                             <input class="none-input" type="file" id="on_image_3" data-name="image_3" @change="preview">
                         </label>
@@ -75,14 +75,10 @@
                     <img src="./assets/icon/donative.svg">
                 </a>
             </div>
-            <div class="edit_box">
-                <img class="edit" src="./assets/icon/bg.svg">
-                <img class="edit" src="./assets/icon/image.svg">
-            </div>
         </div>
         <div class="inner center gap-box">
             <div class="container ">
-                <h2 @blur="put_layout" name="title_depoimento" contenteditable="true" class="title"
+                <h2 @blur="put_layout" name="title_depoimento" :contenteditable="edit" class="title"
                     :style="{color: layout.color}"> {{ layout.title_depoimento }} </h2>
                 <div class="space"></div>
                 <div class="grid g-2">
@@ -91,7 +87,7 @@
                         <span></span>
                     </div>
                 </div>
-                <form action="javascript:void(0)" @submit="addDepoimentos()" class="form-edit">
+                <form v-if="edit" action="javascript:void(0)" @submit="addDepoimentos()" class="form-edit">
                     <input type="url" v-model="urlVideo" placeholder="https://www.youtube.com/watch?v=*****" required>
                     <button type="submit">
                         <img src="./assets/icon/plus.svg">
@@ -111,7 +107,7 @@
         </div>
         <div class="inner gap-box center">
             <div class="container">
-                <h2 @blur="put_layout" name="title_video" contenteditable="true" class="title"
+                <h2 @blur="put_layout" name="title_video" :contenteditable="edit" class="title"
                     :style="{color: layout.color}">{{ layout.title_video }}</h2>
                 <div class="space"></div>
                 <div class="grid g-2">
@@ -120,7 +116,7 @@
                         <span></span>
                     </div>
                 </div>
-                <form action="javascript:void(0)" @submit="addVideo()" class="form-edit">
+                <form v-if="edit" action="javascript:void(0)" @submit="addVideo()" class="form-edit">
                     <input type="url" v-model="urlVideo" placeholder="https://www.youtube.com/watch?v=*****" required>
                     <button type="submit">
                         <img src="./assets/icon/plus.svg">
@@ -131,10 +127,10 @@
         <div class="inner gap-box background center"
             :style="{ backgroundImage: 'url(https://api.doardigital.com.br/storage/app/public/'+ institution_id +'/' + layout.bg_top + ')', color: '#FFF' }">
             <div class="container">
-                <h1 @blur="put_layout" name="title_galeria" contenteditable="true" class="center">
+                <h1 @blur="put_layout" name="title_galeria" :contenteditable="edit" class="center">
                     {{ layout.title_galeria }}
                 </h1>
-                <p contenteditable="true" @blur="put_layout" name="decription_galeria">
+                <p :contenteditable="edit" @blur="put_layout" name="decription_galeria">
                     {{ layout.decription_galeria }}
                 </p>
                 <div class="space"></div>
@@ -147,7 +143,7 @@
                     </div>
                 </div>
                 <div class="space"></div>
-                <form action="javascript:void(0)" @submit="add_galery()" class="form-edit">
+                <form v-if="edit" action="javascript:void(0)" @submit="add_galery()" class="form-edit">
                     <div class="grid_add_galery">
                         <label for="for_add_galery">
                             <img src="./assets/icon/image.svg">
@@ -166,17 +162,17 @@
                 <div>
                     <div class="edit_box">
                         <img :src="layout.image_4 | getImage" @error="error_image">
-                        <label for="on_image_4">
+                        <label for="on_image_4" v-if="edit">
                             <img class="edit" src="./assets/icon/image.svg">
                             <input class="none-input" type="file" id="on_image_4" data-name="image_4" @change="preview">
                         </label>
                     </div>
-                    <p contenteditable="true" @blur="put_layout" name="bio">
+                    <p :contenteditable="edit" @blur="put_layout" name="bio">
                         {{ layout.bio }}
                     </p>
                 </div>
                 <div>
-                    <h2 contenteditable="true" class="center" :style="{color: layout.color}" @blur="put_layout"
+                    <h2 :contenteditable="edit" class="center" :style="{color: layout.color}" @blur="put_layout"
                         name="sitacao">
                         {{ layout.sitacao }}
                     </h2>
@@ -191,15 +187,15 @@
         </div>
         <a href="./doar.html" class="call_action">
             <img src="./assets/icon/donative.svg">
-            <span contenteditable="true">DOAR AGORA </span>
+            <span :contenteditable="edit">DOAR AGORA </span>
         </a>
         <div class="footer" :style="{background: layout.color}">
             <div class="container">
                 <div class="flex between footer_content">
-                    <div contenteditable="true" @blur="put_layout" name="copy"> {{ layout.copy }} </div>
+                    <div :contenteditable="edit" @blur="put_layout" name="copy"> {{ layout.copy }} </div>
                     <div class="edit_box">
                         <img :src="layout.image_5 | getImage" @error="error_image" class="logo-footer">
-                        <label for="on_image_5">
+                        <label for="on_image_5" v-if="edit">
                             <img class="edit" src="./assets/icon/image.svg">
                             <input class="none-input" type="file" id="on_image_5" data-name="image_5" @change="preview">
                         </label>
