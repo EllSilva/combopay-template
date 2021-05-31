@@ -166,7 +166,7 @@ globalThis.app = new Vue({
     async mounted() {
 
         let instituicao = (await this.Super.get_institution_by_domain(this.Domain.corruent()))
-        // this.error_domain(instituicao)
+        this.error_domain(instituicao)
 
         this.institution_id = instituicao?.id
 
