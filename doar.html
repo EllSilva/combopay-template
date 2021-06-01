@@ -35,34 +35,34 @@
                             <h4>Escolha Valor para Doação</h4>
                             <div class="g g-4">
                                 <div>
-                                    <input v-model="doacao.valor" value="2500" type="radio" id="for_25"name="donative_price" value="2500" hidden checked>
+                                    <input v-model="doacao.amount" value="2500" type="radio" id="for_25"name="donative_price" value="2500" hidden checked>
                                     <label class="options_pay" for="for_25"> R$ 25,00 </label>
                                 </div>
                                 <div>
-                                    <input v-model="doacao.valor" value="500" hidden type="radio" id="for_50"name="donative_price" value="5000">
+                                    <input v-model="doacao.amount" value="5000" hidden type="radio" id="for_50"name="donative_price" value="5000">
                                     <label class="options_pay" for="for_50"> R$ 50,00 </label>
                                 </div>
                                 <div>
-                                    <input v-model="doacao.valor" value="7500" hidden type="radio" id="for_75"name="donative_price" value="7500">
+                                    <input v-model="doacao.amount" value="7500" hidden type="radio" id="for_75"name="donative_price" value="7500">
                                     <label class="options_pay" for="for_75"> R$ 75,00 </label>
                                 </div>
                                 <div>
-                                    <input v-model="doacao.valor" value="10000" hidden type="radio" id="for_100"name="donative_price" value="10000">
+                                    <input v-model="doacao.amount" value="10000" hidden type="radio" id="for_100"name="donative_price" value="10000">
                                     <label class="options_pay" for="for_100"> R$ 100,00 </label>
                                 </div>
                                 <div>
-                                    <input v-model="doacao.valor" value="20000" hidden type="radio" id="for_200"name="donative_price" value="20000">
+                                    <input v-model="doacao.amount" value="20000" hidden type="radio" id="for_200"name="donative_price" value="20000">
                                     <label class="options_pay" for="for_200">R$ 200,00 </label>
                                 </div>
                                 <div>
-                                    <input v-model="doacao.valor" value="0" hidden type="radio" id="for_custon"name="donative_price" value="CUSTON">
+                                    <input v-model="doacao.amount" value="0" hidden type="radio" id="for_custon"name="donative_price" value="CUSTON">
                                     <label class="options_pay" for="for_custon"> Outro </label>
                                 </div>
                             </div>
                             <div class="space"></div>
-                            <div v-if="doacao.valor==0" >
+                            <div v-if="doacao.amount==0" >
                                 <b>Informe um valor</b>
-                                <input type="text" v-model="doacao.valor_custon" @input="money"  name="price_custon" placeholder="150,00">
+                                <input type="text" v-model="doacao.amount_custon" @input="money"  name="price_custon" placeholder="150,00">
                                 <div class="space"></div>
                             </div>
                             <h3>DIGITE SUAS INFORMAÇÕES</h3>
@@ -84,7 +84,7 @@
                             <h3>INFORME SEU ENDEREÇO</h3>
                             <div class="g g-2">
                                 <input type="text" @blur="viaCep" @input="mask_cep" placeholder="CEP*" v-model="doacao.cep" required>
-                                <input type="text" placeholder="Endereço*" v-model="doacao.endereco" required>
+                                <input type="text" placeholder="Endereço*" v-model="doacao.rua" required>
                                 <input type="text" placeholder="Numero*" v-model="doacao.numero" required>
                                 <input type="text" placeholder="Bairro*" v-model="doacao.bairro" required>
                                 <input type="text" placeholder="Estado*" v-model="doacao.estado" required>

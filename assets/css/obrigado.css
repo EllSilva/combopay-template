@@ -9,6 +9,11 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 15px;
     color: #222;
 }
+h1 {
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+}
 body {
     margin: 0;
     padding: 0;
@@ -64,7 +69,6 @@ img {
     grid-gap: 25px;
     box-shadow: 0 0 4px rgba(0, 0, 0, .3);
 }
-
 .flex { display: flex; }
 .g { display: grid; grid-gap: 20px; }
 .g-2 { grid-template-columns: repeat(2, 1fr); }
@@ -81,7 +85,6 @@ a {
 a:hover {
     text-decoration: underline;
 }
-
 @media (max-width: 761px ) {
     .inner {
         padding: 50px 0;
@@ -91,6 +94,37 @@ a:hover {
     }
     .g-2,
     .g-3,
-    .g-4 { grid-template-columns: repeat(1, 1fr); }
-    
+    .g-4 { grid-template-columns: repeat(1, 1fr); }    
+}
+.link_boleto {
+    display: block;
+    width: 180px;
+    background-color: #3498db;
+    text-align: center;
+    border-radius: 5px;
+    color: #FFF;
+    padding: 5px;
+    margin: 0 auto;
+    margin-top: 30px;
+    text-transform: uppercase;
+}
+.link_boleto:hover {
+    text-decoration: none;
+    background-color: #2980b9;
+}
+.box_boleto {
+    display: block;
+    text-align: center;
+}
+.box_boleto small {
+    color: #777;
+    display: block;
+}
+.codigo {
+    display: inline-block;
+    background-color: #2ecc71;
+    color: #FFF;
+    padding: 10px 20px;
+    margin-top: 7px;
+    border-radius: 50px;
 }

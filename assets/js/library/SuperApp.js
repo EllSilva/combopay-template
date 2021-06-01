@@ -82,31 +82,54 @@ class App {
     async flag_get(id) {
         return this.get(`/configuracao/${id}`, {});
     }
-    async flag_put(id, {base64,flag,instituicao_id}) {
-        return await this.put(`/configuracao/${id}`, {base64,flag,instituicao_id});
+    async flag_put(id, { base64, flag, instituicao_id }) {
+        return await this.put(`/configuracao/${id}`, { base64, flag, instituicao_id });
     }
-    async flag_post({base64,flag,instituicao_id}) {
-        return await this.post(`/configuracao`, {base64,flag,instituicao_id});
+    async flag_post({ base64, flag, instituicao_id }) {
+        return await this.post(`/configuracao`, { base64, flag, instituicao_id });
     }
     async flag_get_by_institution(id) {
         return await this.get(`/configuracao/por-instituicao/${id}`, {});
     }
-    async upload( instituicao_id, images ) {
-        const formData  = new FormData();
+    async upload(instituicao_id, images) {
+        const formData = new FormData();
         formData.append('instituicao_id', instituicao_id);
         formData.append('images', images);
-        let res = await fetch( `${this.base}/upload`, {
+        let res = await fetch(`${this.base}/upload`, {
             method: 'POST',
             body: formData
-        } )
+        })
         return await res.json()
-        
+
     }
 
-    async pay( instituicao_id, playload ) {
-        return await this.post( `/pagamento`, { instituicao_id, ...playload } )
+    async payCard(instituicao_id, playload) {
+        return await this.post(`/zoop/cartao-credito`, { instituicao_id, ...playload })
+    }
+
+    async payBoleto(instituicao_id, playload) {
+        let data = {
+            amount: null,
+            nome: null,
+            sobrenome: null,
+            email: null,
+            cpf: null,
+            dataNascimento: null,
+            instituicao_id: null,
+            telefone: null,
+            rua: null,
+            numero: null,
+            cidade: null,
+            estado: null,
+            bairro: null,
+            cep: null,
+            complemento: 'nao definido'
+        }
+        return await this.post(`/zoop/boleto`, { ...data, ...playload, instituicao_id: '6cf4bb1e78c6428786fc8fe6ddada3a6' })
     }
 
 }
 
 export default App;
+
+

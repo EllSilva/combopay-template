@@ -1,12 +1,14 @@
 import Vue from './library/vue.js'
 import SuperApp from './library/SuperApp.js'
 import Domain from './library/Domain.js'
+import cache from './library/cache.js'
 
 const Super = new SuperApp
 globalThis.app = new Vue({
     data: {
         Super,
         Domain,
+        cache,
         institution_id: null,
         loading: false,
         title: 'Betania',
@@ -58,28 +60,51 @@ globalThis.app = new Vue({
             status: false,
             text: 'error ao finalizar tente novamente mais tarde'
         },
+        // doacao: {
+        //     recorrente: 1,
+        //     amount: null,
+        //     amount_custon: 0,
+        //     nome: null,
+        //     sobrenome: null,
+        //     dataNascimento: null,
+        //     email: null,
+        //     telefone: null,
+        //     cpf: null,
+        //     cep: null,
+        //     rua: null,
+        //     numero: null,
+        //     bairro: null,
+        //     estado: null,
+        //     cidade: null,
+        //     card: null,
+        //     validade: null,
+        //     cvv: null,
+        //     nome_card: null,
+        //     payment_type: 'card',
+        // },
         doacao: {
             recorrente: 1,
-            valor: 2500,
-            valor_custon: 0,
-            nome: null,
-            sobrenome: null,
-            dataNascimento: null,
-            email: null,
-            telefone: null,
-            cpf: null,
-            cep: null,
-            endereco: null,
-            numero: null,
-            bairro: null,
-            estado: null,
-            cidade: null,
+            amount: '5000',
+            amount_custon: 0,
+            nome: 'Bruno',
+            sobrenome: 'Vieira',
+            dataNascimento: '1987-09-18',
+            email: 'br.rafael@outlook.com',
+            telefone: '82999999999',
+            cpf: '76537741807',
+            cep: '06786270',
+            rua: 'Rua gonçalves dias',
+            numero: '45',
+            bairro: 'JD. Margaridas',
+            estado: 'SP',
+            cidade: 'Taboão da Serra',
             card: null,
             validade: null,
             cvv: null,
             nome_card: null,
-            payment_type: 'card',
-        }
+            payment_type: 'boleto',
+            complemento: 'nao definido'
+        },
 
     },
     methods: {
@@ -260,20 +285,35 @@ globalThis.app = new Vue({
         },
         async pay() {
             this.loading = true
-            let res = await this.Super.pay( this.institution_id, this.doacao )
+            let res = {}
+            if (this.doacao.payment_type == 'boleto') {
+                res = await this.Super.payBoleto(this.institution_id, this.doacao)
+            } else {
+                res = await this.Super.payCard(this.institution_id, this.doacao)
+            }
             
+            if( res.status == "success" ) {
+                this.cache.boleto_code = res.boleto.codigo_barras
+                this.cache.boleto_link = res.boleto.link
+                window.location.href = "/obrigado.html"
+            }else {
+                this.error.status = true
+                this.error.text = res.message
+               
+            }
+
             this.loading = false
         },
         async viaCep() {
             this.loading = true
-            let res = await fetch( `https://viacep.com.br/ws/${this.doacao.cep}/json/` )
+            let res = await fetch(`https://viacep.com.br/ws/${this.doacao.cep}/json/`)
             let address = await res.json()
             this.doacao.endereco = address.logradouro
             this.doacao.bairro = address.bairro
             this.doacao.cidade = address.localidade
             this.doacao.estado = address.uf
             this.loading = false
-            
+
         }
 
 
