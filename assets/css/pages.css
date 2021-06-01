@@ -45,6 +45,7 @@ img {
     min-height: 100vh;
     background-color: #161b2ef8;
     color: #FFF;
+    padding: 0 50px;
 }
 .main h1 {
     text-transform: uppercase;
