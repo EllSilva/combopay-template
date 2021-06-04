@@ -293,8 +293,13 @@ globalThis.app = new Vue({
             }
             
             if( res.status == "success" ) {
-                this.cache.boleto_code = res.boleto.codigo_barras
-                this.cache.boleto_link = res.boleto.link
+                if(this.doacao.payment_type == 'boleto') {
+                    this.cache.boleto_code = res.boleto.codigo_barras
+                    this.cache.boleto_link = res.boleto.link
+                }else {
+                    this.cache.boleto_code = false
+                    this.cache.boleto_link = false
+                }
                 window.location.href = "/obrigado.html"
             }else {
                 this.error.status = true
