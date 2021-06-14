@@ -1,0 +1,128 @@
+{
+    "filto_por_dia": 7,
+    "total_doacoes": "10.000,00",
+    "total_doacoes_comparacao_porcentagem": 20,
+    "doacoes_concluidas": "10.000,00",
+    "doacoes_concluidas_comparacao_porcentagem": 20,
+    "doacoes_em_Aberto": "10.000,00",
+    "doacoes_em_Aberto_comparacao_porcentagem": 20,
+    "doacoes_Vencidas": "10.000,00",
+    "doacoes_Vencidas_comparacao_porcentagem": 20,
+    "doacoes_Boletos": "10.000,00",
+    "doacoes_Boletos_comparacao_porcentagem": 20,
+    "doacoes_Creditos": "10.000,00",
+    "doacoes_Creditos_comparacao_porcentagem": 20,
+    "doacoes_pix": "10.000,00",
+    "doacoes_pix_comparacao_porcentagem": 20,
+    "doacoes_previstas": "10.000,00",
+    "doacoes_previstas_comparacao_porcentagem": 20,
+    "novos_doadores": "10.000,00",
+    "novos_doadores_comparacao_porcentagem": 20,
+    "doadores_recorrentes": 97,
+    "doadores_recorrentes_comparacao_porcentagem": 20,
+    "doadores_unicos": 200,
+    "doadores_unicos_comparacao_porcentagem": 20,
+    "doacao_media": "10.000,00",
+    "doacao_media_comparacao_porcentagem": 20,
+    "doadores_adinplentes": 297,
+    "doadores_adinplentes_comparacao_porcentagem": 20,
+    "doadores_inadimplentes": 7,
+    "doadores_inadimplentes_comparacao_porcentagem": 20,
+    "faturamento": {
+        "total_arrecadado": [
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500
+        ],
+        "total_pago": [
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500
+        ],
+        "total_aberto": [
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500
+        ],
+        "total_meta": [
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500,
+            1.500
+        ]
+    },
+    "quantidade_de_doacao": [
+        2.500,
+        2.500,
+        2.500,
+        2.500,
+        2.500,
+        2.500,
+        2.500
+    ],
+    "formas_de_pagamento": {
+        "boleto": 10.000,
+        "cartao": 3.000
+    },
+    "status_doacao_porcentagem": {
+        "pago": 20,
+        "aberto": 70,
+        "vencido": 10
+    },
+    "tipos_doadores_porcentagem": {
+        "recorrente": 70,
+        "unico": 30
+    },
+    "status_doadores_porcentagem": {
+        "adimplentes": 80,
+        "inadimplantes": 20
+    },
+    "tansacoes": [
+        {
+            "nome": "",
+            "email": "",
+            "telefone": "",
+            "data_transacao": "",
+            "id_transacao": "",
+            "status_transacao": "",
+            "tipo_transacao": "",
+            "valor_trasacao": "",
+            "plano_id": ""
+        }
+    ]
+}

@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel</title>
+    <link rel="stylesheet" href="./assets/css/index.css">
+    <link rel="shortcut icon" href="./assets/logo/ico.png" type="image/x-icon">
+    <script src="./assets/js/index.js" type="module" defer></script>
+</head>
+
+<body>
+    <div id="app">
+        <router-view></router-view>
+    </div>
+
+    <template id="login">
+        <div class="l-login">
+            <div>
+                <form action="javascript:void(0)" class="form b-login" @submit="login()">
+                    <img src="./assets/logo/logo.svg">
+                    <input v-model="email" type="email" placeholder="E-mail" required>
+                    <input v-model="password" type="password" placeholder="Senha" required>
+                    <button type="submit" class="btn btn--success">ENTRAR</button>
+                    <div v-if="message_error" class="error">
+                        E-mail ou senha incorretos
+                    </div>
+                    <a href="#/recuperar-senha" class="link link--login">esqueceu sua senha?</a>
+                </form>
+            </div>
+            <div>
+                &copy; 2021 - Digital Combo
+            </div>
+            <div class="loading" v-if="loading"></div>
+        </div>
+    </template>
+
+    <template id="recuperar_senha">
+        <div class="l-login">
+            <div>
+                <form action="javascript:void(0)" @submit="recuperar_senha()" class="form b-login">
+                    <img src="./assets/logo/logo.svg">
+                    <input type="email" v-model="email" placeholder="E-mail" required>
+                    <button type="submit" class="btn btn--success">Recuperar senha</button>
+                    <span v-if="message" class="success" > senha temporária enviada por email </span>
+                    <a href="#/" class="link link--login">Entrar</a>
+                </form>
+            </div>
+            <div>
+                &copy; 2021 - Digital Combo
+            </div>
+        </div>
+    </template>
+
+    <template id="c-menu">
+        <div>
+            <a :href="item.link" v-for="item in lista" class="aside__link">
+                <img :src="'./assets/icon/'+item.icon">
+                <span>{{ item.text }}</span>                
+            </a>
+            <a href="#/" @click="sair()" class="aside__link">
+                <img src="./assets/icon/logout.svg">
+                <span>Sair</span>
+            </a>
+        </div>
+    </template>
+
+    <template id="c-footer">
+        <div class="a-footer">
+            <span>&copy; 2021 - Digital Combo </span>
+        </div>
+    </template>
+
+    <template id="c-header">
+        <div class="a-header">
+            <div> <img src="./assets/icon/menu.svg"> </div>
+            <div> <img src="./assets/logo/logo.svg"> </div>
+            <select v-model="id" id="on-instituicao">
+                <option :value="com.id" v-for="com in instituicoes">{{ com.nome_fantasia }}</option>
+            </select>
+            <label for="on-instituicao">
+                <img src="./assets/icon/search.svg">
+            </label>
+        </div>
+    </template>
+
+    <template id="c-inicio">
+        <div class="l-admin">
+            <c-aside></c-aside>
+            <c-header></c-header>
+            <div class="a-body padding-20">
+                <div class="space"></div>
+                <div class="g g-3">
+                    <div class="resumo" v-for="item in resumos" >
+                        <div :style="{backgroundColor: item.color}">
+                            <img :src="'./assets/icon/'+item.ico">
+                        </div>
+                        <span>
+                            <small>{{item.label}}</small>
+                            <b>{{item.valor}}</b>
+                        </span>
+                        <span>{{item.estimativa}}</span>
+                    </div>
+                </div>
+                <div class="space"></div>
+                <button class="button-export"> EXPORTAR CSV  </button>
+            </div>
+            <c-footer></c-footer>
+            <div class="loading" v-if="loading"></div>
+        </div>
+    </template>
+
+    <template id="c-aside">
+        <div class="a-aside">
+            <div class="aside__link aside__link--gravatar">
+                <img src="./assets/img/gravatar.png">
+                <span> Jose Antonio</span>
+            </div>
+            <c-menu></c-menu>
+        </div>
+    </template>
+
+    <template id="inicio">
+        <div class="l-admin">
+            <c-aside></c-aside>
+            <c-header></c-header>
+            <div class="a-body"></div>
+            <c-footer></c-footer>
+        </div>
+    </template>
+
+    <template id="c-metas">
+        <div class="l-admin">
+            <c-aside></c-aside>
+            <c-header></c-header>
+            <div class="a-body">
+                <div class="body_box">
+                    <h1>Metas 2021</h1>
+                    <form action="javascript:void(0)" @submit="save()" class="form">
+                        <div class="g g-4">
+                            <div v-for="(mes, index) in meses">
+                                <label for=""> {{ mes }} </label>
+                                <input type="text" v-model="playload[index]" placeholder="12.000" class="i-monei">
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn--success">Salvar</button>
+                            </div>
+                        </div>
+                    </form>
+                    <span v-if="error.status" :class="error.type"> {{error.text}} </span>
+                </div>
+            </div>
+            <c-footer></c-footer>
+            <div class="loading" v-if="loading"></div>
+        </div>
+    </template>
+
+    <template id="c-perfil">
+        <div class="l-admin">
+            <c-aside></c-aside>
+            <c-header></c-header>
+            <div class="a-body">
+                <div class="body_box">
+                    <h1>Perfil</h1>
+                    <form action="javascript:void(0)" @submit="atualizar()" class="form">
+                        <div>
+                            <label for="">Nome</label>
+                            <input v-model="nome" type="text" required>
+                        </div>
+                        <div class="g g-2">
+                            <div>
+                                <label for="">Telefone</label>
+                                <input v-model="telefone" type="text" required>
+                            </div>
+                            <div>
+                                <label for="">email</label>
+                                <input v-model="email" type="email" disabled required>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn--success">Salvar</button>
+                            </div>
+                        </div>
+                    </form>
+                    <span v-if="error.status" :class="error.type"> {{error.text}} </span>
+                    <div class="space"></div>
+                    <h2>Alterar senha</h2>
+                    <form action="javascript:void(0)" @submit="alterar_senha()" class="form">
+                        <div class="g g-2">
+                            <div>
+                                <label for="">Digita a senha</label>
+                                <input type="password" v-model="senha" required>
+                            </div>
+                            <div>
+                                <label for="">Repita a senha</label>
+                                <input type="password" v-model="confirmar_senha" required>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn--success">alterar senha</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="error" v-if="messageAlterPass.status" v-html="messageAlterPass.text">  </div>
+                    <span v-if="error2.status" :class="error2.type"> {{error.text}} </span>
+                </div>
+            </div>
+            <div class="loading" v-if="loading"></div>
+            <c-footer></c-footer>
+        </div>
+    </template>
+
+    <template id="c-privacidade">
+        <div class="l-admin">
+            <c-aside></c-aside>
+            <c-header></c-header>
+            <div class="a-body">
+                <div class="body_box">
+                    <h1>Política de Privacidade</h1>
+                    <form action="javascript:void(0)" class="form" @submit="save">
+                        <div class="editor">
+                            <span>
+                                <img src="./assets/editor/t.svg" @click="title">
+                                <img src="./assets/editor/b.svg" @click="bold">
+                                <img src="./assets/editor/i.svg" @click="italic">
+                                <img src="./assets/editor/list.svg" @click="list">
+                            </span>
+                            <div contenteditable="true" @input="input" v-html="content"></div>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn--success"> Salvar</button>
+                        </div>
+                    </form>
+                    <span v-if="error.status" :class="error.type" > {{error.text}} </span>
+                </div>
+            </div>
+            <div class="loading" v-if="loading"></div>
+            <c-footer></c-footer>
+        </div>
+    </template>
+
+    <template id="c-config">
+        <div class="l-admin">
+            <c-aside></c-aside>
+            <c-header></c-header>
+            <div class="a-body">
+                <div class="body_box">
+                    <h1>Configuração</h1>
+                    <form action="javascript:void(0)" @submit="save()" class="form">
+                        <div>
+                            <label for="">Titulo do Site</label>
+                            <input type="text" maxlength="75" v-model="playload.title">
+                        </div>
+                        <div>
+                            <label for="">Descrição Google</label>
+                            <textarea rows="3" maxlength="146" v-model="playload.description"></textarea>
+                        </div>
+                        <div>
+                            <label for="">Tags Google</label>
+                            <input type="text" maxlength="75" v-model="playload.tag">
+                        </div>                      
+                        <div class="space"></div>
+                        <div class="g g-3">
+                            <button type="submit" class="btn btn--success">Salvar</button>
+                        </div>
+                    </form>
+                    <span v-if="error.status" :class="error.type"> {{error.text}} </span>
+                </div>
+            </div>
+            <div class="loading" v-if="loading"></div>
+            <c-footer></c-footer>
+        </div>
+    </template>
+
+    <template id="c-instituicao">
+        <div class="l-admin">
+            <c-aside></c-aside>
+            <c-header></c-header>
+            <div class="a-body">
+                <div class="body_box">
+                    <h1>Instituição</h1>
+                    <form action="javascript:void(0)" @submit="save()" class="form">
+                        <div>
+                            <label for="">Nome Fantasia</label>
+                            <input type="text" v-model="form.nome_fantasia">
+                        </div>
+                        <div class="g g-2">
+                            <div>
+                                <label for="">Razão Social</label>
+                                <input type="text" v-model="form.razao_social">
+                            </div>
+                            <div>
+                                <label for="">CPF/CNPJ</label>
+                                <input type="text" v-model="form.cnpj">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="">Domínio</label>
+                            <input type="radio" v-model="form.domain_person" value="sub" name="type_domains" checked> Subdominio
+                            <input type="radio" v-model="form.domain_person" value="person" name="type_domains"> Domínio Personalizado
+                        </div>
+                        <div class="note" v-if="form.domain_person == 'sub'">
+                            <div class="input-note subdomain">
+                                <input type="text" v-model="form.dominio" placeholder="sub.dominio" class="input-note">
+                                <strong>.dorardigital.com</strong> 
+                            </div>
+                        </div>
+                        <div class="note" v-if="form.domain_person == 'person'">
+                            <input type="text" v-model="form.dominio" placeholder="seudominio.com.br"  class="input-note">
+                            <h5>Configurar domínio personalizado</h5>
+                            <p> 
+                                Entre no painel onde você adiquiriu o dominio, procure por 
+                                zona de DNS e preencha com os dados abaixo, antes de salvar as alterações
+                            </p>
+                            <ul>
+                                <li>ns33.i7host.com.br</li>
+                                <li>ns34.i7host.com.br</li>
+                            </ul>
+                        </div>
+                        <div class="g g-2">
+                            <div>
+                                <label for="">Telefone</label>
+                                <input type="text" v-model="form.telefone">
+                            </div>
+                            <div>
+                                <label for="">E-mail</label>
+                                <input type="text" v-model="form.email">
+                            </div>
+                            <div>
+                                <label for="">Data Nascimento</label>
+                                <input type="date" v-model="form.birthdate">
+                            </div>
+                            <div>
+                                <label for="">Código de Atividade</label>
+                                <select v-model="form.atividade">
+                                    <option :value="mcc.id" v-for="mcc in mccs"> {{ mcc.description }}</option>
+                                </select>                                
+                            </div>
+                        </div>
+                        <div class="g g-2">
+                            <div>
+                                <label for="">CEP</label>
+                                <input type="text" v-model="form.cep">
+                            </div>
+                            <div>
+                                <label for="">Rua/Avenida Nº</label>
+                                <input type="text" v-model="form.rua">
+                            </div>
+                        </div>
+                        <div class="g g-2">                            
+                            <div>
+                                <label for="">Complemento</label>
+                                <input type="text" v-model="form.complemento">
+                            </div>
+                            <div>
+                                <label for="">Bairro</label>
+                                <input type="text" v-model="form.bairro">
+                            </div>
+                            <div>
+                                <label for="">Cidade</label>
+                                <input type="text" v-model="form.cidade">
+                            </div>
+                            <div>
+                                <label for="">Estado</label>
+                                <input type="text" v-model="form.estado">
+                            </div>
+                        </div>
+                        <div class="g g-3">
+                            <button type="submit" class="btn btn--success">Salvar</button>
+                        </div>
+                        <span @click="feedback.status=null" v-if="feedback.status != null" :class="feedback.status"> {{ feedback.message }} </span>
+                    </form>
+                </div>
+            </div>
+            <c-footer></c-footer>
+            <div class="loading" v-if="loading"></div>
+        </div>
+    </template>
+
+
+    <template id="c-script">
+        <div class="l-admin">
+            <c-aside></c-aside>
+            <c-header></c-header>
+            <div class="a-body">
+                <div class="body_box">
+                    <h1> Codigos </h1>
+                    <form action="javascript:void(0)" @submit="save()" class="form">
+                        <div>
+                            <label for="">Header</label>
+                            <textarea rows="7" v-model="playload.header"></textarea>
+                        </div>
+                        <div>
+                            <label for="">Start Body</label>
+                            <textarea rows="7" v-model="playload.body"></textarea>
+                        </div>
+                        <div>
+                            <label for="">Final Body</label>
+                            <textarea rows="7" v-model="playload.footer"></textarea>
+                        </div>
+                        <div class="g g-3">
+                            <button type="submit" class="btn btn--success">Salvar</button>
+                        </div>
+                    </form>
+                    <span v-if="error.status" :class="error.type"> {{error.text}} </span>
+                </div>
+            </div>
+            <div class="loading" v-if="loading"></div>
+            <c-footer></c-footer>
+        </div>
+    </template>
+
+    <template id="c-modulos">
+        <div class="l-admin">
+            <c-aside></c-aside>
+            <c-header></c-header>
+            <div class="a-body">
+                <div class="body_box body_box--transparent">
+                    <h1>Modulos</h1>
+                    <div class="g g-3">
+                        <div class="modulo" v-for="modulo in modulos">
+                            <img :src="'./assets/logo-modulos/'+modulo.logo">
+                            <span v-if="modulo.feature_flag">
+                                <a :href="modulo.link">
+                                    <img src="./assets/icon/gear.svg">
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <c-footer></c-footer>
+        </div>
+    </template>
+
+
+
+    <template id="c-doadores">
+        <div class="l-admin">
+            <c-aside></c-aside>
+            <c-header></c-header>
+            <div class="a-body">
+                <div class="body_box">
+                    <h1>Doadores</h1>
+                    <div class="table">
+                        <div v-for="doador in doadores">
+                            <span><img class="gravatar" src="./assets/img/gravatar.png"></span>
+                            <span class="w-50">
+                                {{ doador.nome }} <br>
+                                {{ doador.email }} <br>
+                                {{ doador.telefone }} <br>
+                            </span>
+                            <span>
+                                <small>Dada Cadastro</small> <br>
+                                {{ doador.created_at | format_data }}
+                            </span>
+                            <span> 
+                                <span class="table_btn table_btn_status">Unico</span>                                 
+                            </span>
+                            <span>
+                                <a href="javascript:void(0)" class="table_btn" >
+                                    <img src="./assets/icon/eye.svg">
+                                </a>
+                            </span>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+            <c-footer></c-footer>
+        </div>
+    </template>
+
+    <template id="c-doacoes">
+        <div class="l-admin">
+            <c-aside></c-aside>
+            <c-header></c-header>
+            <div class="a-body">
+                <div class="body_box">
+                    <h1>Doações</h1>
+                    <div class="table">
+                        <div v-for="doacao in doacoes">
+                            <span><img class="gravatar" src="./assets/img/gravatar.png"></span>
+                            <span>
+                                <small>Doador</small> <br>
+                                {{doacao.nome}}
+                            </span>
+                            <span>
+                                <small>Valor</small> <br>
+                                R$ {{doacao.valor}}
+                            </span>
+                            <span>
+                                <small>Status</small> <br>
+                                <span class="table_btn table_btn_status">Finalizado</span>
+                            </span>
+                            <span>
+                                <small>Data</small> <br>
+                                {{doacao.data}}
+                            </span>
+                            <span>
+                                <span class="table_btn table_btn_status">Cartão</span>
+                            </span>
+                            <span>
+                                <span class="table_btn table_btn_status">UNICO</span>
+                            </span>
+                            <span>
+                                <span v-if="doacao.status">
+                                    <img src="./assets/icon/success.svg" class="ico_status">
+                                </span>
+                                <span v-else>                                    
+                                    <img src="./assets/icon/error.svg" class="ico_status">
+                                </span>                                
+                            </span>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+            <c-footer></c-footer>
+        </div>
+    </template>    
+
+    <template id="c-credenciais">
+        <div class="l-admin">
+            <c-aside></c-aside>
+            <c-header></c-header>
+            <div class="a-body">
+                <div class="body_box">
+                    <h1 class="title_form">
+                        Credenciais 
+                        <a href="#/credenciais/nova" class="plus"> 
+                            <img src="./assets/icon/plus.svg"> 
+                        </a> 
+                    </h1>
+                    <div class="table">
+                        <div v-for="credencial in credenciais">
+                            <span class="w25">{{ credencial.nome }}</span>
+                            <span class="w-50">
+                                <i class="tag" v-for="id in credencial.recursos.split(',')">
+                                    {{ id | get_name_by_id }}
+                                </i>
+                            </span>
+                            <a :href="'#/credenciais/editar/'+credencial.id" class="table_btn table_btn--edit w-40">
+                                <img src="./assets/icon/edit.svg"> 
+                            </a>    
+                            <a  @dblclick="apagar( credencial.id )" title="Para Apagar de duplo click" class="table_btn table_btn--trash w-40">
+                                <img src="./assets/icon/trash.svg"> 
+                            </a>                            
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+            <c-footer></c-footer>
+        </div>
+    </template>
+
+    <template id="c-credenciais-novo">
+        <div class="l-admin">
+            <c-aside></c-aside>
+            <c-header></c-header>
+            <div class="a-body">
+                <div class="body_box">
+                    <h1>Adicione uma credencial</h1>
+                    <form action="javascript:void(0)" class="form" @submit="adicionar()">
+                        <label for="">Nome</label>
+                        <input type="text" v-model="title" placeholder="informe um nome" required>
+                        <div class="g g-2">
+                            <label v-for="recurso in menus">
+                                <input type="checkbox" v-model="checks[recurso.id]">
+                                {{ recurso.text }}
+                            </label>
+                        </div>
+                        <div class="space"></div>
+                        <div class="g g-3">
+                            <button type="submit" class="btn btn--success">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <c-footer></c-footer>
+        </div>
+    </template>
+
+    <template id="c-sass">
+        <div class="l-admin">
+            <c-aside></c-aside>
+            <c-header></c-header>
+            <div class="a-body">
+                <div class="body_box">
+                    <h1 class="title_form">
+                        SAAS 
+                        <a href="#/sass/novo" class="plus"> 
+                            <img src="./assets/icon/plus.svg"> 
+                        </a> 
+                    </h1>
+                    <div class="table">
+                        <div v-for="sass in playload">
+                            <span class="w25">{{ sass.nome_fantasia }}</span>
+                            <span class="w25">
+                                <a :href="'//'+sass.dominio" target="_blank" rel="noopener noreferrer">
+                                    {{ sass.dominio }}
+                                </a>
+                            </span>
+                            <span :class="sass.ativo ? 'btn_ativo' : 'btn_inativo'">
+                                {{ sass.ativo ? 'Ativo' : 'Inativo' }}
+                            </span>
+                            <a :href="'#/sass/editar/'+sass.id" class="table_btn table_btn--edit">
+                                <img src="./assets/icon/edit.svg"> 
+                            </a>                            
+                        </div>                        
+                    </div>
+                </div>
+                <div class="paginacao">
+                    <a :href="'#/sass/'+(+step + 1)" @click="load(step+1)" v-for="step in steps"> {{ step + 1 }} </a>
+                </div>
+            </div>
+            <c-footer></c-footer>
+        </div>
+    </template>
+
+    <template id="c-usuarios">
+        <div class="l-admin">
+            <c-aside></c-aside>
+            <c-header></c-header>
+            <div class="a-body">
+                <div class="body_box">
+                    <h1 class="title_form">
+                        Usuários 
+                        <a href="#/usuarios/novo" class="plus"> 
+                            <img src="./assets/icon/plus.svg"> 
+                        </a> 
+                    </h1>
+                    <div class="table">
+                        <div v-for="user in usuarios" v-if="user.ativo == 1">
+                            <span><img class="gravatar" src="./assets/img/gravatar.png"></span>
+                            <span>{{ user.nome }}</span>
+                            <span>{{ user.telefone }}</span>
+                            <span>{{ user.email }}</span>
+                            <span>
+                                <a :href="'#/usuarios/novo/'+user.id" class="table_btn">
+                                    <img src="./assets/icon/edit.svg">
+                                    <span>EDITAR</span>
+                                </a>
+                            </span>
+                            <span>
+                                <a @dblclick="del(user.id)" class="table_btn table_btn--trash" title="Para acabar use duplo click">
+                                    <img src="./assets/icon/trash.svg">
+                                </a>
+                            </span>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+            <c-footer></c-footer>
+        </div>
+    </template>
+
+    
+    <template id="c-usuarios-novo">
+        <div class="l-admin">
+            <c-aside></c-aside>
+            <c-header></c-header>
+            <div class="a-body">
+                <div class="body_box">
+                    <h1>Usuário</h1>
+                    <form action="javascript:void(0)" class="form" @submit="salvar()">
+                        <div class="g g-2">
+                            <div>
+                                <label for="">Nome</label>
+                                <input type="text" v-model="form.nome" placeholder="" required>
+                            </div>
+                            <div>
+                                <label for="">Email</label>
+                                <input type="email" v-model="form.email" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="g g-2">
+                            <div>
+                                <label for="">Telefone</label>
+                                <input type="text" v-model="form.telefone" placeholder="" required>
+                            </div>
+                            <div>
+                                <label for="">Credencial</label>
+                                <select v-model="form.credencial">
+                                    <option :value="item.id" v-for=" item in credenciais "> {{ item.nome }} </option>
+                                </select>                                
+                            </div>
+                        </div>
+                        <div class="g g-2" v-if="id == null">
+                            <div>
+                                <label for="">Senha</label>
+                                <input type="password" v-model="form.password" placeholder="" required>
+                            </div>
+                            <div>
+                                <label for="">Confirm Senha</label>
+                                <input type="password" v-model="form.password_confirm" placeholder="" required>
+                            </div>
+                        </div>
+                        <div :class="error != null ? 'error' : 'success'" v-if="error != null "> {{error}} </div>                   
+                        <div class="space"></div>
+                        <div class="g g-3">
+                            <button type="submit" class="btn btn--success">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="loading" v-if="loading"></div>
+            <c-footer></c-footer>
+        </div>
+    </template>
+
+    <template id="c-planos">
+        <div class="l-admin">
+            <c-aside></c-aside>
+            <c-header></c-header>
+            <div class="a-body">
+                <div class="body_box">
+                    <h1 class="title_form">
+                        Planos 
+                        <a href="#/planos/novo" class="plus"> 
+                            <img src="./assets/icon/plus.svg"> 
+                        </a> 
+                    </h1>
+                    <div class="table">
+                        <div v-for="plano in planos">
+                            <span>{{ plano.name }}</span>
+                            <span>{{ plano.amount | is_price }}</span>
+                            <span>
+                                <a :href="'#/planos/editar/'+plano.id" class="table_btn">
+                                    <img src="./assets/icon/edit.svg">
+                                    <span>EDITAR</span>
+                                </a>
+                            </span>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+            <c-footer></c-footer>
+        </div>
+    </template>
+
+    <template id="c-emails">
+        <div class="l-admin">
+            <c-aside></c-aside>
+            <c-header></c-header>
+            <div class="a-body">
+                <div class="body_box">
+                    <h1>Emails</h1>
+                    <div class="table">
+                        <div v-for="email in playload">
+                            <span>{{ email.cat }}</span>
+                            <span>
+                                <a :href="'#/modelo-de-emails/'+email.id" class="table_btn">
+                                    <img src="./assets/icon/edit.svg">
+                                    <span>EDITAR</span>
+                                </a>
+                            </span>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+            <c-footer></c-footer>
+        </div>
+    </template>
+
+    <template id="c-edit-modulo">
+        <div class="l-admin">
+            <c-aside></c-aside>
+            <c-header></c-header>
+            <div class="a-body">
+                <div class="body_box">
+                    <h1>{{title}}</h1>
+                    <form action="javascript:void(0)" class="form" @submit="save()">
+                        <div v-for=" input in autoForm ">
+                            <label for="">{{input.label}}</label>
+                            <input type="text" v-model="form[input.name]" placeholder="" required>
+                        </div>
+                        <div class="g g-3">
+                            <button type="submit" class="btn btn--success">Salvar</button>
+                        </div>
+                    </form>
+                    <span v-if="error.status" :class="error.type"> {{error.text}} </span>
+                </div>
+            </div>
+            <div class="loading" v-if="loading"></div>
+            <c-footer></c-footer>
+        </div>
+    </template>
+    
+    <template id="c-emails-edit">
+        <div class="l-admin">
+            <c-aside></c-aside>
+            <c-header></c-header>
+            <div class="a-body">
+                <div class="body_box">
+                    <h2> {{ title }} </h2>
+                    <small> {{ cat }} </small>
+                    <form action="javascript:void(0)" class="form" @submit="save()">
+                        <div>
+                            <input type="text" v-model="title" placeholder="" required>
+                        </div>
+                        <div>
+                            <textarea v-model="text" rows="3"></textarea>
+                        </div>
+                        <p>Você pode usar as seguintes Tags:</p>
+                        <span>
+                            <span class="tag" v-for="tag in tags">{{tag}}</span>
+                        </span>
+                        <div class="space"></div>
+                        <div class="g g-3">
+                            <button type="submit" class="btn btn--success">Salvar</button>
+                        </div>
+                    </form>
+                    <span v-if="error.status" :class="error.type"> {{error.text}} </span>
+                </div>
+            </div>
+            <div class="loading" v-if="loading"></div>
+            <c-footer></c-footer>
+        </div>
+    </template> 
+    
+    <template id="c-planos-novo">
+        <div class="l-admin">
+            <c-aside></c-aside>
+            <c-header></c-header>
+            <div class="a-body">
+                <div class="body_box">
+                    <h2> Plano </h2>
+                    <form action="javascript:void(0)" class="form" @submit="save()">
+                        <div>
+                            <label for="">Nome</label>
+                            <input type="text" v-model="form.name" placeholder="" required>
+                        </div>
+                        <div class="g g-2">
+                            <div>
+                                <label for="">Valor</label>
+                                <input type="text" v-model="form.amount" placeholder="" required>
+                            </div>
+                            <div>
+                                <label for="">Frequência</label>
+                                <select v-model="form.frequency" >
+                                    <option :value="post.id" v-for="post in frequency"> {{post.label}} </option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="">Intervalo</label>
+                                <input type="text" v-model="form.interval" placeholder="" required>
+                            </div>
+                            <div>
+                                <label for="">Duração</label>
+                                <input type="text" v-model="form.duration" placeholder="" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="">Descrição</label>
+                            <textarea v-model="form.description" rows="3"></textarea>
+                        </div>
+                        <div class="g g-3">
+                            <button type="submit" class="btn btn--success">Salvar</button>
+                        </div>
+                    </form>
+                    <span v-if="error.status" :class="error.type"> {{error.text}} </span>
+                </div>
+            </div>
+            <div class="loading" v-if="loading"></div>
+            <c-footer></c-footer>
+        </div>
+    </template>
+    
+    <template id="c-">
+        <div class="l-admin">
+            <c-aside></c-aside>
+            <c-header></c-header>
+            <div class="a-body">
+                <div class="body_box">
+                    <h1>Metas 2021</h1>
+                    <form action="javascript:void(0)" class="form">
+
+                    </form>
+                </div>
+            </div>
+            <c-footer></c-footer>
+        </div>
+    </template>
+
+
+
+</body>
+
+</html>

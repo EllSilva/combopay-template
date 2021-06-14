@@ -1,0 +1,73 @@
+<div class="loading" v-if="loading"></div>
+
+<span v-if="error.status" :class="error.type"> {{error.text}} </span>
+
+error: {
+    status: false,
+    text: 'Salvo com sucesso',
+    type: 'success'
+}
+
+this.error.status = true
+this.error.text = res.message
+this.error.type = res.status
+
+API
+
+login: email, senha
+informação admin: jwt
+validar jwt: jwt
+
+recuperar senha: email
+enviará uma senha temporária por email
+
+domínios administráveis: jwt
+lista todos os domínio a qual usuário for administrador 
+
+permissão: nome, lista de recurso
+administrador: nome, telefone, email, senha, status, permissão, seller id
+instituição: nome, razão social, nome fantasia, cpf, cnpj,  subdomínio, domínio personalizado, ativar domínio personalizado, ativar manutenção, administrador, data cadastro, telefone, email, endereço, número, complemento, bairro, cidade, estado
+
+
+domínio ou sub existe: domain, status
+registro de domínio: domain, se ele é sub ou personalizado
+
+metas: ano, instituição, coleção de valores mensais
+
+plano: nome, valor, todos são mensais, código plano zoop, instituição
+
+doador: nome completo, cpf, código zoop, endereço, número, complemento, bairro, cidade, estado, telefone, email, data registro, instituição
+
+planos assinados: doador, plano id, nota de observação, status, data cadastro, data update
+boleto: doação,  barcode, link documento
+doação: doador, valor, data hora, status, tipo pagamento, número, plano_id, boleto_id  nota de observação
+
+split: instituição, porcentagem
+
+duplicar boleto: doação id
+página: slug, title, conteúdo xml, instituição
+
+configuração: dias carência, dias tolerância, dias vencimento boleto, instituição, logo, ico, cor tema, titulo, descricao site
+
+layout: component, instituição, json
+
+usuário: instituição, admin, permissão, email, senha
+hook: nome, id
+crons job: nome intervalor
+e mails: nome, cron job, titulo, conteudo, hook
+
+fila: …
+arquivo: ...
+
+INTEGRAÇÃO
+
+Mailing Boss: token, uid, instituição - documentação
+email: host smtp, porta, email, senha, nome origem, texto assinatura, instituição -phpmailer
+correio: instituição, token, key - documentação
+RD Station:  id, secret, instituição - documentação
+Evendas: canal, instituição - feito - documentação
+via cep: cep, endereço, cidade, estado, bairro - feito - documentacao
+
+TELAS
+
+para ver as telas clique aqui

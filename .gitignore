@@ -1,3 +1,6 @@
 .vscode/
-.info
 sass/
+docs/
+.info
+.env
+.json
