@@ -210,3 +210,19 @@
     padding: 7px 14px;
     pointer-events: none;
 }
+.box-relatorio {
+    display: block;
+    background-color: #FFF;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-shadow: 5px 5px 3px rgba(0, 0, 0, .05);
+    border-radius: 5px;
+    & > label {
+        color: #999;
+        font-size: 12px;
+        display: block;
+        border-bottom: 1px solid #DDD;
+        padding-bottom: 12px;
+        margin-bottom: 20px;
+    }
+}
