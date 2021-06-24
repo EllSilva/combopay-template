@@ -31,7 +31,7 @@
             :style="{ backgroundImage: 'url(https://api.doardigital.com.br/storage/app/public/'+ institution_id +'/' + layout.bg_top + ')' }">
             <div class="container flex right">
                 <div class="flex edit_box">
-                    <img :src="layout.logo | getImage" class="logo" @error="error_image">
+                    <img :src="layout.logo | getImage(institution_id)" class="logo" @error="error_image">
                     <label for="on_logo" v-if="edit">
                         <img class="edit" src="./assets/icon/image.svg">
                         <input class="none-input" type="file" id="on_logo" data-name="logo" @change="preview">
@@ -44,7 +44,7 @@
                 <div class="grid g-2 center">
                     <div>
                         <div class="edit_box">
-                            <img :src="layout.image_1 | getImage" @error="error_image">
+                            <img :src="layout.image_1 | getImage(institution_id)" @error="error_image">
                             <label for="on_image_1" v-if="edit">
                                 <img class="edit" src="./assets/icon/image.svg">
                                 <input class="none-input" type="file" id="on_image_1" data-name="image_1"
@@ -52,7 +52,7 @@
                             </label>
                         </div>
                         <div class="edit_box">
-                            <img :src="layout.image_2 | getImage" @error="error_image">
+                            <img :src="layout.image_2 | getImage(institution_id)" @error="error_image">
                             <label for="on_image_2" v-if="edit">
                                 <img class="edit" src="./assets/icon/image.svg">
                                 <input class="none-input" type="file" id="on_image_2" data-name="image_2"
@@ -61,7 +61,7 @@
                         </div>
                     </div>
                     <div class="edit_box">
-                        <img :src="layout.image_3 | getImage" @error="error_image">
+                        <img :src="layout.image_3 | getImage(institution_id)" @error="error_image">
                         <label for="on_image_3" v-if="edit">
                             <img class="edit" src="./assets/icon/image.svg">
                             <input class="none-input" type="file" id="on_image_3" data-name="image_3" @change="preview">
@@ -83,7 +83,7 @@
                 <div class="space"></div>
                 <div class="grid g-2">
                     <div class="videos" v-for="depoimento in depoimento_video" @click="pop_status=true">
-                        <img :src="depoimento | getIdYoutube | getTumb">
+                        <img :src="depoimento | getIdYoutube | getTumb" @error="error_image">
                         <span></span>
                     </div>
                 </div>
@@ -112,7 +112,7 @@
                 <div class="space"></div>
                 <div class="grid g-2">
                     <div class="videos" v-for="video in videos" @click="pop_status=true">
-                        <img :src="video | getIdYoutube | getTumb">
+                        <img :src="video | getIdYoutube | getTumb" @error="error_image">
                         <span></span>
                     </div>
                 </div>
@@ -137,7 +137,7 @@
                 <div>
                     <div class="grid g-4">
                         <div v-for="img in galerys" class="item_galery">
-                            <img :src="img.src| getImage" @error="error_image" alt="foto galeria">
+                            <img :src="img.src| getImage(institution_id)" @error="error_image" alt="foto galeria">
                             <span>{{ img.title }}</span>
                         </div>
                     </div>
@@ -161,7 +161,7 @@
             <div class="container grid g-2 center">
                 <div>
                     <div class="edit_box">
-                        <img :src="layout.image_4 | getImage" @error="error_image">
+                        <img :src="layout.image_4 | getImage(institution_id)" @error="error_image">
                         <label for="on_image_4" v-if="edit">
                             <img class="edit" src="./assets/icon/image.svg">
                             <input class="none-input" type="file" id="on_image_4" data-name="image_4" @change="preview">
@@ -194,7 +194,7 @@
                 <div class="flex between footer_content">
                     <div :contenteditable="edit" @blur="put_layout" name="copy"> {{ layout.copy }} </div>
                     <div class="edit_box">
-                        <img :src="layout.image_5 | getImage" @error="error_image" class="logo-footer">
+                        <img :src="layout.image_5 | getImage(institution_id)" @error="error_image" class="logo-footer">
                         <label for="on_image_5" v-if="edit">
                             <img class="edit" src="./assets/icon/image.svg">
                             <input class="none-input" type="file" id="on_image_5" data-name="image_5" @change="preview">

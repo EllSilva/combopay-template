@@ -112,19 +112,6 @@ globalThis.app = new Vue({
             if (!status)
                 window.location.href = "/pagina-em-manutencao.html"
         },
-        async exist_flags() {
-            let list_flags = Object.keys(this.flags)
-            this.Domain.default_flags.forEach(flag_name => {
-                if (!list_flags.includes(flag_name)) {
-                    let playload = {
-                        base64: this.Domain.default_flags_content[flag_name] || btoa(JSON.stringify({})),
-                        flag: flag_name,
-                        instituicao_id: this.institution_id
-                    }
-                    this.Super.flag_post(playload)
-                }
-            })
-        },
         async put_videos() {
             let res = await this.Super.flag_put(this.flagsIds.VIDEOS, {
                 base64: btoa(JSON.stringify(this.videos)),
@@ -162,15 +149,17 @@ globalThis.app = new Vue({
     filters: {
         getIdYoutube: url => new URL(url).searchParams.get('v'),
         getTumb: id => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
-        getImage: nameImage => `https://api.doardigital.com.br/storage/app/public/1/${nameImage}`,
+        getImage: (nameImage, id = 10) => `https://api.doardigital.com.br/storage/app/public/${id}/${nameImage}`,
     },
     async mounted() {
+        console.log( this.Domain.corruent() )
+
 
         let instituicao = (await this.Super.get_institution_by_domain(this.Domain.corruent()))
-        // this.error_domain(instituicao)
-
+        this.error_domain(instituicao)
+        
         this.institution_id = instituicao?.id
-
+        
         this.edit = this.cache.edit
 
         let all_flags = await this.Super.flag_get_by_institution(this.institution_id)
@@ -178,7 +167,6 @@ globalThis.app = new Vue({
         this.flags = this.Domain.render_flag(all_flags)
 
 
-        this.exist_flags()
 
         this.videos = this.flags.VIDEOS
         this.depoimento_video = this.flags.DEPOIMENTOS

@@ -3,8 +3,10 @@ export default {
         return `https://api.doardigital.com.br/storage/app/public/${id_instituicao}/${name_image}`
     },
     corruent() {
-        // return 'tillman.com'
-        return window.location.hostname
+        let domain = window.location.hostname
+        if ( domain == '127.0.0.1' )
+            return 'tillman.com'
+        return domain
     },
     render_flag(lista = []) {
         let render = {}
