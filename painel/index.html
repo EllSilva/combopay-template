@@ -633,7 +633,7 @@
                                 </a>
                             </span>
                             <span>
-                                <span class="botao-criar">APROVAR</span>
+                                <span @click="run( sass.id )" class="botao-criar">APROVAR</span>
                             </span>
                             <span :class="sass.ativo ? 'btn_ativo' : 'btn_inativo'">
                                 {{ sass.ativo ? 'Ativo' : 'Inativo' }}

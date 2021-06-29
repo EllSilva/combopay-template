@@ -97,12 +97,30 @@ globalThis.app = new Vue({
             this.loading = false
 
         },
+        async remover_galery( src ) {
+            this.loading = true
+            this.galerys = this.galerys.filter( post => post.src != src )
+            await this.Super.flag_put(this.flagsIds.GALERIA, {
+                base64: btoa(JSON.stringify(this.galerys)),
+                flag: 'GALERIA',
+                instituicao_id: this.institution_id
+            })
+            this.loading = false
+        },
         addVideo() {
             this.videos.push(this.urlVideo)
             this.put_videos()
         },
+        remover_video( url_video ) {
+            this.videos = this.videos.filter( video => video != url_video )
+            this.put_videos()
+        },
         addDepoimentos() {
             this.depoimento_video.push(this.urlVideo)
+            this.put_depoimento_videos()
+        },
+        remover_depoimento( url_video ) {
+            this.depoimento_video = this.depoimento_video.filter( video => video != url_video )
             this.put_depoimento_videos()
         },
         getDomain() {
@@ -113,18 +131,22 @@ globalThis.app = new Vue({
                 window.location.href = "/pagina-em-manutencao.html"
         },
         async put_videos() {
+            this.loading = true
             let res = await this.Super.flag_put(this.flagsIds.VIDEOS, {
                 base64: btoa(JSON.stringify(this.videos)),
                 flag: 'VIDEOS',
                 instituicao_id: this.institution_id
             })
+            this.loading = false
         },
         async put_depoimento_videos() {
+            this.loading = true
             let res = await this.Super.flag_put(this.flagsIds.DEPOIMENTOS, {
                 base64: btoa(JSON.stringify(this.depoimento_video)),
                 flag: 'DEPOIMENTOS',
                 instituicao_id: this.institution_id
             })
+            this.loading = false
         },
         async put_layout(e) {
             let name = e.target.getAttribute('name')
@@ -152,27 +174,29 @@ globalThis.app = new Vue({
         getImage: (nameImage, id = 10) => `https://api.doardigital.com.br/storage/app/public/${id}/${nameImage}`,
     },
     async mounted() {
+        this.loading = true
         console.log( this.Domain.corruent() )
-
-
+        
+        
         let instituicao = (await this.Super.get_institution_by_domain(this.Domain.corruent()))
         this.error_domain(instituicao)
         
         this.institution_id = instituicao?.id
         
         this.edit = this.cache.edit
-
+        
         let all_flags = await this.Super.flag_get_by_institution(this.institution_id)
         this.flagsIds = this.Domain.flags_ids(all_flags)
         this.flags = this.Domain.render_flag(all_flags)
-
+        
+        console.log( this.flags  )
 
 
         this.videos = this.flags.VIDEOS
         this.depoimento_video = this.flags.DEPOIMENTOS
         this.galerys = this.flags.GALERIA
         this.layout = { ...this.layout, ...this.flags.LAYOUT }
-
+        this.loading = false
 
     }
 }).$mount("#app");

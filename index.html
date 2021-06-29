@@ -82,9 +82,10 @@
                     :style="{color: layout.color}"> {{ layout.title_depoimento }} </h2>
                 <div class="space"></div>
                 <div class="grid g-2">
-                    <div class="videos" v-for="depoimento in depoimento_video" @click="pop_status=true">
-                        <img :src="depoimento | getIdYoutube | getTumb" @error="error_image">
-                        <span></span>
+                    <div class="videos" v-for="depoimento in depoimento_video" >
+                        <i class="apagar" v-if="edit" @click="remover_depoimento(depoimento)">x</i>
+                        <img @click="pop_status=true" :src="depoimento | getIdYoutube | getTumb" @error="error_image">
+                        <span @click="pop_status=true"></span>
                     </div>
                 </div>
                 <form v-if="edit" action="javascript:void(0)" @submit="addDepoimentos()" class="form-edit">
@@ -111,9 +112,10 @@
                     :style="{color: layout.color}">{{ layout.title_video }}</h2>
                 <div class="space"></div>
                 <div class="grid g-2">
-                    <div class="videos" v-for="video in videos" @click="pop_status=true">
-                        <img :src="video | getIdYoutube | getTumb" @error="error_image">
-                        <span></span>
+                    <div class="videos" v-for="video in videos">
+                        <i class="apagar" v-if="edit" @click="remover_video(video)">x</i>
+                        <img @click="pop_status=true" :src="video | getIdYoutube | getTumb" @error="error_image">
+                        <span @click="pop_status=true"></span>
                     </div>
                 </div>
                 <form v-if="edit" action="javascript:void(0)" @submit="addVideo()" class="form-edit">
@@ -137,6 +139,7 @@
                 <div>
                     <div class="grid g-4">
                         <div v-for="img in galerys" class="item_galery">
+                            <i class="apagar" v-if="edit" @click="remover_galery(img.src)">x</i>
                             <img :src="img.src| getImage(institution_id)" @error="error_image" alt="foto galeria">
                             <span>{{ img.title }}</span>
                         </div>
