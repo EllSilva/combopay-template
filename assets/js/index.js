@@ -46,6 +46,7 @@ globalThis.app = new Vue({
             image_5: 'default.png',
             image_6: 'default.png',
             bg_top: 'default.png',
+            bg_galery: 'default.png',
             bg_footer: 'default.png',
         },
         galery_title: null,

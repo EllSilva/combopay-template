@@ -26,6 +26,10 @@
                 <img src="./assets/icon/image.svg">
                 <input class="none-input" type="file" id="on_bg_top" data-name="bg_top" @change="preview">
             </label>
+            <label for="on_bg_galery" v-if="edit">
+                <img src="./assets/icon/galery.png">
+                <input class="none-input" type="file" id="on_bg_galery" data-name="bg_galery" @change="preview">
+            </label>
         </div>
         <div class="inner background"
             :style="{ backgroundImage: 'url(https://api.doardigital.com.br/storage/app/public/'+ institution_id +'/' + layout.bg_top + ')' }">
@@ -127,7 +131,7 @@
             </div>
         </div>
         <div class="inner gap-box background center"
-            :style="{ backgroundImage: 'url(https://api.doardigital.com.br/storage/app/public/'+ institution_id +'/' + layout.bg_top + ')', color: '#FFF' }">
+            :style="{ backgroundImage: 'url(https://api.doardigital.com.br/storage/app/public/'+ institution_id +'/' + layout.bg_galery + ')', color: '#FFF' }">
             <div class="container">
                 <h1 @blur="put_layout" name="title_galeria" :contenteditable="edit" class="center">
                     {{ layout.title_galeria }}
