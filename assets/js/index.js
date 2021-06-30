@@ -27,6 +27,7 @@ globalThis.app = new Vue({
         videos: [],
         depoimento_video: [],
         galerys: [],
+        pop_video: null,
         layout: {
             title_depoimento: "?",
             title_video: "?",
@@ -172,6 +173,7 @@ globalThis.app = new Vue({
         getIdYoutube: url => new URL(url).searchParams.get('v'),
         getTumb: id => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
         getImage: (nameImage, id = 10) => `https://api.doardigital.com.br/storage/app/public/${id}/${nameImage}`,
+        url_embed: id => `https://www.youtube.com/embed/${id}`,
     },
     async mounted() {
         this.loading = true
