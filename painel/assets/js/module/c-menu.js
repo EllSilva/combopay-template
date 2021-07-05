@@ -3,7 +3,19 @@ import cache from '../library/cache.js'
 import App from '../library/superApp.js'
 const Super = new App
 export default {
-    template: "#c-menu",
+    // template: "#c-menu",
+    template: `
+    <div>
+        <a :href="item.link" v-for="item in lista" class="aside__link">
+            <img :src="'./assets/icon/'+item.icon">
+            <span>{{ item.text }}</span>                
+        </a>
+        <a href="#/" @click="sair()" class="aside__link">
+            <img src="./assets/icon/logout.svg">
+            <span> Sair</span>
+        </a>
+    </div>
+    `,
     data: function() {
         return {
             cache,

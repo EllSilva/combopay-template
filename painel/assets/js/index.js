@@ -76,12 +76,23 @@ Vue.component('c-planos-editar', planosEditar )
 
 const router = new Router({ routes: router_list })
 
+Vue.prototype.$eventHub = new Vue()
+
 const app = new Vue({
     router,
     data: {
-        title: 'Painel'
+        title: 'Painel',
+        open: true,
+    },
+    created() {
+        var corruent = this
+        this.$eventHub.$on('toggle-menu', function( val ) {
+            corruent.open = val
+        })
     }
 }).$mount('#app')
+
+
 
 
 globalThis.go_editing = function() {

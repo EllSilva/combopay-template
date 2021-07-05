@@ -1,3 +1,11 @@
+.open {
+    .l-admin {
+        grid-template-columns: 50px 1fr;
+    }
+    .aside__link span {
+        display: none;
+    }
+}
 .l-admin {
     display: grid;
     width: 100%;
@@ -31,6 +39,7 @@
         display: inline-block;
         height: 60px;
         padding: 15px;
+        cursor: pointer;
     }
     select {
         display: flex;

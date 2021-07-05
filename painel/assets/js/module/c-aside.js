@@ -4,5 +4,10 @@ export default {
         return {
 
         }
+    },
+    methods: {
+        gol(stattus){
+            console.log('golll')
+        }
     }
 }

@@ -52,4 +52,8 @@ img {
 }
 .main p {
     color: var(--azul);
+    display: block;
+    width: 500px;
+    max-width: 80vw;
+    margin: 0 auto;
 }

@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div id="app">
+    <div id="app" :class="{open}">
         <router-view></router-view>
     </div>
 
@@ -55,35 +55,9 @@
         </div>
     </template>
 
-    <template id="c-menu">
-        <div>
-            <a :href="item.link" v-for="item in lista" class="aside__link">
-                <img :src="'./assets/icon/'+item.icon">
-                <span>{{ item.text }}</span>                
-            </a>
-            <a href="#/" @click="sair()" class="aside__link">
-                <img src="./assets/icon/logout.svg">
-                <span>Sair</span>
-            </a>
-        </div>
-    </template>
-
     <template id="c-footer">
         <div class="a-footer">
             <span>&copy; 2021 - Digital Combo </span>
-        </div>
-    </template>
-
-    <template id="c-header">
-        <div class="a-header">
-            <div> <img src="./assets/icon/menu.svg"> </div>
-            <div> <img src="./assets/logo/logo.svg"> </div>
-            <select v-model="id" id="on-instituicao">
-                <option :value="com.id" v-for="com in instituicoes">{{ com.nome_fantasia }}</option>
-            </select>
-            <label for="on-instituicao">
-                <img src="./assets/icon/search.svg">
-            </label>
         </div>
     </template>
 
@@ -146,7 +120,7 @@
     </template>
 
     <template id="c-aside">
-        <div class="a-aside">
+        <div class="a-aside" >
             <div class="aside__link aside__link--gravatar">
                 <img src="./assets/img/gravatar.png">
                 <span> Jose Antonio</span>

@@ -18,4 +18,5 @@ export default [
     { id: 'perfil', text: 'Perfil', icon: 'perfil.svg', link: '#/perfil', feature_flag: true },
     { id: 'meu_plano', text: 'Meu Plano', icon: 'doacoes-creditos-249e90.svg', link: '#/meu-plano', feature_flag: true },
     { id: 'script', text: 'Script', icon: 'code.svg', link: '#/script', feature_flag: true },
+    { id: 'qr_code', text: 'QR CODE', icon: 'code.svg', link: '#/qr-code', feature_flag: true },
 ]
