@@ -35,11 +35,15 @@
     grid-template-columns: 60px 120px 1fr 60px;
     box-shadow: 0 0 3px rgba(0, 0, 0, .3);
     background-color: #FFF;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
     img {
         display: inline-block;
         height: 60px;
-        padding: 15px;
+        padding: 18px;
         cursor: pointer;
+        filter: opacity(.5);
     }
     select {
         display: flex;

@@ -19,6 +19,5 @@ export default {
     async mounted() {
         let res = await this.Super.all_doadores()
         this.doadores = res.data
-        console.log( this.doadores[0] )
     }
 }
