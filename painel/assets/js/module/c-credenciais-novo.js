@@ -7,6 +7,7 @@ export default {
         return {
             Super,
             menus: menus,
+            loading: false,
             title: null,
             checks: {
                 inicio: null,
@@ -35,6 +36,7 @@ export default {
     },
     methods: {
         async adicionar() {
+            this.loading = true
             let is_checks = Object.keys(this.checks).filter( key => this.checks[key] == true  ).join(',')
             let res = await this.Super.post_credential({
                 nome: this.title,
@@ -43,6 +45,7 @@ export default {
             if( res.status == 'success' ) {
                 window.location.href = "#/credenciais"
             }
+            this.loading = false
         }
     }
 }

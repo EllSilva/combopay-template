@@ -336,3 +336,13 @@
     }
 
 }
+[disabled] {
+    background-color: #EEE;
+    border: 1px solid #C00 !important;
+    border-radius: 5px;
+    cursor: not-allowed;
+}
+button[disabled] {
+    border: none !important;
+    background-color: #555;
+}

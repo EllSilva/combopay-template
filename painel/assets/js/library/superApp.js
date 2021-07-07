@@ -32,6 +32,7 @@ class App {
             let res = await fetch(`${this.base}${path}`, this.options)
             let status_code = res.status
             let res_in_json = await res.json()
+            this.desloga({ ...res_in_json, status_code })
             return { ...res_in_json, status_code }
         } catch (error) {
             return {
@@ -39,6 +40,17 @@ class App {
                 next: false,
                 message: 'erro catastrófico'
             }
+        }
+    }
+    desloga(playload) {
+        let path = window.location.protocol
+        path += "//"
+        path += window.location.hostname
+        path += ":"
+        path += window.location.port
+        path += "/painel"
+        if (playload.status == 'Token is Expired') {
+            window.location.href = path
         }
     }
     async put(path, data) {
@@ -93,11 +105,11 @@ class App {
     async get_doador_by_institution_id(id) {
         return await this.get(`/doador/por-instituicao/${id}`, {})
     }
-    
+
     async all_doacao() {
         return await this.get(`/doacoes`, {})
     }
-    
+
     async all_doadores() {
         return await this.get(`/doadores`, {})
     }
@@ -129,8 +141,8 @@ class App {
     async get_credential(id) {
         return await this.get(`/credencial/${id}`, {})
     }
-    async all_credential() {
-        return await this.get(`/credenciais`, {})
+    async all_credential(id = 1) {
+        return await this.get(`/credenciais`, { page: id })
     }
     async put_credential(id, playload = {}) {
         return await this.put(`/credencial/${id}`, playload)
@@ -166,7 +178,7 @@ class App {
     async flag_get_by_institution(id) {
         return this.get(`/configuracao/por-instituicao/${id}`, {});
     }
-    
+
     async plano_all() {
         return this.get(`/zoop/planos`, {});
     }

@@ -72,9 +72,7 @@ export default {
         this.total = todas_intituicoes.total
         this.resumo = Array.from(this.instituicoes).splice(0, 3)
         this.institution_name = this.instituicoes.find( post => {
-            console.log( post.id )
             return post.id == localStorage.getItem('institution') 
         })?.subdominio || 'Todos'
-
     }
 }

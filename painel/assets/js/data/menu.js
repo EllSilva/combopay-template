@@ -2,7 +2,7 @@ export default [
     { id: 'inicio', text: 'Inicio', icon: 'home.svg', link: '#/inicio', feature_flag: true },
     { id: 'doadores', text: 'Doadores', icon: 'doadores.svg', link: '#/doadores', feature_flag: true },
     { id: 'doacoes', text: 'Doações', icon: 'doacoes.svg', link: '#/doacoes', feature_flag: true },
-    { id: 'credenciais', text: 'Credenciais', icon: 'credenciais.svg', link: '#/credenciais', feature_flag: true },
+    { id: 'credenciais', text: 'Credenciais', icon: 'credenciais.svg', link: '#/credenciais/1', feature_flag: true },
     { id: 'usuarios', text: 'Usuários', icon: 'usuarios.svg', link: '#/usuarios', feature_flag: true },
     { id: 'sass', text: 'Saas', icon: 'instituicai.svg', link: '#/sass/1', feature_flag: true },
     { id: 'instituicoes', text: 'Instituição', icon: 'instituicai.svg', link: '#/instituicoes', feature_flag: true },
@@ -18,5 +18,5 @@ export default [
     { id: 'perfil', text: 'Perfil', icon: 'perfil.svg', link: '#/perfil', feature_flag: true },
     { id: 'meu_plano', text: 'Meu Plano', icon: 'doacoes-creditos-249e90.svg', link: '#/meu-plano', feature_flag: true },
     { id: 'script', text: 'Script', icon: 'code.svg', link: '#/script', feature_flag: true },
-    { id: 'qr_code', text: 'QR CODE', icon: 'code.svg', link: '#/qr-code', feature_flag: true },
+    { id: 'qr_code', text: 'QR CODE', icon: 'qr.png', link: '#/qr-code', feature_flag: true },
 ]

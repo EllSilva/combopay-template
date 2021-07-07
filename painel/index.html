@@ -149,10 +149,10 @@
                         <div class="g g-4">
                             <div v-for="(mes, index) in meses">
                                 <label for=""> {{ mes }} </label>
-                                <input type="text" v-model="playload[index]" placeholder="12.000" class="i-monei">
+                                <input  type="text" @input="playload[index] = mask_money(playload[index]) " :disabled="is_flag"  v-model="playload[index]" placeholder="12.000" class="i-monei">
                             </div>
                             <div>
-                                <button type="submit" class="btn btn--success">Salvar</button>
+                                <button type="submit" :disabled="is_flag" class="btn btn--success">Salvar</button>
                             </div>
                         </div>
                     </form>
@@ -256,19 +256,19 @@
                     <form action="javascript:void(0)" @submit="save()" class="form">
                         <div>
                             <label for="">Titulo do Site</label>
-                            <input type="text" maxlength="75" v-model="playload.title">
+                            <input type="text" maxlength="75" :disabled="is_flag" v-model="playload.title">
                         </div>
                         <div>
                             <label for="">Descrição Google</label>
-                            <textarea rows="3" maxlength="146" v-model="playload.description"></textarea>
+                            <textarea rows="3" :disabled="is_flag" maxlength="146" v-model="playload.description"></textarea>
                         </div>
                         <div>
                             <label for="">Tags Google</label>
-                            <input type="text" maxlength="75" v-model="playload.tag">
+                            <input type="text" :disabled="is_flag" maxlength="75" v-model="playload.tag">
                         </div>                      
                         <div class="space"></div>
                         <div class="g g-3">
-                            <button type="submit" class="btn btn--success">Salvar</button>
+                            <button type="submit" :disabled="is_flag"  class="btn btn--success">Salvar</button>
                         </div>
                     </form>
                     <span v-if="error.status" :class="error.type"> {{error.text}} </span>
@@ -395,18 +395,18 @@
                     <form action="javascript:void(0)" @submit="save()" class="form">
                         <div>
                             <label for="">Header</label>
-                            <textarea rows="7" v-model="playload.header"></textarea>
+                            <textarea :disabled="is_flag" rows="7" v-model="playload.header"></textarea>
                         </div>
                         <div>
                             <label for="">Start Body</label>
-                            <textarea rows="7" v-model="playload.body"></textarea>
+                            <textarea :disabled="is_flag" rows="7" v-model="playload.body"></textarea>
                         </div>
                         <div>
                             <label for="">Final Body</label>
-                            <textarea rows="7" v-model="playload.footer"></textarea>
+                            <textarea :disabled="is_flag" rows="7" v-model="playload.footer"></textarea>
                         </div>
                         <div class="g g-3">
-                            <button type="submit" class="btn btn--success">Salvar</button>
+                            <button :disabled="is_flag" type="submit" class="btn btn--success">Salvar</button>
                         </div>
                     </form>
                     <span v-if="error.status" :class="error.type"> {{error.text}} </span>
@@ -554,7 +554,11 @@
                         </div>                        
                     </div>
                 </div>
+                <div class="paginacao">
+                    <a :href="'#/credenciais/'+(+step + 1)" @click="load(step+1)" v-for="step in steps"> {{ step + 1 }} </a>
+                </div>
             </div>
+            <div class="loading" v-if="loading"></div>
             <c-footer></c-footer>
         </div>
     </template>
@@ -583,6 +587,7 @@
                 </div>
             </div>
             <c-footer></c-footer>
+            <div class="loading" v-if="loading"></div>
         </div>
     </template>
 
@@ -602,8 +607,8 @@
                         <div v-for="sass in playload">
                             <span class="w25">{{ sass.nome_fantasia }}</span>
                             <span class="w25">
-                                <a :href="'//'+sass.dominio" target="_blank" rel="noopener noreferrer">
-                                    {{ sass.dominio }}
+                                <a :href="'//'+sass.subdominio" target="_blank" rel="noopener noreferrer">
+                                    {{ sass.subdominio }}
                                 </a>
                             </span>
                             <span>

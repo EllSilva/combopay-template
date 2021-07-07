@@ -12,6 +12,7 @@ export default {
                 body: '',
                 footer: ''
             },
+            is_flag: false,
             loading: false,
             error: {
                 status: false,
@@ -24,17 +25,13 @@ export default {
         let res = (await this.Super.flag_all()).data
         let is_flag = 'SCRIPTS_PAGES'
         let flag = res.find( post => post.flag == is_flag && post.instituicao_id == this.cache.institution )
-        if( !flag ) {
-            let new_flag = await this.Super.flag_post( {
-                flag: is_flag,
-                instituicao_id: this.cache.institution,
-                base64: btoa( JSON.stringify(this.playload) )
-            } )
-        }else {
+        if( flag ) {            
             let data = JSON.parse( atob( flag.base64 ) )
             this.playload.header = data.header
             this.playload.body = data.body
             this.playload.footer = data.footer
+        }else {
+            this.is_flag = true
         }
     },
     methods: {

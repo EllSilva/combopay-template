@@ -6,23 +6,36 @@ export default {
     data: function () {
         return {
             Super,
+            loading: false,
+            step: 1,
+            steps: [],
             credenciais: [],
             menus: menus
         }
-    }, 
+    },
     filters: {
-        get_name_by_id( id ) {
-            let permissao = menus.find( post => post.id == id )
-            return permissao?.text 
+        get_name_by_id(id) {
+            let permissao = menus.find(post => post.id == id)
+            return permissao?.text
         }
     },
     async mounted() {
-        let res = await this.Super.all_credential()
-        this.credenciais = res?.data || []
+        this.load(this.$route.params.step)
     },
     methods: {
-        async apagar( id ) {
-            this.Super.put_credential( id, { ativo: false } )
+        async load(id) {
+            let res = await this.Super.all_credential(id)
+            this.credenciais = res?.data || []
+            this.steps = []
+            let total_pages = Math.ceil(res.total / res.per_page)
+            for (let index = 0; index < total_pages; index++) {
+                this.steps.push(index)
+            }
+        },
+        async apagar(id) {
+            this.loading = true
+            await this.Super.put_credential(id, { ativo: false })
+            this.loading = false
         }
     }
 }
