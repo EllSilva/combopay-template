@@ -8,7 +8,7 @@ export default {
         <div> <img src="./assets/logo/logo.svg"> </div>
         <strong> {{institution_name}} </strong>
         
-        <img @click="toggle_pop" src="./assets/icon/edit.svg">
+        <img @click="toggle_pop" src="./assets/icon/change.svg">
 
         <div class="popupo-bg" v-if="status_pop">
             <div>
@@ -16,7 +16,7 @@ export default {
                 <input @input="updade_pop" v-model="search" type="text" placeholder="Buscar...">
                 <div v-for="item in resumo" class="iten-lista-pop">
                     <div>  {{item.subdominio}} </div>
-                    <img @click="change_domain(item.id)" :title="item.id" src="./assets/icon/edit.svg">
+                    <img @click="change_domain(item.id)" :title="item.id" src="./assets/icon/change.svg">
                 </div>
                 <div class="pop-center">
                     Total <b> {{ total }} </b>

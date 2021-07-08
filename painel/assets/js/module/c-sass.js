@@ -16,6 +16,7 @@ export default {
                 'CONFIG_SITE',
                 'METAS_2021',
                 'SCRIPTS_PAGES',
+                'POLITICA',
             ],
             default_flags_content: {
                 'METAS_2021' : btoa(JSON.stringify([])), 
@@ -25,6 +26,7 @@ export default {
                 'LAYOUT' : btoa(JSON.stringify({})),
                 'CONFIG_SITE' : btoa(JSON.stringify({})),
                 'SCRIPTS_PAGES' : btoa(JSON.stringify({})),
+                'POLITICA' : btoa(JSON.stringify('')),
             },
         }
     },

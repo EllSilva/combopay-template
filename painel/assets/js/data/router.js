@@ -31,4 +31,5 @@ export default [
     { path: '/email', component: { template: '<c-email></c-email>' } },
     { path: '/rd-station', component: { template: '<c-rd-station></c-rd-station>' } },
     { path: '/evendas', component: { template: '<c-evendas></c-evendas>' } },
+    { path: '/qr-code', component: { template: '<c-qr></c-qr>' } },
 ]

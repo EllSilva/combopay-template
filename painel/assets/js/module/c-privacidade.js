@@ -9,6 +9,7 @@ export default {
             Super,
             cache,
             loading: false,
+            is_flag: false,
             name_flag: 'POLITICA',
             playload: '',
             content: '',
@@ -35,7 +36,6 @@ export default {
         },
         async save() {
             this.loading = true
-            console.log( this.playload )
             let res = await this.Super.flag_put( this.cache.institution, {
                 flag: this.name_flag,
                 instituicao_id: this.cache.institution,
@@ -53,16 +53,12 @@ export default {
     async mounted() {
         let res = (await this.Super.flag_all()).data
         let flag = res.find(post => post.flag == this.name_flag && post.instituicao_id == this.cache.institution)
-        if (!flag) {
-            let new_flag = await this.Super.flag_post({
-                flag: this.name_flag,
-                instituicao_id: this.cache.institution,
-                base64: btoa(JSON.stringify(this.playload))
-            })
-        } else {
+        if (flag) {
             let data = JSON.parse(atob(flag.base64))
             this.playload = data
             this.content = data
+        } else {
+           this.is_flag = true
         }
     },
 }
