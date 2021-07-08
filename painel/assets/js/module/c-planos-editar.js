@@ -36,16 +36,15 @@ export default {
     },
     async mounted() {
         this.id = this.$route.params.id
-        this.institution_id = '6cf4bb1e78c6428786fc8fe6ddada3a6'
-        // this.institution_id = this.cache.institution
-        let res = await this.Super.plano_get( this.id )
+        this.form.instituicao_id = this.cache.institution
+        let res = await this.Super.plano_get(this.id)
         this.form = { ...this.form, ...res }
     },
     methods: {
 
         async save() {
             this.loading = true
-            let res = await this.Super.plano_put(this.id, this.form )
+            let res = await this.Super.plano_put(this.id, this.form)
             window.location.href = '#/planos'
             this.error.status = true
             this.error.text = res?.message

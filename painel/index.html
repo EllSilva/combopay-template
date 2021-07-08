@@ -665,6 +665,7 @@
                     </div>
                 </div>
             </div>
+            <div class="loading" v-if="loading"></div>
             <c-footer></c-footer>
         </div>
     </template>
@@ -736,7 +737,7 @@
                         </a> 
                     </h1>
                     <div class="table">
-                        <div v-for="plano in planos">
+                        <div v-for="plano in planos" v-if="plano.id">
                             <span>{{ plano.name }}</span>
                             <span>{{ plano.amount | is_price }}</span>
                             <span>
@@ -764,7 +765,7 @@
                         <div v-for="email in playload">
                             <span>{{ email.cat }}</span>
                             <span>
-                                <a :href="'#/modelo-de-emails/'+email.id" class="table_btn">
+                                <a :disabled="is_flag" :href=" !is_flag ? '#/modelo-de-emails/'+email.id : '#/modelo-de-emails'" class="table_btn">
                                     <img src="./assets/icon/edit.svg">
                                     <span>EDITAR</span>
                                 </a>
@@ -787,10 +788,10 @@
                     <form action="javascript:void(0)" class="form" @submit="save()">
                         <div v-for=" input in autoForm ">
                             <label for="">{{input.label}}</label>
-                            <input type="text" v-model="form[input.name]" placeholder="" required>
+                            <input :disabled="is_flag" type="text" v-model="form[input.name]" placeholder="" required>
                         </div>
                         <div class="g g-3">
-                            <button type="submit" class="btn btn--success">Salvar</button>
+                            <button :disabled="is_flag" type="submit" class="btn btn--success">Salvar</button>
                         </div>
                     </form>
                     <span v-if="error.status" :class="error.type"> {{error.text}} </span>
@@ -811,10 +812,10 @@
                     <small> {{ cat }} </small>
                     <form action="javascript:void(0)" class="form" @submit="save()">
                         <div>
-                            <input type="text" v-model="title" placeholder="" required>
+                            <input :disabled="is_flag" type="text" v-model="title" placeholder="" required>
                         </div>
                         <div>
-                            <textarea v-model="text" rows="3"></textarea>
+                            <textarea :disabled="is_flag" v-model="text" rows="3"></textarea>
                         </div>
                         <p>Você pode usar as seguintes Tags:</p>
                         <span>
@@ -822,7 +823,7 @@
                         </span>
                         <div class="space"></div>
                         <div class="g g-3">
-                            <button type="submit" class="btn btn--success">Salvar</button>
+                            <button :disabled="is_flag" type="submit" class="btn btn--success">Salvar</button>
                         </div>
                     </form>
                     <span v-if="error.status" :class="error.type"> {{error.text}} </span>

@@ -16,7 +16,7 @@ export default {
                 currency: "BRL",
                 description: null,
                 amount: null,
-                instituicao_id: "6cf4bb1e78c6428786fc8fe6ddada3a6"
+                instituicao_id: null
             },
             frequency: [
                 { id: "daily", label: "Diaria" },
@@ -33,18 +33,13 @@ export default {
         }
     },
     async mounted() {
-        this.form.institution_id = '6cf4bb1e78c6428786fc8fe6ddada3a6'
-        // this.institution_id = this.cache.institution
-
+        this.form.instituicao_id = this.cache.institution
     },
     methods: {
-
         async save() {
             this.loading = true
-
-            let res = await this.Super.plano_post( this.form )
+            let res = await this.Super.plano_post(this.form)
             window.location.href = '#/planos'
-
             this.error.status = true
             this.error.text = res?.message
             this.error.type = res?.status

@@ -17,15 +17,27 @@ export default {
                 'METAS_2021',
                 'SCRIPTS_PAGES',
                 'POLITICA',
+                'RD_STATION',
+                'CORREIOS',
+                'MAILING_BOSS',
+                'PHP_MAILER',
+                'E_VENDAS',
+                'ALL_TEMPLATE_EMAIL',
             ],
             default_flags_content: {
                 'METAS_2021' : btoa(JSON.stringify([])), 
                 'VIDEOS' : btoa(JSON.stringify([])), 
+                'ALL_TEMPLATE_EMAIL' : btoa(JSON.stringify([])), 
                 'DEPOIMENTOS' : btoa(JSON.stringify([])), 
                 'GALERIA' : btoa(JSON.stringify([])), 
                 'LAYOUT' : btoa(JSON.stringify({})),
                 'CONFIG_SITE' : btoa(JSON.stringify({})),
                 'SCRIPTS_PAGES' : btoa(JSON.stringify({})),
+                'RD_STATION' : btoa(JSON.stringify({})),
+                'CORREIOS' : btoa(JSON.stringify({})),
+                'MAILING_BOSS' : btoa(JSON.stringify({})),
+                'PHP_MAILER' : btoa(JSON.stringify({})),
+                'E_VENDAS' : btoa(JSON.stringify({})),
                 'POLITICA' : btoa(JSON.stringify('')),
             },
         }
@@ -41,7 +53,6 @@ export default {
             }
         },
         run( id ) {
-
             this.default_flags.forEach( is_flag => {
                 let playload = { 
                     base64: this.default_flags_content[is_flag], 
@@ -51,9 +62,7 @@ export default {
                 }
                 this.Super.flag_post(playload)
                 console.log(playload)
-            });
-
-            
+            });            
         }
     },
     async mounted() {
@@ -62,5 +71,3 @@ export default {
         console.log(this.playload)
     }
 }
-
-

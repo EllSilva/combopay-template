@@ -9,33 +9,24 @@ export default {
         return {
             Super,
             cache,
+            is_flag: false,
             templates_emails,
             playload: templates_emails,
-            flag: 'ALL_EMAIL_TEMPLATE',
+            flag: 'ALL_TEMPLATE_EMAIL',
         }
     },
     async mounted() {
-        this.load()       
+        this.load()
     },
     methods: {
-        async create_flag() {
-            let playload = {
-                base64: btoa(JSON.stringify(this.templates_emails)),
-                flag: this.flag,
-                instituicao_id: this.cache.institution,
-                ativo: 1,
-            }
-            return await this.Super.flag_post( playload )
-        },
         async load() {
             let all_flags = await this.Super.flag_get_by_institution(this.cache.institution)
-            let flag = all_flags.find( post => post.flag == this.flag )
-            if( !flag ) {
-                await this.create_flag()
-                await this.load()
-                return
+            let flag = all_flags.find(post => post.flag == this.flag)
+            if (flag) {
+                this.playload = JSON.parse(atob(flag.base64.replace(/\s/gi, '+')))
+            } else {
+                this.is_flag = true
             }
-            this.playload = JSON.parse( atob( flag.base64.replace(/\s/gi, '+') ) )
         },
     }
 }

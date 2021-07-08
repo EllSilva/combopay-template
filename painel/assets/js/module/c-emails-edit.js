@@ -16,8 +16,9 @@ export default {
             cat: null,
             id: null,
             text: null,
+            is_flag: false,
             playload: templates_emails,
-            flag: 'ALL_MAIL_TEMPLATE',
+            flag: 'ALL_TEMPLATE_EMAIL',
             flag_id: null,
             loading: false,
             error: {
@@ -28,7 +29,7 @@ export default {
         }
     },
     async mounted() {
-        this.load()       
+        this.load()
     },
     methods: {
         async create_flag() {
@@ -38,41 +39,40 @@ export default {
                 instituicao_id: this.cache.institution,
                 ativo: 1,
             }
-            return await this.Super.flag_post( playload )
+            return await this.Super.flag_post(playload)
         },
         async load() {
             let all_flags = await this.Super.flag_get_by_institution(this.cache.institution)
-            let flag = all_flags.find( post => post.flag == this.flag )
-            if( !flag ) {
-                await this.create_flag()
-                await this.load()
-                return
+            let flag = all_flags.find(post => post.flag == this.flag)
+            if (flag) {
+                this.flag_id = flag.id
+                this.playload = JSON.parse(atob(flag.base64.replace(/\s/gi, '+')))
+                this.id = this.id = this.$route.params.id
+                let email_corruente = this.playload.find(post => post.id == this.id)
+                console.log(email_corruente)
+                this.text = email_corruente.text
+                this.cat = email_corruente.cat
+                this.title = email_corruente.title
+            } else {
+                this.is_flag = true
             }
-            this.flag_id = flag.id
-            this.playload = JSON.parse( atob( flag.base64.replace(/\s/gi, '+') ) )
-            this.id = this.id = this.$route.params.id
-            let email_corruente = this.playload.find( post => post.id == this.id )
-            console.log( email_corruente )
-            this.text = email_corruente.text
-            this.cat = email_corruente.cat
-            this.title = email_corruente.title
         },
         async save() {
             this.loading = true
-            this.playload = this.playload.map( post => {
-                if( post.id == this.id ) {
+            this.playload = this.playload.map(post => {
+                if (post.id == this.id) {
                     post.title = this.title
                     post.text = this.text
                 }
                 return post
-            } )
+            })
             let playload = {
                 base64: btoa(JSON.stringify(this.templates_emails)),
                 flag: this.flag,
                 instituicao_id: this.cache.institution,
                 ativo: 1,
             }
-            let res = await this.Super.flag_put(this.flag_id, playload )
+            let res = await this.Super.flag_put(this.flag_id, playload)
             this.error.status = true
             this.error.text = res.message
             this.error.type = res.status

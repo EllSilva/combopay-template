@@ -5,17 +5,25 @@ export default {
     data: function () {
         return {
             Super,
+            loading: false,
             usuarios: []
         }
     },
     async mounted() {
-        this.usuarios = (await this.Super.all_admins()).data
-        // console.log(res)
+        this.usuarios = (await this.Super.all_admins()).data        
     },
     methods: {
-        del( id ) {
-            console.log( id )
-            this.Super.status_admin( id, 0 )
+        async del( id ) {
+            this.loading = true
+            this.usuarios = this.usuarios.map( user => { 
+                if(user.id == id) {
+                    user.ativo = 0
+                }
+                return user                 
+            })
+            this.usuarios = this.usuarios.filter( user => user.ativo == 1 )
+            await this.Super.status_admin( id, 0 )
+            this.loading = false
         }
     }
 }

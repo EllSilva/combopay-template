@@ -14,8 +14,9 @@ export default {
             title: 'Configurar E-mail',
             flag: 'PHP_MAILER',
             loading: false,
+            is_flag: false,
             id: null,
-            autoForm: [ 
+            autoForm: [
                 { label: 'Host SMTP', name: 'host_smtp' },
                 { label: 'Porta', name: 'port' },
                 { label: 'E-mail', name: 'email' },
@@ -31,7 +32,7 @@ export default {
     },
     async mounted() {
         this.load()
-        
+
     },
     methods: {
         async create_flag() {
@@ -40,18 +41,17 @@ export default {
                 flag: this.flag,
                 instituicao_id: this.cache.institution
             }
-            return await this.Super.flag_post( playload )
+            return await this.Super.flag_post(playload)
         },
         async load() {
             let all_flags = await this.Super.flag_get_by_institution(this.cache.institution)
-            let flag = all_flags.find( post => post.flag == this.flag )
-            if( !flag ) {
-                await this.create_flag()
-                await this.load()
-                return
+            let flag = all_flags.find(post => post.flag == this.flag)
+            if (flag) {
+                this.id = flag.id
+                this.form = JSON.parse(atob(flag.base64))
+            } else {
+                this.is_flag = true
             }
-            this.id = flag.id
-            this.form = JSON.parse( atob( flag.base64 ) )
 
         },
         async save() {
@@ -61,7 +61,7 @@ export default {
                 flag: this.flag,
                 instituicao_id: this.cache.institution
             }
-            let res = await this.Super.flag_put( this.id, playload )
+            let res = await this.Super.flag_put(this.id, playload)
             this.error.status = true
             this.error.text = res.message
             this.error.type = res.status
