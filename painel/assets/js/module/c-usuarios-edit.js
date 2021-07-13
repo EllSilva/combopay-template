@@ -46,5 +46,3 @@ export default {
         this.credenciais = res.data
     }
 }
-
-

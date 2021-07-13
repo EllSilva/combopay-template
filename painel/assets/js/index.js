@@ -37,6 +37,7 @@ import emailsEdit from './module/c-emails-edit.js'
 import planosNovo from './module/c-planos-novo.js'
 import planosEditar from './module/c-planos-editar.js'
 import qr_code from './module/c-qr.js'
+import cadastro_sucesso from './module/c-cadastro-sucesso.js'
 
 Vue.use(Router)
 Vue.component('c-menu', menu )
@@ -75,6 +76,7 @@ Vue.component('c-emails-edit', emailsEdit )
 Vue.component('c-planos-novo', planosNovo )
 Vue.component('c-planos-editar', planosEditar )
 Vue.component('c-qr', qr_code )
+Vue.component('c-cadastro-sucesso', cadastro_sucesso )
 
 const router = new Router({ routes: router_list })
 

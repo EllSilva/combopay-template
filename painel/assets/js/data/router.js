@@ -32,4 +32,6 @@ export default [
     { path: '/rd-station', component: { template: '<c-rd-station></c-rd-station>' } },
     { path: '/evendas', component: { template: '<c-evendas></c-evendas>' } },
     { path: '/qr-code', component: { template: '<c-qr></c-qr>' } },
+    { path: '/cadastrado-sucesso/:token/:user_id/:name/:credential', component: { template: '<c-cadastro-sucesso></c-cadastro-sucesso>' } },
 ]
+
