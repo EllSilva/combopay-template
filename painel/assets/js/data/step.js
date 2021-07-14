@@ -5,7 +5,7 @@ export default [
         titulo: "Ative sua Assinatura",
         description: "Para iniciar essa jornada precisamos que você finalize alguns passos, iniciando o pagamento da sua assinatura",
         btn_text: "Finalizar Assinatura",
-        Link: "#/meu-plano",
+        link: "#/meu-plano",
     },
     {
         title: "Dados da Conta",
@@ -13,7 +13,7 @@ export default [
         titulo: "Complete seu Cadastro",
         description: "Precisamos que você complete seu cadastro com os dados referente a sua Instituição ou Igreja.",
         btn_text: "Completar Cadastro",
-        Link: "#/instituicao",
+        link: "#/instituicao",
     },
     {
         title: "Dados Bancário",
@@ -21,7 +21,7 @@ export default [
         titulo: "Complete seu Dados Bancários",
         description: "Para que possamos transferir o valores para sua conta, você precisa cadastrar seus dados bancários.",
         btn_text: "Cadastrar dados Bancários",
-        Link: "#/meu-banco",
+        link: "#/meu-banco",
     },
     {
         title: "Criar Planos",
@@ -29,7 +29,7 @@ export default [
         titulo: "Crie seus Planos de Doações",
         description: "É necessário que você crie os planos no qual serão disponibilizamos para seus doadores",
         btn_text: "Cadastrar Planos",
-        Link: "#/planos",
+        link: "#/planos",
     },
     {
         title: "Criar Página",
@@ -37,7 +37,7 @@ export default [
         titulo: "Criar sua Landing Page",
         description: "Personalize sua página de doações, com a cara da sua instituição/igreja.",
         btn_text: "Criar Página de Doações",
-        Link: "#/meus-sites",
+        link: "#/meus-sites",
     },
     {
         title: "Configurar E-mails",
@@ -45,7 +45,7 @@ export default [
         titulo: "Configure as Respostas de E-mail",
         description: "Configure as mensagens de email que seus doadores irão receber em todas as etapas do processo.",
         btn_text: "Editar E-mails",
-        Link: "#/modelo-de-emails",
+        link: "#/modelo-de-emails",
     },
     {
         title: "Configurações",
@@ -53,6 +53,6 @@ export default [
         titulo: "Complete as Demais Configurações",
         description: "Finalize a última etapa para seu sistema estar 100% funcional, finalizando as últimas configurações.",
         btn_text: "Editar Configurações",
-        Link: "#/configuracao",
+        link: "#/configuracao",
     },
 ]

@@ -1,0 +1,76 @@
+.all-step {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    font-size: 11px;
+    background: linear-gradient(#999,#999);
+    background-repeat: no-repeat;
+    background-size: 90% 2px;
+    background-position: center 14px;
+}
+.all-step img {
+    display: block;
+    width: 28px;
+    height: 28px;
+    padding: 7px;
+    background-color: #fdd507;
+    border-radius: 50px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    color: #999;
+    box-shadow: inset 0 0 3px rgba(0,0,0,.3);
+}
+.all-step .active img {
+    background-color: #00d06c;    
+}
+.step-grid {
+    display: grid;
+    grid-template-columns: 25% 1fr;
+    margin-bottom: 30px;
+    align-items: center;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    overflow: hidden;
+    grid-gap: 20px;
+}
+.step-grid img {
+    display: block;
+    width: 80%;
+    background-color: #002bbe;
+    padding: 50px;
+}
+.step-grid a {
+    background-color: #72c847;
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 5px;
+    color: #FFF;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: inset 0 0 3px rgba(0,0,0,.3);
+    cursor: pointer;
+    text-shadow: 1px 1px 0px rgba(0,0,0,.3);
+}
+.step-grid p {
+    color: #999;
+}
+.step-grid h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 45px;
+    font-weight: 300;
+}
+.corte {
+    display: block;
+    position: relative;
+}
+.item-corte {
+    display: block;
+    right: -3px;
+    top: -25px;
+    position: absolute;
+    z-index: 99;
+    background-color: transparent !important;
+    width: 100% !important;
+    padding: 0 !important;
+}
