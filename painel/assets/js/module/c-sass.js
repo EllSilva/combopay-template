@@ -23,8 +23,10 @@ export default {
                 'PHP_MAILER',
                 'E_VENDAS',
                 'ALL_TEMPLATE_EMAIL',
+                'CUPOM',
             ],
             default_flags_content: {
+                'CUPOM' : btoa(JSON.stringify([])), 
                 'METAS_2021' : btoa(JSON.stringify([])), 
                 'VIDEOS' : btoa(JSON.stringify([])), 
                 'ALL_TEMPLATE_EMAIL' : btoa(JSON.stringify([])), 

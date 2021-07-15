@@ -36,7 +36,6 @@ export default {
     methods: {
         load_step() {
             let step = this.step[this.corruente_step]
-            console.log(step)
             this.icone = step.icon
             this.title = step.title
             this.description = step.description

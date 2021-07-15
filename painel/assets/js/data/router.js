@@ -33,5 +33,7 @@ export default [
     { path: '/evendas', component: { template: '<c-evendas></c-evendas>' } },
     { path: '/qr-code', component: { template: '<c-qr></c-qr>' } },
     { path: '/cadastrado-sucesso/:token/:user_id/:name/:credential', component: { template: '<c-cadastro-sucesso></c-cadastro-sucesso>' } },
+    { path: '/cupons', component: { template: '<c-cupon-list></c-cupon-list>' } },
+    { path: '/cupom/novo', component: { template: '<c-cupom-novo></c-cupom-novo>' } },
 ]
 
