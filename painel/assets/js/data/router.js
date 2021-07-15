@@ -35,5 +35,6 @@ export default [
     { path: '/cadastrado-sucesso/:token/:user_id/:name/:credential', component: { template: '<c-cadastro-sucesso></c-cadastro-sucesso>' } },
     { path: '/cupons', component: { template: '<c-cupon-list></c-cupon-list>' } },
     { path: '/cupom/novo', component: { template: '<c-cupom-novo></c-cupom-novo>' } },
+    { path: '/cupom-editar/:id', component: { template: '<c-cupom-edit></c-cupom-edit>' } },
 ]
 

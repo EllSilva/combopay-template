@@ -41,6 +41,7 @@ import cadastro_sucesso from './module/c-cadastro-sucesso.js'
 import step from './module/c-step.js'
 import list_cupom from './module/c-cupon-list.js'
 import novo_cupom from './module/c-cupom-novo.js'
+import edit_cupom from './module/c-cupom-edit.js'
 
 Vue.use(Router)
 Vue.component('c-menu', menu )
@@ -83,6 +84,7 @@ Vue.component('c-cadastro-sucesso', cadastro_sucesso )
 Vue.component('c-step', step )
 Vue.component('c-cupon-list', list_cupom )
 Vue.component('c-cupom-novo', novo_cupom )
+Vue.component('c-cupom-edit', edit_cupom )
 
 const router = new Router({ routes: router_list })
 

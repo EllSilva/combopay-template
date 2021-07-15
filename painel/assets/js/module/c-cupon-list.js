@@ -16,19 +16,18 @@ export default {
                         </a> 
                     </h1>
                     <div class="table">
-                        <div v-for="user in playload" v-if="user.ativo == 1">
-                            <span><img class="gravatar" src="./assets/img/gravatar.png"></span>
-                            <span>{{ user.nome }}</span>
-                            <span>{{ user.telefone }}</span>
-                            <span>{{ user.email }}</span>
+                        <div v-for="post in playload" v-if="post.ativo == 1">
+                            <span>{{ post.name }}</span>
+                            <span>{{ post.code }}</span>
+                            <span>R\${{ post.discout }}</span>
                             <span>
-                                <a :href="'#/usuarios/novo/'+user.id" class="table_btn">
+                                <a :href="'#/cupom-editar/'+post.id" class="table_btn">
                                     <img src="./assets/icon/edit.svg">
                                     <span>EDITAR</span>
                                 </a>
                             </span>
                             <span>
-                                <a @dblclick="del(user.id)" class="table_btn table_btn--trash" title="Para acabar use duplo click">
+                                <a @dblclick="del(post.id)" class="table_btn table_btn--trash" title="Para acabar use duplo click">
                                     <img src="./assets/icon/trash.svg">
                                 </a>
                             </span>
@@ -44,6 +43,7 @@ export default {
         return {
             Super,
             cache,
+            id: null,
             loading: false,
             playload: [],
            
@@ -51,20 +51,25 @@ export default {
     },
     async mounted() {
         let all_flags = await this.Super.flag_get_by_institution(this.cache.institution)
-        let flag = all_flags.find(post => post.flag == 'CUPOM')
+        let flag = all_flags.reverse().find(post => post.flag == 'CUPOM')
         this.playload = JSON.parse( atob( flag.base64 ) )
+        this.id = flag.id
     },
     methods: {
         async del( id ) {
             this.loading = true
-            // this.usuarios = this.usuarios.map( user => { 
-            //     if(user.id == id) {
-            //         user.ativo = 0
-            //     }
-            //     return user                 
-            // })
-            // this.usuarios = this.usuarios.filter( user => user.ativo == 1 )
-            // await this.Super.status_admin( id, 0 )
+            this.playload = this.playload.map( post => { 
+                if(post.id == id) {
+                    post.ativo = false
+                }
+                return post                 
+            })
+            let playload = {
+                base64: btoa( JSON.stringify( this.playload )),
+                flag: 'CUPOM',
+                instituicao_id: this.cache.institution
+            }
+            await this.Super.flag_put(this.id, playload)
             this.loading = false
         }
     }
