@@ -24,9 +24,11 @@ export default {
                 'E_VENDAS',
                 'ALL_TEMPLATE_EMAIL',
                 'CUPOM',
+                'DIVISAO',
             ],
             default_flags_content: {
                 'CUPOM' : "W10=", 
+                'DIVISAO' : "W10=", 
                 'METAS_2021' : "W10=", 
                 'VIDEOS' : "W10=", 
                 'ALL_TEMPLATE_EMAIL' : "W10=", 

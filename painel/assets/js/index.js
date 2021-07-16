@@ -42,6 +42,9 @@ import step from './module/c-step.js'
 import list_cupom from './module/c-cupon-list.js'
 import novo_cupom from './module/c-cupom-novo.js'
 import edit_cupom from './module/c-cupom-edit.js'
+import list_divisao from './module/c-divisao-list.js'
+import novo_divisao from './module/c-divisao-novo.js'
+import edit_divisao from './module/c-divisao-edit.js'
 
 Vue.use(Router)
 Vue.component('c-menu', menu )
@@ -85,6 +88,9 @@ Vue.component('c-step', step )
 Vue.component('c-cupon-list', list_cupom )
 Vue.component('c-cupom-novo', novo_cupom )
 Vue.component('c-cupom-edit', edit_cupom )
+Vue.component('c-divisao-list', list_divisao )
+Vue.component('c-divisao-novo', novo_divisao )
+Vue.component('c-divisao-edit', edit_divisao )
 
 const router = new Router({ routes: router_list })
 

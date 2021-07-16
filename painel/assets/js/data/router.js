@@ -36,5 +36,8 @@ export default [
     { path: '/cupons', component: { template: '<c-cupon-list></c-cupon-list>' } },
     { path: '/cupom/novo', component: { template: '<c-cupom-novo></c-cupom-novo>' } },
     { path: '/cupom-editar/:id', component: { template: '<c-cupom-edit></c-cupom-edit>' } },
+    { path: '/divisao-pagamento', component: { template: '<c-divisao-list></c-divisao-list>' } },
+    { path: '/divisao-novo', component: { template: '<c-divisao-novo></c-divisao-novo>' } },
+    { path: '/divisao-editar/:id', component: { template: '<c-divisao-edit></c-divisao-edit>' } },
 ]
 
