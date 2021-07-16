@@ -147,8 +147,8 @@
             <c-aside></c-aside>
             <c-header></c-header>
             <div class="a-body">
+                <c-step></c-step>
                 <div class="body_box">
-                    <c-step></c-step>
                     <h1>Metas 2021</h1>
                     <form action="javascript:void(0)" @submit="save()" class="form">
                         <div class="g g-4">
@@ -656,7 +656,7 @@
                 <div class="body_box">
                     <h1 class="title_form">
                         Usuários 
-                        <a href="#/usuarios/novo" class="plus"> 
+                        <a href="#/usuario-novo" class="plus"> 
                             <img src="./assets/icon/plus.svg"> 
                         </a> 
                     </h1>
@@ -880,12 +880,17 @@
                                 </select>
                             </div>
                             <div>
-                                <label for="">Intervalo</label>
+                                <label for="">Dias de Carencia</label>
                                 <input type="text" v-model="form.interval" placeholder="" required>
                             </div>
                             <div>
                                 <label for="">Duração</label>
                                 <input type="text" v-model="form.duration" placeholder="" required>
+                                <small style="font-size: 11px">
+                                    A duração vai depender da frequência ex: se estiver mensal e for um plano de 1 ano,
+                                    você deve colocar 12, relativo o numero de cobranças que o comprador recebera em quanto
+                                    etiver ativo no plano
+                                </small>
                             </div>
                         </div>
                         <div>

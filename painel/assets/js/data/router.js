@@ -20,7 +20,7 @@ export default [
     { path: '/modelo-de-emails', component: { template: '<c-emails></c-emails>' } },
     { path: '/modelo-de-emails/:id', component: { template: '<c-emails-edit></c-emails-edit>' } },
     { path: '/usuarios', component: { template: '<c-usuarios></c-usuarios>' } },
-    { path: '/usuarios/novo', component: { template: '<c-usuarios-novo></c-usuarios-novo>' } },
+    { path: '/usuario-novo', component: { template: '<c-usuarios-novo></c-usuarios-novo>' } },
     { path: '/usuarios/novo/:id', component: { template: '<c-usuarios-edit></c-usuarios-edit>' } },
     { path: '/sass/novo', component: { template: '<c-sass-novo></c-sass-novo>' } },
     { path: '/sass/:step', component: { template: '<c-sass></c-sass>' } },

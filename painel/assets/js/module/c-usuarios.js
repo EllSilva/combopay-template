@@ -10,7 +10,7 @@ export default {
         }
     },
     async mounted() {
-        this.usuarios = (await this.Super.all_admins()).data        
+        this.usuarios = (await this.Super.all_admins()).data
     },
     methods: {
         async del( id ) {
