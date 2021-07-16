@@ -3,38 +3,89 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/obrigado.css">
-    <script src="./assets/js/obrigado.js" type="module" defer></script>
-    <link rel="shortcut icon" href="./assets/logo/icopng.png" type="image/x-icon">
-    <title>Obrigado</title>
+    <title>Escolha Plano</title>
+    <script defer>
+        const texto = document.getElementById("texto");
+        const btnCopiador = document.getElementById("btnCopiador");
+        btnCopiador.addEventListener("click", function () {
+            texto.select();
+            document.execCommand("Copy");
+        });
+    </script>
 </head>
 
 <body>
-    <div class="layout" style="background-color: #25b3c2;" id="app">
-        <div class="header"> <img src="./sass/doacoesbethania.com.br/logo/3.png"> </div>
-        <div class="inner">
-            <form action="javascript:void(0)">
-                <div class="container">
-                    <h1>Obrigado Por <br> Sua Contribuição</h1>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Perspiciatis dolorum rem aut tenetur ad repellat, 
-                        ullam quos labore dicta, accusantium enim ut deserunt 
-                        iusto voluptatum quae, dignissimos incidunt neque laboriosam?
-                    </p>
-                    <div v-if="boleto_code" class="box_boleto">
-                        <small>Código do Boleto </small>
-                        <span class="codigo"> {{ boleto_code }} </span>
-                        <a :href="boleto_link" target="_blank" class="link_boleto"> IMPRIMIR BOLETO </a>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="footer"> Copyright © 2020 Comunidade Bethânia </div>
+    <header>
+        <img id="logo" src="./assets/icon-obrigado/logo.jpeg" alt="Logo de Bethânia">
+    </header>
+    <div id="block1">
+        <img class="verif ic" src="./assets/icon-obrigado/verificado.png">
+        <h3>Obrigado por sua generosidade!</h3>
+    </div>
+    <br>
+    <div id="block2">
+        <h2>Sua doação foi recebida com sucesso, Deus te abençoe!.</h2>
     </div>
 
+    <div id="block2">
+        <p>Clique abaixo para acessar o seu boleto.</p>
+        <a href="" target="_blank" class="boleto">
+            <img src="./assets/icon-obrigado/boleto.png" alt="Icone Boleto" class="bolIco">
+            <b>VER MEU BOLETO</b>
+        </a>
+        <p>ou copie o <b>código de barras:</b></p>
+        <br>
+        <div id="inpContainer">
+            <input id="texto" type="text" value="000000.0000000.00000000.000000000">
+            <button id="btnCopiador"><b>Copiar</b></button>
+        </div>
+
+        <p><b>Importante: Este boleto é uma contribuição espontânea e não gera protesto.</b></p>
+    </div>    
+
+    <div id="block3">
+        <h3>Obrigado, Roberto </h3>
+        <br>
+        <p>"A providência de Deus se manifesta por meio de você!", Pe. Léo, sjc</p>
+        <br>
+        <p>
+            Ajude-nos na missão de<br>
+            Restaurar Vidas! Compartilhe esta causa!
+        </p>
+        <br>
+        <div>
+            <a id="faceShare" class="box"
+                href="https://www.facebook.com/sharer/sharer.php?u=https://doacoesbethania.com.br">
+                Compartilhar<br>
+                no Facebook 
+                <img class="fb" src="./assets/icon-obrigado/facebook.png">
+            </a>
+            <a id="whatsShare" class="box" href="https://web.whatsapp.com/send?text=https://doacoesbethania.com.br">
+                Compartilhar <br>
+                no Whatsapp 
+                <img class="whats" src="./assets/icon-obrigado/whatsapp.png">
+            </a>
+        </div>
+        <a id="doacao" href="https://doacoesbethania.com.br"><b>Fazer nova Doação</b></a>
+    </div>
+    <footer>
+        <div>
+            <br><br>
+            <p>
+                Comunidade Bethânia - CNPJ: 00.816.354/001-09 | 
+                Endereço: Estr, Municipal Bethânia , 400, Caixa Postal 71 - 
+                Timbezinho, São Jão Batista - SC - CEP: 88240-000 | 
+                Para dúvidas e cancelamentos entre em contato com nossa 
+                central de relacionamento no telefone (48) 3265-4416
+                ou pelo e-mail: soubetania@bethania.com.br | 
+                Em até 30 dias após o processamento da transação,
+                realizaremos o ressarcimento integral dos valores doados.
+            </p>
+            <br><br>
+        </div>
+    </footer>
 </body>
 
 </html>

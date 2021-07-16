@@ -1,130 +1,241 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap');
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    outline: none;
 }
-h1, h2, h3, h4, h5, h6 {
-    margin: 0;
-    padding: 0;
-    margin-bottom: 15px;
-    color: #222;
-}
-h1 {
-    display: block;
-    text-align: center;
-    text-transform: uppercase;
-}
+
 body {
-    margin: 0;
-    padding: 0;
-    border: 0;
     font-family: 'Noto Sans JP', sans-serif;
-}
-[hidden] {
-    display: none !important;
-}
-img {
-    max-width: 100%;
-}
-.layout {
-    display: grid;
-    width: 100%;
+    min-width: 100vw;
+    min-height: 100vh;
+    color: #666768;
     max-width: 100vw;
-    grid-template-rows: 100px 1fr 50px;
-    background-color: #CCC;
+    overflow-x: hidden;
 }
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #FFF;
-    box-shadow: 0 0 3px rgba(0, 0, 0, .3);
-}
-.header img {
-    display: block;
-    height: 70px;
-}
-.footer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    background-color: #FFF;
-    color: #777;
-}
-.inner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 50px;
-}
-.container {
-    width: 1200px;
-    max-width: 90vw;
-    display: block;
-    grid-template-columns: repeat(2, 1fr);
-    background-color: #FFF;
-    padding: 25px;
-    border-radius: 5px;
-    grid-gap: 25px;
-    box-shadow: 0 0 4px rgba(0, 0, 0, .3);
-}
-.flex { display: flex; }
-.g { display: grid; grid-gap: 20px; }
-.g-2 { grid-template-columns: repeat(2, 1fr); }
-.g-3 { grid-template-columns: repeat(3, 1fr); }
-.g-4 { grid-template-columns: repeat(4, 1fr); }
-.space {
-    display: block;
-    height: 24px;
-}
+
 a {
     text-decoration: none;
-    color: #05f;
+    color: white;
+    font-weight: bold;
 }
-a:hover {
-    text-decoration: underline;
-}
-@media (max-width: 761px ) {
-    .inner {
-        padding: 50px 0;
-    }
-    .container {
-        grid-template-columns: repeat(1, 1fr);
-    }
-    .g-2,
-    .g-3,
-    .g-4 { grid-template-columns: repeat(1, 1fr); }    
-}
-.link_boleto {
-    display: block;
-    width: 180px;
-    background-color: #3498db;
-    text-align: center;
-    border-radius: 5px;
-    color: #FFF;
-    padding: 5px;
-    margin: 0 auto;
-    margin-top: 30px;
-    text-transform: uppercase;
-}
-.link_boleto:hover {
-    text-decoration: none;
-    background-color: #2980b9;
-}
-.box_boleto {
-    display: block;
+
+header {
+    padding: 20px;
     text-align: center;
 }
-.box_boleto small {
-    color: #777;
-    display: block;
+
+#logo {
+    width: 300px;
 }
-.codigo {
+
+.ic {
     display: inline-block;
-    background-color: #2ecc71;
-    color: #FFF;
-    padding: 10px 20px;
-    margin-top: 7px;
-    border-radius: 50px;
+    width: 50px;
+    margin: 0 auto;
+}
+
+#block1 {
+    background-color: #1e9ba8;
+    padding: 35px;
+    text-align: center;
+}
+
+#block1 h3 {
+    font-weight: bolder;
+    color: white;
+    font-size: 25px;
+}
+
+#block2 {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#block2 p:first-child {
+    font-size: 19px;
+    margin: 20px;
+}
+
+.boleto {
+    display: flex;
+    padding: 5px;
+    align-items: center;
+    justify-content: center;
+    background-color: #e86e27;
+    color: white;
+    border-radius: 13px;
+    width: 200px;
+    margin: 20px;
+}
+
+.bolIco {
+    width: 25px;
+    margin: 0px 8px 0px 2px;
+}
+
+#inpContainer {
+    display: flex;
+    width: 470px;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    background-color: #dedae7b6;
+    padding: 5px 15px;
+}
+
+button {
+    color: white;
+    background-color: #e86e27;
+    font-size: 15px;
+    border: none;
+    outline: none;
+    padding: 7px 30px;
+    margin: 0px 0px 0px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+#block2 p:last-child {
+    margin-bottom: 20px;
+}
+
+#block3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(0, 180, 196);
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+#block3 h3 {
+    margin: 20 10px;
+}
+
+#block3>div {
+    display: flex;
+    flex-direction: row;
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 15px;
+}
+
+.fb {
+    width: 17px;
+    height: 30px;
+    margin-left: 10px;
+}
+
+.whats {
+    width: 28px;
+    height: 28px;
+    margin-left: 10px;
+}
+
+#faceShare {
+    background-color: #085a97;
+}
+
+#whatsShare {
+    background-color: #429813;
+}
+
+#doacao {
+    margin: 20px;
+    background-color: rgb( 0, 185, 85);
+    border: solid white 1px;
+    border-radius: 20px;
+    padding: 5px 10px;
+    box-shadow: inset 0px 0px 3px 1px rgba( 0, 0, 0, 0.2);
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    font-size: 10px;
+}
+
+footer div {
+    width: 40%;
+    margin: 0 auto;
+}
+
+.footIco {
+    width: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    header {
+        padding: 10px;
+    }
+    #inpContainer {
+        width: 95%;
+    }
+    footer {
+        text-align: justify;
+        padding: 20px;
+        margin-bottom: 10px;
+    }
+    #inpContainer {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    input {
+        padding: 10px;
+        margin: 5px;
+        font-size: 15px;
+    }
+    button {
+        color: white;
+        background-color: #e86e27;
+        font-size: 15px;
+        border: none;
+        outline: none;
+        padding: 5px 25px;
+        border-radius: 20px;
+        cursor: pointer;
+        width: 100px;
+    }
+    .box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: left;
+        border-radius: 5px;
+        margin: 5px;
+        padding: 10px;
+        font-size: 12px;
+    }
+    footer div {
+        width: 100%;
+    }
+    .fb {
+        width: 15px;
+        height: 25px;
+        margin-left: 10px;
+    }
+    .whats {
+        width: 25px;
+        height: 25px;
+        margin-left: 10px;
+    }
 }
