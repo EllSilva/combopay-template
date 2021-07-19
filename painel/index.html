@@ -217,6 +217,7 @@
                     <div class="error" v-if="messageAlterPass.status" v-html="messageAlterPass.text">  </div>
                     <span v-if="error2.status" :class="error2.type"> {{error.text}} </span>
                 </div>
+                
             </div>
             <div class="loading" v-if="loading"></div>
             <c-footer></c-footer>
@@ -385,6 +386,29 @@
                             <button type="submit" class="btn btn--success">Salvar</button>
                         </div>
                         <span @click="feedback.status=null" v-if="feedback.status != null" :class="feedback.status"> {{ feedback.message }} </span>
+                    </form>
+                </div>
+                <div class="body_box">
+                    <h2>Adiministradores</h2>
+                    <div class="admins-gravatar">
+                        <div class="gravatar-item" v-for="email in admins">
+                            <span @click="remove_admin(email)">x</span>
+                            <img :title="email" :src="'http://brc.doardigital.com.br/utils/gravatar/?email='+email" alt="brunnocriacoes@gmail.com">
+                        </div>
+                    </div>
+                    <form action="javscript:void(0)" @submit="add_admin" class="form">
+                        <div class="g g-2">
+                            <div>
+                                <label for="">E-mail</label>
+                                <input type="email" v-model="email_admin" placeholder="email">
+                            </div>
+                            <div>
+                                <label for="">.</label>
+                                <button type="submit" class="btn btn--success">
+                                    Adicionar Administrador
+                                </button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -614,8 +638,8 @@
                 <c-step></c-step>
                 <div class="body_box">
                     <h1 class="title_form">
-                        SAAS 
-                        <a href="#/sass/novo" class="plus"> 
+                        Minhas Instituições 
+                        <a href="#/adionar-instituicao" class="plus"> 
                             <img src="./assets/icon/plus.svg"> 
                         </a> 
                     </h1>
@@ -633,14 +657,14 @@
                             <span :class="sass.ativo ? 'btn_ativo' : 'btn_inativo'">
                                 {{ sass.ativo ? 'Ativo' : 'Inativo' }}
                             </span>
-                            <a :href="'#/sass/editar/'+sass.id" class="table_btn table_btn--edit">
+                            <a :href="'#/editar-instituicao/'+sass.id" class="table_btn table_btn--edit">
                                 <img src="./assets/icon/edit.svg"> 
                             </a>                            
                         </div>                        
                     </div>
                 </div>
                 <div class="paginacao">
-                    <a :href="'#/sass/'+(+step + 1)" @click="load(step+1)" v-for="step in steps"> {{ step + 1 }} </a>
+                    <a :href="'#/minhas-instituicoes/'+(+step + 1)" @click="load(step+1)" v-for="step in steps"> {{ step + 1 }} </a>
                 </div>
             </div>
             <c-footer></c-footer>

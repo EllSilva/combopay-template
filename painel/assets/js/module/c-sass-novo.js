@@ -9,6 +9,9 @@ export default {
             Super,
             cache,
             mccs,
+            admins: [],
+            email_admin: null,
+            is_edit: false,
             form: {
                 domain_person: null,
                 bairro: null,
@@ -67,7 +70,7 @@ export default {
             console.log(res)
             this.loading = false
             this.feedback.status = res?.status
-            window.location.href = "#/sass/1"
+            window.location.href = "#/minhas-instituicoes/1"
             this.feedback.message = res?.message
         }
     }

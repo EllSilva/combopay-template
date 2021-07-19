@@ -22,9 +22,9 @@ export default [
     { path: '/usuarios', component: { template: '<c-usuarios></c-usuarios>' } },
     { path: '/usuario-novo', component: { template: '<c-usuarios-novo></c-usuarios-novo>' } },
     { path: '/usuarios/novo/:id', component: { template: '<c-usuarios-edit></c-usuarios-edit>' } },
-    { path: '/sass/novo', component: { template: '<c-sass-novo></c-sass-novo>' } },
-    { path: '/sass/:step', component: { template: '<c-sass></c-sass>' } },
-    { path: '/sass/editar/:id', component: { template: '<c-sass-editar></c-sass-editar>' } },
+    { path: '/adionar-instituicao', component: { template: '<c-sass-novo></c-sass-novo>' } },
+    { path: '/minhas-instituicoes/:step', component: { template: '<c-sass></c-sass>' } },
+    { path: '/editar-instituicao/:id', component: { template: '<c-sass-editar></c-sass-editar>' } },
 
     { path: '/correios', component: { template: '<c-correios></c-correios>' } },
     { path: '/mailing-boss', component: { template: '<c-mailing-boss></c-mailing-boss>' } },
