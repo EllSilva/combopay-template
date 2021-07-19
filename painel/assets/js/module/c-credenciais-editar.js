@@ -53,7 +53,7 @@ export default {
                 recursos: is_checks
             })
             if( res.status == 'success' ) {
-                window.location.href = "#/credenciais"
+                window.location.href = "#/credenciais/1"
             }
             this.loading = false
         }

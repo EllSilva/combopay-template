@@ -39,5 +39,6 @@ export default [
     { path: '/divisao-pagamento', component: { template: '<c-divisao-list></c-divisao-list>' } },
     { path: '/divisao-novo', component: { template: '<c-divisao-novo></c-divisao-novo>' } },
     { path: '/divisao-editar/:id', component: { template: '<c-divisao-edit></c-divisao-edit>' } },
+    { path: '/carteira', component: { template: '<c-carteira></c-carteira>' } },
 ]
 

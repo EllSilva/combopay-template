@@ -45,6 +45,7 @@ import edit_cupom from './module/c-cupom-edit.js'
 import list_divisao from './module/c-divisao-list.js'
 import novo_divisao from './module/c-divisao-novo.js'
 import edit_divisao from './module/c-divisao-edit.js'
+import carteira from './module/c-carteira.js'
 
 Vue.use(Router)
 Vue.component('c-menu', menu )
@@ -91,6 +92,7 @@ Vue.component('c-cupom-edit', edit_cupom )
 Vue.component('c-divisao-list', list_divisao )
 Vue.component('c-divisao-novo', novo_divisao )
 Vue.component('c-divisao-edit', edit_divisao )
+Vue.component('c-carteira', carteira )
 
 const router = new Router({ routes: router_list })
 
