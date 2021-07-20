@@ -1,6 +1,10 @@
 import App from '../library/superApp.js'
 import cache from '../library/cache.js'
 import mccs from '../data/mccs.js'
+import viacep from '../mask/viacep.js'
+import maskTel from "../mask/telefone.js"
+import cpf_cnpj from "../mask/cpfCnpj.js"
+import cnpj from "../mask/cnpj.js"
 const Super = new App
 export default {
     template: "#c-instituicao",
@@ -13,7 +17,7 @@ export default {
             email_admin: null,
             is_edit: false,
             form: {
-                domain_person: null,
+                domain_person: 'sub',
                 bairro: null,
                 cidade: null,
                 cnpj: null,
@@ -31,27 +35,19 @@ export default {
                 cep: null,
                 birthdate: null,
                 atividade: '1',
+                banco_conta: {
+                    codigo_banco: "341",
+                    agencia: "0932",
+                    agencia_dv: "5",
+                    conta: "teste",
+                    tipo: "teste",
+                    conta: "58054",
+                    conta_dv: "1",
+                    cnpj: "26268738888",
+                    nome: "API BANK ACCOUNT",
+                    tipo: "conta_corrente"
+                }
             },          
-            // form: {
-            //     domain_person: 'person',
-            //     bairro: 'b',
-            //     cidade: 'b',
-            //     cnpj: 'b',
-            //     complemento: 'b',
-            //     dominio: 'brc.com',
-            //     dominio_personalizado: true,
-            //     email: 'b',
-            //     estado: 'b',
-            //     id: 1,
-            //     nome_fantasia: 'b',
-            //     razao_social: 'b',
-            //     rua: 'b',
-            //     subdominio: 'brc',
-            //     telefone: 'b',
-            //     cep: 'b',
-            //     birthdate: 'b',
-            //     atividade: '1',
-            // },
             loading: false,
             feedback: {
                 status: null,
@@ -72,6 +68,31 @@ export default {
             this.feedback.status = res?.status
             window.location.href = "#/minhas-instituicoes/1"
             this.feedback.message = res?.message
+        },
+        async add_admin() {
+            this.admins.push(this.email_admin)
+        },
+        async remove_admin(email) {
+            this.admins = this.admins.filter( mail => mail != email )
+        },
+        async busca_cep() {
+            this.loading = true
+            let res = await viacep(this.form.cep)
+            this.form.rua = res.logradouro
+            this.form.bairro = res.bairro
+            this.form.cidade = res.localidade
+            this.form.estado = res.uf
+            this.loading = false
+        },
+        telefone() {
+            this.form.telefone = maskTel(this.form.telefone )           
+        },
+        cpf_cnpj() {
+            this.form.cnpj = cpf_cnpj(this.form.cnpj )           
+        },
+        cnpj() {
+            this.form.banco_conta.cnpj = cnpj(this.form.banco_conta.cnpj )           
+
         }
     }
 }

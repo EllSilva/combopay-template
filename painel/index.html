@@ -295,7 +295,7 @@
             <div class="a-body">
                 <c-step></c-step>
                 <div class="body_box">
-                    <h1>Instituição</h1>
+                    <h1>Informação da Instituição</h1>
                     <form action="javascript:void(0)" @submit="save()" class="form">
                         <div>
                             <label for="">Nome Fantasia</label>
@@ -308,17 +308,27 @@
                             </div>
                             <div>
                                 <label for="">CPF/CNPJ</label>
-                                <input type="text" v-model="form.cnpj">
+                                <input type="text" @input="cpf_cnpj" v-model="form.cnpj">
                             </div>
                         </div>
+                        <div class="g g-2">
+                            <div>
+                                <label for="">Telefone</label>
+                                <input type="text" @input="telefone" v-model="form.telefone">
+                            </div>
+                            <div>
+                                <label for="">E-mail</label>
+                                <input type="text" v-model="form.email">
+                            </div>
+                        </div>
+                        <h2>Domínio</h2>
                         <div>
-                            <label for="">Domínio</label>
                             <input type="radio" v-model="form.domain_person" value="sub" name="type_domains" checked> Subdominio
                             <input type="radio" v-model="form.domain_person" value="person" name="type_domains"> Domínio Personalizado
                         </div>
                         <div class="note" v-if="form.domain_person == 'sub'">
                             <div class="input-note subdomain">
-                                <input type="text" v-model="form.dominio" placeholder="sub.dominio" class="input-note">
+                                <input type="text" v-model="form.dominio" placeholder="subdominio" class="input-note">
                                 <strong>.dorardigital.com</strong> 
                             </div>
                         </div>
@@ -334,30 +344,14 @@
                                 <li>ns34.i7host.com.br</li>
                             </ul>
                         </div>
-                        <div class="g g-2">
-                            <div>
-                                <label for="">Telefone</label>
-                                <input type="text" v-model="form.telefone">
-                            </div>
-                            <div>
-                                <label for="">E-mail</label>
-                                <input type="text" v-model="form.email">
-                            </div>
-                            <div>
-                                <label for="">Data Nascimento</label>
-                                <input type="date" v-model="form.birthdate">
-                            </div>
-                            <div>
-                                <label for="">Código de Atividade</label>
-                                <select v-model="form.atividade">
-                                    <option :value="mcc.id" v-for="mcc in mccs"> {{ mcc.description }}</option>
-                                </select>                                
-                            </div>
-                        </div>
+                        <h2>Endereço</h2>
                         <div class="g g-2">
                             <div>
                                 <label for="">CEP</label>
-                                <input type="text" v-model="form.cep">
+                                <div class="grid-search">
+                                    <input type="text" maxlength="8" minlength="8" v-model="form.cep">
+                                    <img @click="busca_cep" src="./assets/icon/search.svg">
+                                </div>
                             </div>
                             <div>
                                 <label for="">Rua/Avenida Nº</label>
@@ -381,6 +375,51 @@
                                 <label for="">Estado</label>
                                 <input type="text" v-model="form.estado">
                             </div>
+                        </div>                        
+                        <h2>Dados Bancario</h2>
+                        <div class="g g-3">
+                            <div>
+                                <label for="">Código Banco</label>
+                                <input type="text" v-model="form.banco_conta.codigo_banco">
+                            </div>
+                            <div>
+                                <label for="">Agencia</label>
+                                <input type="text" v-model="form.banco_conta.agencia">
+                            </div>
+                            <div>
+                                <label for="">Agencia Dígito</label>
+                                <input type="text" v-model="form.banco_conta.agencia_dv">
+                            </div>
+                        </div>
+                        <div class="g g-3">
+                            <div>
+                                <label for="">Conta</label>
+                                <input type="text" v-model="form.banco_conta.conta">
+                            </div>
+                            <div>
+                                <label for="">Conta Dígito</label>
+                                <input type="text" v-model="form.banco_conta.conta_dv">
+                            </div> 
+                            <div>
+                                <label for="">Tipo</label>
+                                <select model="banco_conta.tipo">
+                                    <option value="conta_corrente">Conta Corrente</option>
+                                    <option value="conta_poupanca"> Conta poupanca </option>
+                                    <option value="conta_corrente_conjunta"> Conta corrente conjunta </option>
+                                    <option value="conta_poupanca_conjunta"> Conta poupanca conjunta </option>    
+                                </select>
+                            </div>                         
+                        </div>
+                        <div class="g g-2">
+                            <div>
+                                <label for="">CNPJ</label>
+                                <input type="text" @input="cnpj" v-model="form.banco_conta.cnpj">
+                            </div>
+                            <div>
+                                <label for="">Nome</label>
+                                <input type="text" v-model="form.banco_conta.nome">
+                            </div>
+                            
                         </div>
                         <div class="g g-3">
                             <button type="submit" class="btn btn--success">Salvar</button>
@@ -400,7 +439,7 @@
                         <div class="g g-2">
                             <div>
                                 <label for="">E-mail</label>
-                                <input type="email" v-model="email_admin" placeholder="email">
+                                <input type="email" required v-model="email_admin" placeholder="email">
                             </div>
                             <div>
                                 <label for="">.</label>

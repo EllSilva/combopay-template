@@ -296,3 +296,19 @@
         }
     }
 }
+.grid-search {
+    display: grid;
+    grid-template-columns: 1fr 40px;
+    grid-gap: 20px;
+    img {
+        width: 40px;
+        height: 40px;
+        padding: 12px;
+        background-color: #DDD;
+        border-radius: 5px;
+        cursor: pointer;
+        &:hover {
+            background-color: #CCC;
+        }
+    }
+}

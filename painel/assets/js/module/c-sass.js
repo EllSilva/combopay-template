@@ -72,6 +72,5 @@ export default {
     async mounted() {
         this.step = this.$route.params.step
         await this.load( this.step )
-        console.log(this.playload)
     }
 }
