@@ -18,22 +18,22 @@ export default {
             is_edit: false,
             form: {
                 domain_person: 'sub',
-                bairro: null,
-                cidade: null,
-                cnpj: null,
-                complemento: null,
-                dominio: null,
-                dominio_personalizado: null,
-                email: null,
-                estado: null,
+                bairro: "",
+                cidade: "",
+                cnpj: "",
+                complemento: "",
+                dominio: "",
+                dominio_personalizado: 0,
+                email: "",
+                estado: "",
                 id: 1,
-                nome_fantasia: null,
-                razao_social: null,
-                rua: null,
-                subdominio: null,
-                telefone: null,
-                cep: null,
-                birthdate: null,
+                nome_fantasia: "",
+                razao_social: "",
+                rua: "",
+                subdominio: "",
+                telefone: "",
+                cep: "",
+                birthdate: "",
                 atividade: '1',
                 banco_conta: {
                     codigo_banco: "341",
@@ -61,13 +61,14 @@ export default {
     methods: {
         async save() {
             this.loading = true
-            this.form.dominio_personalizado = true
-            let res = await this.Super.post_institution( this.form )
-            console.log(res)
-            this.loading = false
+            this.form.dominio_personalizado = this.form.domain_person == 'sub' ? 0 : 1
+            let res = await this.Super.post_institution( this.form )          
             this.feedback.status = res?.status
-            window.location.href = "#/minhas-instituicoes/1"
+            if(res?.status != 'error') {
+                window.location.href = "#/minhas-instituicoes/1"
+            }
             this.feedback.message = res?.message
+            this.loading = false
         },
         async add_admin() {
             this.admins.push(this.email_admin)

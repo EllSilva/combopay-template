@@ -11,12 +11,24 @@ class App {
         cache: 'default',
         body: null
     }
-    obj_to_url(obj) {
-        let indices = Object.keys(obj);
-        let url = indices.map(i => `${i}=${obj[i]}`).join('&');
-        // return url;
-        return encodeURI(url);
-    }
+    obj_to_url(obj, next_level = null) {
+            var query = []; 
+            for (var key in obj) {
+                switch (typeof obj[key]) {
+                    case 'string':
+                    case 'number':
+                        if ( next_level != null ) {
+                            query.push( `${next_level}[${key}]=${obj[key]}&` )   
+                        } else {
+                            query.push( `${key}=${obj[key]}&` )                    
+                        }
+                    break
+                    case 'object':
+                        query.push( this.obj_to_url(obj[key], key ) )
+                }
+            }
+            return query.join('');
+        }
     async post(path, data, verbo = 'POST') {
         this.options.body = this.obj_to_url(data)
         this.options.method = verbo
