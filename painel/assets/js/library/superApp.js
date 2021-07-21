@@ -209,6 +209,22 @@ class App {
     async plano_post(playload) {
         return this.post(`/zoop/plano`, playload);
     }
+    
+    async split_all() {
+        return this.get(`/splits`, {});
+    }
+    async split_get(id) {
+        return this.get(`/split/${id}`, {});
+    }
+    async split_get_by_institution(id) {
+        return this.get(`split/por-instituicao/${id}`, {});
+    }
+    async split_put(id, playload) {
+        return this.put(`/split/${id}`, playload);
+    }
+    async split_post(playload) {
+        return this.post(`/split`, playload);
+    }
 
 
 }

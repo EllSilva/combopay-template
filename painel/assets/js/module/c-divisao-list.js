@@ -53,6 +53,8 @@ export default {
         let flag = all_flags.reverse().find(post => post.flag == 'DIVISAO')
         this.playload = JSON.parse( atob( flag.base64 ) )
         this.id = flag.id
+
+        console.log( await this.Super.split_all() )
     },
     methods: {
         async del( id ) {
