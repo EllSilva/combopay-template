@@ -346,3 +346,35 @@ button[disabled] {
     border: none !important;
     background-color: #555;
 }
+
+.busca-box {
+    display: grid;
+    grid-template-columns: 1fr 35px;
+    align-items: center;
+    background-color: #EEE;
+    padding: 7px;
+    border-radius: 3px;
+    img {
+        max-width: 100%;
+        padding: 8px;
+    }
+    input {
+        display: block;
+        line-height: 35px;
+        background-color: transparent;
+        text-indent: 12px;
+        border: none;
+    }
+    button {
+        padding: 0;
+        margin: 0;
+        border: 0;
+        background-color: #DDD;
+        cursor: pointer;
+        border: 1px solid #CCC;
+        border-radius: 5px;
+        &:hover {
+            background-color: #BBB;
+        }
+    }
+}

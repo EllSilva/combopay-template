@@ -17,6 +17,7 @@ export default {
             email_admin: null,
             is_edit: false,
             form: {
+                admin_master: null,
                 domain_person: 'sub',
                 bairro: "",
                 cidade: "",
@@ -56,7 +57,7 @@ export default {
         }
     },
     async mounted() {
-       
+       this.form.admin_master = localStorage.getItem('email')
     },
     methods: {
         async save() {

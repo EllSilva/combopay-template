@@ -12,23 +12,23 @@ class App {
         body: null
     }
     obj_to_url(obj, next_level = null) {
-            var query = []; 
-            for (var key in obj) {
-                switch (typeof obj[key]) {
-                    case 'string':
-                    case 'number':
-                        if ( next_level != null ) {
-                            query.push( `${next_level}[${key}]=${obj[key]}&` )   
-                        } else {
-                            query.push( `${key}=${obj[key]}&` )                    
-                        }
+        var query = [];
+        for (var key in obj) {
+            switch (typeof obj[key]) {
+                case 'string':
+                case 'number':
+                    if (next_level != null) {
+                        query.push(`${next_level}[${key}]=${obj[key]}&`)
+                    } else {
+                        query.push(`${key}=${obj[key]}&`)
+                    }
                     break
-                    case 'object':
-                        query.push( this.obj_to_url(obj[key], key ) )
-                }
+                case 'object':
+                    query.push(this.obj_to_url(obj[key], key))
             }
-            return query.join('');
         }
+        return query.join('');
+    }
     async post(path, data, verbo = 'POST') {
         this.options.body = this.obj_to_url(data)
         this.options.method = verbo
@@ -135,11 +135,18 @@ class App {
         // cep, sobrenome, dataNascimento, numero
         return await this.post(`/doador`, playload)
     }
+
     async get_institution(id) {
         return await this.get(`/instituicao/${id}`, {})
     }
     async all_institution(step = 1) {
         return await this.get(`/instituicoes`, { page: step })
+    }
+    async search_institution(s) {
+        return await this.get(`/instituicao/procura/${s}`, {})
+    }
+    async all_email_admin_institution(email) {
+        return await this.get(`/instituicao/por-master/${email}`, {})
     }
     async status_institution(id, ativo) {
         return await this.put(`/instituicao/status/${id}`, { ativo })
@@ -150,6 +157,10 @@ class App {
     async post_institution(playload = {}) {
         return await this.post(`/instituicao`, playload)
     }
+    async add_anotacao_institution({ instituicao_id, anotacao }) {
+        return await this.post(`/instituicao/anotacao`, { instituicao_id, anotacao })
+    }    
+
     async get_credential(id) {
         return await this.get(`/credencial/${id}`, {})
     }
@@ -209,12 +220,15 @@ class App {
     async plano_post(playload) {
         return this.post(`/zoop/plano`, playload);
     }
-    
+
     async split_all() {
         return this.get(`/splits`, {});
     }
     async split_get(id) {
         return this.get(`/split/${id}`, {});
+    }
+    async split_del(id) {
+        return this.put(`/split/${id}`, { ativo: 0 });
     }
     async split_get_by_institution(id) {
         return this.get(`split/por-instituicao/${id}`, {});

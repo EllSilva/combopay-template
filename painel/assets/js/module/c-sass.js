@@ -8,6 +8,7 @@ export default {
             playload: [],
             steps: [],
             step: 1,
+            s: null,
             default_flags: [
                 'VIDEOS', 
                 'DEPOIMENTOS', 
@@ -67,6 +68,10 @@ export default {
                 this.Super.flag_post(playload)
                 console.log(playload)
             });            
+        },
+        async search() {            
+            let res = await this.Super.search_institution(this.s)
+            this.playload = res
         }
     },
     async mounted() {

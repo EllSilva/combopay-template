@@ -11,11 +11,13 @@ export default {
             cache,
             Domain,
             form: {
-                name: null,
-                id_seller: null,
-                porcentage: null,
+                id: null,
+                responsavel: null,
+                porcetagem: null,
+                instituicao_id: null,
+                restos_taxas: 1
             },
-            title: 'Editar Cupom',
+            title: 'Editar Divisão',
             flag: 'DIVISAO',
             loading: false,
             id: null,
@@ -23,9 +25,8 @@ export default {
             playload: [],
             is_id: null,
             autoForm: [
-                { label: 'Nome', name: 'name' },
-                { label: 'ID Vendedor', name: 'id_seller' },
-                { label: 'Porcentagem', name: 'porcentage' },
+                { label: 'Código Instituição', name: 'responsavel' },
+                { label: 'Porcentagem', name: 'porcetagem' },
             ],
             error: {
                 status: false,
@@ -39,39 +40,15 @@ export default {
     },
     methods: {
         async load() {
-            let all_flags = await this.Super.flag_get_by_institution(this.cache.institution)
-            let flag = all_flags.reverse().find(post => post.flag == this.flag)
-            this.playload = JSON.parse(atob(flag.base64))
-            this.is_id = this.$route.params.id
-            if (flag) {
-                this.id = flag.id
-                let is = this.playload.find(post => post.id == this.$route.params.id)
-                this.form.name = is.name
-                this.form.id_seller = is.id_seller
-                this.form.porcentage = is.porcentage
-            } else {
-                this.is_flag = true
-            }
-            this.form.id = this.$route.params.id
-            this.form.ativo = true
+            let split = await this.Super.split_get(this.$route.params.id)
+            this.form.instituicao_id = this.cache.institution
+            this.form.porcetagem = split.porcetagem
+            this.form.responsavel = split.responsavel
+            this.form.id = split.id
         },
         async save() {
             this.loading = true
-            this.playload = this.playload.map(post => {
-                if (post.id == this.$route.params.id) {
-                    post = this.form
-                }
-                return post
-            })
-            let playload = {
-                base64: btoa(JSON.stringify(Array.from(this.playload))),
-                flag: this.flag,
-                instituicao_id: this.cache.institution
-            }
-            let res = await this.Super.flag_put(this.id, playload)
-            this.error.status = true
-            this.error.text = res.message
-            this.error.type = res.status
+            let res = await this.Super.split_put(this.$route.params.id, this.form)
             window.location.href = "#/divisao-pagamento"
             this.loading = false
         }

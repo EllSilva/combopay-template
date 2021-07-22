@@ -676,12 +676,21 @@
             <div class="a-body">
                 <c-step></c-step>
                 <div class="body_box">
-                    <h1 class="title_form">
-                        Minhas Instituições 
+                    <div class="title_form">                        
+                        <h1 >
+                            Minhas Instituições
+                        </h1>
+                        <form action="javascript:void(0)" @submit="search" class="busca-box">
+                            <input type="text" v-model="s" required placeholder="O que você procura?">
+                            <button type="submit">
+                                <img src="./assets/icon/search.svg">
+                            </button>
+                        </form>
                         <a href="#/adionar-instituicao" class="plus"> 
                             <img src="./assets/icon/plus.svg"> 
                         </a> 
-                    </h1>
+                    </div>
+                    <div class="space"></div>
                     <div class="table">
                         <div v-for="sass in playload">
                             <span class="w25">{{ sass.nome_fantasia }}</span>

@@ -6,7 +6,7 @@ export default {
     <div class="a-header">
         <div @click="toggle()"> <img src="./assets/icon/menu.svg"> </div>
         <div> <img src="./assets/logo/logo.svg"> </div>
-        <strong> {{institution_name}} </strong>
+        <strong> Código {{id}} - {{institution_name}} </strong>
         
         <img @click="toggle_pop" src="./assets/icon/change.svg">
 
@@ -15,7 +15,7 @@ export default {
                 <div @click="toggle_pop" class="pop-close">X</div>
                 <input @input="updade_pop" v-model="search" type="text" placeholder="Buscar...">
                 <div v-for="item in resumo" class="iten-lista-pop">
-                    <div>  {{item.subdominio}} </div>
+                    <div> <b>Código<b> {{item.id}} - {{item.subdominio}} </div>
                     <img @click="change_domain(item.id)" :title="item.id" src="./assets/icon/change.svg">
                 </div>
                 <div class="pop-center">

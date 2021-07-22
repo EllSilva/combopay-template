@@ -10,7 +10,12 @@ export default {
             Super,
             cache,
             Domain,
-            form: {},
+            form: {
+                responsavel: null,
+                porcetagem: null,
+                instituicao_id: null,
+                restos_taxas: 1
+            },
             title: 'Divisão',
             flag: 'DIVISAO',
             loading: false,
@@ -18,9 +23,8 @@ export default {
             is_flag: false,
             playload: [],
             autoForm: [
-                { label: 'Nome', name: 'name' },
-                { label: 'ID Vendedor', name: 'id_seller' },
-                { label: 'Porcentagem', name: 'porcentage' },
+                { label: 'Código Instituição', name: 'responsavel' },
+                { label: 'Porcentagem', name: 'porcetagem' },
             ],
             error: {
                 status: false,
@@ -34,32 +38,13 @@ export default {
     },
     methods: {
         async load() {
-            let all_flags = await this.Super.flag_get_by_institution(this.cache.institution)
-            let flag = all_flags.reverse().find(post => post.flag == this.flag)
-            this.playload = JSON.parse( atob( flag.base64 ) )
-            if (flag) {
-                this.id = flag.id
-            } else {
-                this.is_flag = true
-            }
-            this.form.id = Date.now()
-            this.form.ativo = true            
+            this.form.instituicao_id = this.cache.institution
         },
         async save() {
             this.loading = true
-            this.playload.push( this.form )
-            let playload = {
-                base64: btoa(JSON.stringify( Array.from( this.playload ))),
-                flag: this.flag,
-                instituicao_id: this.cache.institution
-            }
-            let res = await this.Super.flag_put(this.id, playload)
-            this.error.status = true
-            this.error.text = res.message
-            this.error.type = res.status
+            await this.Super.split_post(this.form)
             window.location.href = "#/divisao-pagamento"
             this.loading = false
-
         }
     }
 }

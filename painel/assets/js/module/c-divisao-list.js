@@ -16,10 +16,9 @@ export default {
                         </a> 
                     </h1>
                     <div class="table">
-                        <div v-for="post in playload" v-if="post.ativo == 1">
-                            <span>{{ post.name }}</span>
-                            <span>{{ post.id_seller }}</span>
-                            <span>{{ post.porcentage }}%</span>
+                        <div v-for="post in playload">
+                            <span><b>Código:</b> {{ post.responsavel }}</span>
+                            <span>{{ post.porcetagem }}%</span>
                             <span>
                                 <a :href="'#/divisao-editar/'+post.id" class="table_btn">
                                     <img src="./assets/icon/edit.svg">
@@ -48,29 +47,14 @@ export default {
             playload: [],           
         }
     },
-    async mounted() {
-        let all_flags = await this.Super.flag_get_by_institution(this.cache.institution)
-        let flag = all_flags.reverse().find(post => post.flag == 'DIVISAO')
-        this.playload = JSON.parse( atob( flag.base64 ) )
-        this.id = flag.id
-
-        console.log( await this.Super.split_all() )
+    async mounted() { 
+        this.playload = (await this.Super.split_all()).data
+        console.log(this.playload)
     },
     methods: {
         async del( id ) {
             this.loading = true
-            this.playload = this.playload.map( post => { 
-                if(post.id == id) {
-                    post.ativo = false
-                }
-                return post                 
-            })
-            let playload = {
-                base64: btoa( JSON.stringify( this.playload )),
-                flag: 'DIVISAO',
-                instituicao_id: this.cache.institution
-            }
-            await this.Super.flag_put(this.id, playload)
+            await this.Super.split_del(id)
             this.loading = false
         }
     }
