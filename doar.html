@@ -13,9 +13,8 @@
 
 <body>
     <div id="doar_app">
-
         <div class="layout" :style="{background: layout.color}">
-            <div class="header"> <img :src="layout.image_1 | getImage" @error="error_image"> </div>
+            <div class="header"> <img :src="layout.logo | getImage(institution_id)" @error="error_image"> </div>
             <div class="inner">
                 <form action="javascript:void(0)" @submit="pay">
                     <div class="container">
@@ -60,26 +59,20 @@
                                 </div>
                             </div>
                             <div class="space"></div>
+                        </div>
+                        <div>
                             <div v-if="doacao.amount==0" >
                                 <b>Informe um valor</b>
                                 <input type="text" v-model="doacao.amount_custon" @input="money"  name="price_custon" placeholder="150,00">
                                 <div class="space"></div>
                             </div>
-
-                           
-                        </div>
-                        <div>
                             <div>
                                 <h3>Informação</h3>
                                 <label for="">E-mail</label>
                                 <input type="email" placeholder="email*" v-model="doacao.email" required>
-                            </div>
-  
+                            </div>  
                             <div class="space"></div>
-
                             <button type="submit"> Proseguir... </button>
-                            
-                            
                         </div>
                     </div>
                 </form>

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/doar.css">
     <link rel="shortcut icon" href="./assets/logo/icopng.png" type="image/x-icon">
-    <script src="./assets/js/finalizar.js" type="module" defer></script>
+    <script src="./assets/js/doar.js" type="module" defer></script>
     <title>Faça sua Doação</title>
 </head>
 
@@ -15,11 +15,51 @@
     <div id="doar_app">
 
         <div class="layout" :style="{background: layout.color}">
-            <div class="header"> <img :src="layout.logo | getImage(institution_id)" @error="error_image"> </div>
+            <div class="header"> <img :src="layout.image_1 | getImage" @error="error_image"> </div>
             <div class="inner">
                 <form action="javascript:void(0)" @submit="pay">
                     <div class="container">
                         <div>
+                            <h4>Escolha tipo</h4>
+                            <div class="g g-2">
+                                <div>
+                                    <input v-model="doacao.recorrente" value="1" hidden type="radio" id="for_mensal" name="transaction_type" checked>
+                                    <label class="options_pay" for="for_mensal">Doação Mensal</label>
+                                </div>
+                                <div>
+                                    <input v-model="doacao.recorrente" value="0" type="radio" name="transaction_type" id="for_unica" hidden >
+                                    <label class="options_pay" for="for_unica">Doação Única </label>
+                                </div>
+                            </div>
+                            <div class="space"></div>
+                            <h4>Escolha Valor para Doação</h4>
+                            <div class="g g-4">
+                                <div>
+                                    <input v-model="doacao.amount" value="2500" type="radio" id="for_25"name="donative_price" value="2500" hidden checked>
+                                    <label class="options_pay" for="for_25"> R$ 25,00 </label>
+                                </div>
+                                <div>
+                                    <input v-model="doacao.amount" value="5000" hidden type="radio" id="for_50"name="donative_price" value="5000">
+                                    <label class="options_pay" for="for_50"> R$ 50,00 </label>
+                                </div>
+                                <div>
+                                    <input v-model="doacao.amount" value="7500" hidden type="radio" id="for_75"name="donative_price" value="7500">
+                                    <label class="options_pay" for="for_75"> R$ 75,00 </label>
+                                </div>
+                                <div>
+                                    <input v-model="doacao.amount" value="10000" hidden type="radio" id="for_100"name="donative_price" value="10000">
+                                    <label class="options_pay" for="for_100"> R$ 100,00 </label>
+                                </div>
+                                <div>
+                                    <input v-model="doacao.amount" value="20000" hidden type="radio" id="for_200"name="donative_price" value="20000">
+                                    <label class="options_pay" for="for_200">R$ 200,00 </label>
+                                </div>
+                                <div>
+                                    <input v-model="doacao.amount" value="0" hidden type="radio" id="for_custon"name="donative_price" value="CUSTON">
+                                    <label class="options_pay" for="for_custon"> Outro </label>
+                                </div>
+                            </div>
+                            <div class="space"></div>
                             <div v-if="doacao.amount==0" >
                                 <b>Informe um valor</b>
                                 <input type="text" v-model="doacao.amount_custon" @input="money"  name="price_custon" placeholder="150,00">
@@ -27,30 +67,18 @@
                             </div>
                             <h3>DIGITE SUAS INFORMAÇÕES</h3>
                             <div class="g g-2">
-                                <div>
-                                    <label for="">Nome*</label>
-                                    <input type="text" placeholder="Nome*" v-model="doacao.nome" required>
-                                </div>
-                                <div>
-                                    <label for="">Sobrenome*</label>
-                                    <input type="text" placeholder="Sobrenome*" v-model="doacao.sobrenome" required>
-                                </div>
+                                <input type="text" placeholder="Nome*" v-model="doacao.nome" required>
+                                <input type="text" placeholder="Sobre Nome*" v-model="doacao.sobrenome" required>
                                 <div>
                                     <label for="">Data Nascimento</label>
                                     <input type="date" placeholder="Data Nascimento*" v-model="doacao.dataNascimento" required>
                                 </div>
                                 <div>
-                                    <label for="">CPF*</label>
+                                    <label for="">.</label>
                                     <input type="text" placeholder="CPF*" @input="mask_cpf" v-model="doacao.cpf" required>
                                 </div>
-                                <div>
-                                    <label for="">Email*</label>
-                                    <input type="email" placeholder="email*" v-model="doacao.email" required>
-                                </div>
-                                <div>
-                                    <label for="">Telefone</label>
-                                    <input type="text" placeholder="Telefone*" @input="mask_tel" v-model="doacao.telefone" required>
-                                </div>
+                                <input type="email" placeholder="email*" v-model="doacao.email" required>
+                                <input type="text" placeholder="Telefone*" @input="mask_tel" v-model="doacao.telefone" required>
                             </div>
                             <div class="space"></div>
                             <h3>INFORME SEU ENDEREÇO</h3>
@@ -62,7 +90,6 @@
                                 <input type="text" placeholder="Estado*" v-model="doacao.estado" required>
                                 <input type="text" placeholder="Cidade*" v-model="doacao.cidade" required>
                             </div>
-                            <div class="space"></div>
                         </div>
                         <div>
                             <div>
