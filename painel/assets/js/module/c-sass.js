@@ -43,7 +43,7 @@ export default {
                 'MAILING_BOSS' : btoa(JSON.stringify({})),
                 'PHP_MAILER' : btoa(JSON.stringify({})),
                 'E_VENDAS' : btoa(JSON.stringify({})),
-                'POLITICA' : btoa(JSON.stringify('')),
+                'POLITICA' : btoa(JSON.stringify({})),
             },
         }
     },

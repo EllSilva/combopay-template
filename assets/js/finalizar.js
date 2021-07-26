@@ -274,6 +274,7 @@ globalThis.app = new Vue({
                     }
                 }
                 res = await this.Super.payBoleto(playload)
+                console.log(res)
             } else {
                 res = await this.Super.payCard(this.institution_id, this.doacao)
             }
@@ -286,7 +287,7 @@ globalThis.app = new Vue({
                     this.cache.boleto_code = false
                     this.cache.boleto_link = false
                 }
-                window.location.href = "/obrigado.html"
+                // window.location.href = "/obrigado.html"
             } else {
                 this.error.status = true
                 this.error.text = res.message

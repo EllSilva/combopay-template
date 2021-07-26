@@ -7,31 +7,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/politica-de-privacidade.css">
     <title>Politica de privacidade</title>
+    <script src="./assets/js/politica.js" type="module" defer></script>
 </head>
 
 <body>
-    <div class="layout" style="background-color: #25b3c2;">
-        <div class="header"> <img src="./sass/doacoesbethania.com.br/logo/3.png"> </div>
-        <div class="inner">
-            <form action="javascript:void(0)">
-                <div class="container">
-                    <h1>Politica de privacidade</h1>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Perspiciatis dolorum rem aut tenetur ad repellat, 
-                        ullam quos labore dicta, accusantium enim ut deserunt 
-                        iusto voluptatum quae, dignissimos incidunt neque laboriosam?
-                    </p>  
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Perspiciatis dolorum rem aut tenetur ad repellat, 
-                        ullam quos labore dicta, accusantium enim ut deserunt 
-                        iusto voluptatum quae, dignissimos incidunt neque laboriosam?
-                    </p>
-                </div>
-            </form>
+    <div class="layout" :style="{background: layout.color}" id="app">
+        <div class="header">
+            <img :src="layout.logo | getImage(institution_id)" @error="error_image">
         </div>
-        <div class="footer"> Copyright © 2020 Comunidade Bethânia </div>
+        <div class="inner">
+            <div class="container">
+                <h1>Politica de privacidade</h1>
+                {{content}}
+            </div>
+        </div>
+        <div class="footer">
+            {{ layout.copy }}
+        </div>
     </div>
 
 </body>
