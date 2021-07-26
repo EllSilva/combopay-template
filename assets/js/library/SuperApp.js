@@ -11,20 +11,20 @@ class App {
         body: null
     }
     obj_to_url(obj, next_level = null) {
-        var query = []; 
+        var query = [];
         for (var key in obj) {
             switch (typeof obj[key]) {
                 case 'string':
                 case 'number':
-                    if ( next_level != null ) {
-                        query.push( `${next_level}[${key}]=${obj[key]}&` )   
+                    if (next_level != null) {
+                        query.push(`${next_level}[${key}]=${obj[key]}&`)
                         console.log(next_level)
                     } else {
-                        query.push( `${key}=${obj[key]}&` )                    
+                        query.push(`${key}=${obj[key]}&`)
                     }
-                break
+                    break
                 case 'object':
-                    query.push( this.obj_to_url(obj[key], key ) )
+                    query.push(this.obj_to_url(obj[key], key))
             }
         }
         return query.join('');
@@ -153,25 +153,8 @@ class App {
         return await this.post(`/zoop/cartao-credito`, { ...data, instituicao_id: '6cf4bb1e78c6428786fc8fe6ddada3a6' })
     }
 
-    async payBoleto(instituicao_id, playload) {
-        let data = {
-            amount: null,
-            nome: null,
-            sobrenome: null,
-            email: null,
-            cpf: null,
-            dataNascimento: null,
-            instituicao_id: null,
-            telefone: null,
-            rua: null,
-            numero: null,
-            cidade: null,
-            estado: null,
-            bairro: null,
-            cep: null,
-            complemento: 'nao definido'
-        }
-        return await this.post(`/zoop/boleto`, { ...data, ...playload, instituicao_id: '6cf4bb1e78c6428786fc8fe6ddada3a6' })
+    async payBoleto(playload) {
+        return await this.post(`/transacao`, playload)
     }
 
 }
@@ -180,20 +163,20 @@ export default App;
 
 
 function objectParametize(obj, next_level = null) {
-    var query = []; 
+    var query = [];
     for (var key in obj) {
         switch (typeof obj[key]) {
             case 'string':
             case 'number':
-                if ( next_level != null ) {
-                    query.push( `${next_level}[${key}]=${obj[key]}&` )   
+                if (next_level != null) {
+                    query.push(`${next_level}[${key}]=${obj[key]}&`)
                     console.log(next_level)
                 } else {
-                    query.push( `${key}=${obj[key]}&` )                    
+                    query.push(`${key}=${obj[key]}&`)
                 }
-            break
+                break
             case 'object':
-                query.push( objectParametize(obj[key], key ) )
+                query.push(objectParametize(obj[key], key))
         }
     }
     return query.join('');

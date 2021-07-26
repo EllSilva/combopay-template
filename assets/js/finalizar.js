@@ -60,28 +60,6 @@ globalThis.app = new Vue({
             status: false,
             text: 'error ao finalizar tente novamente mais tarde'
         },
-        // doacao: {
-        //     recorrente: 1,
-        //     amount: null,
-        //     amount_custon: 0,
-        //     nome: null,
-        //     sobrenome: null,
-        //     dataNascimento: null,
-        //     email: null,
-        //     telefone: null,
-        //     cpf: null,
-        //     cep: null,
-        //     rua: null,
-        //     numero: null,
-        //     bairro: null,
-        //     estado: null,
-        //     cidade: null,
-        //     card: null,
-        //     validade: null,
-        //     cvv: null,
-        //     nome_card: null,
-        //     payment_type: 'card',
-        // },
         doacao: {
             recorrente: 1,
             amount: '5000',
@@ -93,17 +71,17 @@ globalThis.app = new Vue({
             telefone: '82999999999',
             cpf: '76537741807',
             cep: '06786270',
-            rua: 'Rua gonçalves dias',
+            rua: '',
             numero: '45',
-            bairro: 'JD. Margaridas',
-            estado: 'SP',
-            cidade: 'Taboão da Serra',
+            bairro: '',
+            estado: '',
+            cidade: '',
             card: null,
             validade: null,
             cvv: null,
             nome_card: null,
-            payment_type: 'boleto',
-            complemento: 'nao definido'
+            payment_type: 'card',
+            complemento: 'nao definido',
         },
 
     },
@@ -287,24 +265,32 @@ globalThis.app = new Vue({
             this.loading = true
             let res = {}
             if (this.doacao.payment_type == 'boleto') {
-                res = await this.Super.payBoleto(this.institution_id, this.doacao)
+                let playload = {
+                    quantia: this.doacao.amount,
+                    metodo: "boleto",
+                    cliente: {
+                        nome: this.doacao.nome,
+                        cpf: this.doacao.cpf
+                    }
+                }
+                res = await this.Super.payBoleto(playload)
             } else {
                 res = await this.Super.payCard(this.institution_id, this.doacao)
             }
-            
-            if( res.status == "success" ) {
-                if(this.doacao.payment_type == 'boleto') {
+
+            if (res.status == "success") {
+                if (this.doacao.payment_type == 'boleto') {
                     this.cache.boleto_code = res.boleto.codigo_barras
                     this.cache.boleto_link = res.boleto.link
-                }else {
+                } else {
                     this.cache.boleto_code = false
                     this.cache.boleto_link = false
                 }
                 window.location.href = "/obrigado.html"
-            }else {
+            } else {
                 this.error.status = true
                 this.error.text = res.message
-               
+
             }
 
             this.loading = false
@@ -313,12 +299,11 @@ globalThis.app = new Vue({
             this.loading = true
             let res = await fetch(`https://viacep.com.br/ws/${this.doacao.cep}/json/`)
             let address = await res.json()
-            this.doacao.endereco = address.logradouro
+            this.doacao.rua = address.logradouro
             this.doacao.bairro = address.bairro
             this.doacao.cidade = address.localidade
             this.doacao.estado = address.uf
             this.loading = false
-
         }
 
 
@@ -327,13 +312,46 @@ globalThis.app = new Vue({
         getIdYoutube: url => new URL(url).searchParams.get('v'),
         getTumb: id => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
         getImage: (nameImage, id) => `https://api.doardigital.com.br/storage/app/public/${id}/${nameImage}`,
+        money: val => {
+            val = val.replace('.', '')
+            val = val.replace(/\D/gi, '')
+            val = val ? val : 0
+            val = `${parseInt(val)}` ?? '0'
+            switch (val.length) {
+                case 0:
+                    val = '00,00'
+                    break;
+                case 1:
+                    val = val.replace(/(\d{1})/gi, '00,0$1')
+                    break;
+                case 2:
+                    val = val.replace(/(\d{2})/gi, '00,$1')
+                    break;
+                case 3:
+                    val = val.replace(/(\d{1})(\d{2})/gi, '0$1,$2')
+                    break;
+                case 4:
+                    val = val.replace(/(\d{2})(\d{2})/gi, '$1,$2')
+                    break;
+                case 5:
+                    val = val.replace(/(\d{3})(\d{2})/gi, '$1,$2')
+                    break;
+                case 6:
+                    val = val.replace(/(\d{1})(\d{3})(\d{2})/gi, '$1.$2,$3')
+                    break;
+                default:
+                    val = val.replace(/(\d{1})(\d{3})(\d{2})(.*)/gi, '$1.$2,$3')
+                    break;
+            }
+            return val
+        }
     },
     async mounted() {
 
-        this.doacao.recorrente = localStorage.getItem('recorrente') 
-        this.doacao.amount = localStorage.getItem('amount') 
-        this.doacao.email = localStorage.getItem('email') 
-        this.doacao.amount_custon = localStorage.getItem('amount_custon') 
+        this.doacao.recorrente = localStorage.getItem('recorrente')
+        this.doacao.amount = localStorage.getItem('amount')
+        this.doacao.email = localStorage.getItem('email')
+        this.doacao.amount_custon = localStorage.getItem('amount_custon')
 
         let instituicao = (await this.Super.get_institution_by_domain(this.Domain.corruent()))
         instituicao.ativo = true

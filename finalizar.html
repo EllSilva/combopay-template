@@ -66,7 +66,7 @@
                         </div>
                         <div>
                             <div>
-                                <h1>INFORMAÇÃO DE PAGAMENTO</h1>
+                                <h1>Total a Pagar: R$ {{doacao.amount|money}} {{doacao.recorrente == 1 ? 'Por mês' : ''}} </h1>
                                 <p>
                                     Todas as transações são seguras e criptografadas.
                                     As informações do cartão de crédito nunca são
@@ -93,7 +93,7 @@
                                 <div class="card">
                                     <div class="flex_between">
                                         <img height="40" src="./assets/img/chip.png">
-                                        <img height="40" src="./assets/img/logo.svg">
+                                        
                                     </div>
                                     <b>{{doacao.card||'0000 0000 0000 0000'}}</b>
                                     <div class="flex_between">
