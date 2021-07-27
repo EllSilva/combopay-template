@@ -936,38 +936,15 @@
                 <div class="body_box">
                     <h2> Plano </h2>
                     <form action="javascript:void(0)" class="form" @submit="save()">
-                        <div>
-                            <label for="">Nome</label>
-                            <input type="text" v-model="form.name" placeholder="" required>
-                        </div>
                         <div class="g g-2">
+                            <div>
+                                <label for="">Nome</label>
+                                <input type="text" v-model="form.name" placeholder="" required>
+                            </div>
                             <div>
                                 <label for="">Valor</label>
                                 <input type="text" v-model="form.amount" placeholder="" required>
                             </div>
-                            <div>
-                                <label for="">Frequência</label>
-                                <select v-model="form.frequency" >
-                                    <option :value="post.id" v-for="post in frequency"> {{post.label}} </option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="">Dias de Carencia</label>
-                                <input type="text" v-model="form.interval" placeholder="" required>
-                            </div>
-                            <div>
-                                <label for="">Duração</label>
-                                <input type="text" v-model="form.duration" placeholder="" required>
-                                <small style="font-size: 11px">
-                                    A duração vai depender da frequência ex: se estiver mensal e for um plano de 1 ano,
-                                    você deve colocar 12, relativo o numero de cobranças que o comprador recebera em quanto
-                                    etiver ativo no plano
-                                </small>
-                            </div>
-                        </div>
-                        <div>
-                            <label for="">Descrição</label>
-                            <textarea v-model="form.description" rows="3"></textarea>
                         </div>
                         <div class="g g-3">
                             <button type="submit" class="btn btn--success">Salvar</button>

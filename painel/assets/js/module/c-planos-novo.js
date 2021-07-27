@@ -37,9 +37,18 @@ export default {
     },
     methods: {
         async save() {
+
+            let playload = {
+                quantia: this.form.amount,
+                prazo: 30,
+                nome: this.form.nome,
+                instituicao_id: this.form.instituicao_id
+            }
+
             this.loading = true
-            let res = await this.Super.plano_post(this.form)
-            window.location.href = '#/planos'
+            let res = await this.Super.plano_post(playload)
+            // window.location.href = '#/planos'
+            console.log(res)
             this.error.status = true
             this.error.text = res?.message
             this.error.type = res?.status
