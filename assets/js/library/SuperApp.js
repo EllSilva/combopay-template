@@ -122,35 +122,8 @@ class App {
 
     }
 
-    async payCard(instituicao_id, playload) {
-        let data = {
-            nome: "José",
-            sobrenome: "Da Silva",
-            email: "teeste@teste.com",
-            cpf: "76537741807",
-            dataNascimento: "1982-12-15",
-            instituicao_id: "6cf4bb1e78c6428786fc8fe6ddada3a6",
-            telefone: "12029579543",
-            rua: "Av das Américas",
-            numero: "27",
-            cidade: "Rio de Janeiro",
-            estado: "RJ",
-            bairro: "Downtown",
-            cep: "10023000",
-            complemento: "APT 601",
-            amount: "35500",
-            creditCard: {
-                holder_name: "Bruno Vieira",
-                expiration_month: "22",
-                expiration_year: "2222",
-                card_number: "4539003370725497",
-                security_code: "111"
-            },
-            installment_plan: {
-                "number_installments": "2"
-            }
-        }
-        return await this.post(`/zoop/cartao-credito`, { ...data, instituicao_id: '6cf4bb1e78c6428786fc8fe6ddada3a6' })
+    async payCard(playload) {
+        return await this.post(`/transacao`, playload )
     }
 
     async payBoleto(playload) {

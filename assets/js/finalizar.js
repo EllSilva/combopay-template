@@ -68,7 +68,7 @@ globalThis.app = new Vue({
             sobrenome: 'Vieira',
             dataNascimento: '1987-09-18',
             email: 'br.rafael@outlook.com',
-            telefone: '82999999999',
+            telefone: '11999998888',
             cpf: '76537741807',
             cep: '06786270',
             rua: '',
@@ -76,10 +76,10 @@ globalThis.app = new Vue({
             bairro: '',
             estado: '',
             cidade: '',
-            card: null,
-            validade: null,
-            cvv: null,
-            nome_card: null,
+            card: "4111111111111111",
+            validade: "0922",
+            cvv: "123",
+            nome_card: "Morpheus Fishburne",
             payment_type: 'card',
             complemento: 'nao definido',
         },
@@ -266,6 +266,9 @@ globalThis.app = new Vue({
             let res = {}
             if (this.doacao.payment_type == 'boleto') {
                 let playload = {
+                    ...this.doacao,
+                    instituicao_id: this.institution_id,
+                    doador_id: 3,
                     quantia: this.doacao.amount,
                     metodo: "boleto",
                     cliente: {
@@ -276,7 +279,33 @@ globalThis.app = new Vue({
                 res = await this.Super.payBoleto(playload)
                 console.log(res)
             } else {
-                res = await this.Super.payCard(this.institution_id, this.doacao)
+                let playload = {
+                    quantia: this.doacao.amount,
+                    metodo: "cartao_credito",
+                    instituicao_id: this.institution_id,
+                    doador_id: "3",
+                    cliente: {
+                        nome: this.doacao.nome,
+                        cpf: this.doacao.cpf,
+                        email: this.doacao.email,
+                        telefone:'%2B55'+this.doacao.telefone 
+                    },
+                    cartao_credito: {
+                        nome: this.doacao.nome_card,
+                        cvv: this.doacao.cvv,
+                        numero: this.doacao.card,
+                        expericao: this.doacao.validade
+                    },
+                    items: {
+                        id: "1",
+                        nome: "Doação",
+                        preco_unico: this.doacao.amount,
+                        quantidade: 1
+                    }
+                }
+
+                res = await this.Super.payCard(playload)
+                console.log(res)
             }
 
             if (res.status == "success") {
