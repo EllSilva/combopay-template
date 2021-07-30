@@ -828,8 +828,8 @@
                     </h1>
                     <div class="table">
                         <div v-for="plano in planos" v-if="plano.id">
-                            <span>{{ plano.name }}</span>
-                            <span>{{ plano.amount | is_price }}</span>
+                            <span>{{ plano.nome }}</span>
+                            <span>{{ plano.quantia | is_price }}</span>
                             <span>
                                 <a :href="'#/planos/editar/'+plano.id" class="table_btn">
                                     <img src="./assets/icon/edit.svg">
@@ -943,7 +943,7 @@
                             </div>
                             <div>
                                 <label for="">Valor</label>
-                                <input type="text" v-model="form.amount" placeholder="" required>
+                                <input :disabled="edit" type="text" v-model="form.amount" placeholder="" required>
                             </div>
                         </div>
                         <div class="g g-3">

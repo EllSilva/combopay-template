@@ -25,6 +25,7 @@ export default {
                 { id: "anualy", label: "Anual" },
             ],
             loading: false,
+            edit: false,
             error: {
                 status: false,
                 text: 'Salvo com sucesso',

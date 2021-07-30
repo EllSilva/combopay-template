@@ -203,19 +203,19 @@ class App {
     }
 
     async plano_all() {
-        return this.get(`/planos`, {});
+        return this.get(`/plano`, {});
     }
     async plano_get(id) {
-        return this.get(`/planos/${id}`, {});
+        return this.get(`/plano/${id}`, {});
     }
     async plano_get_by_mkt(id) {
-        return this.get(`/planos/por-marketplace/${id}`, {});
+        return this.get(`/plano/por-marketplace/${id}`, {});
     }
     async plano_get_by_institution(id) {
-        return this.get(`/planos/por-instituicao/${id}`, {});
+        return this.get(`/plano/por-instituicao/${id}`, {});
     }
     async plano_put(id, playload) {
-        return this.put(`/planos/${id}`, playload);
+        return this.put(`/plano/${id}`, playload);
     }
     async plano_post(playload) {
         return this.post(`/plano`, playload);

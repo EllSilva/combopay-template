@@ -27,6 +27,7 @@ export default {
                 { id: "anualy", label: "Anual" },
             ],
             loading: false,
+            edit: true,
             error: {
                 status: false,
                 text: 'Salvo com sucesso',
@@ -38,13 +39,17 @@ export default {
         this.id = this.$route.params.id
         this.form.instituicao_id = this.cache.institution
         let res = await this.Super.plano_get(this.id)
-        this.form = { ...this.form, ...res }
+        this.form.name = res.nome
+        this.form.amount = res.quantia
     },
     methods: {
-
         async save() {
             this.loading = true
-            let res = await this.Super.plano_put(this.id, this.form)
+            let playload = {
+                nome: this.form.nome,
+                instituicao_id: this.form.instituicao_id
+            }
+            let res = await this.Super.plano_put(this.id, playload)
             window.location.href = '#/planos'
             this.error.status = true
             this.error.text = res?.message
