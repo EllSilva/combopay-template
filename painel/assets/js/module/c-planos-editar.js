@@ -39,8 +39,8 @@ export default {
         this.id = this.$route.params.id
         this.form.instituicao_id = this.cache.institution
         let res = await this.Super.plano_get(this.id)
-        this.form.name = res.nome
-        this.form.amount = res.quantia
+        this.form.nome = res.name
+        this.form.amount = res.amount
     },
     methods: {
         async save() {

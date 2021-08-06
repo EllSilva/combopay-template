@@ -129,6 +129,14 @@ class App {
     async payBoleto(playload) {
         return await this.post(`/transacao`, playload)
     }
+    
+    async payPlan(playload) {
+        return await this.post(`/assinatura`, playload)
+    }
+
+    async plano_get_by_mkt(id) {
+        return this.get(`/plano/por-instituicao/${id}`, {});
+    }
 
 }
 

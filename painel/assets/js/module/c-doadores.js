@@ -17,7 +17,7 @@ export default {
         }
     },
     async mounted() {
-        let res = await this.Super.all_doadores()
-        this.doadores = res.data
+        let res = await this.Super.all_doadores_by_istitution(this.cache.institution)
+        this.doadores = res
     }
 }

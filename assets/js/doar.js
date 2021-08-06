@@ -60,6 +60,7 @@ globalThis.app = new Vue({
             status: false,
             text: 'error ao finalizar tente novamente mais tarde'
         },
+        planos: [],
         doacao: {
             recorrente: 1,
             amount: '5000',
@@ -85,6 +86,7 @@ globalThis.app = new Vue({
         },
 
     },
+
     methods: {
         error_image(e) {
             e.target.src = './assets/img/default.png'
@@ -94,7 +96,7 @@ globalThis.app = new Vue({
                 window.location.href = "/pagina-em-manutencao.html"
         },
         money() {
-            let val = this.doacao.valor_custon
+            let val = this.doacao.amount_custon
             val = val.replace('.', '')
             val = val.replace(/\D/gi, '')
             val = val ? val : 0
@@ -125,7 +127,7 @@ globalThis.app = new Vue({
                     val = val.replace(/(\d{1})(\d{3})(\d{2})(.*)/gi, '$1.$2,$3')
                     break;
             }
-            this.doacao.valor_custon = val
+            this.doacao.amount_custon = val
         },
         async pay() {
             this.loading = true
@@ -138,15 +140,59 @@ globalThis.app = new Vue({
 
             this.loading = false
         },
+        setPlan( id ) {
+            if(this.doacao.recorrente) {
+                localStorage.setItem('plan_id', id)
+            }else {
+                localStorage.removeItem('plan_id')
+            }
+        }
     },
     filters: {
         getImage: (nameImage, id = 10) => `https://api.doardigital.com.br/storage/app/public/${id}/${nameImage}`,
+        money( valor ) {
+            let val = valor
+            val = val.replace('.', '')
+            val = val.replace(/\D/gi, '')
+            val = val ? val : 0
+            val = `${parseInt(val)}` ?? '0'
+            switch (val.length) {
+                case 0:
+                    val = '00,00'
+                    break;
+                case 1:
+                    val = val.replace(/(\d{1})/gi, '00,0$1')
+                    break;
+                case 2:
+                    val = val.replace(/(\d{2})/gi, '00,$1')
+                    break;
+                case 3:
+                    val = val.replace(/(\d{1})(\d{2})/gi, '0$1,$2')
+                    break;
+                case 4:
+                    val = val.replace(/(\d{2})(\d{2})/gi, '$1,$2')
+                    break;
+                case 5:
+                    val = val.replace(/(\d{3})(\d{2})/gi, '$1,$2')
+                    break;
+                case 6:
+                    val = val.replace(/(\d{1})(\d{3})(\d{2})/gi, '$1.$2,$3')
+                    break;
+                default:
+                    val = val.replace(/(\d{1})(\d{3})(\d{2})(.*)/gi, '$1.$2,$3')
+                    break;
+            }
+        
+            return val
+        }
     },
     async mounted() {
         let instituicao = (await this.Super.get_institution_by_domain(this.Domain.corruent()))
         instituicao.ativo = true
         this.is_site_active(instituicao?.ativo)
         this.institution_id = instituicao?.id
+        this.planos = (await this.Super.plano_get_by_mkt(this.institution_id) )
+        console.log( this.planos )
         let all_flags = await this.Super.flag_get_by_institution(this.institution_id)
         this.flagsIds = this.Domain.flags_ids(all_flags)
         this.flags = this.Domain.render_flag(all_flags)

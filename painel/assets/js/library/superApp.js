@@ -121,9 +121,15 @@ class App {
     async all_doacao() {
         return await this.get(`/doacoes`, {})
     }
+    async all_doacao_by_institution(id) {
+        return await this.get(`/transacao/por-instituicao/${id}`, {})
+    }
 
     async all_doadores() {
         return await this.get(`/doadores`, {})
+    }
+    async all_doadores_by_istitution(id) {
+        return await this.get(`/doador/por-instituicao/${id}`, {})
     }
     async status_doador(id, ativo) {
         return await this.put(`/doador/status/${id}`, { ativo })
@@ -132,7 +138,6 @@ class App {
         return await this.put(`/doador/${id}`, playload)
     }
     async post_doador(playload = {}) {
-        // cep, sobrenome, dataNascimento, numero
         return await this.post(`/doador`, playload)
     }
 
@@ -159,7 +164,7 @@ class App {
     }
     async add_anotacao_institution({ instituicao_id, anotacao }) {
         return await this.post(`/instituicao/anotacao`, { instituicao_id, anotacao })
-    }    
+    }
 
     async get_credential(id) {
         return await this.get(`/credencial/${id}`, {})

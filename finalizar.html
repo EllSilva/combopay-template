@@ -20,11 +20,6 @@
                 <form action="javascript:void(0)" @submit="pay">
                     <div class="container">
                         <div>
-                            <div v-if="doacao.amount==0" >
-                                <b>Informe um valor</b>
-                                <input type="text" v-model="doacao.amount_custon" @input="money"  name="price_custon" placeholder="150,00">
-                                <div class="space"></div>
-                            </div>
                             <h3>DIGITE SUAS INFORMAÇÕES</h3>
                             <div class="g g-2">
                                 <div>
@@ -66,7 +61,7 @@
                         </div>
                         <div>
                             <div>
-                                <h1>Total a Pagar: R$ {{doacao.amount|money}} {{doacao.recorrente == 1 ? 'Por mês' : ''}} </h1>
+                                <h1> Total a Pagar: R$ {{doacao.amount == 0 ? doacao.amount_custon : doacao.amount |money}} {{doacao.recorrente == 1 ? 'Por mês' : ''}} </h1>
                                 <p>
                                     Todas as transações são seguras e criptografadas.
                                     As informações do cartão de crédito nunca são

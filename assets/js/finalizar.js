@@ -61,6 +61,7 @@ globalThis.app = new Vue({
             text: 'error ao finalizar tente novamente mais tarde'
         },
         doacao: {
+            plan_id: null,
             recorrente: 1,
             amount: '5000',
             amount_custon: 0,
@@ -264,6 +265,7 @@ globalThis.app = new Vue({
         async pay() {
             this.loading = true
             let res = {}
+            localStorage.setItem('type_paymente', this.doacao.payment_type)
             if (this.doacao.payment_type == 'boleto') {
                 let playload = {
                     ...this.doacao,
@@ -276,14 +278,19 @@ globalThis.app = new Vue({
                         cpf: this.doacao.cpf
                     }
                 }
-                res = await this.Super.payBoleto(playload)
-                console.log(res)
+                if(this.doacao.recorrente==1) {
+                    console.log(this.doacao.recorrente)
+                    playload.plano_id = this.doacao.plan_id
+                    res = await this.Super.payPlan(playload)
+                }else{
+                    res = await this.Super.payBoleto(playload)
+                }
             } else {
                 let playload = {
                     quantia: this.doacao.amount,
                     metodo: "cartao_credito",
                     instituicao_id: this.institution_id,
-                    doador_id: "3",
+                    doador_id: Date.now(),
                     cliente: {
                         nome: this.doacao.nome,
                         cpf: this.doacao.cpf,
@@ -303,20 +310,23 @@ globalThis.app = new Vue({
                         quantidade: 1
                     }
                 }
-
-                res = await this.Super.payCard(playload)
-                console.log(res)
+                if(this.doacao.recorrente==1) {
+                    playload.plano_id = this.doacao.plan_id
+                    res = await this.Super.payPlan(playload)
+                }else{
+                    res = await this.Super.payCard(playload)
+                }
             }
 
             if (res.status == "success") {
                 if (this.doacao.payment_type == 'boleto') {
                     this.cache.boleto_code = res.boleto.codigo_barras
-                    this.cache.boleto_link = res.boleto.link
+                    this.cache.boleto_link = res.boleto.url
                 } else {
                     this.cache.boleto_code = false
                     this.cache.boleto_link = false
                 }
-                // window.location.href = "/obrigado.html"
+                window.location.href = "/obrigado.html"
             } else {
                 this.error.status = true
                 this.error.text = res.message
@@ -382,6 +392,7 @@ globalThis.app = new Vue({
         this.doacao.amount = localStorage.getItem('amount')
         this.doacao.email = localStorage.getItem('email')
         this.doacao.amount_custon = localStorage.getItem('amount_custon')
+        this.doacao.plan_id = localStorage.getItem('plan_id')
 
         let instituicao = (await this.Super.get_institution_by_domain(this.Domain.corruent()))
         instituicao.ativo = true

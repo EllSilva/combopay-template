@@ -33,25 +33,9 @@
                             <div class="space"></div>
                             <h4>Escolha Valor para Doação</h4>
                             <div class="g g-4">
-                                <div>
-                                    <input v-model="doacao.amount" value="2500" type="radio" id="for_25"name="donative_price" value="2500" hidden checked>
-                                    <label class="options_pay" for="for_25"> R$ 25,00 </label>
-                                </div>
-                                <div>
-                                    <input v-model="doacao.amount" value="5000" hidden type="radio" id="for_50"name="donative_price" value="5000">
-                                    <label class="options_pay" for="for_50"> R$ 50,00 </label>
-                                </div>
-                                <div>
-                                    <input v-model="doacao.amount" value="7500" hidden type="radio" id="for_75"name="donative_price" value="7500">
-                                    <label class="options_pay" for="for_75"> R$ 75,00 </label>
-                                </div>
-                                <div>
-                                    <input v-model="doacao.amount" value="10000" hidden type="radio" id="for_100"name="donative_price" value="10000">
-                                    <label class="options_pay" for="for_100"> R$ 100,00 </label>
-                                </div>
-                                <div>
-                                    <input v-model="doacao.amount" value="20000" hidden type="radio" id="for_200"name="donative_price" value="20000">
-                                    <label class="options_pay" for="for_200">R$ 200,00 </label>
+                                <div v-for="plano in planos">
+                                    <input v-model="doacao.amount" :value="plano.quantia" type="radio" :id="'for_'+plano.id" name="donative_price"  hidden checked>
+                                    <label class="options_pay" @click="setPlan( plano.id )" :for="'for_'+plano.id"> R$ {{plano.quantia | money}} </label>
                                 </div>
                                 <div>
                                     <input v-model="doacao.amount" value="0" hidden type="radio" id="for_custon"name="donative_price" value="CUSTON">

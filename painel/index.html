@@ -565,33 +565,32 @@
                             <span><img class="gravatar" src="./assets/img/gravatar.png"></span>
                             <span>
                                 <small>Doador</small> <br>
-                                {{doacao.nome}}
+                                {{doacao.nome||'Não Informado'}}
                             </span>
                             <span>
                                 <small>Valor</small> <br>
-                                R$ {{doacao.valor}}
+                                {{doacao.quantia || 0 | is_price }}
                             </span>
                             <span>
                                 <small>Status</small> <br>
-                                <span class="table_btn table_btn_status">Finalizado</span>
+                                <span class="table_btn table_btn_status">{{doacao.status | status}} </span>
                             </span>
                             <span>
                                 <small>Data</small> <br>
-                                {{doacao.data}}
+                                {{doacao.created_at | format_data}}
                             </span>
                             <span>
-                                <span class="table_btn table_btn_status">Cartão</span>
+                                <small>Tipo</small> <br>
+                                <span class="table_btn table_btn_status">{{doacao.tipo|tipo}}</span>
                             </span>
                             <span>
-                                <span class="table_btn table_btn_status">UNICO</span>
-                            </span>
+                                <small>Recorrente</small>
+                                <span class="table_btn table_btn_status">NÂO</span>
+                            </span>                            
                             <span>
-                                <span v-if="doacao.status">
-                                    <img src="./assets/icon/success.svg" class="ico_status">
-                                </span>
-                                <span v-else>                                    
-                                    <img src="./assets/icon/error.svg" class="ico_status">
-                                </span>                                
+                                <a :href="'#/doacoes-detalhe/'+doacao.doador_id" class="table_btn">
+                                    <img src="./assets/icon/eye.svg">
+                                </a>
                             </span>
                         </div>                        
                     </div>
