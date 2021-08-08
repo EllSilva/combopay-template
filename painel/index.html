@@ -46,7 +46,7 @@
                     <img src="./assets/logo/logo.svg">
                     <input type="email" v-model="email" placeholder="E-mail" required>
                     <button type="submit" class="btn btn--success">Recuperar senha</button>
-                    <span v-if="message" class="success" > senha temporária enviada por email </span>
+                    <span v-if="message" class="success"> senha temporária enviada por email </span>
                     <a href="#/" class="link link--login">Entrar</a>
                 </form>
             </div>
@@ -71,7 +71,7 @@
                 <div class="a-body padding-20">
                     <div class="space"></div>
                     <div class="g g-3">
-                        <div class="resumo" v-for="item in resumos" >
+                        <div class="resumo" v-for="item in resumos">
                             <div :style="{backgroundColor: item.color}">
                                 <img :src="'./assets/icon/'+item.ico">
                             </div>
@@ -83,12 +83,12 @@
                         </div>
                     </div>
                     <div class="space"></div>
-    
+
                     <div class="box-relatorio">
                         <label for="">Faturas</label>
                         <canvas ref="graph_faturas" width="100%" height="100"></canvas>
                     </div>
-                   
+
                     <div class="g g-2">
                         <div class="box-relatorio">
                             <label for="">Quantidade de Doações</label>
@@ -99,7 +99,7 @@
                             <canvas ref="graph_forma_pagamento" width="100%" height="100"></canvas>
                         </div>
                     </div>
-    
+
                     <div class="g g-3">
                         <div class="box-relatorio">
                             <label for="">Status Doação</label>
@@ -113,9 +113,9 @@
                             <label for="">Status Doadores</label>
                             <canvas ref="graph_status_doadores" width="100%" height="100"></canvas>
                         </div>
-                    </div>               
-    
-                    <button class="button-export"> EXPORTAR CSV  </button>
+                    </div>
+
+                    <button class="button-export"> EXPORTAR CSV </button>
                 </div>
             </div>
             <c-footer></c-footer>
@@ -124,7 +124,7 @@
     </template>
 
     <template id="c-aside">
-        <div class="a-aside" >
+        <div class="a-aside">
             <div class="aside__link aside__link--gravatar">
                 <img src="./assets/img/gravatar.png">
                 <span> Jose Antonio</span>
@@ -154,7 +154,8 @@
                         <div class="g g-4">
                             <div v-for="(mes, index) in meses">
                                 <label for=""> {{ mes }} </label>
-                                <input  type="text" @input="playload[index] = mask_money(playload[index]) " :disabled="is_flag"  v-model="playload[index]" placeholder="12.000" class="i-monei">
+                                <input type="text" @input="playload[index] = mask_money(playload[index]) "
+                                    :disabled="is_flag" v-model="playload[index]" placeholder="12.000" class="i-monei">
                             </div>
                             <div>
                                 <button type="submit" :disabled="is_flag" class="btn btn--success">Salvar</button>
@@ -214,10 +215,10 @@
                             </div>
                         </div>
                     </form>
-                    <div class="error" v-if="messageAlterPass.status" v-html="messageAlterPass.text">  </div>
+                    <div class="error" v-if="messageAlterPass.status" v-html="messageAlterPass.text"> </div>
                     <span v-if="error2.status" :class="error2.type"> {{error.text}} </span>
                 </div>
-                
+
             </div>
             <div class="loading" v-if="loading"></div>
             <c-footer></c-footer>
@@ -246,7 +247,7 @@
                             <button type="submit" class="btn btn--success"> Salvar</button>
                         </div>
                     </form>
-                    <span v-if="error.status" :class="error.type" > {{error.text}} </span>
+                    <span v-if="error.status" :class="error.type"> {{error.text}} </span>
                 </div>
             </div>
             <div class="loading" v-if="loading"></div>
@@ -269,15 +270,16 @@
                         </div>
                         <div>
                             <label for="">Descrição Google</label>
-                            <textarea rows="3" :disabled="is_flag" maxlength="146" v-model="playload.description"></textarea>
+                            <textarea rows="3" :disabled="is_flag" maxlength="146"
+                                v-model="playload.description"></textarea>
                         </div>
                         <div>
                             <label for="">Tags Google</label>
                             <input type="text" :disabled="is_flag" maxlength="75" v-model="playload.tag">
-                        </div>                      
+                        </div>
                         <div class="space"></div>
                         <div class="g g-3">
-                            <button type="submit" :disabled="is_flag"  class="btn btn--success">Salvar</button>
+                            <button type="submit" :disabled="is_flag" class="btn btn--success">Salvar</button>
                         </div>
                     </form>
                     <span v-if="error.status" :class="error.type"> {{error.text}} </span>
@@ -323,20 +325,24 @@
                         </div>
                         <h2>Domínio</h2>
                         <div>
-                            <input type="radio" v-model="form.domain_person" value="sub" name="type_domains" checked> Subdominio
-                            <input type="radio" v-model="form.domain_person" value="person" name="type_domains"> Domínio Personalizado
+                            <input type="radio" v-model="form.domain_person" value="sub" name="type_domains" checked>
+                            Subdominio
+                            <input type="radio" v-model="form.domain_person" value="person" name="type_domains"> Domínio
+                            Personalizado
                         </div>
                         <div class="note" v-if="form.domain_person == 'sub'">
                             <div class="input-note subdomain">
-                                <input type="text" v-model="form.subdominio" placeholder="subdominio" class="input-note">
-                                <strong>.dorardigital.com</strong> 
+                                <input type="text" v-model="form.subdominio" placeholder="subdominio"
+                                    class="input-note">
+                                <strong>.dorardigital.com</strong>
                             </div>
                         </div>
                         <div class="note" v-if="form.domain_person == 'person'">
-                            <input type="text" v-model="form.dominio" placeholder="seudominio.com.br"  class="input-note">
+                            <input type="text" v-model="form.dominio" placeholder="seudominio.com.br"
+                                class="input-note">
                             <h5>Configurar domínio personalizado</h5>
-                            <p> 
-                                Entre no painel onde você adiquiriu o dominio, procure por 
+                            <p>
+                                Entre no painel onde você adiquiriu o dominio, procure por
                                 zona de DNS e preencha com os dados abaixo, antes de salvar as alterações
                             </p>
                             <ul>
@@ -358,7 +364,7 @@
                                 <input type="text" v-model="form.rua">
                             </div>
                         </div>
-                        <div class="g g-2">                            
+                        <div class="g g-2">
                             <div>
                                 <label for="">Complemento</label>
                                 <input type="text" v-model="form.complemento">
@@ -375,7 +381,7 @@
                                 <label for="">Estado</label>
                                 <input type="text" v-model="form.estado">
                             </div>
-                        </div>                        
+                        </div>
                         <h2>Dados Bancario</h2>
                         <div class="g g-3">
                             <div>
@@ -399,16 +405,16 @@
                             <div>
                                 <label for="">Conta Dígito</label>
                                 <input type="text" v-model="form.banco_conta.conta_dv">
-                            </div> 
+                            </div>
                             <div>
                                 <label for="">Tipo</label>
                                 <select model="banco_conta.tipo">
                                     <option value="conta_corrente">Conta Corrente</option>
                                     <option value="conta_poupanca"> Conta poupanca </option>
                                     <option value="conta_corrente_conjunta"> Conta corrente conjunta </option>
-                                    <option value="conta_poupanca_conjunta"> Conta poupanca conjunta </option>    
+                                    <option value="conta_poupanca_conjunta"> Conta poupanca conjunta </option>
                                 </select>
-                            </div>                         
+                            </div>
                         </div>
                         <div class="g g-2">
                             <div>
@@ -419,12 +425,13 @@
                                 <label for="">Nome</label>
                                 <input type="text" v-model="form.banco_conta.nome">
                             </div>
-                            
+
                         </div>
                         <div class="g g-3">
                             <button type="submit" class="btn btn--success">Salvar</button>
                         </div>
-                        <span @click="feedback.status=null" v-if="feedback.status != null" :class="feedback.status"> {{ feedback.message }} </span>
+                        <span @click="feedback.status=null" v-if="feedback.status != null" :class="feedback.status"> {{
+                            feedback.message }} </span>
                     </form>
                 </div>
                 <div class="body_box">
@@ -432,7 +439,8 @@
                     <div class="admins-gravatar">
                         <div class="gravatar-item" v-for="email in admins">
                             <span @click="remove_admin(email)">x</span>
-                            <img :title="email" :src="'http://brc.doardigital.com.br/utils/gravatar/?email='+email" alt="brunnocriacoes@gmail.com">
+                            <img :title="email" :src="'http://brc.doardigital.com.br/utils/gravatar/?email='+email"
+                                alt="brunnocriacoes@gmail.com">
                         </div>
                     </div>
                     <form action="javscript:void(0)" @submit="add_admin" class="form">
@@ -523,9 +531,55 @@
             <div class="a-body">
                 <c-step></c-step>
                 <div class="body_box">
-                    <h1>Doadores</h1>
+                    <div class="filtros">
+                        <div>Filtros</div>
+                        <div>
+                            <small>Periodo</small> <br>
+                            <select>
+                                <option value="">Todos</option>
+                                <option value="">Ontem</option>
+                                <option value="">Últimos 7 dias</option>
+                                <option value="">Últimos 30 dias</option>
+                                <option value="">Escolher Periodo</option>
+                            </select>
+                        </div>
+                        <div>
+                            <small>Data Ínicio</small> <br>
+                            <input type="date">
+                        </div>
+                        <div>
+                            <small>Data Final</small> <br>
+                            <input type="date">
+                        </div>
+                        <div>
+                            <small>Plano</small> <br>
+                            <select>
+                                <option value="">Todos</option>
+                                <option value="">Basico</option>
+                                <option value="">Medio</option>
+                                <option value="">Avançado</option>
+                            </select>
+                        </div>
+                        <div>
+                            <small>Exportar CSV</small> <br> <!-- %0A -->
+                            <a href="data:text/csv;charset=utf-8,bruno%0AJose" download="relatorio-doacoes.csv">Exportar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="body_box">
+                    <div class="title_form">
+                        <h1>Doadores</h1>
+                        <form action="javascript:void(0)" class="busca-box">
+                            <input type="text" required placeholder="Buscar...">
+                            <button type="submit">
+                                <img src="./assets/icon/search.svg">
+                            </button>
+                        </form>
+                    </div>
+                    <div class="space"></div>
                     <div class="table">
                         <div v-for="doador in doadores">
+                            <span> <input type="checkbox"> </span>
                             <span><img class="gravatar" src="./assets/img/gravatar.png"></span>
                             <span class="w-50">
                                 {{ doador.nome }} <br>
@@ -536,15 +590,15 @@
                                 <small>Dada Cadastro</small> <br>
                                 {{ doador.created_at | format_data }}
                             </span>
-                            <span> 
-                                <span class="table_btn table_btn_status">Unico</span>                                 
+                            <span>
+                                <span class="table_btn table_btn_status">Unico</span>
                             </span>
                             <span>
-                                <a href="javascript:void(0)" class="table_btn" >
+                                <a :href="'#/doador-hitorico/'+doador.id" class="table_btn">
                                     <img src="./assets/icon/eye.svg">
                                 </a>
                             </span>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
             </div>
@@ -559,9 +613,65 @@
             <div class="a-body">
                 <c-step></c-step>
                 <div class="body_box">
-                    <h1>Doações</h1>
+                    <div class="filtros">
+                        <div>Filtros</div>
+                        <div>
+                            <small>Periodo</small> <br>
+                            <select>
+                                <option value="">Hoje</option>
+                                <option value="">Ontem</option>
+                                <option value="">Últimos 7 dias</option>
+                                <option value="">Últimos 30 dias</option>
+                                <option value="">Este Ano</option>
+                                <option value="">Escolher Periodo</option>
+                            </select>
+                        </div>
+                        <div>
+                            <small>Data Ínicio</small> <br>
+                            <input type="date">
+                        </div>
+                        <div>
+                            <small>Data Final</small> <br>
+                            <input type="date">
+                        </div>
+                        <div>
+                            <small>Status Pagamento</small> <br>
+                            <select>
+                                <option value="">Todos</option>
+                                <option value="">Pago</option>
+                                <option value="">Pendente</option>
+                                <option value="">Cancelado</option>
+                            </select>
+                        </div>
+                        <div>
+                            <small>Tipo Pagamento</small> <br>
+                            <select>
+                                <option value="">Todos</option>
+                                <option value="">Cartão Credito</option>
+                                <option value="">Boleto</option>
+                                <option value="">PIX</option>
+                            </select>
+                        </div>
+                        <div>
+                            <small>Exportar CSV</small> <br> <!-- %0A -->
+                            <a href="data:text/csv;charset=utf-8,bruno%0AJose" download="relatorio-doacoes.csv">Exportar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="body_box">
+                    <div class="title_form">
+                        <h1>Doações</h1>
+                        <form action="javascript:void(0)" class="busca-box">
+                            <input type="text" required placeholder="Buscar...">
+                            <button type="submit">
+                                <img src="./assets/icon/search.svg">
+                            </button>
+                        </form>
+                    </div>
+                    <div class="space"></div>
                     <div class="table">
                         <div v-for="doacao in doacoes">
+                            <span> <input type="checkbox"> </span>
                             <span><img class="gravatar" src="./assets/img/gravatar.png"></span>
                             <span>
                                 <small>Doador</small> <br>
@@ -586,19 +696,19 @@
                             <span>
                                 <small>Recorrente</small>
                                 <span class="table_btn table_btn_status">NÂO</span>
-                            </span>                            
+                            </span>
                             <span>
                                 <a :href="'#/doacoes-detalhe/'+doacao.doador_id" class="table_btn">
                                     <img src="./assets/icon/eye.svg">
                                 </a>
                             </span>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
             </div>
             <c-footer></c-footer>
         </div>
-    </template>    
+    </template>
 
     <template id="c-credenciais">
         <div class="l-admin">
@@ -608,10 +718,10 @@
                 <c-step></c-step>
                 <div class="body_box">
                     <h1 class="title_form">
-                        Credenciais 
-                        <a href="#/credenciais/nova" class="plus"> 
-                            <img src="./assets/icon/plus.svg"> 
-                        </a> 
+                        Credenciais
+                        <a href="#/credenciais/nova" class="plus">
+                            <img src="./assets/icon/plus.svg">
+                        </a>
                     </h1>
                     <div class="table">
                         <div v-for="credencial in credenciais">
@@ -622,16 +732,18 @@
                                 </i>
                             </span>
                             <a :href="'#/credenciais/editar/'+credencial.id" class="table_btn table_btn--edit w-40">
-                                <img src="./assets/icon/edit.svg"> 
-                            </a>    
-                            <a  @dblclick="apagar( credencial.id )" title="Para Apagar de duplo click" class="table_btn table_btn--trash w-40">
-                                <img src="./assets/icon/trash.svg"> 
-                            </a>                            
-                        </div>                        
+                                <img src="./assets/icon/edit.svg">
+                            </a>
+                            <a @dblclick="apagar( credencial.id )" title="Para Apagar de duplo click"
+                                class="table_btn table_btn--trash w-40">
+                                <img src="./assets/icon/trash.svg">
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="paginacao">
-                    <a :href="'#/credenciais/'+(+step + 1)" @click="load(step+1)" v-for="step in steps"> {{ step + 1 }} </a>
+                    <a :href="'#/credenciais/'+(+step + 1)" @click="load(step+1)" v-for="step in steps"> {{ step + 1 }}
+                    </a>
                 </div>
             </div>
             <div class="loading" v-if="loading"></div>
@@ -675,8 +787,8 @@
             <div class="a-body">
                 <c-step></c-step>
                 <div class="body_box">
-                    <div class="title_form">                        
-                        <h1 >
+                    <div class="title_form">
+                        <h1>
                             Minhas Instituições
                         </h1>
                         <form action="javascript:void(0)" @submit="search" class="busca-box">
@@ -685,9 +797,9 @@
                                 <img src="./assets/icon/search.svg">
                             </button>
                         </form>
-                        <a href="#/adionar-instituicao" class="plus"> 
-                            <img src="./assets/icon/plus.svg"> 
-                        </a> 
+                        <a href="#/adionar-instituicao" class="plus">
+                            <img src="./assets/icon/plus.svg">
+                        </a>
                     </div>
                     <div class="space"></div>
                     <div class="table">
@@ -705,13 +817,14 @@
                                 {{ sass.ativo ? 'Ativo' : 'Inativo' }}
                             </span>
                             <a :href="'#/editar-instituicao/'+sass.id" class="table_btn table_btn--edit">
-                                <img src="./assets/icon/edit.svg"> 
-                            </a>                            
-                        </div>                        
+                                <img src="./assets/icon/edit.svg">
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="paginacao">
-                    <a :href="'#/minhas-instituicoes/'+(+step + 1)" @click="load(step+1)" v-for="step in steps"> {{ step + 1 }} </a>
+                    <a :href="'#/minhas-instituicoes/'+(+step + 1)" @click="load(step+1)" v-for="step in steps"> {{ step
+                        + 1 }} </a>
                 </div>
             </div>
             <c-footer></c-footer>
@@ -726,10 +839,10 @@
                 <c-step></c-step>
                 <div class="body_box">
                     <h1 class="title_form">
-                        Usuários 
-                        <a href="#/usuario-novo" class="plus"> 
-                            <img src="./assets/icon/plus.svg"> 
-                        </a> 
+                        Usuários
+                        <a href="#/usuario-novo" class="plus">
+                            <img src="./assets/icon/plus.svg">
+                        </a>
                     </h1>
                     <div class="table">
                         <div v-for="user in usuarios" v-if="user.ativo == 1">
@@ -744,11 +857,12 @@
                                 </a>
                             </span>
                             <span>
-                                <a @dblclick="del(user.id)" class="table_btn table_btn--trash" title="Para acabar use duplo click">
+                                <a @dblclick="del(user.id)" class="table_btn table_btn--trash"
+                                    title="Para acabar use duplo click">
                                     <img src="./assets/icon/trash.svg">
                                 </a>
                             </span>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
             </div>
@@ -757,7 +871,7 @@
         </div>
     </template>
 
-    
+
     <template id="c-usuarios-novo">
         <div class="l-admin">
             <c-aside></c-aside>
@@ -786,7 +900,7 @@
                                 <label for="">Credencial</label>
                                 <select v-model="form.credencial">
                                     <option :value="item.id" v-for=" item in credenciais "> {{ item.nome }} </option>
-                                </select>                                
+                                </select>
                             </div>
                         </div>
                         <div class="g g-2" v-if="id == null">
@@ -799,7 +913,7 @@
                                 <input type="password" v-model="form.password_confirm" placeholder="" required>
                             </div>
                         </div>
-                        <div :class="error != null ? 'error' : 'success'" v-if="error != null "> {{error}} </div>                   
+                        <div :class="error != null ? 'error' : 'success'" v-if="error != null "> {{error}} </div>
                         <div class="space"></div>
                         <div class="g g-3">
                             <button type="submit" class="btn btn--success">Salvar</button>
@@ -820,10 +934,10 @@
                 <c-step></c-step>
                 <div class="body_box">
                     <h1 class="title_form">
-                        Planos 
-                        <a href="#/planos/novo" class="plus"> 
-                            <img src="./assets/icon/plus.svg"> 
-                        </a> 
+                        Planos
+                        <a href="#/planos/novo" class="plus">
+                            <img src="./assets/icon/plus.svg">
+                        </a>
                     </h1>
                     <div class="table">
                         <div v-for="plano in planos" v-if="plano.id">
@@ -835,7 +949,7 @@
                                     <span>EDITAR</span>
                                 </a>
                             </span>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
             </div>
@@ -855,12 +969,14 @@
                         <div v-for="email in playload">
                             <span>{{ email.cat }}</span>
                             <span>
-                                <a :disabled="is_flag" :href=" !is_flag ? '#/modelo-de-emails/'+email.id : '#/modelo-de-emails'" class="table_btn">
+                                <a :disabled="is_flag"
+                                    :href=" !is_flag ? '#/modelo-de-emails/'+email.id : '#/modelo-de-emails'"
+                                    class="table_btn">
                                     <img src="./assets/icon/edit.svg">
                                     <span>EDITAR</span>
                                 </a>
                             </span>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
             </div>
@@ -892,7 +1008,7 @@
             <c-footer></c-footer>
         </div>
     </template>
-    
+
     <template id="c-emails-edit">
         <div class="l-admin">
             <c-aside></c-aside>
@@ -924,8 +1040,8 @@
             <div class="loading" v-if="loading"></div>
             <c-footer></c-footer>
         </div>
-    </template> 
-    
+    </template>
+
     <template id="c-planos-novo">
         <div class="l-admin">
             <c-aside></c-aside>
@@ -956,7 +1072,7 @@
             <c-footer></c-footer>
         </div>
     </template>
-    
+
     <template id="c-">
         <div class="l-admin">
             <c-aside></c-aside>
