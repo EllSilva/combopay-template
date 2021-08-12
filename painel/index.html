@@ -77,7 +77,7 @@
                             </div>
                             <span>
                                 <small>{{item.label}}</small>
-                                <b>{{item.valor}}</b>
+                                <b>{{item.valor | money}} </b>
                             </span>
                             <span>{{item.estimativa}}</span>
                         </div>
@@ -115,7 +115,9 @@
                         </div>
                     </div>
 
-                    <button class="button-export"> EXPORTAR CSV </button>
+                    <a :href="link" download="relatorio-geral.csv" class="button-export"> 
+                        EXPORTAR CSV 
+                    </a>
                 </div>
             </div>
             <c-footer></c-footer>
@@ -217,6 +219,217 @@
                     </form>
                     <div class="error" v-if="messageAlterPass.status" v-html="messageAlterPass.text"> </div>
                     <span v-if="error2.status" :class="error2.type"> {{error.text}} </span>
+                </div>
+
+            </div>
+            <div class="loading" v-if="loading"></div>
+            <c-footer></c-footer>
+        </div>
+    </template>
+
+    <template id="c-brindes">
+        <div class="l-admin">
+            <c-aside></c-aside>
+            <c-header></c-header>
+            <div class="a-body">
+                <c-step></c-step>
+                <div class="body_box">
+                    <h1>Brindes</h1>
+                    <form action="javascript:void(0)" class="form">
+                        <div class="g g-2">
+                            <div>
+                                <div>
+                                    <label for="">Periodos</label>
+                                    <select>
+                                        <option value="">Últimos 30 dias</option>
+                                        <option value="">Últimos 60 dias</option>
+                                        <option value="">Peridos Customisado</option>
+                                    </select>
+                                </div>
+                                <div class="g g-2">
+                                    <div>
+                                        <label for="">Data Ínicio</label>
+                                        <input type="date">
+                                    </div>
+                                    <div>
+                                        <label for="">Data Máxima</label>
+                                        <input type="date">
+                                    </div>
+                                </div>
+                                <div class="g g-2">
+                                    <div>
+                                        <label for="">Planos</label>
+                                        <select>
+                                            <option value="">Basico R$25,00</option>
+                                            <option value="">Medio R$50,00</option>
+                                            <option value="">Master R$100,00</option>
+                                            <option value="">Todos</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="">Status</label>
+                                        <select>
+                                            <option value="">Pago</option>
+                                            <option value="">Pendente</option>
+                                            <option value="">Cancelado</option>
+                                            <option value="">Todos</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="g g-2">
+                                    <div>
+                                        <button type="submit" class="btn btn--success">
+                                            Etiqueta Endereço
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <button type="submit" class="btn btn--success">
+                                            Declaração de Conteúdo
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div>
+                                <div>
+                                    <label for="">Valor Total</label>
+                                    <input type="text" placeholder="0,00">
+                                </div>
+                                <div class="space"></div>
+                                <div class="table">
+                                    <div>
+                                        <div>Livreto</div>
+                                        <div>1</div>
+                                        <div>100kg</div>
+                                        <div>X</div>
+                                    </div>
+                                    <div>
+                                        <div>Marca Livro</div>
+                                        <div>1</div>
+                                        <div>120kg</div>
+                                        <div>X</div>
+                                    </div>
+                                </div>
+                                <div class="space"></div>
+                                <div class="g g-3">
+                                    <div>
+                                        <label for="">Descrição</label>
+                                        <input type="text" placeholder="Digite nome item...">
+                                    </div>
+                                    <div>
+                                        <label for="">Quantidade</label>
+                                        <input type="number" placeholder="1">
+                                    </div>
+                                    <div>
+                                        <label for="">Peso</label>
+                                        <input type="number" placeholder="2">
+                                    </div>
+                                    <center>
+
+                                        <span type="submit" class="btn btn--success">
+                                            Adicionar +
+                                        </span>
+                                    </center>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                    <span v-if="error.status" :class="error.type"> {{error.text}} </span>
+                    <div class="space"></div>
+                </div>
+
+            </div>
+            <div class="loading" v-if="loading"></div>
+            <c-footer></c-footer>
+        </div>
+    </template>
+
+    <template id="c-meu-plano">
+        <div class="l-admin">
+            <c-aside></c-aside>
+            <c-header></c-header>
+            <div class="a-body">
+                <c-step></c-step>
+                <div class="body_box">
+                    <h1>Meu Plano</h1>
+                    <div class="g g-2">
+                        <div>
+                            <h3>Historico</h3>
+                            <div class="table">
+                                <div>
+                                    <span>
+                                        <small>Valor</small> <br>
+                                        R$0,000
+                                    </span>
+                                    <span>
+                                        <small>Status</small> <br>
+                                        <span class="table_btn table_btn_status">
+                                            Pendente
+                                        </span>
+                                    </span>
+                                    <span>
+                                        <small>Data</small> <br>
+                                        DD/MM/YYYY
+                                    </span>
+                                    <span>
+                                        <a href="#/doacoes-detalhe/+doacao.doador_id" class="table_btn">
+                                            <img src="./assets/icon/eye.svg">
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <form class="form">
+                            <h3>Planos</h3>
+                            <div>
+                                <label>
+                                    <input type="radio" value="1" name="planos_doardigital">
+                                    R$ 29,90 ao mês / 1 instituição
+                                </label> <br>
+                                <label>
+                                    <input type="radio" value="2" name="planos_doardigital">
+                                    R$ 49,90 ao mês / 4 instituição
+                                </label> <br>
+                                <label>
+                                    <input type="radio" value="3" name="planos_doardigital">
+                                    R$ 149,90 ao mês / 10 instituição
+                                </label>
+                            </div>
+                            <h3>Cartão de credito</h3>
+                            <div>
+                                <label for="">Número cartão</label>
+                                <input type="text" placeholder="0000 0000 0000 0000" required>
+                            </div>
+                            <div class="g g-2">
+                                <div>
+                                    <label for="">Validade</label>
+                                    <input type="text" placeholder="DD/YY" required>
+                                </div>
+                                <div>
+                                    <label for="">CVV</label>
+                                    <input type="text" placeholder="" required>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="">Número cartão</label>
+                                <input type="text" placeholder="0000 0000 0000 0000" required>
+                            </div>
+                            <div>
+                                <label for="">Cupom</label>
+                                <input type="text" placeholder="#DOARDIGITAL_00545214" required>
+                            </div>
+                            <center>
+                                <h2>Total a pagar R$49,90</h2>
+                                <small>30 dias de teste</small>
+                            </center>
+                            <div class="space"></div>
+                            <div>
+                                <button type="submit" class="btn btn--success">Pagar Agora</button>
+                            </div>
+                        </form>
+                    </div>
+
                 </div>
 
             </div>
@@ -562,7 +775,8 @@
                         </div>
                         <div>
                             <small>Exportar CSV</small> <br> <!-- %0A -->
-                            <a href="data:text/csv;charset=utf-8,bruno%0AJose" download="relatorio-doacoes.csv">Exportar</a>
+                            <a href="data:text/csv;charset=utf-8,bruno%0AJose"
+                                download="relatorio-doacoes.csv">Exportar</a>
                         </div>
                     </div>
                 </div>
@@ -654,7 +868,8 @@
                         </div>
                         <div>
                             <small>Exportar CSV</small> <br> <!-- %0A -->
-                            <a href="data:text/csv;charset=utf-8,bruno%0AJose" download="relatorio-doacoes.csv">Exportar</a>
+                            <a href="data:text/csv;charset=utf-8,bruno%0AJose"
+                                download="relatorio-doacoes.csv">Exportar</a>
                         </div>
                     </div>
                 </div>

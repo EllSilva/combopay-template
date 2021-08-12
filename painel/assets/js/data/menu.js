@@ -19,4 +19,5 @@ export default [
     { id: 'wallet', text: 'Carteira', icon: 'wallet.png', link: '#/carteira', feature_flag: true },
     { id: 'script', text: 'Script', icon: 'code.svg', link: '#/script', feature_flag: true },
     { id: 'qr_code', text: 'QR CODE', icon: 'qr.png', link: '#/qr-code', feature_flag: true },
+    { id: 'brindes', text: 'Brindes', icon: 'print.png', link: '#/brindes', feature_flag: true },
 ]

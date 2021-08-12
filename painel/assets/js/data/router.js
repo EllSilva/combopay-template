@@ -4,6 +4,7 @@ export default [
     { path: '/inicio', component: { template: '<c-inicio></c-inicio>' } },
     { path: '/metas/:ano', component: { template: '<c-metas></c-metas>' } },
     { path: '/perfil', component: { template: '<c-perfil></c-perfil>' } },
+    { path: '/meu-plano', component: { template: '<c-meuplano></c-meuplano>' } },
     { path: '/politica-de-privacidade', component: { template: '<c-privacidade></c-privacidade>' } },
     { path: '/configuracao', component: { template: '<c-config></c-config>' } },
     { path: '/instituicoes', component: { template: '<c-instituicao></c-instituicao>' } },
@@ -40,5 +41,6 @@ export default [
     { path: '/divisao-novo', component: { template: '<c-divisao-novo></c-divisao-novo>' } },
     { path: '/divisao-editar/:id', component: { template: '<c-divisao-edit></c-divisao-edit>' } },
     { path: '/carteira', component: { template: '<c-carteira></c-carteira>' } },
+    { path: '/brindes', component: { template: '<c-brindes></c-brindes>' } },
 ]
 

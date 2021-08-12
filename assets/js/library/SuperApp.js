@@ -138,6 +138,10 @@ class App {
         return this.get(`/plano/por-instituicao/${id}`, {});
     }
 
+    async post_doador(playload = {}) {
+        return await this.post(`/doador`, playload)
+    }
+
 }
 
 export default App;
