@@ -1,0 +1,184 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: 0;
+}
+
+html {
+  /* a cada 1rem será considera 10px */
+  font-size: 62.5%;
+}
+
+html,
+body {
+  height: 100vh;
+  font-family: "Source Sans Pro";
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-size: 1.6rem;
+}
+
+.imagem {
+  border-radius: 20px;
+  width: 100%;
+  box-shadow: 0 0 10px 0 rgb(0 0 0 / 50%);
+}
+
+.icone {
+  width: 30px;
+  filter: invert(100);
+  padding-left: 11px;
+}
+
+
+/* CURVA DO TOPO */
+
+.curva-topo {
+	background-image: linear-gradient(to right, #021E52, blue);
+	color: #fff;
+	text-align: center;
+}
+
+.curva-topo h1 {
+	font-size: 2rem;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-top: 2rem;
+}
+
+.curva-topo p {
+	font-size: 1rem;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.curva-topo svg {
+	display:block;
+	margin-top: -10%;
+}
+
+
+/* TÍTULOS E BOTÃO */
+
+h2 {
+  color: rgb(75, 75, 75);
+  font-size: 4.5rem;
+  line-height: 4.6rem;
+}
+
+h3 {
+  color: rgb(75, 75, 75);
+  font-size: 2.8rem;
+  line-height: 3.8rem;
+}
+
+.div-botao{
+  margin-top: 40px;
+}
+
+.div-botao-1{
+  margin-top: 40px;
+  text-align:center
+}
+
+.button {
+  display: inline;
+  font-size: 2rem;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  background-color: blue;
+  padding: 20px 22%;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: all 150ms linear 0s;
+}
+
+.button:hover {
+  opacity: 0.9;
+}
+
+
+/*=============== 
+HERO
+==================*/
+section.hero {
+  margin: 0 0 20px 0;
+}
+
+section.hero .container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  align-items: center;
+  display: flex;
+}
+
+section.hero p {
+  color: blue;
+  font-size: 2.4rem;
+  line-height: 3rem;
+  margin: 10px 0px 0px;
+}
+
+
+.container-1 {
+  width: 90%;
+  max-width: 1100px;
+  display: flex;
+  margin: auto;
+  align-items: center;
+
+}
+
+.container-2 {
+  padding: 55px 0 40px 0;
+  width: 90%;
+  max-width: 1200px;
+  display: flex;
+  margin: auto;
+  align-items: center;
+
+}
+
+
+.child a{
+  
+  text-align: center;
+  align-items: center;
+}
+
+.child {
+  width:100%;
+}
+
+
+.child-2 {
+  width:50%;
+  padding: 10px;
+}
+
+
+.child h2{
+  text-align: center;
+  padding: 40px 0 15px 0;
+  font-size: 3.5rem;
+}
+
+.child p{
+  font-size: 2.2rem;
+}
+
+/*=============== 
+MAIN
+==================*/
+main {
+  margin-bottom: 80px;
+}
+
+
