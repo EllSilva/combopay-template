@@ -47,7 +47,8 @@ export default {
                     cnpj: "26268738888",
                     nome: "API BANK ACCOUNT",
                     tipo: "conta_corrente"
-                }
+                },
+                anotacao: btoa( JSON.stringify({ status: 1 }) )
             },          
             loading: false,
             feedback: {
