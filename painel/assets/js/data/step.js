@@ -8,7 +8,7 @@ export default [
         link: "#/meu-plano",
     },
     {
-        title: "Dados da Conta",
+        title: "Criar Instituição",
         icon: "icone-dados-da-conta.svg",
         titulo: "Complete seu Cadastro",
         description: "Precisamos que você complete seu cadastro com os dados referente a sua Instituição ou Igreja.",

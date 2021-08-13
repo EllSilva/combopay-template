@@ -1,8 +1,8 @@
 <?php
 
 $domain = $_SERVER['HTTP_HOST'];
-$path_template = __DIR__ . "/template/{$domain}.html";
-$path_template_padrao = __DIR__ . "/template/padrao.html";
+$path_template = __DIR__ . "/{$domain}.html";
+$path_template_padrao = __DIR__ . "/padrao.html";
 
 if (file_exists($path_template)) {
     include $path_template;

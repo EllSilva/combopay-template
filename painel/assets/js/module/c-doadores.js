@@ -8,7 +8,16 @@ export default {
         return {
             cache,
             Super,
-            doadores: []
+            doadores: [],
+            link: '',
+            backup: [],
+            ids: [],
+            periodo: Date.now(),
+            data_min: null,
+            data_max: null,
+            status: 1,
+            tipo: 1,
+            s: '',
         }
     },
     filters: {
@@ -19,5 +28,9 @@ export default {
     async mounted() {
         let res = await this.Super.all_doadores_by_istitution(this.cache.institution)
         this.doadores = res
+        this.backup = res
+        let link = 'data:text/csv;charset=utf-8,'
+        link += this.doadores.map( dc => Object.values(dc).join(';')+'%0A' )
+        this.link = link
     }
 }

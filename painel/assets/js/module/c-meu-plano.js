@@ -12,6 +12,8 @@ export default {
             email: null,
             telefone: null,
             senha: '',
+            print_valor: "29.90",
+            plano_id: "1386032",
             confirmar_senha: '',
             messageAlterPass: {
                 status: false,
@@ -27,10 +29,33 @@ export default {
                 status: false,
                 text: 'Salvo com sucesso',
                 type: 'success'
-            }
+            },
+            planos: [
+                { preco: "29.90", id: "1386032", instancias: 1 },
+                { preco: "80.73", id: "1386052", instancias: 3 },
+                { preco: "15.249", id: "1386056", instancias: 6 },
+                { preco: "220.66", id: "1386057", instancias: 9 },
+                { preco: "279.86", id: "1386058", instancias: 12 },
+                { preco: "336.37", id: "1386059", instancias: 15 },
+            ],
+            cupon: [
+                { code: "#ANJODIGITAL", trial: 30, preco: "29.90", id: "1386061", instancias: 1 },
+                { code: "#ANJODIGITAL", trial: 30, preco: "80.73", id: "1386062", instancias: 3 },
+                { code: "#ANJODIGITAL", trial: 30, preco: "152.49", id: "1386064", instancias: 6 },
+                { code: "#ANJODIGITAL", trial: 30, preco: "220.66", id: "1386065", instancias: 9 },
+                { code: "#ANJODIGITAL", trial: 30, preco: "279.86", id: "1386066", instancias: 12 },
+                { code: "#ANJODIGITAL", trial: 30, preco: "336.37", id: "1386067", instancias: 15 },
+            ],
         }
     },
+    watch: {
+        plano_id(x, y ) { this.valor() }
+    },
     methods: {
+        valor() {
+            this.plano_id
+            console.log('ok')
+        },
         async alterar_senha() {
             this.loading = true
             this.messageAlterPass.status = false
@@ -64,6 +89,10 @@ export default {
             this.error.type = res.status
             this.loading = false
         },
+    },
+    filters: {
+        money: val => parseInt( val ).toLocaleString('en-US', { style: 'currency', currency: 'BRL', }),        
+
     },
     async created() {
         

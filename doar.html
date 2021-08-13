@@ -13,7 +13,7 @@
 
 <body>
     <div id="doar_app">
-        <div class="layout" :style="{background: layout.color}">
+        <div class="layout" >
             <div class="header"> <img :src="layout.logo | getImage(institution_id)" @error="error_image"> </div>
             <div class="inner">
                 <form action="javascript:void(0)" @submit="pay">
@@ -61,7 +61,9 @@
                     </div>
                 </form>
             </div>
-            <div class="footer"> {{ layout.copy }} </div>
+            <div class="footer"> 
+                &copy; Todos os Direitos Reservados     
+            </div>
             <div class="space"></div>
         </div>
         <div class="loading" v-if="loading" >

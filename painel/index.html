@@ -383,18 +383,11 @@
                         <form class="form">
                             <h3>Planos</h3>
                             <div>
-                                <label>
-                                    <input type="radio" value="1" name="planos_doardigital">
-                                    R$ 29,90 ao mês / 1 instituição
+                                <label v-for="plano in planos">
+                                    <input type="radio" v-model="plano_id" :value="plano.id" name="planos_doardigital">
+                                    {{plano.preco|money}} ao mês / {{plano.instancias}} instituição
                                 </label> <br>
-                                <label>
-                                    <input type="radio" value="2" name="planos_doardigital">
-                                    R$ 49,90 ao mês / 4 instituição
-                                </label> <br>
-                                <label>
-                                    <input type="radio" value="3" name="planos_doardigital">
-                                    R$ 149,90 ao mês / 10 instituição
-                                </label>
+                                
                             </div>
                             <h3>Cartão de credito</h3>
                             <div>
@@ -420,7 +413,7 @@
                                 <input type="text" placeholder="#DOARDIGITAL_00545214" required>
                             </div>
                             <center>
-                                <h2>Total a pagar R$49,90</h2>
+                                <h2>Total a pagar {{print_valor|money}}</h2>
                                 <small>30 dias de teste</small>
                             </center>
                             <div class="space"></div>
@@ -748,26 +741,27 @@
                         <div>Filtros</div>
                         <div>
                             <small>Periodo</small> <br>
-                            <select>
-                                <option value="">Todos</option>
-                                <option value="">Ontem</option>
-                                <option value="">Últimos 7 dias</option>
-                                <option value="">Últimos 30 dias</option>
-                                <option value="">Escolher Periodo</option>
+                            <select v-model="periodo">
+                                <option :value="periodo">Hoje</option>
+                                <option :value="periodo - 86400">Ontem</option>
+                                <option :value="periodo - (7*86400)">Últimos 7 dias</option>
+                                <option value="periodo - (30*86400)">Últimos 30 dias</option>
+                                <option value="periodo - (360*86400)">Este Ano</option>
+                                <option value="1">Escolher Periodo</option>
                             </select>
                         </div>
                         <div>
                             <small>Data Ínicio</small> <br>
-                            <input type="date">
+                            <input type="date" :disabled="periodo!=1" v-model="data_min">
                         </div>
                         <div>
                             <small>Data Final</small> <br>
-                            <input type="date">
+                            <input type="date" :disabled="periodo!=1" v-model="data_max">
                         </div>
                         <div>
                             <small>Plano</small> <br>
-                            <select>
-                                <option value="">Todos</option>
+                            <select disabled>
+                                <option value="" >Todos</option>
                                 <option value="">Basico</option>
                                 <option value="">Medio</option>
                                 <option value="">Avançado</option>
@@ -775,8 +769,9 @@
                         </div>
                         <div>
                             <small>Exportar CSV</small> <br> <!-- %0A -->
-                            <a href="data:text/csv;charset=utf-8,bruno%0AJose"
-                                download="relatorio-doacoes.csv">Exportar</a>
+                            <a :href="link" download="doadores.csv">
+                                Exportar
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -831,45 +826,46 @@
                         <div>Filtros</div>
                         <div>
                             <small>Periodo</small> <br>
-                            <select>
-                                <option value="">Hoje</option>
-                                <option value="">Ontem</option>
-                                <option value="">Últimos 7 dias</option>
-                                <option value="">Últimos 30 dias</option>
-                                <option value="">Este Ano</option>
-                                <option value="">Escolher Periodo</option>
+                            <select v-model="periodo">
+                                <option :value="periodo">Hoje</option>
+                                <option :value="periodo - 86400">Ontem</option>
+                                <option :value="periodo - (7*86400)">Últimos 7 dias</option>
+                                <option value="periodo - (30*86400)">Últimos 30 dias</option>
+                                <option value="periodo - (360*86400)">Este Ano</option>
+                                <option value="1">Escolher Periodo</option>
                             </select>
                         </div>
                         <div>
                             <small>Data Ínicio</small> <br>
-                            <input type="date">
+                            <input type="date" :disabled="periodo!=1" v-model="data_min">
                         </div>
                         <div>
                             <small>Data Final</small> <br>
-                            <input type="date">
+                            <input type="date" :disabled="periodo!=1" v-model="data_max">
                         </div>
                         <div>
                             <small>Status Pagamento</small> <br>
-                            <select>
-                                <option value="">Todos</option>
-                                <option value="">Pago</option>
-                                <option value="">Pendente</option>
-                                <option value="">Cancelado</option>
+                            <select v-model="status">
+                                <option value="1">Todos</option>
+                                <option value="paid">Pago</option>
+                                <option value="waiting_payment">Pendente</option>
+                                <option value="canceled">Cancelado</option>
                             </select>
                         </div>
                         <div>
                             <small>Tipo Pagamento</small> <br>
-                            <select>
-                                <option value="">Todos</option>
-                                <option value="">Cartão Credito</option>
-                                <option value="">Boleto</option>
-                                <option value="">PIX</option>
+                            <select v-model="tipo">
+                                <option value="1">Todos</option>
+                                <option value="cartao_credito">Cartão Credito</option>
+                                <option value="boleto">Boleto</option>
+                                <option value="pix">PIX</option>
                             </select>
                         </div>
                         <div>
-                            <small>Exportar CSV</small> <br> <!-- %0A -->
-                            <a href="data:text/csv;charset=utf-8,bruno%0AJose"
-                                download="relatorio-doacoes.csv">Exportar</a>
+                            <small>Exportar CSV</small> <br>
+                            <a :href="link" download="relatorio-doacoes.csv">
+                                Exportar
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -877,7 +873,7 @@
                     <div class="title_form">
                         <h1>Doações</h1>
                         <form action="javascript:void(0)" class="busca-box">
-                            <input type="text" required placeholder="Buscar...">
+                            <input type="text" v-model="s" required placeholder="Buscar...">
                             <button type="submit">
                                 <img src="./assets/icon/search.svg">
                             </button>

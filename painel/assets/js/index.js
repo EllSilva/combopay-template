@@ -96,6 +96,7 @@ Vue.component('c-divisao-novo', novo_divisao )
 Vue.component('c-divisao-edit', edit_divisao )
 Vue.component('c-carteira', carteira )
 Vue.component('c-brindes', brindes )
+Vue.component('c-meuplano', meu_plano )
 
 const router = new Router({ routes: router_list })
 
