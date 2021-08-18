@@ -8,15 +8,18 @@ export default {
     data: function () {
         return {
             cache,
+            Super,
         }
     },
     async mounted() {
+        let res = await this.Super.get_admin(this.$route.params.user_id)
         this.cache.user_logged_name = this.$route.params.name
         this.cache.user_logged_id = this.$route.params.user_id
-        this.cache.user_logged_credential_id = this.$route.params.credential
+        this.cache.user_logged_credential_id = 15
         this.cache.bearer = this.$route.params.token
         this.cache.institution = 0
-        window.location.href = "#/inicio"
+        this.cache.email = res.email
+        window.location.href = "#/meu-plano"
     },
     methods: {
         

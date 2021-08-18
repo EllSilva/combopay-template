@@ -1,4 +1,5 @@
 export default [
+    { id: 'super', text: 'Super ADM', icon: 'doadores-adimplentes-20bf63.svg', link: '#/resumo-geral', feature_flag: true },
     { id: 'inicio', text: 'Inicio', icon: 'home.svg', link: '#/inicio', feature_flag: true },
     { id: 'doadores', text: 'Doadores', icon: 'doadores.svg', link: '#/doadores', feature_flag: true },
     { id: 'doacoes', text: 'Doações', icon: 'doacoes.svg', link: '#/doacoes', feature_flag: true },

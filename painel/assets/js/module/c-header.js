@@ -5,17 +5,17 @@ export default {
     template: `
     <div class="a-header">
         <div @click="toggle()"> <img src="./assets/icon/menu.svg"> </div>
-        <div> <img src="./assets/logo/logo.svg"> </div>
-        <strong> Código {{id}} - {{institution_name}} </strong>
+        <div> <img src="./assets/logo/logo.svg" class="not-filter"> </div>
+        <strong> ID {{id}} - {{institution_name}} </strong>
         
-        <img @click="toggle_pop" src="./assets/icon/change.svg">
+        <img v-if="id!=0" @click="toggle_pop" src="./assets/icon/change.svg">
 
         <div class="popupo-bg" v-if="status_pop">
             <div>
                 <div @click="toggle_pop" class="pop-close">X</div>
                 <input @input="updade_pop" v-model="search" type="text" placeholder="Buscar...">
                 <div v-for="item in resumo" class="iten-lista-pop">
-                    <div> <b>Código<b> {{item.id}} - {{item.subdominio}} </div>
+                    <div> <b>ID<b> {{item.id}} - {{item.subdominio}} </div>
                     <img @click="change_domain(item.id)" :title="item.id" src="./assets/icon/change.svg">
                 </div>
                 <div class="pop-center">

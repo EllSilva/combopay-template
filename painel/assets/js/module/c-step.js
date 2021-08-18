@@ -15,8 +15,8 @@ export default {
                 </div>
             </div>
             <div class="all-step">
-                <div v-for="(pass, i ) in step" :class="{active: i <= corruente_step}">
-                    <img :src=" i <= corruente_step ? './assets/step/icone-concluido.svg' : './assets/step/icone-aguardando.svg'">
+                <div v-for="(pass, i ) in step" :class="{active: i < corruente_step}">
+                    <img :src=" i < corruente_step ? './assets/step/icone-concluido.svg' : './assets/step/icone-aguardando.svg'">
                     <span>{{pass.title}}  </span>
                 </div>
             </div>
@@ -25,7 +25,7 @@ export default {
     data: function () {
         return {
            step,
-           corruente_step: 6,
+           corruente_step: 0,
            icone: null,
            title: null,
            description: null,
