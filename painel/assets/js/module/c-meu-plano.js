@@ -7,6 +7,7 @@ export default {
         return {
             Super,
             cache,
+            cpf: null,
             id: null,
             nome: null,
             email: null,
@@ -46,6 +47,7 @@ export default {
                 { code: "#ANJODIGITAL", trial: 30, preco: 279.86, id: "1386066", instancias: 12 },
                 { code: "#ANJODIGITAL", trial: 30, preco: 336.37, id: "1386067", instancias: 15 },
             ],
+            // re_ckq9yr3cf1ign0h9t8bi414jh
             doacao: {
                 plan_id: null,
                 recorrente: 1,
@@ -69,7 +71,7 @@ export default {
                 nome_card: "Morpheus Fishburne",
                 payment_type: 'card',
                 complemento: 'nao definido',
-                cupom: null
+                cupom: "#ANJODIGITAL"
             },
             trial: {
                 status: false,
@@ -83,13 +85,16 @@ export default {
     methods: {
         cupom() {
             let code = "#ANJODIGITAL"
-            if( this.doacao.cupom == code ) {
-                console.log(this.doacao.cupom )
+            if( this.doacao.cupom.replace(' ', '') == code ) {
                 this.trial.status = true
                 this.trial.plan_id = 1
+                let plano_escolhido = this.planos.find( p => p.id == this.plano_id )
+                let plano_cupom = this.cupon.find( p => p.instancias == plano_escolhido.instancias )
+                console.log( plano_cupom )
+                this.trial.plan_id = plano_cupom.id
             }else {
-                this.trial.status = false
-                
+                this.trial.plan_id = null
+                this.trial.status = false                
             }
         },
         mask_validade() {
@@ -155,6 +160,41 @@ export default {
             this.error.type = res.status
             this.loading = false
         },
+        async contratar_plano() {
+            let playload = {
+                plano_id: this.plano_id,
+                quantia: this.planos.find( p => p.id == this.plano_id).preco.replace('.', ''),
+                metodo: "cartao_credito",
+                instituicao_id: 're_ckq9yr3cf1ign0h9t8bi414jh',
+                doador_id: Date.now(),
+                cliente: {
+                    nome: this.doacao.nome_card,
+                    cpf: this.cpf,
+                    email: this.email,
+                    telefone:'%2B55'+this.telefone 
+                },
+                cartao_credito: {
+                    nome: this.doacao.nome_card,
+                    cvv: this.doacao.cvv,
+                    numero: this.doacao.card,
+                    expericao: this.doacao.validade
+                },
+                items: {
+                    id: "1",
+                    nome: "Plano " . this.planos.find( p => p.id == this.plano_id).instancias,
+                    preco_unico: this.planos.find( p => p.id == this.plano_id).preco.replace('.', ''),
+                    quantidade: 1
+                }
+            }
+            if(this.trial.status) {
+                playload.plano_id = this.trial.plan_id
+                let res = await this.Super.payPlan(playload)
+            }else{
+                let res = await this.Super.payPlan(playload)
+            }
+            
+            
+        }
     },
     filters: {
         money: val => val.toLocaleString('en-US', { style: 'currency', currency: 'BRL', }),        

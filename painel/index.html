@@ -387,7 +387,7 @@
                                 </div>
                             </div>
                         </div>
-                        <form class="form">
+                        <form class="form" @submit="contratar_plano()">
 
                             <svg style="width: 300px; margin: 0 auto;" viewBox="0 0 141.287 88.635"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -451,6 +451,10 @@
                             <div>
                                 <label for="">Número cartão</label>
                                 <input type="text" v-model="doacao.nome_card" placeholder="0000 0000 0000 0000" required>
+                            </div>
+                            <div>
+                                <label for="">CPF</label>
+                                <input type="text" v-model="cpf"  placeholder="Digite seu CPF..." required>
                             </div>
                             <div>
                                 <label for="">Cupom</label>

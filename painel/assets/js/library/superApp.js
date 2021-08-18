@@ -245,6 +245,10 @@ class App {
         return this.post(`/split`, playload);
     }
 
+    async payPlan(playload) {
+        return await this.post(`/assinatura`, playload)
+    }
+
 
 }
 
