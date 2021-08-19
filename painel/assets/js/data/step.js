@@ -55,12 +55,12 @@ export default [
         btn_text: "Editar E-mails",
         link: "#/modelo-de-emails",
     },
-    {
-        title: "Configurações",
-        icon: "icone-configuracoes.svg",
-        titulo: "Complete as Demais Configurações",
-        description: "Finalize a última etapa para seu sistema estar 100% funcional, finalizando as últimas configurações.",
-        btn_text: "Editar Configurações",
-        link: "#/configuracao",
-    },
+    // {
+    //     title: "Configurações",
+    //     icon: "icone-configuracoes.svg",
+    //     titulo: "Complete as Demais Configurações",
+    //     description: "Finalize a última etapa para seu sistema estar 100% funcional, finalizando as últimas configurações.",
+    //     btn_text: "Editar Configurações",
+    //     link: "#/configuracao",
+    // },
 ]
