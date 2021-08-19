@@ -37,9 +37,14 @@ export default {
         this.form.instituicao_id = this.cache.institution
     },
     methods: {
+        masc_money() {
+            let valor = this.form.amount.replace(/\D/gi, '')
+            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            this.form.amount = valor
+        },
         async save() {
             let playload = {
-                quantia: this.form.amount,
+                quantia: this.form.amount.replace('.','').replace(',',''),
                 prazo: 30,
                 nome: this.form.nome,
                 instituicao_id: this.form.instituicao_id

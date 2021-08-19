@@ -7,7 +7,7 @@ export default {
         return {
             Super,
             cache,
-            cpf: null,
+            cpf: '893.863.790-58',
             id: null,
             nome: null,
             email: null,
@@ -47,7 +47,7 @@ export default {
                 { code: "#ANJODIGITAL", trial: 30, preco: 279.86, id: "1386066", instancias: 12 },
                 { code: "#ANJODIGITAL", trial: 30, preco: 336.37, id: "1386067", instancias: 15 },
             ],
-            // re_ckq9yr3cf1ign0h9t8bi414jh
+
             doacao: {
                 plan_id: null,
                 recorrente: 1,
@@ -80,21 +80,21 @@ export default {
         }
     },
     watch: {
-        plano_id(x, y ) { this.valor() }
+        plano_id(x, y) { this.valor() }
     },
     methods: {
         cupom() {
             let code = "#ANJODIGITAL"
-            if( this.doacao.cupom.replace(' ', '') == code ) {
+            if (this.doacao.cupom.replace(' ', '') == code) {
                 this.trial.status = true
                 this.trial.plan_id = 1
-                let plano_escolhido = this.planos.find( p => p.id == this.plano_id )
-                let plano_cupom = this.cupon.find( p => p.instancias == plano_escolhido.instancias )
-                console.log( plano_cupom )
+                let plano_escolhido = this.planos.find(p => p.id == this.plano_id)
+                let plano_cupom = this.cupon.find(p => p.instancias == plano_escolhido.instancias)
+                console.log(plano_cupom)
                 this.trial.plan_id = plano_cupom.id
-            }else {
+            } else {
                 this.trial.plan_id = null
-                this.trial.status = false                
+                this.trial.status = false
             }
         },
         mask_validade() {
@@ -161,47 +161,63 @@ export default {
             this.loading = false
         },
         async contratar_plano() {
+
+           
+            let valor = this.planos.find(p => p.id == this.plano_id).preco.toFixed(2).toString().replace('.', '')
+            let instacia_total = this.planos.find(p => p.id == this.plano_id).instancias
             let playload = {
-                plano_id: this.plano_id,
-                quantia: this.planos.find( p => p.id == this.plano_id).preco.replace('.', ''),
-                metodo: "cartao_credito",
-                instituicao_id: 're_ckq9yr3cf1ign0h9t8bi414jh',
-                doador_id: Date.now(),
+                // plano_id: this.plano_id,
+                plano_id: 610886,
+                quantia: valor,
+                metodo_pagamento: "credit_card",
+                instituicao_id: '1',
+                // instituicao_id: 're_ckq9yr3cf1ign0h9t8bi414jh',
+                doador_id: 2,
                 cliente: {
                     nome: this.doacao.nome_card,
-                    cpf: this.cpf,
+                    cpf: this.cpf.replace(/\D/ig, ''),
                     email: this.email,
-                    telefone:'%2B55'+this.telefone 
+                    // telefone: '%2B55' + this.telefone,
+                    telefone: this.telefone.substr(2,10),
+                    ddd: this.telefone.substr(0,2),
+                    data_nascimento: "1970-01-01",
+                    sexo: "masculino"
                 },
                 cartao_credito: {
                     nome: this.doacao.nome_card,
                     cvv: this.doacao.cvv,
-                    numero: this.doacao.card,
-                    expericao: this.doacao.validade
+                    numero: this.doacao.card.replace(/\D/ig, ''),
+                    expiracao: this.doacao.validade.replace(/\D/ig, '')
                 },
                 items: {
                     id: "1",
-                    nome: "Plano " . this.planos.find( p => p.id == this.plano_id).instancias,
-                    preco_unico: this.planos.find( p => p.id == this.plano_id).preco.replace('.', ''),
+                    nome: `Plano ${instacia_total}`,
+                    preco_unico: valor,
                     quantidade: 1
+                },
+                endereco: {
+                    "rua": "Rua de Teste",
+                    "numero": "100",
+                    "complemento": "Apto 777",
+                    "bairro": "Bairro de Teste",
+                    "cep": "63145000"
                 }
             }
-            if(this.trial.status) {
+            if (this.trial.status) {
                 playload.plano_id = this.trial.plan_id
                 let res = await this.Super.payPlan(playload)
-            }else{
+            } else {
                 let res = await this.Super.payPlan(playload)
             }
-            
-            
+
+
         }
     },
     filters: {
-        money: val => val.toLocaleString('en-US', { style: 'currency', currency: 'BRL', }),        
-
+        money: val => val.toLocaleString('en-US', { style: 'currency', currency: 'BRL', }),
     },
     async created() {
-        
+
         let res = await this.Super.get_admin(this.cache.user_logged_id)
         this.id = res.id
         this.nome = res.nome

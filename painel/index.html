@@ -181,9 +181,25 @@
                 <div class="body_box">
                     <h1>Perfil</h1>
                     <form action="javascript:void(0)" @submit="atualizar()" class="form">
-                        <div>
-                            <label for="">Nome</label>
-                            <input v-model="nome" type="text" required>
+                        <div class="g g-2">
+                            <div>
+                                <label for="">Nome</label>
+                                <input v-model="nome" type="text" required>
+                            </div> 
+                            <div>
+                                <label for="">Sobrenome</label>
+                                <input v-model="sobrenome" type="text" required>
+                            </div>
+                        </div>
+                        <div class="g g-2">
+                            <div>
+                                <label for="">CFP</label>
+                                <input v-model="cpf" type="text" required>
+                            </div> 
+                            <div>
+                                <label for="">Data Nascimento</label>
+                                <input v-model="dataNascimento" type="date" required>
+                            </div>
                         </div>
                         <div class="g g-2">
                             <div>
@@ -193,7 +209,44 @@
                             <div>
                                 <label for="">email</label>
                                 <input v-model="email" type="email" disabled required>
+                            </div>                            
+                        </div>
+                        <div class="space"></div>
+                        <h3>Meu Endereço</h3>
+                        <div class="g g-2">
+                            <div>
+                                <label for="">CEP</label>
+                                <input v-model="cep" type="text" required>
                             </div>
+                            <div>
+                                <label for="">Rua</label>
+                                <input v-model="email" type="rua"  required>
+                            </div>
+                            <div class="g g-2">
+                                <div>
+                                    <label for="">Numero</label>
+                                    <input v-model="numero" type="text"  required>
+                                </div>
+                                <div>
+                                    <label for="">Complemento</label>
+                                    <input v-model="complemento" type="text"  required>
+                                </div> 
+                            </div>
+                            <div>
+                                <label for="">Bairro</label>
+                                <input v-model="bairro" type="text"  required>
+                            </div> 
+                            
+                            <div>
+                                <label for="">Cidade</label>
+                                <input v-model="cidade" type="text"  required>
+                            </div> 
+                            <div>
+                                <label for="">Estado</label>
+                                <input v-model="estado" type="text"  required>
+                            </div>           
+                        </div>
+                        <div class="g g-3">
                             <div>
                                 <button type="submit" class="btn btn--success">Salvar</button>
                             </div>
@@ -387,7 +440,7 @@
                                 </div>
                             </div>
                         </div>
-                        <form class="form" @submit="contratar_plano()">
+                        <form class="form" @submit="contratar_plano()" action="javascript:void(0)">
 
                             <svg style="width: 300px; margin: 0 auto;" viewBox="0 0 141.287 88.635"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -1323,7 +1376,7 @@
                             </div>
                             <div>
                                 <label for="">Valor</label>
-                                <input :disabled="edit" type="text" v-model="form.amount" placeholder="" required>
+                                <input :disabled="edit" type="text" @input="masc_money" v-model="form.amount" placeholder="" required>
                             </div>
                         </div>
                         <div class="g g-3">

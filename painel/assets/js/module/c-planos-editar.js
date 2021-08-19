@@ -40,9 +40,14 @@ export default {
         this.form.instituicao_id = this.cache.institution
         let res = await this.Super.plano_get(this.id)
         this.form.nome = res.name
-        this.form.amount = res.amount
+        this.form.amount = (res.amount/100).toLocaleString('pt-br', { minimumFractionDigits: 2 }) 
     },
     methods: {
+        masc_money() {
+            let valor = this.form.amount.replace(/\D/gi, '')
+            valor = (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            this.form.amount = valor
+        },
         async save() {
             this.loading = true
             let playload = {

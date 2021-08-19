@@ -13,6 +13,19 @@ export default {
             telefone: null,
             senha: '',
             confirmar_senha: '',
+
+            sobrenome: null,
+            cpf: null,
+            dataNascimento: null,
+            instituicao_id: null,
+            rua: null,
+            numero: null,
+            cidade: null,
+            estado: null,
+            bairro: null,
+            cep: null,
+            complemento: null,
+
             messageAlterPass: {
                 status: false,
                 text: null
@@ -28,6 +41,9 @@ export default {
                 text: 'Salvo com sucesso',
                 type: 'success'
             }
+
+
+
         }
     },
     methods: {
@@ -66,13 +82,23 @@ export default {
         },
     },
     async created() {
-        
+
         let res = await this.Super.get_admin(this.cache.user_logged_id)
         this.id = res.id
         this.nome = res.nome
         this.email = res.email
         this.telefone = res.telefone
-
+        this.sobrenome = res?.sobrenome
+        this.cpf = res?.cpf
+        this.dataNascimento = res?.dataNascimento
+        this.instituicao_id = res?.instituicao_id
+        this.rua = res?.rua
+        this.numero = res?.numero
+        this.cidade = res?.cidade
+        this.estado = res?.estado
+        this.bairro = res?.bairro
+        this.cep = res?.cep
+        this.complemento = res?.complemento
 
     }
 }

@@ -1,5 +1,13 @@
 export default [
     {
+        title: "Iformações",
+        icon: "icone-assinatura.svg",
+        titulo: "Ative sua Assinatura",
+        description: "Para iniciar essa jornada precisamos que você finalize alguns passos, iniciando o pagamento da sua assinatura",
+        btn_text: "Complete seu perfil",
+        link: "#/perfil",
+    },
+    {
         title: "Ativar Assinatura",
         icon: "icone-assinatura.svg",
         titulo: "Ative sua Assinatura",

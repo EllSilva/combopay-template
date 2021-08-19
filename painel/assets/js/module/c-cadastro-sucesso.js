@@ -19,7 +19,7 @@ export default {
         this.cache.bearer = this.$route.params.token
         this.cache.institution = 0
         this.cache.email = res.email
-        window.location.href = "#/meu-plano"
+        window.location.href = "#/perfil"
     },
     methods: {
         

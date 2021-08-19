@@ -27,7 +27,7 @@ export default {
     },
     filters: {
         is_price(price) {
-            let valor = parseInt(price).toLocaleString('pt-br', { minimumFractionDigits: 2 })
+            let valor = (price/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
             return `R$ ${valor}`
         }
     }
