@@ -33,6 +33,7 @@ export default {
             },
             planos: [
                 { preco: 29.90, id: "1386032", instancias: 1 },
+                { preco: 56.81, id: "1396159", instancias: 2 },
                 { preco: 80.73, id: "1386052", instancias: 3 },
                 { preco: 152.49, id: "1386056", instancias: 6 },
                 { preco: 220.66, id: "1386057", instancias: 9 },
@@ -41,6 +42,7 @@ export default {
             ],
             cupon: [
                 { code: "#ANJODIGITAL", trial: 30, preco: 29.90, id: "1386061", instancias: 1 },
+                { code: "#ANJODIGITAL", trial: 30, preco: 56.81, id: "1396162", instancias: 2 },
                 { code: "#ANJODIGITAL", trial: 30, preco: 80.73, id: "1386062", instancias: 3 },
                 { code: "#ANJODIGITAL", trial: 30, preco: 152.49, id: "1386064", instancias: 6 },
                 { code: "#ANJODIGITAL", trial: 30, preco: 220.66, id: "1386065", instancias: 9 },

@@ -12,6 +12,7 @@ export default {
             cache,
             templates_emails,
             tags,
+            email_id: null,
             title: null,
             cat: null,
             id: null,
@@ -32,51 +33,49 @@ export default {
         this.load()
     },
     methods: {
-        async create_flag() {
-            let playload = {
-                base64: btoa(JSON.stringify(this.templates_emails)),
-                flag: this.flag,
-                instituicao_id: this.cache.institution,
-                ativo: 1,
-            }
-            return await this.Super.flag_post(playload)
-        },
+      
         async load() {
-            let all_flags = await this.Super.flag_get_by_institution(this.cache.institution)
-            let flag = all_flags.find(post => post.flag == this.flag)
-            if (flag) {
-                this.flag_id = flag.id
-                this.playload = JSON.parse(atob(flag.base64.replace(/\s/gi, '+')))
-                this.id = this.id = this.$route.params.id
-                let email_corruente = this.playload.find(post => post.id == this.id)
-                console.log(email_corruente)
-                this.text = email_corruente.text
-                this.cat = email_corruente.cat
-                this.title = email_corruente.title
-            } else {
-                this.is_flag = true
-            }
+            this.id =  this.$route.params.id
+            this.flag_id =  this.$route.params.flag_id
+
+            this.playload = JSON.parse( atob( (await this.Super.flag_get(this.flag_id)).base64 ) )
+            
+            let email = this.playload.find( e => e.id == this.id )
+
+            this.email_id = email.id
+            this.text = email.text
+            this.cat = email.cat
+            this.title = email.title
+
+           
         },
         async save() {
+
             this.loading = true
-            this.playload = this.playload.map(post => {
-                if (post.id == this.id) {
-                    post.title = this.title
-                    post.text = this.text
+
+            this.playload =  this.playload.map(e => {
+                if(e.id == this.email_id) {
+                    e.text = this.text
+                    e.title = this.title
                 }
-                return post
+                return e
             })
             let playload = {
-                base64: btoa(JSON.stringify(this.templates_emails)),
+                base64: btoa(JSON.stringify(this.playload)),
                 flag: this.flag,
                 instituicao_id: this.cache.institution,
                 ativo: 1,
             }
             let res = await this.Super.flag_put(this.flag_id, playload)
+
             this.error.status = true
             this.error.text = res.message
             this.error.type = res.status
+
             this.loading = false
+
+            return
+         
         }
     }
 }

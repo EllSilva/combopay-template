@@ -346,3 +346,43 @@
         cursor: pointer;
     }
 }
+input:checked ~ .toogle {
+    background-color: #30B810;
+    i {
+        margin-left: 29px;
+        background-color: #EEE;
+        &::before {
+            display: block;
+            content: 'ON';
+            color: #30B810;
+        }
+    }
+}
+.toogle {
+    display: block;
+    width: 60px;
+    height: 30px;
+    border-radius: 50px;
+    background-color: #DDD;
+    padding: 3px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+    i {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 9px;
+        font-family: monospace;
+        width: 24px;
+        height: 24px;
+        border-radius: 50px;
+        background-color: #CCC;
+        transition: all .3s ease-in-out;
+        &::before {
+            display: block;
+            content: 'OFF';
+            color: #333;
+        }
+    }
+
+}

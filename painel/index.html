@@ -1285,10 +1285,14 @@
                     <h1>Emails</h1>
                     <div class="table">
                         <div v-for="email in playload">
-                            <span>{{ email.cat }}</span>
+                            <span class="w25">{{ email.cat }}</span>
+                            <label class="w25" >
+                                <input type="checkbox" :checked="email.status" hidden>
+                                <div class="toogle" @click="tootle_statu(email.id)"><i></i></div>
+                            </label>
                             <span>
                                 <a :disabled="is_flag"
-                                    :href=" !is_flag ? '#/modelo-de-emails/'+email.id : '#/modelo-de-emails'"
+                                    :href=" !is_flag ? '#/modelo-de-emails/'+email.id + '/' + id: '#/modelo-de-emails'"
                                     class="table_btn">
                                     <img src="./assets/icon/edit.svg">
                                     <span>EDITAR</span>
@@ -1341,7 +1345,7 @@
                             <input :disabled="is_flag" type="text" v-model="title" placeholder="" required>
                         </div>
                         <div>
-                            <textarea :disabled="is_flag" v-model="text" rows="3"></textarea>
+                            <textarea :disabled="is_flag" v-model="text" rows="7"></textarea>
                         </div>
                         <p>Você pode usar as seguintes Tags:</p>
                         <span>

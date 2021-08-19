@@ -19,7 +19,7 @@ export default [
     { path: '/planos/novo', component: { template: '<c-planos-novo></c-planos-novo>' } },
     { path: '/planos/editar/:id', component: { template: '<c-planos-editar></c-planos-editar>' } },
     { path: '/modelo-de-emails', component: { template: '<c-emails></c-emails>' } },
-    { path: '/modelo-de-emails/:id', component: { template: '<c-emails-edit></c-emails-edit>' } },
+    { path: '/modelo-de-emails/:id/:flag_id', component: { template: '<c-emails-edit></c-emails-edit>' } },
     { path: '/usuarios', component: { template: '<c-usuarios></c-usuarios>' } },
     { path: '/usuario-novo', component: { template: '<c-usuarios-novo></c-usuarios-novo>' } },
     { path: '/usuarios/novo/:id', component: { template: '<c-usuarios-edit></c-usuarios-edit>' } },
