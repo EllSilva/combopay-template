@@ -241,3 +241,7 @@ footer div {
         margin-left: 10px;
     }
 }
+.space {
+    display: block;
+    height: 30px;
+}

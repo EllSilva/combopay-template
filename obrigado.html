@@ -22,8 +22,8 @@
         <br>
         <div id="block2">
             <h2>Sua doação foi recebida com sucesso, Deus te abençoe!.</h2>
+            <div class="space"></div>
         </div>
-
         <div id="block2" v-if="type=='boleto'">
             <p>Clique abaixo para acessar o seu boleto.</p>
             <a :href="boleto_link" target="_blank" class="boleto">
@@ -66,17 +66,18 @@
             <div>
                 <br><br>
                 <p>
-                    Comunidade Bethânia - CNPJ: 00.816.354/001-09 |
-                    Endereço: Estr, Municipal Bethânia , 400, Caixa Postal 71 -
-                    Timbezinho, São Jão Batista - SC - CEP: 88240-000 |
+                    {{inst.nome_fantasia}} - CNPJ: {{inst.cnpj}} |
+                    Endereço: {{inst.rua}} , {{inst.complemento}} -
+                    {{inst.bairro}}, {{inst.cidade}} - {{inst.estado}} - CEP: {{inst.cep}} |
                     Para dúvidas e cancelamentos entre em contato com nossa
-                    central de relacionamento no telefone (48) 3265-4416
-                    ou pelo e-mail: soubetania@bethania.com.br |
+                    central de relacionamento no telefone {{inst.telefone}}
+                    ou pelo e-mail: {{inst.email}} |
                     Em até 30 dias após o processamento da transação,
                     realizaremos o ressarcimento integral dos valores doados.
                 </p>
                 <br><br>
-            </div>
+            </div> 
+
         </footer>
     </div>
 </body>

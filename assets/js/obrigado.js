@@ -11,6 +11,19 @@ globalThis.app = new Vue({
         Super,
         Domain,
         base: null,
+        inst: {
+            bairro: null,
+            cep: null,
+            cidade: null,
+            cnpj: null,
+            complemento: null,
+            email: null,
+            estado: null,
+            nome_fantasia: null,
+            razao_social: null,
+            rua: null,
+            telefone: null,
+        },
         backgroundColor: '#FFF',
         layout: {
             logo: './assets/img/default.png',
@@ -22,6 +35,7 @@ globalThis.app = new Vue({
     async mounted() {
         this.base = this.Domain.corruent()
         let instituicao = (await this.Super.get_institution_by_domain(this.Domain.corruent()))
+        this.inst = instituicao
 
         let flag_all = (await this.Super.flag_get_by_institution(instituicao.id)).reverse()
         let config_site = JSON.parse(atob(flag_all.find(post => post.flag == 'CONFIG_SITE').base64))
