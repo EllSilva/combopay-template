@@ -27,6 +27,8 @@ export default {
     },
     async mounted() {
         let res = await this.Super.all_doadores_by_istitution(this.cache.institution)
+        
+        globalThis._doadores = res
         this.doadores = res
         this.backup = res
         let link = 'data:text/csv;charset=utf-8,'

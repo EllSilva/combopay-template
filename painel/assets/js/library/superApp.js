@@ -117,6 +117,10 @@ class App {
     async get_doador_by_institution_id(id) {
         return await this.get(`/doador/por-instituicao/${id}`, {})
     }
+    
+    async get_doador_history(id) {
+        return await this.get(`/transacao/por-doador/${id}`, {})
+    }
 
     async all_doacao() {
         return await this.get(`/doacoes`, {})

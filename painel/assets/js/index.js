@@ -48,6 +48,7 @@ import edit_divisao from './module/c-divisao-edit.js'
 import carteira from './module/c-carteira.js'
 import meu_plano from './module/c-meu-plano.js'
 import brindes from './module/c-brindes.js'
+import detalhe_doador from './module/c-detalhe-doador.js'
 
 Vue.use(Router)
 Vue.component('c-menu', menu )
@@ -97,6 +98,7 @@ Vue.component('c-divisao-edit', edit_divisao )
 Vue.component('c-carteira', carteira )
 Vue.component('c-brindes', brindes )
 Vue.component('c-meuplano', meu_plano )
+Vue.component('c-detalhe-doador', detalhe_doador )
 
 const router = new Router({ routes: router_list })
 

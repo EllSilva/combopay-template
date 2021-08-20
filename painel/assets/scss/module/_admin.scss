@@ -250,9 +250,9 @@
         padding-left: 30px;
         margin-bottom: 15px;
         background: linear-gradient(#05F, #05f);
-        background-size: 12px 12px;
-        background-position: left center;
-        background-repeat: no-repeat;
+        background-size: 12px 12px !important;
+        background-position: left center !important;
+        background-repeat: no-repeat !important;
     }
 }
 .admins-gravatar {

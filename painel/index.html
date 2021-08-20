@@ -185,7 +185,7 @@
                             <div>
                                 <label for="">Nome</label>
                                 <input v-model="nome" type="text" required>
-                            </div> 
+                            </div>
                             <div>
                                 <label for="">Sobrenome</label>
                                 <input v-model="sobrenome" type="text" required>
@@ -195,7 +195,7 @@
                             <div>
                                 <label for="">CFP</label>
                                 <input v-model="cpf" type="text" required>
-                            </div> 
+                            </div>
                             <div>
                                 <label for="">Data Nascimento</label>
                                 <input v-model="dataNascimento" type="date" required>
@@ -209,7 +209,7 @@
                             <div>
                                 <label for="">email</label>
                                 <input v-model="email" type="email" disabled required>
-                            </div>                            
+                            </div>
                         </div>
                         <div class="space"></div>
                         <h3>Meu Endereço</h3>
@@ -220,31 +220,31 @@
                             </div>
                             <div>
                                 <label for="">Rua</label>
-                                <input v-model="email" type="rua"  required>
+                                <input v-model="email" type="rua" required>
                             </div>
                             <div class="g g-2">
                                 <div>
                                     <label for="">Numero</label>
-                                    <input v-model="numero" type="text"  required>
+                                    <input v-model="numero" type="text" required>
                                 </div>
                                 <div>
                                     <label for="">Complemento</label>
-                                    <input v-model="complemento" type="text"  required>
-                                </div> 
+                                    <input v-model="complemento" type="text" required>
+                                </div>
                             </div>
                             <div>
                                 <label for="">Bairro</label>
-                                <input v-model="bairro" type="text"  required>
-                            </div> 
-                            
+                                <input v-model="bairro" type="text" required>
+                            </div>
+
                             <div>
                                 <label for="">Cidade</label>
-                                <input v-model="cidade" type="text"  required>
-                            </div> 
+                                <input v-model="cidade" type="text" required>
+                            </div>
                             <div>
                                 <label for="">Estado</label>
-                                <input v-model="estado" type="text"  required>
-                            </div>           
+                                <input v-model="estado" type="text" required>
+                            </div>
                         </div>
                         <div class="g g-3">
                             <div>
@@ -276,6 +276,137 @@
 
             </div>
             <div class="loading" v-if="loading"></div>
+            <c-footer></c-footer>
+        </div>
+    </template>
+
+    <template id="c-detalhe-doador">
+        <div class="l-admin">
+            <c-aside></c-aside>
+            <c-header></c-header>
+            <div class="a-body">
+                <c-step></c-step>
+                <div class="body_box">
+                    <h1>Detalhe do Doador</h1>
+                    <div class="g g-2">
+                        <div>
+                            <small>Nome</small> <br>
+                            <strong>{{nome}}</strong>
+                        </div>
+                        <div>
+                            <small>Sobrenome</small> <br>
+                            <strong>{{sobrenome}}</strong>
+                        </div>
+                        <div>
+                            <small>Telefone</small> <br>
+                            <strong>{{telefone}}</strong>
+                        </div>
+                        <div>
+                            <small>Email</small> <br>
+                            <strong>{{email}}</strong>
+                        </div>
+                        <div>
+                            <small>Código</small> <br>
+                            <strong>{{codigo_zoop}}</strong>
+                        </div>
+                        <div>
+                            <small>CPF</small> <br>
+                            <strong>{{cpf}}</strong>
+                        </div>
+                    </div>
+                    <div class="space"></div>
+                    <h1>Endereço</h1>
+                    <div class="g g-2">
+                        <div>
+                            <small>CEP</small> <br>
+                            <strong>{{cep}}</strong>
+                        </div>
+                        <div class="g g-2">
+                            <div>
+                                <small>Rua</small> <br>
+                                <strong>{{rua}}</strong>
+                            </div>
+                            <div>
+                                <small>Número</small> <br>
+                                <strong>{{numero}}</strong>
+                            </div>
+                        </div>
+                        <div>
+                            <small>Bairro</small> <br>
+                            <strong>{{bairro}}</strong>
+                        </div>
+                        <div>
+                            <small>Complemento</small> <br>
+                            <strong>{{complemento}}</strong>
+                        </div>
+                        <div>
+                            <small>Cidade</small> <br>
+                            <strong>{{cidade}}</strong>
+                        </div>
+                        <div>
+                            <small>Estado</small> <br>
+                            <strong>{{estado}}</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="body_box">
+                    <h1>Minhas Assinatura</h1>
+                    <div>
+                        <div class="table">
+                            <div>
+                                <span>
+                                    <small>Minha Assinatura</small> <br>
+                                    <p>
+                                        <i>*</i>
+                                        DD/MM/YYYY
+                                    </p>
+                                </span>
+                                <span>
+                                    <small>Métodos</small> <br>
+                                    <p>Cartão</p>
+                                </span>
+                                <span>
+                                    <small>Valor</small> <br>
+                                    <p>R$0,00</p>
+                                </span>
+                                <span>
+                                    <small>Próximo pagamento</small> <br>
+                                    <p>DD/MM/YYYY</p>
+                                </span>
+                                <span>
+                                    <small>Ação</small> <br>
+                                    <label>
+                                        <input type="checkbox" hidden>
+                                        <div class="toogle"><i></i></div>
+                                    </label>
+                                </span>
+                                <span>
+                                    <small>Data Acação</small> <br>
+                                    <p>DD/MM/YYYY</p>
+                                </span>
+                                <span>
+                                    <small>Motivo Desistencia</small> <br>
+                                    <textarea rows="3"></textarea>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="body_box">
+                    <h2>Historico de transação</h2>
+                    <div class="historico">
+                        <span v-for="item in history" 
+                            class="available" 
+                            :style="{background: item.cor}">
+                            <b>{{item.status | traduz}}</b> <br>
+                            {{item.created_at | data}} <br> 
+                            {{item.quantia | money }}                            
+                        </span>
+
+                    </div>
+                </div>
+
+            </div>
             <c-footer></c-footer>
         </div>
     </template>
@@ -486,32 +617,36 @@
                                         font-family="monospace">{{doacao.cvv||'1234'}}</tspan>
                                 </text>
                             </svg>
-                            <br>  
+                            <br>
                             <div>
                                 <label for="">Número cartão</label>
-                                <input type="text" v-model="doacao.card" @input="mask_card" placeholder="0000 0000 0000 0000" required>
+                                <input type="text" v-model="doacao.card" @input="mask_card"
+                                    placeholder="0000 0000 0000 0000" required>
                             </div>
                             <div class="g g-2">
                                 <div>
                                     <label for="">Validade</label>
-                                    <input type="text" v-model="doacao.validade" @input="mask_validade" placeholder="DD/YY" required>
+                                    <input type="text" v-model="doacao.validade" @input="mask_validade"
+                                        placeholder="DD/YY" required>
                                 </div>
                                 <div>
                                     <label for="">CVV</label>
-                                    <input type="text" v-model="doacao.cvv"  @input="mask_cvv" placeholder="" required>
+                                    <input type="text" v-model="doacao.cvv" @input="mask_cvv" placeholder="" required>
                                 </div>
                             </div>
                             <div>
                                 <label for="">Número cartão</label>
-                                <input type="text" v-model="doacao.nome_card" placeholder="0000 0000 0000 0000" required>
+                                <input type="text" v-model="doacao.nome_card" placeholder="0000 0000 0000 0000"
+                                    required>
                             </div>
                             <div>
                                 <label for="">CPF</label>
-                                <input type="text" v-model="cpf"  placeholder="Digite seu CPF..." required>
+                                <input type="text" v-model="cpf" placeholder="Digite seu CPF..." required>
                             </div>
                             <div>
                                 <label for="">Cupom</label>
-                                <input type="text" v-model="doacao.cupom" @input="cupom" placeholder="#DOARDIGITAL_00545214" required>
+                                <input type="text" v-model="doacao.cupom" @input="cupom"
+                                    placeholder="#DOARDIGITAL_00545214" required>
                             </div>
 
                             <div class="space"></div>
@@ -593,7 +728,7 @@
                             <label for="">Cor de Fundo</label>
                             <input type="color" :disabled="is_flag" maxlength="75" v-model="playload.cor_main">
                         </div>
-                        <form action="" ref="f_logo">                            
+                        <form action="" ref="f_logo">
                             <label>
                                 <img :src="my_logo" width="150">
                                 <input type="file" @change="preview" name="images" data-name="my_logo" hidden>
@@ -619,7 +754,7 @@
             <div class="a-body">
                 <c-step></c-step>
                 <div class="body_box">
-                    <h1>Informação da Instituição</h1>
+                    <h1>Informação da Instituição </h1>
                     <form action="javascript:void(0)" @submit="save()" class="form">
                         <div>
                             <label for="">Nome Fantasia</label>
@@ -1273,9 +1408,9 @@
                         <div v-for="plano in planos" v-if="plano.id">
                             <span class="w25">{{ plano.nome }}</span>
                             <span class="w25">{{ plano.quantia | is_price }}</span>
-                            <label class="w25" >
+                            <label class="w25">
                                 <input type="checkbox" checked hidden>
-                                <div class="toogle" ><i></i></div>
+                                <div class="toogle"><i></i></div>
                             </label>
                             <span>
                                 <a :href="'#/planos/editar/'+plano.id" class="table_btn">
@@ -1302,7 +1437,7 @@
                     <div class="table">
                         <div v-for="email in playload">
                             <span class="w25">{{ email.cat }}</span>
-                            <label class="w25" >
+                            <label class="w25">
                                 <input type="checkbox" :checked="email.status" hidden>
                                 <div class="toogle" @click="tootle_statu(email.id)"><i></i></div>
                             </label>
@@ -1396,7 +1531,8 @@
                             </div>
                             <div>
                                 <label for="">Valor</label>
-                                <input :disabled="edit" type="text" @input="masc_money" v-model="form.amount" placeholder="" required>
+                                <input :disabled="edit" type="text" @input="masc_money" v-model="form.amount"
+                                    placeholder="" required>
                             </div>
                         </div>
                         <div class="g g-3">

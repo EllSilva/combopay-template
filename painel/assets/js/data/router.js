@@ -42,5 +42,6 @@ export default [
     { path: '/divisao-editar/:id', component: { template: '<c-divisao-edit></c-divisao-edit>' } },
     { path: '/carteira', component: { template: '<c-carteira></c-carteira>' } },
     { path: '/brindes', component: { template: '<c-brindes></c-brindes>' } },
+    { path: '/doador-hitorico/:id', component: { template: '<c-detalhe-doador></c-detalhe-doador>' } },
 ]
 
