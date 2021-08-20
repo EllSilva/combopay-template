@@ -13,8 +13,8 @@
 
 <body>
     <div id="doar_app">
-        <div class="layout">
-            <div class="header"> <img :src="layout.logo | getImage(institution_id)" @error="error_image"> </div>
+        <div class="layout" :style="{ backgroundColor: backgroundColor }">
+            <div class="header"> <img :src="layout.logo" @error="error_image"> </div>
             <div class="inner">
                 <form action="javascript:void(0)" @submit="pay">
                     <div class="container">
@@ -91,8 +91,7 @@
                             <div class="space"></div>
                             <div v-if="doacao.payment_type=='card'">
 
-                                <svg class="card-novo"  viewBox="0 0 141.287 88.635"
-                                    xmlns="http://www.w3.org/2000/svg">
+                                <svg class="card-novo" viewBox="0 0 141.287 88.635" xmlns="http://www.w3.org/2000/svg">
                                     <rect width="141.18" height="88.629" x=".054" y=".003" ry="4.572" fill="#0094e8"
                                         paint-order="stroke markers fill" />
                                     <text style="line-height:1.25;-inkscape-font-specification:'Segoe UI'" x="12.994"
@@ -154,8 +153,9 @@
                         </div>
                     </div>
                     <center>
+                        <div class="space"></div>
                         <p class="paragrafos">
-                            Os seus dados pessoais serão utilizados para processar a sua compra, 
+                            Os seus dados pessoais serão utilizados para processar a sua compra,
                             apoiar a sua experiência em todo este site e para outros
                             fins descritos na nossa
                             <a href="./politica-de-privacidade.html">
@@ -168,8 +168,8 @@
                     </center>
                 </form>
             </div>
-            <div class="footer"> 
-                &copy; Todos os Direitos Reservados 
+            <div class="footer">
+                &copy; Todos os Direitos Reservados
             </div>
             <div class="space"></div>
         </div>

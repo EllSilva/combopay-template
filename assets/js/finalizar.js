@@ -16,7 +16,7 @@ globalThis.app = new Vue({
             top: './sass/doacoesbethania.com.br/logo/2.png',
             footer: './sass/doacoesbethania.com.br/logo/1.png'
         },
-        backgroundColor: '#25b3c2',
+        backgroundColor: '#FFF',
         header: {
             align: '',
             backgroundColor: '#25b3c2',
@@ -36,7 +36,7 @@ globalThis.app = new Vue({
             copy: "?",
             logo_topo: '',
             color: '#C00',
-            logo: 'default',
+            logo: './assets/img/default.png',
             image_1: 'default.png',
             image_2: 'default.png',
             image_3: 'default.png',
@@ -399,19 +399,17 @@ globalThis.app = new Vue({
         this.is_site_active(instituicao?.ativo)
         this.institution_id = instituicao?.id
 
+        let flag_all = (await this.Super.flag_get_by_institution(instituicao.id)).reverse()
+        let config_site = JSON.parse(atob(flag_all.find(post => post.flag == 'CONFIG_SITE').base64))
+        if(config_site.logo) {
+            this.layout.logo = `https://api.doardigital.com.br/storage/app/public/${instituicao.id}/${config_site.logo}`
+        }
+        if(config_site.cor_main) {
+            this.backgroundColor = config_site.cor_main
+        }
 
-        let all_flags = await this.Super.flag_get_by_institution(this.institution_id)
-        this.flagsIds = this.Domain.flags_ids(all_flags)
-        this.flags = this.Domain.render_flag(all_flags)
 
-
-        this.exist_flags()
-
-        this.videos = this.flags.VIDEOS
-        this.depoimento_video = this.flags.DEPOIMENTOS
-        this.galerys = this.flags.GALERIA
-        this.layout = { ...this.layout, ...this.flags.LAYOUT }
-
+       
 
     }
 }).$mount("#doar_app");

@@ -574,9 +574,15 @@
                 <div class="body_box">
                     <h1>Configuração</h1>
                     <form action="javascript:void(0)" @submit="save()" class="form">
-                        <div>
-                            <label for="">Titulo do Site</label>
-                            <input type="text" maxlength="75" :disabled="is_flag" v-model="playload.title">
+                        <div class="g g-2">
+                            <div>
+                                <label for="">Titulo do Site</label>
+                                <input type="text" maxlength="75" :disabled="is_flag" v-model="playload.title">
+                            </div>
+                            <div>
+                                <label for="">Tags Google</label>
+                                <input type="text" :disabled="is_flag" maxlength="75" v-model="playload.tag">
+                            </div>
                         </div>
                         <div>
                             <label for="">Descrição Google</label>
@@ -584,9 +590,15 @@
                                 v-model="playload.description"></textarea>
                         </div>
                         <div>
-                            <label for="">Tags Google</label>
-                            <input type="text" :disabled="is_flag" maxlength="75" v-model="playload.tag">
+                            <label for="">Cor de Fundo</label>
+                            <input type="color" :disabled="is_flag" maxlength="75" v-model="playload.cor_main">
                         </div>
+                        <form action="" ref="f_logo">                            
+                            <label>
+                                <img :src="my_logo" width="150">
+                                <input type="file" @change="preview" name="images" data-name="my_logo" hidden>
+                            </label>
+                        </form>
                         <div class="space"></div>
                         <div class="g g-3">
                             <button type="submit" :disabled="is_flag" class="btn btn--success">Salvar</button>
@@ -1259,8 +1271,12 @@
                     </h1>
                     <div class="table">
                         <div v-for="plano in planos" v-if="plano.id">
-                            <span>{{ plano.nome }}</span>
-                            <span>{{ plano.quantia | is_price }}</span>
+                            <span class="w25">{{ plano.nome }}</span>
+                            <span class="w25">{{ plano.quantia | is_price }}</span>
+                            <label class="w25" >
+                                <input type="checkbox" checked hidden>
+                                <div class="toogle" ><i></i></div>
+                            </label>
                             <span>
                                 <a :href="'#/planos/editar/'+plano.id" class="table_btn">
                                     <img src="./assets/icon/edit.svg">

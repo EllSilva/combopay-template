@@ -26,7 +26,9 @@ header {
 }
 
 #logo {
-    width: 300px;
+    display: block;
+    height: 75px;
+    margin: 0 auto;
 }
 
 .ic {
@@ -36,7 +38,7 @@ header {
 }
 
 #block1 {
-    background-color: #1e9ba8;
+    background-color: #038034;
     padding: 35px;
     text-align: center;
 }

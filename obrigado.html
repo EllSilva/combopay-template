@@ -12,8 +12,8 @@
 
 <body>
     <div id="app">
-        <header>
-            <img id="logo" src="./assets/icon-obrigado/logo.jpeg" alt="Logo de Bethânia">
+        <header :style="{ backgroundColor: backgroundColor }">
+            <img id="logo" :src="layout.logo" alt="Logo de Bethânia">
         </header>
         <div id="block1">
             <img class="verif ic" src="./assets/icon-obrigado/verificado.png">
@@ -40,7 +40,7 @@
             <p><b>Importante: Este boleto é uma contribuição espontânea e não gera protesto.</b></p>
         </div>
 
-        <div id="block3">
+        <div id="block3" :style="{ backgroundColor: backgroundColor }">
             <h3>Obrigado</h3>
             <br>
             <p>
@@ -49,19 +49,18 @@
             </p>
             <br>
             <div>
-                <a id="faceShare" class="box"
-                    href="https://www.facebook.com/sharer/sharer.php?u=https://doacoesbethania.com.br">
+                <a id="faceShare" class="box" target="_blank" :href="'https://www.facebook.com/sharer/sharer.php?u=https://'+base">
                     Compartilhar<br>
                     no Facebook
                     <img class="fb" src="./assets/icon-obrigado/facebook.png">
                 </a>
-                <a id="whatsShare" class="box" href="https://web.whatsapp.com/send?text=https://doacoesbethania.com.br">
+                <a id="whatsShare" class="box" target="_blank" :href="'https://web.whatsapp.com/send?text=https://'+base">
                     Compartilhar <br>
                     no Whatsapp
                     <img class="whats" src="./assets/icon-obrigado/whatsapp.png">
                 </a>
             </div>
-            <a id="doacao" href="https://doacoesbethania.com.br"><b>Fazer nova Doação</b></a>
+            <a id="doacao" :href="'https://'+base"><b>Fazer nova Doação</b></a>
         </div>
         <footer>
             <div>

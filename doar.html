@@ -13,8 +13,8 @@
 
 <body>
     <div id="doar_app">
-        <div class="layout" >
-            <div class="header"> <img :src="layout.logo | getImage(institution_id)" @error="error_image"> </div>
+        <div class="layout" :style="{ backgroundColor: backgroundColor }">
+            <div class="header"> <img :src="layout.logo" @error="error_image"> </div>
             <div class="inner">
                 <form action="javascript:void(0)" @submit="pay">
                     <div class="container">

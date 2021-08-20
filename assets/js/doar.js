@@ -16,7 +16,7 @@ globalThis.app = new Vue({
             top: './sass/doacoesbethania.com.br/logo/2.png',
             footer: './sass/doacoesbethania.com.br/logo/1.png'
         },
-        backgroundColor: '#25b3c2',
+        backgroundColor: '#FFF',
         header: {
             align: '',
             backgroundColor: '#25b3c2',
@@ -36,7 +36,7 @@ globalThis.app = new Vue({
             copy: "?",
             logo_topo: '',
             color: '#C00',
-            logo: 'default',
+            logo: './assets/img/default.png',
             image_1: 'default.png',
             image_2: 'default.png',
             image_3: 'default.png',
@@ -187,16 +187,25 @@ globalThis.app = new Vue({
         }
     },
     async mounted() {
-        let instituicao = (await this.Super.get_institution_by_domain(this.Domain.corruent()))
-        instituicao.ativo = true
-        this.is_site_active(instituicao?.ativo)
+
+        let instituicao = await this.Super.get_institution_by_domain(this.Domain.corruent())
+        
+        let flag_all = (await this.Super.flag_get_by_institution(instituicao.id)).reverse()
+        let config_site = JSON.parse(atob(flag_all.find(post => post.flag == 'CONFIG_SITE').base64))
+        if(config_site.logo) {
+            this.layout.logo = `https://api.doardigital.com.br/storage/app/public/${instituicao.id}/${config_site.logo}`
+        }
+        if(config_site.cor_main) {
+            this.backgroundColor = config_site.cor_main
+        }      
+
+        this.is_site_active(true)
+
         this.institution_id = instituicao?.id
         this.planos = (await this.Super.plano_get_by_mkt(this.institution_id) )
-        console.log( this.planos )
         let all_flags = await this.Super.flag_get_by_institution(this.institution_id)
         this.flagsIds = this.Domain.flags_ids(all_flags)
         this.flags = this.Domain.render_flag(all_flags)
         this.layout = { ...this.layout, ...this.flags.LAYOUT }
-        console.log(this.layout)
     }
 }).$mount("#doar_app");

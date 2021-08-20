@@ -249,6 +249,19 @@ class App {
         return await this.post(`/assinatura`, playload)
     }
 
+    async upload(form) {       
+        let res = await fetch(`${this.base}/upload`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('bearer') || ''}`
+            },
+            method: 'POST',
+            mode: 'cors',
+            cache: 'default',
+            body: form
+        })
+        return await res.json()
+    }
+
 
 }
 
