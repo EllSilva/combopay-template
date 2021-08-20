@@ -49,6 +49,7 @@ import carteira from './module/c-carteira.js'
 import meu_plano from './module/c-meu-plano.js'
 import brindes from './module/c-brindes.js'
 import detalhe_doador from './module/c-detalhe-doador.js'
+import detalhe_doacao from './module/c-detalhe-doacao.js'
 
 Vue.use(Router)
 Vue.component('c-menu', menu )
@@ -99,6 +100,7 @@ Vue.component('c-carteira', carteira )
 Vue.component('c-brindes', brindes )
 Vue.component('c-meuplano', meu_plano )
 Vue.component('c-detalhe-doador', detalhe_doador )
+Vue.component('c-detalhe-doacao', detalhe_doacao )
 
 const router = new Router({ routes: router_list })
 

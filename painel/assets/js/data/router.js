@@ -43,5 +43,6 @@ export default [
     { path: '/carteira', component: { template: '<c-carteira></c-carteira>' } },
     { path: '/brindes', component: { template: '<c-brindes></c-brindes>' } },
     { path: '/doador-hitorico/:id', component: { template: '<c-detalhe-doador></c-detalhe-doador>' } },
+    { path: '/doacoes-detalhe/:id', component: { template: '<c-detalhe-doacao></c-detalhe-doacao>' } },
 ]
 

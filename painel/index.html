@@ -395,17 +395,50 @@
                 <div class="body_box">
                     <h2>Historico de transação</h2>
                     <div class="historico">
-                        <span v-for="item in history" 
-                            class="available" 
-                            :style="{background: item.cor}">
+                        <span v-for="item in history" class="available" :style="{background: item.cor}">
                             <b>{{item.status | traduz}}</b> <br>
-                            {{item.created_at | data}} <br> 
-                            {{item.quantia | money }}                            
+                            {{item.created_at | data}} <br>
+                            {{item.quantia | money }}
                         </span>
 
                     </div>
                 </div>
 
+            </div>
+            <c-footer></c-footer>
+        </div>
+    </template>
+
+    <template id="c-detalhe-doacao">
+        <div class="l-admin">
+            <c-aside></c-aside>
+            <c-header></c-header>
+            <div class="a-body">
+                <c-step></c-step>
+                <div class="body_box">
+                    <h1>Detalhe da Doação</h1>
+                    <div class="g g-2">
+                        <div> <small>Nome</small> <br> <strong> {{nome}} </strong></div>
+                        <div> <small>Valor</small> <br> <strong> {{quantia|money}} </strong></div>
+                        <div> <small>tipo</small> <br> <strong> {{tipo}} </strong></div>
+                        <div> <small>Recorrente</small> <br> <strong> {{plano_id ? 'SIM' : 'NÃO'}} </strong></div>
+                        <div> <small>Vencimento</small> <br> <strong> {{created_at | data}} </strong></div>
+                        <div> <small>Status</small> <br> <strong> {{status|traduz}} </strong></div>
+                    </div>
+                </div>
+                <div class="body_box" v-if="tipo=='boleto'">
+                    <h1>Detalhes Boleto</h1>
+                    <center>
+                        <strong>10498.82473 11000.100047 00112.795638 9 85810000008000</strong> <br>
+                        <div class="space"></div>
+                        <div class="g g-4">
+                            <span></span>
+                            <span class="button-export">Copiar Código</span>
+                            <span class="button-export">Copiar Link</span>
+                            <span></span>
+                        </div>
+                    </center>
+                </div>
             </div>
             <c-footer></c-footer>
         </div>
@@ -1160,7 +1193,7 @@
                                 <span class="table_btn table_btn_status">NÂO</span>
                             </span>
                             <span>
-                                <a :href="'#/doacoes-detalhe/'+doacao.doador_id" class="table_btn">
+                                <a :href="'#/doacoes-detalhe/'+doacao.id" class="table_btn">
                                     <img src="./assets/icon/eye.svg">
                                 </a>
                             </span>

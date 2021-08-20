@@ -80,6 +80,7 @@ export default {
     async mounted() {
         let res = await this.Super.all_doacao_by_institution(this.cache.institution)
         this.doacoes = res
+        globalThis._doacoes = res
         this.backup = res
         console.log(this.backup)
     }
