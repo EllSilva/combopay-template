@@ -1,0 +1,82 @@
+POST http://api.doardigital.com.br/v1/assinatura
+
+{
+    plan_id: 614822,
+    recorrente: 1,
+    amount: 5000,
+    amount_custon: 0,
+    nome: "Bruno",
+    sobrenome: "Vieira",
+    dataNascimento: "1987-09-18",
+    email: "br.rafael@outlook.com",
+    telefone: 11999998888,
+    cpf: 76537741807,
+    cep: 06786270,
+    rua: "Rua Gonçalves Dias",
+    numero: 45,
+    bairro: "Jardim das Margaridas",
+    estado: "SP",
+    cidade: "Taboão da Serra",
+    card: 4111111111111111,
+    validade: 0922,
+    cvv: 123,
+    nome_card: "Morpheus Fishburne",
+    payment_type: "boleto",
+    complemento: "nao definido",
+    instituicao_id: 10,
+    doador_id: 3,
+    quantia: 5000,
+    metodo: "boleto",
+    cliente[nome]: "Bruno",
+    cliente[cpf]: 76537741807,
+    plano_id: 614822,
+}
+
+###
+
+POST http://api.doardigital.com.br/v1/assinatura
+
+{
+    plan_id: 614822,
+    recorrente: 1,
+    amount: 5000,
+    amount_custon: 0,
+    nome: "Bruno",
+    sobrenome: "Vieira",
+    dataNascimento: "1987-09-18",
+    email: "br.rafael@outlook.com",
+    telefone: 11999998888,
+    cpf: 76537741807,
+    cep: 06786270,
+    rua: "Rua Gonçalves Dias",
+    numero: 45,
+    bairro: "Jardim das Margaridas",
+    estado: "SP",
+    cidade: "Taboão da Serra",
+    card: 4111111111111111,
+    validade: 0922,
+    cvv: 123,
+    nome_card: "Morpheus Fishburne",
+    payment_type: "boleto",
+    complemento: "nao definido",
+    instituicao_id: 10,
+    doador_id: 3,
+    quantia: 5000,
+    metodo: "boleto",
+    cliente[nome]: "Bruno",
+    cliente[cpf]: 76537741807,
+    plano_id: 614822,
+}
+
+###
+
+POST http://api.doardigital.com.br/v1/plano
+
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGkuZG9hcmRpZ2l0YWwuY29tLmJyXC92MVwvbG9naW4iLCJpYXQiOjE2Mjk3MjY5MzgsImV4cCI6MTYyOTczMDUzOCwibmJmIjoxNjI5NzI2OTM4LCJqdGkiOiJkYVJieVBMR2FRdlo3cjNvIiwic3ViIjoyLCJwcnYiOiJkZjg4M2RiOTdiZDA1ZWY4ZmY4NTA4MmQ2ODZjNDVlODMyZTU5M2E5In0.FNkv1fgrW_M5nmzDSxwk7FcUQr8PbA3QhdT4mRibVdY
+
+{
+    quantia: 15000
+    prazo: 30
+    nome: "plano B"
+    instituicao_id: 1
+}

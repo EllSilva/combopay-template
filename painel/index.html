@@ -220,7 +220,7 @@
                             </div>
                             <div>
                                 <label for="">Rua</label>
-                                <input v-model="email" type="rua" required>
+                                <input v-model="rua" type="rua" required>
                             </div>
                             <div class="g g-2">
                                 <div>
@@ -1441,8 +1441,8 @@
                         <div v-for="plano in planos" v-if="plano.id">
                             <span class="w25">{{ plano.nome }}</span>
                             <span class="w25">{{ plano.quantia | is_price }}</span>
-                            <label class="w25">
-                                <input type="checkbox" checked hidden>
+                            <label class="w25" @click="status(plano.id, plano.status)">
+                                <input type="checkbox" :checked="plano.status" hidden>
                                 <div class="toogle"><i></i></div>
                             </label>
                             <span>

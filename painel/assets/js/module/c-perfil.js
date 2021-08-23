@@ -73,8 +73,23 @@ export default {
             let res = await this.Super.put_admin(this.id, {
                 email: this.email,
                 telefone: this.telefone,
-                nome: this.nome
+                nome: this.nome,
+                sobrenome: this.sobrenome,
+                cpf: this.cpf,
+                dataNascimento: this.dataNascimento,
+                instituicao_id: this.instituicao_id,
+                rua: this.rua,
+                numero: this.numero,
+                cidade: this.cidade,
+                estado: this.estado,
+                bairro: this.bairro,
+                cep: this.cep,
+                complemento: this.complemento,
             })
+
+           
+
+
             this.error.status = true
             this.error.text = res.message
             this.error.type = res.status

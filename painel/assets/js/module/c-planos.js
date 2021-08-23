@@ -18,12 +18,20 @@ export default {
                 institution_id: this.institution_id,
                 status: 'inactive'
             })
+        },
+        async status(id, status) {
+            let playload = {
+                status: status ? 0 : 1
+            }
+            let res = await this.Super.plano_put(id, playload)
+            console.log(res)
         }
     },
     async mounted() {
         this.institution_id = this.cache.institution
         let res = await this.Super.plano_get_by_institution(this.institution_id)
         this.planos = res
+        console.log( res )
     },
     filters: {
         is_price(price) {

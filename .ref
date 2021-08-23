@@ -1,1 +1,28 @@
-https://api.doardigital.com.br/storage/app/public/:id_instituicao/:name_image
+admin_master: br.rafael@outlook.com
+domain_person: sub
+bairro: Jardim das Margaridas
+cidade: Taboão da Serra
+cnpj: 11.111.111/1111-11
+complemento: 55
+dominio: 
+dominio_personalizado: 0
+email: br.ouihasdnmkoasnd@outlook.com
+estado: SP
+id: 1
+nome_fantasia: ZZZ
+razao_social: zzz
+rua: Rua Gonçalves Dias
+subdominio: b2b
+telefone: (11) 1 1111-1111
+cep: 06786270
+birthdate: 
+atividade: 1
+banco_conta[codigo_banco]: 341
+banco_conta[agencia]: 0932
+banco_conta[agencia_dv]: 5
+banco_conta[conta]: 58054
+banco_conta[tipo]: conta_corrente
+banco_conta[conta_dv]: 1
+banco_conta[cnpj]: 26268738888
+banco_conta[nome]: API BANK ACCOUNT
+anotacao: eyJzdGF0dXMiOjF9
