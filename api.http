@@ -80,3 +80,89 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvX
     nome: "plano B"
     instituicao_id: 1
 }
+
+###
+
+POST http://api.doardigital.com.br/v1/instituicao
+
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGkuZG9hcmRpZ2l0YWwuY29tLmJyXC92MVwvbG9naW4iLCJpYXQiOjE2Mjk3Mzg3NDEsImV4cCI6MTYyOTc0MjM0MSwibmJmIjoxNjI5NzM4NzQxLCJqdGkiOiJHME1FRW03ZWlqN0NYbjloIiwic3ViIjoyLCJwcnYiOiJkZjg4M2RiOTdiZDA1ZWY4ZmY4NTA4MmQ2ODZjNDVlODMyZTU5M2E5In0.hG_k6Jw-drYpPu580nP5knXzi8XgfYiTYbexW3chYR0
+Content-Type: application/x-www-form-urlencoded
+Referer: http://127.0.0.1:5500/
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36 OPR/78.0.4093.147
+
+{
+    admin_master: br.rafael@outlook.com
+    domain_person: sub
+    bairro: Jardim das Margaridas
+    cidade: Taboão da Serra
+    cnpj: 11.111.111/1111-11
+    complemento: 
+    dominio: 
+    dominio_personalizado: 1
+    email: br.rafael@outlook.com
+    estado: SP
+    id: 1
+    nome_fantasia: b5
+    razao_social: b5
+    rua: Rua Gonçalves Dias
+    subdominio: b5
+    telefone: (11) 1 1111-1111
+    cep: 06786270
+    birthdate: 
+    atividade: 1
+    banco_conta[codigo_banco]: 341
+    banco_conta[agencia]: 0932
+    banco_conta[agencia_dv]: 5
+    banco_conta[conta]: 58054
+    banco_conta[tipo]: conta_corrente
+    banco_conta[conta_dv]: 1
+    banco_conta[cnpj]: 26268738888
+    banco_conta[nome]: API BANK ACCOUNT
+    anotacao: eyJzdGF0dXMiOjF9
+}
+
+###
+
+GET http://api.doardigital.com.br/v1/assinatura/por-doador/3
+
+
+###
+GET http://api.doardigital.com.br/v1/assinatura/por-instituicao/10
+
+
+###
+POST http://api.doardigital.com.br/v1/assinatura
+
+{
+	"plano_id": 610886,
+	"metodo_pagamento": "boleto",
+	"instituicao_id": "1",
+	"doador_id": "2",
+	"cartao_credito": {
+		"nome": "Aardvark SilvaE",
+		"cvv": "122",
+		"numero": "4242424242424242",
+		"expiracao": "1220"
+	},
+	"cliente": {
+    "nome": "Daenerys Targaryen",
+    "cpf": "00000000000",
+		"email": "m@w2122e.com",
+		"ddd": "81",
+		"telefone": "999998888",
+		"data_nascimento": "1970-01-01",
+		"sexo": "masculino"
+	},
+	"endereco": {
+		"rua": "Rua de Teste",
+		"numero": "100",
+		"complemento": "Apto 777",
+		"bairro": "Bairro de Teste",
+		"cep": "63145000",
+		"cidade": "centro",
+		"estado": "ce"
+	}
+}
+
+###
+GET http://api.doardigital.com.br/v1/instituicao/saldo/re_cksox1uh801hl0o9tyj2r3amw

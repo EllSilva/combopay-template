@@ -1302,10 +1302,14 @@
                     <div class="space"></div>
                     <div class="table">
                         <div v-for="sass in playload">
-                            <span class="w25">{{ sass.nome_fantasia }}</span>
                             <span class="w25">
-                                <a :href="'//'+sass.subdominio" target="_blank" rel="noopener noreferrer">
-                                    {{ sass.subdominio }}
+                                <small>Nome Fantazia</small> <br>
+                                {{ sass.nome_fantasia }}
+                            </span>
+                            <span class="w25">
+                                <small>Sub Domain</small> <br>
+                                <a :href="'//'+sass.subdominio+'.doardigital.com.br'" target="_blank" rel="noopener noreferrer">
+                                    {{ sass.subdominio }}.doardigital.com.br
                                 </a>
                             </span>
                             <span>

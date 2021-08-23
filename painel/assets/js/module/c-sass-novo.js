@@ -63,7 +63,7 @@ export default {
     methods: {
         async save() {
             this.loading = true
-            this.form.dominio_personalizado = this.form.domain_person == 'sub' ? 0 : 1
+            this.form.dominio_personalizado = this.form.domain_person == 'sub' ? 1 : 0
             let res = await this.Super.post_institution( this.form )          
             this.feedback.status = res?.status
             if(res?.status != 'error') {
