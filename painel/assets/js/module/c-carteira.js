@@ -1,3 +1,8 @@
+import App from '../library/superApp.js'
+import cache from '../library/cache.js'
+
+const Super = new App
+
 import money from "../mask/money.js"
 export default {
     template: `
@@ -49,6 +54,8 @@ export default {
     `,
     data: function () {
         return {
+            Super,
+            cache,
             loading: false,
             money,
             tipo: "total",
@@ -171,6 +178,15 @@ export default {
         date: v => v.substr(0, 10).split('-').reverse().join('/')
     },
     async mounted() {
+        let instituicao = await this.Super.get_institution(this.cache.institution)
+        let saldo = await this.Super.institution_saldo(instituicao.recebedor_id)
+        let historico = await this.Super.institution_historico(instituicao.recebedor_id)
+        
+        console.log(historico)
+
+        this.saldo[0].valor = saldo.disponivel
+        this.saldo[1].valor = saldo.fundos_espera
+        this.saldo[2].valor = saldo.transferidos_para_conta
     },
     methods: {
     }

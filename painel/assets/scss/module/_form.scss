@@ -386,3 +386,8 @@ button[disabled] {
 [hidden] {
     display: none !important;
 }
+.s-hidem {
+    @media (max-width: 580px) {
+        display: none !important;
+    }
+}

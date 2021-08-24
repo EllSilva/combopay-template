@@ -823,13 +823,13 @@
                         <div class="note" v-if="form.domain_person == 'sub'">
                             <div class="input-note subdomain">
                                 <input type="text" v-model="form.subdominio" placeholder="subdominio"
-                                    class="input-note">
+                                    class="input-note" :disabled="is_edit">
                                 <strong>.doardigital.com.br</strong>
                             </div>
                         </div>
                         <div class="note" v-if="form.domain_person == 'person'">
                             <input type="text" v-model="form.dominio" placeholder="seudominio.com.br"
-                                class="input-note">
+                                class="input-note" :disabled="is_edit">
                             <h5>Configurar domínio personalizado</h5>
                             <p>
                                 Entre no painel onde você adiquiriu o dominio, procure por
@@ -933,7 +933,7 @@
                                 alt="brunnocriacoes@gmail.com">
                         </div>
                     </div>
-                    <form action="javscript:void(0)" @submit="add_admin" class="form">
+                    <form action="javascript:void(0)" method="POST" @submit="add_admin" class="form">
                         <div class="g g-2">
                             <div>
                                 <label for="">E-mail</label>
@@ -1306,17 +1306,20 @@
                                 <small>Nome Fantazia</small> <br>
                                 {{ sass.nome_fantasia }}
                             </span>
-                            <span class="w25">
+                            <span class="w25 s-hidem">
                                 <small>Sub Domain</small> <br>
                                 <a :href="'//'+sass.subdominio+'.doardigital.com.br'" target="_blank" rel="noopener noreferrer">
                                     {{ sass.subdominio }}.doardigital.com.br
                                 </a>
                             </span>
-                            <span>
-                                <span @click="run( sass.id )" class="botao-criar">APROVAR</span>
+                            <span style="width: 50px;" >
+                                <img title="Resetar Configurações" @dblclick="run( sass.id )" width="18" src="./assets/icon/reset.png" alt="">
                             </span>
-                            <span :class="sass.ativo ? 'btn_ativo' : 'btn_inativo'">
-                                {{ sass.ativo ? 'Ativo' : 'Inativo' }}
+                            <span>
+                                <label @click="status(sass.id, sass.ativo)">
+                                    <input type="checkbox" hidden :checked="sass.ativo">
+                                    <div class="toogle"><i></i></div>
+                                </label>
                             </span>
                             <a :href="'#/editar-instituicao/'+sass.id" class="table_btn table_btn--edit">
                                 <img src="./assets/icon/edit.svg">

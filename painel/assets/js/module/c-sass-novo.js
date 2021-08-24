@@ -5,13 +5,17 @@ import viacep from '../mask/viacep.js'
 import maskTel from "../mask/telefone.js"
 import cpf_cnpj from "../mask/cpfCnpj.js"
 import cnpj from "../mask/cnpj.js"
+import black from "../data/black-list.js"
+
 const Super = new App
+
 export default {
     template: "#c-instituicao",
     data: function () {
         return {
             Super,
             cache,
+            black,
             mccs,
             admins: [],
             email_admin: null,
@@ -64,9 +68,15 @@ export default {
         async save() {
             this.loading = true
             this.form.dominio_personalizado = this.form.domain_person == 'sub' ? 1 : 0
+            if( this.black.includes(this.form.subdominio) ) {
+                this.feedback.status = 'error'
+                this.feedback.message = "Dominio Indosponiveis"
+                this.loading = false
+                return
+            }
             let res = await this.Super.post_institution( this.form )          
-            this.feedback.status = res?.status
-            if(res?.status != 'error') {
+            this.feedback.status = res?.status            
+            if(res?.status != 'error' && !this.black.includes(this.form.subdominio) ) {
                 window.location.href = "#/minhas-instituicoes/1"
             }
             this.feedback.message = res?.message

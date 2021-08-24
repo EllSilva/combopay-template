@@ -66,12 +66,16 @@ export default {
                     ativo: 1,
                 }
                 this.Super.flag_post(playload)
-                console.log(playload)
             });            
         },
         async search() {            
             let res = await this.Super.search_institution(this.s)
             this.playload = res
+        },
+        status( id, status ) {
+            this.Super.status_institution(id, {
+                ativo: status ? false : true
+            })
         }
     },
     async mounted() {

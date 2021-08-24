@@ -15,8 +15,9 @@ export default {
             mccs,
             admins: [],
             email_admin: null,
-            is_edit: false,
+            is_edit: true,
             form: {
+                admin_master: null,
                 domain_person: 'person',
                 bairro: "Jennyfer Bypass",
                 cidade: "Port Nikitachester",
@@ -75,15 +76,18 @@ export default {
         }
     },
     async mounted() {
-        let instituicao = await this.Super.get_institution( this.step = this.$route.params.id )
-        this.flags.forEach( key => {
+        let instituicao = await this.Super.get_institution(this.step = this.$route.params.id)
+        this.flags.forEach(key => {
             this.form[key] = instituicao[key]
-        } )
+        })
+        this.form.admin_master = instituicao.admin_master
+        this.admins = JSON.parse( atob(instituicao.anotacao) || "[]" ) || []
+        console.log(instituicao )
     },
     methods: {
         async save() {
             this.loading = true
-            let res = await this.Super.put_institution( this.form.id, this.form )
+            let res = await this.Super.put_institution(this.form.id, this.form)
             this.loading = false
             this.feedback.status = res?.status
             window.location.href = "#/minhas-instituicoes/1"
@@ -91,9 +95,21 @@ export default {
         },
         async add_admin() {
             this.admins.push(this.email_admin)
+            this.email_admin = null
+            let playload = {
+                anotacao: btoa(JSON.stringify(this.admins)),
+                admin_master: this.form.admin_master
+            }
+            let res = await this.Super.put_institution( this.form.id, playload )
+
         },
         async remove_admin(email) {
-            this.admins = this.admins.filter( mail => mail != email )
+            this.admins = this.admins.filter(mail => mail != email)
+            let playload = {
+                anotacao: btoa(JSON.stringify(this.admins)),
+                admin_master: this.form.admin_master
+            }
+            let res = await this.Super.put_institution( this.form.id, playload )
         },
         async busca_cep() {
             this.loading = true
@@ -105,13 +121,13 @@ export default {
             this.loading = false
         },
         telefone() {
-            this.form.telefone = maskTel(this.form.telefone )           
+            this.form.telefone = maskTel(this.form.telefone)
         },
         cpf_cnpj() {
-            this.form.cnpj = cpf_cnpj(this.form.cnpj )           
+            this.form.cnpj = cpf_cnpj(this.form.cnpj)
         },
         cnpj() {
-            this.form.banco_conta.cnpj = cnpj(this.form.banco_conta.cnpj )           
+            this.form.banco_conta.cnpj = cnpj(this.form.banco_conta.cnpj)
 
         }
     }

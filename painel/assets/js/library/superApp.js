@@ -168,6 +168,15 @@ class App {
     }
     async add_anotacao_institution({ instituicao_id, anotacao }) {
         return await this.post(`/instituicao/anotacao`, { instituicao_id, anotacao })
+    }    
+    async status_institution( id, playload) {
+        return await this.put(`/instituicao/status/${id}`, playload)
+    }
+    async institution_saldo( id_recebedor ) {
+        return await this.get(`/instituicao/saldo/${id_recebedor}`, {})
+    }
+    async institution_historico( id_recebedor ) {
+        return await this.get(`/instituicao/status/${id_recebedor}`, {})
     }
 
     async get_credential(id) {
