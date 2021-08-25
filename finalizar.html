@@ -24,15 +24,18 @@
                                 <div>
                                     <label for="">Nome*</label>
                                     <input type="text" placeholder="Nome*" v-model="doacao.nome" required>
-                                </div>
+                                </div>                              
                                 <div>
-                                    <label for="">Sobrenome*</label>
-                                    <input type="text" placeholder="Sobrenome*" v-model="doacao.sobrenome" required>
-                                </div>
-                                <div>
-                                    <label for="">Data Nascimento</label>
+                                    <label for="">Data Nascimento*</label>
                                     <input type="date" placeholder="Data Nascimento*" v-model="doacao.dataNascimento"
                                         required>
+                                </div>
+                                <div>
+                                    <label for="">Data Nascimento*</label>
+                                    <select v-model="doacao.sexo">
+                                        <option value="feminino">feminino</option>
+                                        <option value="masculino">Masculino</option>
+                                    </select>
                                 </div>
                                 <div>
                                     <label for="">CPF*</label>

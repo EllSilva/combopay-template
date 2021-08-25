@@ -122,12 +122,8 @@ class App {
 
     }
 
-    async payCard(playload) {
+    async pay(playload) {
         return await this.post(`/transacao`, playload )
-    }
-
-    async payBoleto(playload) {
-        return await this.post(`/transacao`, playload)
     }
     
     async payPlan(playload) {

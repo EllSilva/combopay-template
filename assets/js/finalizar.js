@@ -69,20 +69,21 @@ globalThis.app = new Vue({
             sobrenome: 'Vieira',
             dataNascimento: '1987-09-18',
             email: 'br.rafael@outlook.com',
-            telefone: '11999998888',
-            cpf: '76537741807',
+            telefone: '(11) 9 9999-8888',
+            cpf: '765.377.418-07',
             cep: '06786270',
-            rua: '',
-            numero: '45',
-            bairro: '',
-            estado: '',
-            cidade: '',
-            card: "4111111111111111",
-            validade: "0922",
+            rua: 'Gonçalves Dias',
+            numero: '42',
+            bairro: 'Jd Margarida',
+            cidade: 'Taboão da serra',
+            estado: 'SP',
+            card: "4111 1111 1111 1111",
+            validade: "09/22",
             cvv: "123",
             nome_card: "Morpheus Fishburne",
             payment_type: 'card',
             complemento: 'nao definido',
+            sexo: "masculino",
         },
 
     },
@@ -263,60 +264,73 @@ globalThis.app = new Vue({
             this.doacao.telefone = mascara
         },
         async pay() {
+
             this.loading = true
-            let res = {}
+
             localStorage.setItem('type_paymente', this.doacao.payment_type)
-            if (this.doacao.payment_type == 'boleto') {
-                let playload = {
-                    ...this.doacao,
-                    instituicao_id: this.institution_id,
-                    doador_id: 3,
-                    quantia: this.doacao.amount,
-                    metodo: "boleto",
-                    cliente: {
-                        nome: this.doacao.nome,
-                        cpf: this.doacao.cpf
-                    }
-                }
-                if(this.doacao.recorrente==1) {
-                    console.log(this.doacao.recorrente)
-                    playload.plano_id = this.doacao.plan_id
-                    res = await this.Super.payPlan(playload)
-                }else{
-                    res = await this.Super.payBoleto(playload)
-                }
-            } else {
-                let playload = {
-                    quantia: this.doacao.amount,
-                    metodo: "cartao_credito",
-                    instituicao_id: this.institution_id,
-                    doador_id: Date.now(),
-                    cliente: {
-                        nome: this.doacao.nome,
-                        cpf: this.doacao.cpf,
-                        email: this.doacao.email,
-                        telefone:'%2B55'+this.doacao.telefone 
-                    },
-                    cartao_credito: {
-                        nome: this.doacao.nome_card,
-                        cvv: this.doacao.cvv,
-                        numero: this.doacao.card,
-                        expericao: this.doacao.validade
-                    },
-                    items: {
-                        id: "1",
-                        nome: "Doação",
-                        preco_unico: this.doacao.amount,
-                        quantidade: 1
-                    }
-                }
-                if(this.doacao.recorrente==1) {
-                    playload.plano_id = this.doacao.plan_id
-                    res = await this.Super.payPlan(playload)
-                }else{
-                    res = await this.Super.payCard(playload)
+
+            let playload = {
+                doador_id: null,
+                metodo_pagamento: this.doacao.payment_type == "boleto" ? "boleto" : "credit_card",
+                instituicao_id: this.institution_id,
+                quantia: this.doacao.amount,
+            }
+
+            playload.cliente = {
+                nome: this.doacao.nome,
+                cpf: this.doacao.cpf.replace(/\D/gi, ''),
+                email: this.doacao.email,
+                telefone:'%2B55'+this.doacao.telefone.replace(/\D/gi, ''),
+                data_nascimento: this.doacao.dataNascimento,
+                sexo: this.doacao.sexo
+            }
+
+            playload.endereco = {
+                cep: this.doacao.cep,
+                rua: this.doacao.rua,
+                numero: this.doacao.numero,
+                bairro: this.doacao.bairro,
+                complemento: "Apto 777",
+                cidade: this.doacao.estado,
+                estado: this.doacao.cidade,
+            }
+
+            if (this.doacao.recorrente == 1) {
+                playload.plano_id = this.doacao.plan_id
+                playload.cliente.telefone = this.doacao.telefone.replace(/\D/gi, '').substr(2, 11)
+                playload.cliente.ddd = this.doacao.telefone.replace(/\D/gi, '').substr(0, 2)
+            }
+
+            if (this.doacao.recorrente != 1 && playload.metodo_pagamento == "credit_card") {
+                playload.items = {
+                    id: "1",
+                    nome: "Doação",
+                    preco_unico: this.doacao.amount,
+                    quantidade: 1
                 }
             }
+
+            if (playload.metodo_pagamento == "credit_card") {
+                playload.cartao_credito = {
+                    nome: this.doacao.nome_card,
+                    cvv: this.doacao.cvv.replace(/\D/gi, ''),
+                    numero: this.doacao.card.replace(/\D/gi, ''),
+                    expericao: this.doacao.validade.replace(/\D/gi, '')
+                }
+
+            }
+
+            let res = {}
+
+            if (this.doacao.recorrente == 1) {
+                res = await this.Super.payPlan(playload)
+            }
+
+            if (this.doacao.recorrente != 1) {
+                res = await this.Super.pay(playload)
+            }
+
+            console.log(playload)
 
             if (res.status == "success") {
                 if (this.doacao.payment_type == 'boleto') {
@@ -401,15 +415,15 @@ globalThis.app = new Vue({
 
         let flag_all = (await this.Super.flag_get_by_institution(instituicao.id)).reverse()
         let config_site = JSON.parse(atob(flag_all.find(post => post.flag == 'CONFIG_SITE').base64))
-        if(config_site.logo) {
+        if (config_site.logo) {
             this.layout.logo = `https://api.doardigital.com.br/storage/app/public/${instituicao.id}/${config_site.logo}`
         }
-        if(config_site.cor_main) {
+        if (config_site.cor_main) {
             this.backgroundColor = config_site.cor_main
         }
 
 
-       
+
 
     }
 }).$mount("#doar_app");

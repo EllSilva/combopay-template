@@ -33,7 +33,7 @@
                             <div class="space"></div>
                             <h4>Escolha Valor para Doação</h4>
                             <div class="g g-4">
-                                <div v-for="plano in planos">
+                                <div v-for="plano in planos" v-if="plano.status">
                                     <input v-model="doacao.amount" :value="plano.quantia" type="radio" :id="'for_'+plano.id" name="donative_price"  hidden checked>
                                     <label class="options_pay" @click="setPlan( plano.id )" :for="'for_'+plano.id"> R$ {{plano.quantia | money}} </label>
                                 </div>
