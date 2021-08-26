@@ -147,7 +147,7 @@ POST http://api.doardigital.com.br/v1/assinatura
 	"cliente": {
         "nome": "Daenerys Targaryen",
         "cpf": "00000000000",
-            "email": "m@w2122e.com",
+        "email": "m@w2122e.com",
 		"ddd": "81",
 		"telefone": "999998888",
 		"data_nascimento": "1970-01-01",
@@ -167,3 +167,35 @@ POST http://api.doardigital.com.br/v1/assinatura
 
 ###
 GET http://api.doardigital.com.br/v1/instituicao/saldo/re_cksox1uh801hl0o9tyj2r3amw
+
+
+###
+POST http://api.doardigital.com.br/v1/transacao
+
+{
+	"quantia": 2100,
+	"metodo": "boleto",
+	"instituicao_id": "1",
+	"doador_id": "3",
+	"cliente": {
+        "nome": "Daenerys Targaryen",
+        "cpf": "00000000000",
+		"email": "em@we39ew7242fa3eeee.com",
+		"telefone": "+5511999998888",
+		"dataNascimento": "1970-01-01",
+		"rua": "irmaos",
+		"numero": "1",
+		"cidade": "centro",
+		"estado": "ce",
+		"bairro": "centro",
+		"cep": "32131313",
+		"complemento": "casa",
+		"sexo": "masculino"
+	},
+	"items": {
+  	"id": "1",
+    "nome": "R2D2",
+    "preco_unico": 300,
+    "quantidade": 1
+  }
+}

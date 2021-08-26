@@ -11,18 +11,18 @@
 </head>
 
 <body>
-    <div class="layout" :style="{background: layout.color}" id="app">
+    <div class="layout" :style="{ backgroundColor: backgroundColor }" id="app">
         <div class="header">
-            <img :src="layout.logo | getImage(institution_id)" @error="error_image">
+            <img :src="logo" >
         </div>
         <div class="inner">
             <div class="container">
                 <h1>Politica de privacidade</h1>
-                {{content}}
+                Em Breve
             </div>
         </div>
         <div class="footer">
-            {{ layout.copy }}
+            &copy; Todos os Direitos Reservados
         </div>
     </div>
 

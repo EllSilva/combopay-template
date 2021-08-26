@@ -270,8 +270,8 @@ globalThis.app = new Vue({
             localStorage.setItem('type_paymente', this.doacao.payment_type)
 
             let playload = {
-                doador_id: null,
-                metodo_pagamento: this.doacao.payment_type == "boleto" ? "boleto" : "credit_card",
+                doador_id: "",
+                metodo: this.doacao.payment_type == "boleto" ? "boleto" : "credit_card",
                 instituicao_id: this.institution_id,
                 quantia: this.doacao.amount,
             }
@@ -281,18 +281,30 @@ globalThis.app = new Vue({
                 cpf: this.doacao.cpf.replace(/\D/gi, ''),
                 email: this.doacao.email,
                 telefone:'%2B55'+this.doacao.telefone.replace(/\D/gi, ''),
-                data_nascimento: this.doacao.dataNascimento,
+                dataNascimento: this.doacao.dataNascimento,
                 sexo: this.doacao.sexo
             }
 
-            playload.endereco = {
-                cep: this.doacao.cep,
-                rua: this.doacao.rua,
-                numero: this.doacao.numero,
-                bairro: this.doacao.bairro,
-                complemento: "Apto 777",
-                cidade: this.doacao.estado,
-                estado: this.doacao.cidade,
+            if (this.doacao.recorrente != 1) {
+                playload.cliente.cep = this.doacao.cep
+                playload.cliente.rua = this.doacao.rua
+                playload.cliente.numero = this.doacao.numero
+                playload.cliente.bairro = this.doacao.bairro
+                playload.cliente.complemento = "Apto 777"
+                playload.cliente.cidade = this.doacao.cidade
+                playload.cliente.estado = this.doacao.estado
+            }
+
+            if (this.doacao.recorrente == 1) {
+                playload.endereco = {
+                    cep: this.doacao.cep,
+                    rua: this.doacao.rua,
+                    numero: this.doacao.numero,
+                    bairro: this.doacao.bairro,
+                    complemento: "Apto 777",
+                    cidade: this.doacao.cidade,
+                    estado: this.doacao.estado,
+                }
             }
 
             if (this.doacao.recorrente == 1) {
@@ -301,7 +313,7 @@ globalThis.app = new Vue({
                 playload.cliente.ddd = this.doacao.telefone.replace(/\D/gi, '').substr(0, 2)
             }
 
-            if (this.doacao.recorrente != 1 && playload.metodo_pagamento == "credit_card") {
+            if (this.doacao.recorrente != 1) {
                 playload.items = {
                     id: "1",
                     nome: "Doação",
@@ -310,12 +322,12 @@ globalThis.app = new Vue({
                 }
             }
 
-            if (playload.metodo_pagamento == "credit_card") {
+            if (playload.metodo == "credit_card") {
                 playload.cartao_credito = {
                     nome: this.doacao.nome_card,
                     cvv: this.doacao.cvv.replace(/\D/gi, ''),
                     numero: this.doacao.card.replace(/\D/gi, ''),
-                    expericao: this.doacao.validade.replace(/\D/gi, '')
+                    expiracao: this.doacao.validade.replace(/\D/gi, '')
                 }
 
             }
@@ -330,7 +342,7 @@ globalThis.app = new Vue({
                 res = await this.Super.pay(playload)
             }
 
-            console.log(playload)
+            this.loading = false
 
             if (res.status == "success") {
                 if (this.doacao.payment_type == 'boleto') {
@@ -339,15 +351,18 @@ globalThis.app = new Vue({
                 } else {
                     this.cache.boleto_code = false
                     this.cache.boleto_link = false
-                }
-                window.location.href = "/obrigado.html"
-            } else {
+                }                
+            } 
+
+            if (res.status != "success") {
                 this.error.status = true
                 this.error.text = res.message
-
             }
 
-            this.loading = false
+            if (res.status == "success") {
+                window.location.href = "/obrigado.html"
+            }
+            
         },
         async viaCep() {
             this.loading = true
