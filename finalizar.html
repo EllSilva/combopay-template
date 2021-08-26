@@ -64,6 +64,15 @@
                                 <input type="text" placeholder="Cidade*" v-model="doacao.cidade" required>
                             </div>
                             <div class="space"></div>
+                            <label class="cinza-text">
+                                <input type="checkbox">
+                                Desejo receber informação via <b>WhatsApp</b> 
+                            </label> <br>
+                            <label class="cinza-text">
+                                <input type="checkbox">
+                                Desejo receber informação via <b>email</b> 
+                            </label> <br>
+                            <div class="space"></div>
                         </div>
                         <div>
                             <div>
@@ -77,17 +86,17 @@
                             </div>
                             <div class="g g-4">
                                 <div>
-                                    <input type="radio" v-model="doacao.payment_type" value="card" id="for_card" hidden
-                                        checked>
+                                    <input type="radio" v-model="doacao.payment_type" value="card" id="for_card" hidden checked>
                                     <label class="options_pay" for="for_card">
-                                        <img src="./assets/icon/card.svg">
+                                        <img src="./assets/icon/card.svg"> <br>
+                                        Cartão
                                     </label>
                                 </div>
                                 <div>
-                                    <input type="radio" v-model="doacao.payment_type" value="boleto" id="for_boleto"
-                                        hidden>
+                                    <input type="radio" v-model="doacao.payment_type" value="boleto" id="for_boleto" hidden>
                                     <label class="options_pay" for="for_boleto">
-                                        <img src="./assets/icon/barcode.svg">
+                                        <img src="./assets/icon/barcode.svg"> <br>
+                                        Boleto
                                     </label>
                                 </div>
                             </div>
@@ -161,7 +170,7 @@
                             Os seus dados pessoais serão utilizados para processar a sua compra,
                             apoiar a sua experiência em todo este site e para outros
                             fins descritos na nossa
-                            <a href="./politica-de-privacidade.html">
+                            <a href="./politica-de-privacidade.html" target="_blank">
                                 política de privacidade.
                             </a>
                         </p>

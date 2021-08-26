@@ -1,0 +1,12 @@
+POST http://94.130.148.247:8000/send-message/
+
+Content-Type: application/x-www-form-urlencoded
+
+{
+    "sender": "digitalcombo",
+    "number": "5582999776698",
+    "message": "Seja Bem vindo ao Doar Digital",
+    "idc": "cadastro.doardigital.com.br",
+}
+
+###
