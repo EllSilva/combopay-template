@@ -193,8 +193,8 @@
                         </div>
                         <div class="g g-2">
                             <div>
-                                <label for="">CFP</label>
-                                <input v-model="cpf" type="text" required>
+                                <label for="">CPF</label>
+                                <input v-model="cpf" @input="masCpf" type="text" required>
                             </div>
                             <div>
                                 <label for="">Data Nascimento</label>
@@ -204,7 +204,7 @@
                         <div class="g g-2">
                             <div>
                                 <label for="">Telefone</label>
-                                <input v-model="telefone" type="text" required>
+                                <input v-model="telefone"  @input="maskTel" type="text" required>
                             </div>
                             <div>
                                 <label for="">email</label>
@@ -216,7 +216,7 @@
                         <div class="g g-2">
                             <div>
                                 <label for="">CEP</label>
-                                <input v-model="cep" type="text" required>
+                                <input v-model="cep" type="text" @blur="viaCep" required>
                             </div>
                             <div>
                                 <label for="">Rua</label>
@@ -254,22 +254,24 @@
                     </form>
                     <span v-if="error.status" :class="error.type"> {{error.text}} </span>
                     <div class="space"></div>
-                    <h2>Alterar senha</h2>
-                    <form action="javascript:void(0)" @submit="alterar_senha()" class="form">
-                        <div class="g g-2">
-                            <div>
-                                <label for="">Digita a senha</label>
-                                <input type="password" v-model="senha" required>
+                    <div v-if="credencial!=15">
+                        <h2>Alterar senha</h2>
+                        <form action="javascript:void(0)" @submit="alterar_senha()" class="form">
+                            <div class="g g-2">
+                                <div>
+                                    <label for="">Digita a senha</label>
+                                    <input type="password" v-model="senha" required>
+                                </div>
+                                <div>
+                                    <label for="">Repita a senha</label>
+                                    <input type="password" v-model="confirmar_senha" required>
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn btn--success">alterar senha</button>
+                                </div>
                             </div>
-                            <div>
-                                <label for="">Repita a senha</label>
-                                <input type="password" v-model="confirmar_senha" required>
-                            </div>
-                            <div>
-                                <button type="submit" class="btn btn--success">alterar senha</button>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                     <div class="error" v-if="messageAlterPass.status" v-html="messageAlterPass.text"> </div>
                     <span v-if="error2.status" :class="error2.type"> {{error.text}} </span>
                 </div>
@@ -574,33 +576,35 @@
                         <div>
                             <h3>Planos</h3>
                             <div class="form">
-                                <label v-for="plano in planos">
+                                <label v-for="plano in planos" v-if="!trial.status || plano.instancias==1">
                                     <input type="radio" v-model="plano_id" :value="plano.id" name="planos_doardigital">
                                     <b>{{plano.preco|money}}</b> ao mês / <b> {{plano.instancias}} </b> instituição
                                 </label> <br>
                             </div>
-                            <h3>Historico</h3>
-                            <div class="table">
-                                <div>
-                                    <span>
-                                        <small>Valor</small> <br>
-                                        R$0,000
-                                    </span>
-                                    <span>
-                                        <small>Status</small> <br>
-                                        <span class="table_btn table_btn_status">
-                                            Pendente
+                            <div v-if="credencial!=21">
+                                <h3>Historico</h3>
+                                <div class="table">
+                                    <div>
+                                        <span>
+                                            <small>Valor</small> <br>
+                                            R$0,000
                                         </span>
-                                    </span>
-                                    <span>
-                                        <small>Data</small> <br>
-                                        DD/MM/YYYY
-                                    </span>
-                                    <span>
-                                        <a href="#/doacoes-detalhe/+doacao.doador_id" class="table_btn">
-                                            <img src="./assets/icon/eye.svg">
-                                        </a>
-                                    </span>
+                                        <span>
+                                            <small>Status</small> <br>
+                                            <span class="table_btn table_btn_status">
+                                                Pendente
+                                            </span>
+                                        </span>
+                                        <span>
+                                            <small>Data</small> <br>
+                                            DD/MM/YYYY
+                                        </span>
+                                        <span>
+                                            <a href="#/doacoes-detalhe/+doacao.doador_id" class="table_btn">
+                                                <img src="./assets/icon/eye.svg">
+                                            </a>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

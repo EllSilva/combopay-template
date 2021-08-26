@@ -6,7 +6,7 @@ export default {
     <div class="a-header">
         <div @click="toggle()"> <img src="./assets/icon/menu.svg"> </div>
         <div> <img src="./assets/logo/logo.svg" class="not-filter"> </div>
-        <strong> ID {{id}} - {{institution_name}} </strong>
+        <strong v-if="id!=0"> ID {{id}} - {{institution_name}} </strong>
         
         <img v-if="id!=0" @click="toggle_pop" src="./assets/icon/change.svg">
 

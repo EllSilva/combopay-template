@@ -42,7 +42,12 @@ async function cadastrar() {
     let register = await SuperRegisterAdmin(getDados())
     if (register.status) return onError(register.message)
     await SendWhatsapp(getDados().telefone)
-    window.location.href = `http://padrao.doardigital.com.br/painel/#/cadastrado-sucesso/${register.token.access_token}/${register.admin.id}/${register.admin.nome}/1`
+    if(window.location.hostname != '127.0.0.1') {
+        window.location.href = `http://padrao.doardigital.com.br/painel/#/cadastrado-sucesso/${register.token.access_token}/${register.admin.id}/${register.admin.nome}/1`
+    }
+    if(window.location.hostname == '127.0.0.1') {
+        window.location.href = `http://127.0.0.1:5500/painel/#/cadastrado-sucesso/${register.token.access_token}/${register.admin.id}/${register.admin.nome}/1`
+    }
 
 }
 

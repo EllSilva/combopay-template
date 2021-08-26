@@ -13,6 +13,7 @@ export default {
             telefone: null,
             senha: '',
             confirmar_senha: '',
+            credencial: 15,
 
             sobrenome: null,
             cpf: null,
@@ -70,7 +71,7 @@ export default {
         },
         async atualizar() {
             this.loading = true
-            let res = await this.Super.put_admin(this.id, {
+            let playload = {
                 email: this.email,
                 telefone: this.telefone,
                 nome: this.nome,
@@ -85,20 +86,54 @@ export default {
                 bairro: this.bairro,
                 cep: this.cep,
                 complemento: this.complemento,
-            })
+            }
 
-           
-
+            if(this.credencial == 15) {
+                playload.credencial = 21
+                localStorage.setItem('user_logged_credential_id', 21)
+            }
+            let res = await this.Super.put_admin(this.id, playload) 
 
             this.error.status = true
             this.error.text = res.message
             this.error.type = res.status
             this.loading = false
+
+            if(this.credencial == 15) {
+                window.location.href = "#/meu-plano"
+            }
+
         },
+        maskTel() {            
+            this.telefone = this.telefone.replace(/\D/gi, '')
+            this.telefone = this.telefone.replace(/(\d{2})(.*)/gi, '($1) $2')
+            this.telefone = this.telefone.replace(/\((\d{2})\)\s(\d{1})(.*)/gi, '($1) $2 $3')
+            this.telefone = this.telefone.replace(/\((\d{2})\)\s(\d{1})\s(\d{4})(.*)/gi, '($1) $2 $3-$4')
+            this.telefone = this.telefone.replace(/\((\d{2})\)\s(\d{1})\s(\d{4})-(\d{4})(.*)/gi, '($1) $2 $3-$4')
+        },        
+        masCpf() {
+            this.cpf = this.cpf.replace(/\D/gi, '')
+            this.cpf = this.cpf.replace(/(\d{3})(.*)/gi, '$1.$2')
+            this.cpf = this.cpf.replace(/(\d{3})\.(\d{3})(.*)/gi, '$1.$2.$3')
+            this.cpf = this.cpf.replace(/(\d{3})\.(\d{3})\.(\d{3})(.*)/gi, '$1.$2.$3-$4')
+            this.cpf = this.cpf.replace(/(\d{3})\.(\d{3})\.(\d{3})\-(\d{2})(.*)/gi, '$1.$2.$3-$4')
+        },
+        async viaCep() {
+            this.loading = true
+            let res = await fetch(`https://viacep.com.br/ws/${this.cep}/json/`)
+            let address = await res.json()
+            this.rua = address.logradouro
+            this.bairro = address.bairro
+            this.cidade = address.localidade
+            this.estado = address.uf
+            this.loading = false
+        }
     },
     async created() {
 
         let res = await this.Super.get_admin(this.cache.user_logged_id)
+        console.log(res.credencial)
+        this.credencial = res.credencial
         this.id = res.id
         this.nome = res.nome
         this.email = res.email

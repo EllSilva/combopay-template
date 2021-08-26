@@ -15,7 +15,7 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CSXHHTJP1X"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-CSXHHTJP1X');
     </script>
@@ -55,25 +55,29 @@
                 </div>
                 <div class="col s12 m12 l6">
                     <div class="space"></div>
-                    <form action="javascript:void(0)" autocomplete="off" name="formulario" onsubmit="globalThis.cadastrar()" class="form">
+                    <form action="javascript:void(0)" autocomplete="off" name="formulario"
+                        onsubmit="globalThis.cadastrar()" class="form">
                         <input value="" type="text" name="name" placeholder="Nome" required>
                         <input value="" type="email" name="email" placeholder="Email" required>
-                        <input value="" oninput="globalThis.maskTel(this)" type="text" name="phone" placeholder="Telefone" required>
+                        <input value="" oninput="globalThis.maskTel(this)" type="text" name="phone"
+                            placeholder="Telefone" required>
                         <input value="" type="password" name="password" placeholder="Senha" required>
                         <input value="" type="password" name="password_confirm" placeholder="Confirmar senha" required>
                         <label class="cinza-text">
                             <input type="checkbox" required>
                             Eu aceito todos os termos
                         </label> <br>
-                        <label class="cinza-text">
-                            <input type="checkbox" name="notification_sms">
-                            Desejo receber informação via <b>WhatsApp</b> 
-                        </label> <br>
-                        <label class="cinza-text">
-                            <input type="checkbox" name="notification_email">
-                            Desejo receber informação via <b>email</b> 
-                        </label> <br>
-                        <p class="cinza-text" >
+                        <div hidden>
+                            <label class="cinza-text">
+                                <input type="checkbox" name="notification_sms">
+                                Desejo receber informação via <b>WhatsApp</b>
+                            </label> <br>
+                            <label class="cinza-text">
+                                <input type="checkbox" name="notification_email">
+                                Desejo receber informação via <b>email</b>
+                            </label> <br>
+                        </div>
+                        <p class="cinza-text">
                             Ao se cadastar você ira para uma lista de aprovação
                             isso pode demorar 48hs, todos os termos você encontrar
                             <a href="./termos.html" target="_blank"> clicando aqui </a>.

@@ -2,7 +2,7 @@ import step from "../data/step.js"
 
 export default {
     template: `
-        <div class="body_box" v-if="corruente_step < step.length">
+        <div class="body_box" v-if="credencial < 22">
             <div class="step-grid">
                 <div class="corte" style="background-color: #002bbe">
                     <img :src="'./assets/step/'+icone">
@@ -31,6 +31,7 @@ export default {
            description: null,
            link: null,
            link_text: null,
+           credencial: 21,
         }
     }, 
     methods: {
@@ -41,10 +42,35 @@ export default {
             this.description = step.description
             this.link = step.link
             this.link_text = step.btn_text
+        },
+        is_step() {            
+            switch (this.credencial) {
+                case "21":
+                    this.corruente_step = 1
+                    break;            
+                case "16":
+                    this.corruente_step = 2
+                    break;            
+                case "17":
+                    this.corruente_step = 3
+                    break;            
+                case "18":
+                    this.corruente_step = 4
+                    break;            
+                case "19":
+                    this.corruente_step = 5
+                    break;                
+                
+                default:
+                    this.corruente_step = 0
+                    break;
+            }
         }
     },
     async mounted() {
+        this.credencial = localStorage.getItem('user_logged_credential_id')
         this.corruente_step = localStorage.getItem('corruente_step') || 0
+        this.is_step()
         this.load_step()
     }
 }

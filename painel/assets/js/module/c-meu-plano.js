@@ -16,6 +16,7 @@ export default {
             print_valor: "29.90",
             plano_id: "1386032",
             confirmar_senha: '',
+            credencial: 21,
             messageAlterPass: {
                 status: false,
                 text: null
@@ -67,13 +68,13 @@ export default {
                 bairro: '',
                 estado: '',
                 cidade: '',
-                card: "4111111111111111",
-                validade: "0922",
+                card: "4111 1111 1111 1111",
+                validade: "09/22",
                 cvv: "123",
                 nome_card: "Morpheus Fishburne",
                 payment_type: 'card',
                 complemento: 'nao definido',
-                cupom: "#ANJODIGITAL"
+                cupom: "#ANJODIGITA"
             },
             trial: {
                 status: false,
@@ -90,10 +91,8 @@ export default {
             if (this.doacao.cupom.replace(' ', '') == code) {
                 this.trial.status = true
                 this.trial.plan_id = 1
-                let plano_escolhido = this.planos.find(p => p.id == this.plano_id)
-                let plano_cupom = this.cupon.find(p => p.instancias == plano_escolhido.instancias)
-                console.log(plano_cupom)
-                this.trial.plan_id = plano_cupom.id
+                this.trial.plan_id = this.cupon[0].id
+                this.plano_id = this.planos[0].id
             } else {
                 this.trial.plan_id = null
                 this.trial.status = false
@@ -219,7 +218,7 @@ export default {
         money: val => val.toLocaleString('en-US', { style: 'currency', currency: 'BRL', }),
     },
     async created() {
-
+        this.credencial = localStorage.getItem('user_logged_credential_id')
         let res = await this.Super.get_admin(this.cache.user_logged_id)
         this.id = res.id
         this.nome = res.nome
