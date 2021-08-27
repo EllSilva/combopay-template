@@ -17,6 +17,7 @@ export default {
             cache,
             black,
             mccs,
+            user: null,
             admins: [],
             email_admin: null,
             is_edit: false,
@@ -52,8 +53,8 @@ export default {
                     nome: "API BANK ACCOUNT",
                     tipo: "conta_corrente"
                 },
-                anotacao: btoa( JSON.stringify({ status: 1 }) )
-            },          
+                anotacao: btoa(JSON.stringify({ status: 1 }))
+            },
             loading: false,
             feedback: {
                 status: null,
@@ -62,31 +63,44 @@ export default {
         }
     },
     async mounted() {
-       this.form.admin_master = localStorage.getItem('email')
+        this.user = await this.Super.get_admin(this.cache.user_logged_id)
+        this.form.admin_master = this.user.email
     },
     methods: {
         async save() {
             this.loading = true
             this.form.dominio_personalizado = this.form.domain_person == 'sub' ? 1 : 0
-            if( this.black.includes(this.form.subdominio) ) {
+            if (this.black.includes(this.form.subdominio)) {
                 this.feedback.status = 'error'
                 this.feedback.message = "Dominio Indosponiveis"
                 this.loading = false
                 return
             }
-            let res = await this.Super.post_institution( this.form )          
-            this.feedback.status = res?.status            
-            if(res?.status != 'error' && !this.black.includes(this.form.subdominio) ) {
-                window.location.href = "#/minhas-instituicoes/1"
-            }
-            this.feedback.message = res?.message
+
+            let res = await this.Super.post_institution(this.form)
             this.loading = false
+            this.feedback.status = res?.status
+            this.feedback.message = res?.message
+
+            if( this.user.credencial == 16 ) {
+                localStorage.setItem('user_logged_credential_id', 17)
+                await this.Super.put_admin(this.user.id, {
+                    credencial: 17
+                }) 
+                window.location.href = '#/planos'
+                return
+            }
+            
+            if (res?.status != 'error' && !this.black.includes(this.form.subdominio)) {
+                window.location.href = "#/minhas-instituicoes/1"
+            }            
+
         },
         async add_admin() {
             this.admins.push(this.email_admin)
         },
         async remove_admin(email) {
-            this.admins = this.admins.filter( mail => mail != email )
+            this.admins = this.admins.filter(mail => mail != email)
         },
         async busca_cep() {
             this.loading = true
@@ -98,13 +112,13 @@ export default {
             this.loading = false
         },
         telefone() {
-            this.form.telefone = maskTel(this.form.telefone )           
+            this.form.telefone = maskTel(this.form.telefone)
         },
         cpf_cnpj() {
-            this.form.cnpj = cpf_cnpj(this.form.cnpj )           
+            this.form.cnpj = cpf_cnpj(this.form.cnpj)
         },
         cnpj() {
-            this.form.banco_conta.cnpj = cnpj(this.form.banco_conta.cnpj )           
+            this.form.banco_conta.cnpj = cnpj(this.form.banco_conta.cnpj)
 
         }
     }

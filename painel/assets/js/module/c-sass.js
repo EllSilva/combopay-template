@@ -1,14 +1,17 @@
 import App from '../library/superApp.js'
+import cache from '../library/cache.js'
 const Super = new App
 export default {
     template: "#c-sass",
     data: function () {
         return {
             Super,
+            cache,
             playload: [],
             steps: [],
             step: 1,
             s: null,
+            user: null,
             default_flags: [
                 'VIDEOS', 
                 'DEPOIMENTOS', 
@@ -50,8 +53,14 @@ export default {
     methods: {
         async load( step ) {
             this.steps = []
-            let all_institution = await this.Super.all_institution( step )
-            // console.log(all_institution)
+            let all_institution = {data:[]}
+            if(this.user.credencial!=1) {
+                all_institution = await this.Super.all_email_admin_institution(this.user.email)
+                all_institution = {data:[all_institution]}
+            }
+            if(this.user.credencial==1) {
+                all_institution = await this.Super.all_institution( step )                
+            }
             this.playload = all_institution.data
             let total_pages = Math.ceil( all_institution.total / 10 )
             for (let index = 0; index < total_pages; index++) {
@@ -81,6 +90,7 @@ export default {
     },
     async mounted() {
         this.step = this.$route.params.step
+        this.user = await this.Super.get_admin(this.cache.user_logged_id)
         await this.load( this.step )
     }
 }

@@ -1473,6 +1473,12 @@
             <c-header></c-header>
             <div class="a-body">
                 <c-step></c-step>
+                <div class="body_box" v-if="user.credencial==18">
+                    <h2 class="title_form">
+                        <span>Configurar depois</span>
+                        <span @click="pular" class="button-export">Pular Etapa</span>
+                    </h2>
+                </div>
                 <div class="body_box">
                     <h1>Emails</h1>
                     <div class="table">

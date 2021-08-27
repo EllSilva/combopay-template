@@ -202,3 +202,6 @@ POST http://api.doardigital.com.br/v1/transacao
 
 ###
 http://api.doardigital.com.br/v1/admin/por-instituicao/1
+
+###
+http://api.doardigital.com.br/v1/instituicao/por-master/br5@outlook.com

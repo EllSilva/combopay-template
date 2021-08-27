@@ -10,6 +10,7 @@ export default {
             id: null,
             Super,
             cache,
+            user: null,
             is_flag: false,
             templates_emails,
             playload: templates_emails,
@@ -17,16 +18,17 @@ export default {
         }
     },
     async mounted() {
+        this.user = await this.Super.get_admin(this.cache.user_logged_id)
         this.load()
     },
     methods: {
         async load() {
             let all_flags = (await this.Super.flag_get_by_institution(this.cache.institution)).reverse()
             let flag = all_flags.find(post => post.flag == this.flag)
-            let data = JSON.parse( atob( flag.base64 ) )
+            let data = JSON.parse( atob( flag?.base64 || "W10=" ) )
             data = data.length ? data : templates_emails
             this.playload = data
-            this.id = flag.id        
+            this.id = flag?.id        
         },
         async tootle_statu(id_email) {
             this.playload =  this.playload.map(e => {
@@ -42,6 +44,13 @@ export default {
                 ativo: 1,
             }
             let res = await this.Super.flag_put(this.id, playload)
+        },
+        async pular() {
+            localStorage.setItem('user_logged_credential_id', 20)
+            await this.Super.put_admin(this.user.id, {
+                credencial: 20
+            }) 
+            window.location.href = '#/inicio'            
         }
     }
 }

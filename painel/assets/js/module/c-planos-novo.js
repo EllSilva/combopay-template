@@ -8,6 +8,8 @@ export default {
         return {
             Super,
             cache,
+            user: null,
+            inst: null,
             form: {
                 nome: null,
                 frequency: "daily",
@@ -34,7 +36,12 @@ export default {
         }
     },
     async mounted() {
+        this.user = await this.Super.get_admin(this.cache.user_logged_id)
+        this.inst = await this.Super.all_email_admin_institution(this.user.email)
         this.form.instituicao_id = this.cache.institution
+        if( this.user.credencial == 17 ) {
+            this.form.instituicao_id = this.inst.id
+        }
     },
     methods: {
         masc_money() {
@@ -47,15 +54,26 @@ export default {
                 quantia: this.form.amount.replace('.','').replace(',',''),
                 prazo: 30,
                 nome: this.form.nome,
-                instituicao_id: this.form.instituicao_id
+                instituicao_id: this.form.instituicao_id,
+                instituicao_id: this.form.instituicao_id,
             }
             this.loading = true
             let res = await this.Super.plano_post(playload)
-            window.location.href = '#/planos'
             this.error.status = true
             this.error.text = res?.message
             this.error.type = res?.status
             this.loading = false
+
+            if( this.user.credencial == 17 ) {
+                localStorage.setItem('user_logged_credential_id', 18)
+                await this.Super.put_admin(this.user.id, {
+                    credencial: 18
+                }) 
+                window.location.href = '#/modelo-de-emails'
+                return
+            }
+
+            window.location.href = '#/planos'
         }
     }
 }
