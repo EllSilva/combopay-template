@@ -677,10 +677,6 @@
                                     required>
                             </div>
                             <div>
-                                <label for="">CPF</label>
-                                <input type="text" v-model="cpf" placeholder="Digite seu CPF..." required>
-                            </div>
-                            <div>
                                 <label for="">Cupom</label>
                                 <input type="text" v-model="doacao.cupom" @input="cupom"
                                     placeholder="#DOARDIGITAL_00545214" required>
@@ -696,6 +692,7 @@
                             <center v-if="trial.status">
                                 <small> 30 dias de teste </small>
                             </center>
+                            <span v-if="error.status" :class="error.type"> {{error.text}} </span>
                         </form>
                     </div>
 

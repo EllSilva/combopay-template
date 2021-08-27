@@ -123,11 +123,11 @@ User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 
 ###
 
-GET http://api.doardigital.com.br/v1/assinatura/por-doador/3
+GET http://api.doardigital.com.br/v1/assinatura/por-doador/59
 
 
 ###
-GET http://api.doardigital.com.br/v1/assinatura/por-instituicao/10
+GET http://api.doardigital.com.br/v1/assinatura/por-instituicao/1
 
 
 ###
@@ -199,3 +199,6 @@ POST http://api.doardigital.com.br/v1/transacao
     "quantidade": 1
   }
 }
+
+###
+http://api.doardigital.com.br/v1/admin/por-instituicao/1
