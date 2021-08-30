@@ -56,7 +56,9 @@ export default {
             let all_institution = {data:[]}
             if(this.user.credencial!=1) {
                 all_institution = await this.Super.all_email_admin_institution(this.user.email)
-                all_institution = {data:[all_institution]}
+                if(all_institution.id) {
+                    all_institution = {data:[all_institution]}
+                }
             }
             if(this.user.credencial==1) {
                 all_institution = await this.Super.all_institution( step )                

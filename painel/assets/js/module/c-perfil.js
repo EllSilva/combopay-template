@@ -132,8 +132,9 @@ export default {
     async created() {
 
         let res = await this.Super.get_admin(this.cache.user_logged_id)
+        console.log(res)
         console.log(res.credencial)
-        this.credencial = res.credencial
+        this.credencial = this.cache.user_logged_credential_id
         this.id = res.id
         this.nome = res.nome
         this.email = res.email
