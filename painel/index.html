@@ -129,7 +129,7 @@
         <div class="a-aside">
             <div class="aside__link aside__link--gravatar">
                 <img src="./assets/img/gravatar.png">
-                <span> Jose Antonio</span>
+                <span> {{user.nome}}</span>
             </div>
             <c-menu></c-menu>
         </div>
@@ -1287,15 +1287,15 @@
                 <c-step></c-step>
                 <div class="body_box">
                     <div class="title_form">
-                        <h1>
-                            Minhas Instituições
-                        </h1>
-                        <form action="javascript:void(0)" @submit="search" class="busca-box">
-                            <input type="text" v-model="s" required placeholder="O que você procura?">
-                            <button type="submit">
-                                <img src="./assets/icon/search.svg">
-                            </button>
-                        </form>
+                        <h1> Minhas Instituições </h1>
+                        <div>
+                            <form v-if="user.credencial == 1" action="javascript:void(0)" @submit="search" class="busca-box">
+                                <input type="text" v-model="s" required placeholder="O que você procura?">
+                                <button type="submit">
+                                    <img src="./assets/icon/search.svg">
+                                </button>
+                            </form>
+                        </div>
                         <a href="#/adionar-instituicao" class="plus">
                             <img src="./assets/icon/plus.svg">
                         </a>
@@ -1313,10 +1313,10 @@
                                     {{ sass.subdominio }}.doardigital.com.br
                                 </a>
                             </span>
-                            <span style="width: 50px;" >
+                            <span style="width: 50px;" v-if="user.credencial == 1" >
                                 <img title="Resetar Configurações" @dblclick="run( sass.id )" width="18" src="./assets/icon/reset.png" alt="">
                             </span>
-                            <span>
+                            <span v-if="user.credencial == 1">
                                 <label @click="status(sass.id, sass.ativo)">
                                     <input type="checkbox" hidden :checked="sass.ativo">
                                     <div class="toogle"><i></i></div>

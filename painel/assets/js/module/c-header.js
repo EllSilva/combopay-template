@@ -13,12 +13,12 @@ export default {
         <div class="popupo-bg" v-if="status_pop">
             <div>
                 <div @click="toggle_pop" class="pop-close">X</div>
-                <input @input="updade_pop" v-model="search" type="text" placeholder="Buscar...">
+                <input @input="updade_pop" v-if="user.credencial == 1" v-model="search" type="text" placeholder="Buscar...">
                 <div v-for="item in resumo" class="iten-lista-pop">
                     <div> <b>ID<b> {{item.id}} - {{item.subdominio}} </div>
                     <img @click="change_domain(item.id)" :title="item.id" src="./assets/icon/change.svg">
                 </div>
-                <div class="pop-center">
+                <div class="pop-center" v-if="user.credencial == 1">
                     Total <b> {{ total }} </b>
                 </div>
             </div>
@@ -33,6 +33,9 @@ export default {
             status: true,
             total: 0,
             id: 0,
+            user: {
+                credencial: null,
+            },
             instituicoes: [],
             institution_name: "Todos",
             resumo: [],
@@ -45,7 +48,9 @@ export default {
             this.status = !this.status
             this.$eventHub.$emit('toggle-menu', this.status )
         },
-        updade_pop() {
+        async updade_pop() {
+            this.instituicoes = await this.Super.search_institution( this.search )
+            // console.log( search )
             let list_term = this.instituicoes.map( post => {
                     post.terms = `@ ${post.dominio} - ${post.subdominio}`
                     return post
@@ -66,7 +71,19 @@ export default {
     },
     emits: ['toggle-menu'],
     async mounted() {
-        let todas_intituicoes = await this.Super.all_institution()
+        this.user = await this.Super.get_admin(this.cache.user_logged_id)
+        let todas_intituicoes =[]
+
+        if(this.user.credencial!=1) {
+            todas_intituicoes = await this.Super.all_email_admin_institution(this.user.email)
+            if(todas_intituicoes.id) {
+                todas_intituicoes = all_institution
+            }
+        }
+        if(this.user.credencial==1) {
+            todas_intituicoes = await this.Super.all_institution()                
+        }
+
         this.id = this.cache.institution
         this.instituicoes = todas_intituicoes.data
         this.total = todas_intituicoes.total

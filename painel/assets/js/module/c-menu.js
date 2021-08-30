@@ -39,7 +39,8 @@ export default {
         }
     },
     async mounted() {
-        let credencial = await this.Super.get_credential( this.cache.user_logged_credential_id )
+        let user = await this.Super.get_admin(this.cache.user_logged_id)
+        let credencial = await this.Super.get_credential( user.credencial )
         let recursos = credencial.recursos.split(',')
         this.lista = this.itens.filter( item => recursos.includes( item.id ) )
         this.active_path = `#${this.$router.currentRoute.fullPath}`
