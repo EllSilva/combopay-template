@@ -2,6 +2,13 @@
 ini_set('SMTP','myserver');
 ini_set('smtp_port',25);
 
+
+$host = "smtp.hostinger.com.br"; 
+$type = "TLS";
+$porta = 587;
+$email = "contato@digitalcombo.com.br";
+$pass = "Prosperidade@121";
+
 $to = $_GET["email"] ?? "br.rafael@outlook.com";
 $subject = "Birthday Reminders for August";
 $headers = "";
