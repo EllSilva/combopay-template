@@ -1,9 +1,9 @@
 export default [
     {
-        title: "Iformações",
-        icon: "icone-assinatura.svg",
-        titulo: "Ative sua Assinatura",
-        description: "Para iniciar essa jornada precisamos que você finalize alguns passos, iniciando o pagamento da sua assinatura",
+        title: "Finalize seu Cadastro",
+        icon: "parabens.png",
+        titulo: "Finalize seu Cadastro",
+        description: "Para que você inicie essa nova jornada precisamos que antes finalize alguns simples passos a seguir, sendo o primeiro completar seu perfil e salvar.",
         btn_text: "Complete seu perfil",
         link: "#/perfil",
     },
@@ -53,7 +53,7 @@ export default [
         titulo: "Configure as Respostas de E-mail",
         description: "Configure as mensagens de email que seus doadores irão receber em todas as etapas do processo.",
         btn_text: "Editar E-mails",
-        link: "#/modelo-de-emails",
+        link: "#/email",
     },
     // {
     //     title: "Configurações",
@@ -63,4 +63,12 @@ export default [
     //     btn_text: "Editar Configurações",
     //     link: "#/configuracao",
     // },
+    {
+        title: "Notificações",
+        icon: "icone-configuracoes-emails.svg",
+        titulo: "Configure as Respostas de E-mail",
+        description: "Configure as mensagens de email que seus doadores irão receber em todas as etapas do processo.",
+        btn_text: "Editar E-mails",
+        link: "#/modelo-de-emails",
+    },
 ]
