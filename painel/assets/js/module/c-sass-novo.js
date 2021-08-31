@@ -118,6 +118,13 @@ export default {
             this.feedback.status = res?.status
             this.feedback.message = res?.message
 
+            if (res?.status != 'error' && !this.black.includes(this.form.subdominio)) {
+                let subdominio = this.form.subdominio
+                let minha_nova_instituicao = await this.Super.get_institution_by_domain( subdominio)
+                console.log(minha_nova_instituicao)
+                this.run(minha_nova_instituicao.id)
+            }
+
             if( this.user.credencial == 16 ) {
                 localStorage.setItem('user_logged_credential_id', 17)
                 await this.Super.put_admin(this.user.id, {
@@ -131,7 +138,6 @@ export default {
                 window.location.href = "#/minhas-instituicoes/1"
             }  
             
-            console.log(res)
 
         },
         async add_admin() {

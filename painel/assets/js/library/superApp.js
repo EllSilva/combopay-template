@@ -144,7 +144,10 @@ class App {
     async post_doador(playload = {}) {
         return await this.post(`/doador`, playload)
     }
-
+   
+    async get_institution_by_domain(domain) {
+        return await this.get(`/instituicao/por-dominio/${domain}`, {})
+    }
     async get_institution(id) {
         return await this.get(`/instituicao/${id}`, {})
     }
