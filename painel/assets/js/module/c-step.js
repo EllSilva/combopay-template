@@ -4,7 +4,7 @@ export default {
     template: `
         <div class="body_box" v-if="credencial < 22">
             <div class="step-grid">
-                <div class="corte" style="background-color: #002bbe">
+                <div class="corte" style="background-image: linear-gradient(45deg , blue, #1679bd">
                     <img :src="'./assets/step/'+icone">
                     <img class="item-corte" src="./assets/step/corte.svg">
                 </div>
