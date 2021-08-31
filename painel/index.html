@@ -84,12 +84,12 @@
                     </div>
                     <div class="space"></div>
 
-                    <div class="box-relatorio">
+                    <div class="box-relatorio" v-if="total>0">
                         <label for="">Faturas</label>
                         <canvas ref="graph_faturas" width="100%" height="100"></canvas>
                     </div>
 
-                    <div class="g g-2">
+                    <div class="g g-2" v-if="total>0">
                         <div class="box-relatorio">
                             <label for="">Quantidade de Doações</label>
                             <canvas ref="graph_quantidade_doacao" width="100%" height="100"></canvas>
@@ -100,7 +100,7 @@
                         </div>
                     </div>
 
-                    <div class="g g-3">
+                    <div class="g g-3" v-if="total>0">
                         <div class="box-relatorio">
                             <label for="">Status Doação</label>
                             <canvas ref="graph_status_doacao" width="100%" height="100"></canvas>
@@ -115,7 +115,7 @@
                         </div>
                     </div>
 
-                    <a :href="link" download="relatorio-geral.csv" class="button-export">
+                    <a :href="link" download="relatorio-geral.csv" class="button-export" v-if="total>0">
                         EXPORTAR CSV
                     </a>
                 </div>
@@ -814,8 +814,8 @@
                                 <input type="text" v-model="form.email">
                             </div>
                         </div>
-                        <h2>Domínio</h2>
-                        <div>
+                        <h2>Subdomínio</h2>
+                        <div hidden>
                             <input type="radio" v-model="form.domain_person" value="sub" name="type_domains" checked>
                             Subdominio
                             <input type="radio" v-model="form.domain_person" value="person" name="type_domains"> Domínio
@@ -925,7 +925,7 @@
                             feedback.message }} </span>
                     </form>
                 </div>
-                <div class="body_box">
+                <div class="body_box" hidden>
                     <h2>Adiministradores</h2>
                     <div class="admins-gravatar">
                         <div class="gravatar-item" v-for="email in admins">

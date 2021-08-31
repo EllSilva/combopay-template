@@ -11,13 +11,14 @@ export default {
             Chart,
             link: 'data:text/csv;charset=utf-8,',
             loading: false,
-            resumos: []
+            resumos: [],
+            total: 0,
         }
     },
     async mounted() {
         let all_doadores = await this.Super.all_doadores_by_istitution(this.cache.institution)
         let all_doacoes = await this.Super.all_doacao_by_institution(this.cache.institution)
-
+        this.total = all_doacoes.length
         
         let total_doacoes = all_doacoes.map(doacao => parseInt(doacao.quantia))
         let total_docacao = total_doacoes.length
@@ -135,6 +136,10 @@ export default {
             { label: "Doadores Adinplentes", valor: 0, estimativa: null, ico: "doadores-adimplentes-20bf63.svg", color: "#20bf63" },
             { label: "Doadores Inadimplentes", valor: 0, estimativa: null, ico: "doadores-inadimplentes-ff7675.svg", color: "#ff7675" },
         ]
+
+        if( this.total<1 ) {
+            return
+        }
         this.graph('graph_faturas', {
             type: 'line',
             data: {

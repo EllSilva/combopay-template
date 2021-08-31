@@ -72,12 +72,12 @@ export default {
     emits: ['toggle-menu'],
     async mounted() {
         this.user = await this.Super.get_admin(this.cache.user_logged_id)
-        let todas_intituicoes =[]
+        let todas_intituicoes = {data:[]}
 
         if(this.user.credencial!=1) {
-            todas_intituicoes = await this.Super.all_email_admin_institution(this.user.email)
+            let minhas_instituicoes = await this.Super.all_email_admin_institution(this.user.email)
             if(todas_intituicoes.id) {
-                todas_intituicoes = all_institution
+                todas_intituicoes.data = minhas_instituicoes
             }
         }
         if(this.user.credencial==1) {

@@ -21,6 +21,42 @@ export default {
             admins: [],
             email_admin: null,
             is_edit: false,
+            default_flags: [
+                'VIDEOS', 
+                'DEPOIMENTOS', 
+                'GALERIA', 
+                'LAYOUT', 
+                'CONFIG_SITE',
+                'METAS_2021',
+                'SCRIPTS_PAGES',
+                'POLITICA',
+                'RD_STATION',
+                'CORREIOS',
+                'MAILING_BOSS',
+                'PHP_MAILER',
+                'E_VENDAS',
+                'ALL_TEMPLATE_EMAIL',
+                'CUPOM',
+                'DIVISAO',
+            ],
+            default_flags_content: {
+                'CUPOM' : "W10=", 
+                'DIVISAO' : "W10=", 
+                'METAS_2021' : "W10=", 
+                'VIDEOS' : "W10=", 
+                'ALL_TEMPLATE_EMAIL' : "W10=", 
+                'DEPOIMENTOS' : "W10=", 
+                'GALERIA' : "W10=", 
+                'LAYOUT' : btoa(JSON.stringify({})),
+                'CONFIG_SITE' : btoa(JSON.stringify({})),
+                'SCRIPTS_PAGES' : btoa(JSON.stringify({})),
+                'RD_STATION' : btoa(JSON.stringify({})),
+                'CORREIOS' : btoa(JSON.stringify({})),
+                'MAILING_BOSS' : btoa(JSON.stringify({})),
+                'PHP_MAILER' : btoa(JSON.stringify({})),
+                'E_VENDAS' : btoa(JSON.stringify({})),
+                'POLITICA' : btoa(JSON.stringify({})),
+            },
             form: {
                 admin_master: null,
                 domain_person: 'sub',
@@ -93,7 +129,9 @@ export default {
             
             if (res?.status != 'error' && !this.black.includes(this.form.subdominio)) {
                 window.location.href = "#/minhas-instituicoes/1"
-            }            
+            }  
+            
+            console.log(res)
 
         },
         async add_admin() {
@@ -120,6 +158,17 @@ export default {
         cnpj() {
             this.form.banco_conta.cnpj = cnpj(this.form.banco_conta.cnpj)
 
-        }
+        },
+        run( id ) {
+            this.default_flags.forEach( is_flag => {
+                let playload = { 
+                    base64: this.default_flags_content[is_flag], 
+                    flag: is_flag, 
+                    instituicao_id: id,
+                    ativo: 1,
+                }
+                this.Super.flag_post(playload)
+            });            
+        },
     }
 }

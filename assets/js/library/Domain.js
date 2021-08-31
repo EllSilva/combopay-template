@@ -4,8 +4,10 @@ export default {
     },
     corruent() {
         let domain = window.location.hostname
-        if ( domain == '127.0.0.1' )
-            return 'tillman.com'
+        if ( domain == '127.0.0.1' ) {
+            domain = 'tillman.com'
+        }
+        domain = domain.replace('.doardigital.com.br', '')        
         return domain
     },
     render_flag(lista = []) {
