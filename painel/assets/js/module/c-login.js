@@ -16,6 +16,7 @@ export default {
     methods: {
         async login() {
             let res = await this.App.login(this.email, this.password)
+            let minha_instituicao = await this.App.all_email_admin_institution(this.email)
             this.loading = true
             this.cache.email = this.email
             if (res.status_code == 200) {
@@ -24,7 +25,7 @@ export default {
                 this.cache.user_logged_credential_id = res?.admin?.credencial
                 this.cache.bearer = res?.token?.access_token
                 let corruente_user = await this.App.get_admin(res?.admin?.id)
-                this.cache.institution = corruente_user.instituicao_id
+                this.cache.institution = minha_instituicao.id
                 window.location.href = "#/inicio"
             } else {
                 this.message_error = true

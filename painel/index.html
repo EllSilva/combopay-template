@@ -204,7 +204,7 @@
                         <div class="g g-2">
                             <div>
                                 <label for="">Telefone</label>
-                                <input v-model="telefone"  @input="maskTel" type="text" required>
+                                <input v-model="telefone" @input="maskTel" type="text" required>
                             </div>
                             <div>
                                 <label for="">email</label>
@@ -821,26 +821,17 @@
                             <input type="radio" v-model="form.domain_person" value="person" name="type_domains"> Domínio
                             Personalizado
                         </div>
-                        <div class="note" v-if="form.domain_person == 'sub'">
+                        <div v-if="is_edit">
+                            <p> <b>{{form.subdominio}}</b>.doardigital.com.br </p>
+                        </div>
+                        <div class="note" v-if="!is_edit">
                             <div class="input-note subdomain">
-                                <input type="text" v-model="form.subdominio" placeholder="subdominio"
-                                    class="input-note" :disabled="is_edit">
+                                <input type="text" v-model="form.subdominio" placeholder="subdominio" class="input-note"
+                                    :disabled="is_edit">
                                 <strong>.doardigital.com.br</strong>
                             </div>
                         </div>
-                        <div class="note" v-if="form.domain_person == 'person'">
-                            <input type="text" v-model="form.dominio" placeholder="seudominio.com.br"
-                                class="input-note" :disabled="is_edit">
-                            <h5>Configurar domínio personalizado</h5>
-                            <p>
-                                Entre no painel onde você adiquiriu o dominio, procure por
-                                zona de DNS e preencha com os dados abaixo, antes de salvar as alterações
-                            </p>
-                            <ul>
-                                <li>ns33.i7host.com.br</li>
-                                <li>ns34.i7host.com.br</li>
-                            </ul>
-                        </div>
+
                         <h2>Endereço</h2>
                         <div class="g g-2">
                             <div>
@@ -924,6 +915,30 @@
                         <span @click="feedback.status=null" v-if="feedback.status != null" :class="feedback.status"> {{
                             feedback.message }} </span>
                     </form>
+                </div>
+                <div class="body_box" v-if="is_edit">
+                    <h2>Domínio personalizado</h2>
+                    <div class="g g-2 form">
+                        <div>
+                            <label for="">Informe seu Domínio</label>
+                            <input type="text" v-model="form.dominio" placeholder="seudominio.com.br" >
+                        </div>
+                         <div>
+                            <label for="">.</label>
+                            <button type="submit" class="btn btn--success">
+                                Adicionar Domínio Personalizado
+                            </button>
+                        </div>
+                    </div>
+                    <div class="note" v-if="form.domain_person == 'person'">
+                        <p>
+                            Entre no painel onde você adiquiriu o dominio, procure por
+                            zona de DNS e preencha com os dados abaixo, antes de salvar as alterações
+                        </p>
+                        <ul>
+                            <li>187.45.181.130</li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="body_box" hidden>
                     <h2>Adiministradores</h2>
@@ -1289,7 +1304,8 @@
                     <div class="title_form">
                         <h1> Minhas Instituições </h1>
                         <div>
-                            <form v-if="user.credencial == 1" action="javascript:void(0)" @submit="search" class="busca-box">
+                            <form v-if="user.credencial == 1" action="javascript:void(0)" @submit="search"
+                                class="busca-box">
                                 <input type="text" v-model="s" required placeholder="O que você procura?">
                                 <button type="submit">
                                     <img src="./assets/icon/search.svg">
@@ -1309,12 +1325,14 @@
                             </span>
                             <span class="w25 s-hidem">
                                 <small>Sub Domain</small> <br>
-                                <a :href="'//'+sass.subdominio+'.doardigital.com.br'" target="_blank" rel="noopener noreferrer">
+                                <a :href="'//'+sass.subdominio+'.doardigital.com.br'" target="_blank"
+                                    rel="noopener noreferrer">
                                     {{ sass.subdominio }}.doardigital.com.br
                                 </a>
                             </span>
-                            <span style="width: 50px;" v-if="user.credencial == 1" >
-                                <img title="Resetar Configurações" @dblclick="run( sass.id )" width="18" src="./assets/icon/reset.png" alt="">
+                            <span style="width: 50px;" v-if="user.credencial == 1">
+                                <img title="Resetar Configurações" @dblclick="run( sass.id )" width="18"
+                                    src="./assets/icon/reset.png" alt="">
                             </span>
                             <span v-if="user.credencial == 1">
                                 <label @click="status(sass.id, sass.ativo)">
@@ -1438,6 +1456,12 @@
             <c-header></c-header>
             <div class="a-body">
                 <c-step></c-step>
+                <div class="body_box" v-if="user.credencial==17">
+                    <h2 class="title_form">
+                        <span>Configurar depois</span>
+                        <span @click="pular" class="button-export">Pular Etapa</span>
+                    </h2>
+                </div>
                 <div class="body_box">
                     <h1 class="title_form">
                         Planos
@@ -1473,7 +1497,7 @@
             <c-header></c-header>
             <div class="a-body">
                 <c-step></c-step>
-                <div class="body_box" v-if="user.credencial==18">
+                <div class="body_box" v-if="user.credencial==19">
                     <h2 class="title_form">
                         <span>Configurar depois</span>
                         <span @click="pular" class="button-export">Pular Etapa</span>
@@ -1510,6 +1534,12 @@
             <c-header></c-header>
             <div class="a-body">
                 <c-step></c-step>
+                <div class="body_box" v-if="user.credencial==18">
+                    <h2 class="title_form">
+                        <span>Configurar depois</span>
+                        <span @click="pular" class="button-export">Pular Etapa</span>
+                    </h2>
+                </div>
                 <div class="body_box">
                     <h1>{{title}}</h1>
                     <form action="javascript:void(0)" class="form" @submit="save()">
@@ -1568,6 +1598,7 @@
             <c-header></c-header>
             <div class="a-body">
                 <c-step></c-step>
+               
                 <div class="body_box">
                     <h2> Plano </h2>
                     <form action="javascript:void(0)" class="form" @submit="save()">

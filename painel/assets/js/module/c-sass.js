@@ -11,7 +11,9 @@ export default {
             steps: [],
             step: 1,
             s: null,
-            user: null,
+            user: {
+                credencial: null
+            },
             default_flags: [
                 'VIDEOS', 
                 'DEPOIMENTOS', 

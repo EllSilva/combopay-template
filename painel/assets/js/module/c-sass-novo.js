@@ -17,7 +17,9 @@ export default {
             cache,
             black,
             mccs,
-            user: null,
+            user: {
+                credencial: null
+            },
             admins: [],
             email_admin: null,
             is_edit: false,
@@ -120,9 +122,35 @@ export default {
 
             if (res?.status != 'error' && !this.black.includes(this.form.subdominio)) {
                 let subdominio = this.form.subdominio
-                let minha_nova_instituicao = await this.Super.get_institution_by_domain( subdominio)
-                console.log(minha_nova_instituicao)
+                let minha_nova_instituicao = await this.Super.get_institution_by_domain(subdominio)
+                this.cache.institution = minha_nova_instituicao.id
+
                 this.run(minha_nova_instituicao.id)
+
+                let playload = {
+                    quantia: "2500",
+                    prazo: 30,
+                    nome: "Plano 25",
+                    instituicao_id: minha_nova_instituicao.id,
+                }
+                await this.Super.plano_post(playload)
+
+                playload.quantia = "5000"
+                playload.nome = "Plano 50"
+                await this.Super.plano_post(playload)
+
+                playload.quantia = "7500"
+                playload.nome = "Plano 75"
+                await this.Super.plano_post(playload)
+
+                playload.quantia = "10000"
+                playload.nome = "Plano 100"
+                await this.Super.plano_post(playload)
+
+                playload.quantia = "20000"
+                playload.nome = "Plano 200"
+                await this.Super.plano_post(playload)
+
             }
 
             if( this.user.credencial == 16 ) {

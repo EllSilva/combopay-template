@@ -16,6 +16,7 @@ export default {
             loading: false,
             is_flag: false,
             id: null,
+            user: {},
             autoForm: [
                 { label: 'Host SMTP', name: 'host_smtp' },
                 { label: 'Porta', name: 'port' },
@@ -31,6 +32,7 @@ export default {
         }
     },
     async mounted() {
+        this.user = await this.Super.get_admin(this.cache.user_logged_id)
         this.load()
 
     },
@@ -67,6 +69,13 @@ export default {
             this.error.type = res.status
             this.loading = false
 
+        },
+        async pular() {
+            localStorage.setItem('user_logged_credential_id', 19)
+            await this.Super.put_admin(this.user.id, {
+                credencial: 19
+            }) 
+            window.location.href = '#/modelo-de-emails'            
         }
     }
 }

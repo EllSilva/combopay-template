@@ -74,8 +74,10 @@ export default {
         this.user = await this.Super.get_admin(this.cache.user_logged_id)
         let todas_intituicoes = {data:[]}
 
+        let minhas_instituicoes = null
         if(this.user.credencial!=1) {
-            let minhas_instituicoes = await this.Super.all_email_admin_institution(this.user.email)
+             minhas_instituicoes = await this.Super.all_email_admin_institution(this.user.email)
+            
             if(todas_intituicoes.id) {
                 todas_intituicoes.data = minhas_instituicoes
             }
@@ -83,13 +85,12 @@ export default {
         if(this.user.credencial==1) {
             todas_intituicoes = await this.Super.all_institution()                
         }
+        
 
         this.id = this.cache.institution
         this.instituicoes = todas_intituicoes.data
         this.total = todas_intituicoes.total
         this.resumo = Array.from(this.instituicoes).splice(0, 3)
-        this.institution_name = this.instituicoes.find( post => {
-            return post.id == localStorage.getItem('institution') 
-        })?.subdominio || 'Todos'
+        this.institution_name = minhas_instituicoes.nome_fantasia
     }
 }

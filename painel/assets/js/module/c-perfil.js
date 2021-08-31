@@ -119,14 +119,17 @@ export default {
             this.cpf = this.cpf.replace(/(\d{3})\.(\d{3})\.(\d{3})\-(\d{2})(.*)/gi, '$1.$2.$3-$4')
         },
         async viaCep() {
+            if( this.cep.length != 8) {
+                return
+            }
             this.loading = true
             let res = await fetch(`https://viacep.com.br/ws/${this.cep}/json/`)
-            let address = await res.json()
-            this.rua = address.logradouro
-            this.bairro = address.bairro
-            this.cidade = address.localidade
-            this.estado = address.uf
             this.loading = false
+            let address = await res.json()
+            this.rua = address?.logradouro
+            this.bairro = address?.bairro
+            this.cidade = address?.localidade
+            this.estado = address?.uf
         }
     },
     async created() {
