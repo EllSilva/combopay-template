@@ -16,7 +16,7 @@ export default {
                 email: '',
                 instituicao_id: 1,
                 telefone: '',
-                credencial: 1,
+                credencial: 22,
                 password: null,
                 password_confirm: null,
                 ativo: 1,

@@ -1181,3 +1181,11 @@ input:checked~.toogle i::before {
     width: 100% !important;
     padding: 0 !important
 }
+.not-show {
+    display: block;
+    width: 1px;
+    height: 1px;
+    border: 0;
+    padding: 0;
+    margin: 0;
+}

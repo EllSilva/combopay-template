@@ -18,6 +18,8 @@ export default {
             status: null,
             tipo: null,
             data_vencimento: null,
+            boleto_code: null,
+            boleto_link: null,
         }
     },
     filters: {
@@ -36,7 +38,11 @@ export default {
             return lib[termo] || "Pendente"
         }
     },
-    methods: {},
+    methods: {
+        copiar( ref ) {
+            this.$refs[ref].select(); document.execCommand('copy');
+        }
+    },
     async mounted() {
         this.id = this.$route.params.id
         if (!globalThis._doacoes) {
@@ -53,6 +59,10 @@ export default {
         this.quantia = doacao.quantia
         this.status = doacao.status
         this.tipo = doacao.tipo
+        this.boleto_code = doacao?.boleto_code
+        this.boleto_link = doacao?.boleto_link
+
+    
         
 
         // this.cep = doador.cep

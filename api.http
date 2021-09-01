@@ -123,9 +123,10 @@ User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 
 ###
 
-GET http://api.doardigital.com.br/v1/assinatura/por-doador/59
+GET http://api.doardigital.com.br/v1/assinatura/por-doador/75
 
-
+###
+GET http://api.doardigital.com.br/v1/assinatura/por-doador-cpf/44040797027
 ###
 GET http://api.doardigital.com.br/v1/assinatura/por-instituicao/42
 
@@ -209,3 +210,6 @@ http://api.doardigital.com.br/v1/instituicao/por-master/br5@outlook.com
 ###
 
 http://api.doardigital.com.br/v1/transacao/por-instituicao/42
+
+###
+http://api.doardigital.com.br/v1/doador/por-instituicao/10

@@ -110,31 +110,31 @@ export default {
 
         let doacoes_aberto = total_doacoes - doacoes_pagas
 
-        this.link += `total ;${total_doacoes}%0A`
-        this.link += `pagas;${doacoes_pagas}%0A`
-        this.link += `caceladas;${doacoes_canceladas}%0A`
-        this.link += `recorrente;${total_doadores_recorrente}%0A`
-        this.link += `media;${media_doacao}%0A`
-        this.link += `abento;${doacoes_aberto}%0A`
-        this.link += `boletos;${doacoes_boletos}%0A`
-        this.link += `cartao;${doacoes_card}%0A`
-        this.link += `pix;${doacoes_pix}%0A`
+        this.link += `Total ;${total_doacoes}%0A`
+        this.link += `Pagas;${doacoes_pagas}%0A`
+        this.link += `Canceladas;${doacoes_canceladas}%0A`
+        this.link += `Recorrente;${total_doadores_recorrente}%0A`
+        this.link += `Média;${media_doacao}%0A`
+        this.link += `Aberto;${doacoes_aberto}%0A`
+        this.link += `Boletos;${doacoes_boletos}%0A`
+        this.link += `Cartão;${doacoes_card}%0A`
+        this.link += `PIX;${doacoes_pix}%0A`
 
         this.resumos = [
-            { label: "Total Doações", valor: total_doacoes, estimativa: null, ico: "total-doacoes-0984e3.svg", color: "#0984e3" },
-            { label: "Doações Concluidas", valor: doacoes_pagas, estimativa: null, ico: "doacoes-concluidas-20bf63.svg", color: "#20bf63" },
-            { label: "Doações em Aberto", valor: doacoes_aberto, estimativa: null, ico: "doacoes-em-aberto-f9d64b.svg", color: "#f9d64b" },
-            { label: "Doações Vencidas", valor: doacoes_canceladas, estimativa: null, ico: "doacoes-vencidas-ff7675.svg", color: "#ff7675" },
-            { label: "Doações Boletos", valor: doacoes_boletos, estimativa: null, ico: "doacoes-boletos-2eccba.svg", color: "#2eccba" },
-            { label: "Doações Creditos", valor: doacoes_card, estimativa: null, ico: "doacoes-creditos-249e90.svg", color: "#249e90" },
-            { label: "Doações PIX", valor: doacoes_pix, estimativa: null, ico: "doacoes-pix-5320bf.svg", color: "#5320bf" },
-            { label: "Doações Previstas", valor: 0, estimativa: null, ico: "doacoes-previstas-616161.svg", color: "#616161" },
-            { label: "Novos Doadores", valor: all_doacoes.length, estimativa: null, ico: "novos-doadores-20bf63.svg", color: "#20bf63" },
-            { label: "Doadores Recorrentes", valor: total_doadores_recorrente, estimativa: null, ico: "doadores-recorrentes-0984e3.svg", color: "#0984e3" },
-            { label: "Doadores Únicos", valor: all_doacoes.length - total_doadores_recorrente, estimativa: null, ico: "doadores-unicos-7fc1e6.svg", color: "#7fc1e6" },
-            { label: "Doação Media", valor: media_doacao, estimativa: null, ico: "doacoes-media-2ecc71.svg", color: "#2ecc71" },
-            { label: "Doadores Adinplentes", valor: 0, estimativa: null, ico: "doadores-adimplentes-20bf63.svg", color: "#20bf63" },
-            { label: "Doadores Inadimplentes", valor: 0, estimativa: null, ico: "doadores-inadimplentes-ff7675.svg", color: "#ff7675" },
+            {  tipo: 0, label: "Total Doações", valor: total_doacoes, estimativa: null, ico: "total-doacoes-0984e3.svg", color: "#0984e3" },
+            {  tipo: 0, label: "Doações Concluídas", valor: doacoes_pagas, estimativa: null, ico: "doacoes-concluidas-20bf63.svg", color: "#20bf63" },
+            {  tipo: 0, label: "Doações em Aberto", valor: doacoes_aberto, estimativa: null, ico: "doacoes-em-aberto-f9d64b.svg", color: "#f9d64b" },
+            {  tipo: 0, label: "Doações Vencidas", valor: doacoes_canceladas, estimativa: null, ico: "doacoes-vencidas-ff7675.svg", color: "#ff7675" },
+            {  tipo: 0, label: "Doações Boletos", valor: doacoes_boletos, estimativa: null, ico: "doacoes-boletos-2eccba.svg", color: "#2eccba" },
+            {  tipo: 0, label: "Doações Créditos", valor: doacoes_card, estimativa: null, ico: "doacoes-creditos-249e90.svg", color: "#249e90" },
+            {  tipo: 0, label: "Doações PIX", valor: doacoes_pix, estimativa: null, ico: "doacoes-pix-5320bf.svg", color: "#5320bf" },
+            {  tipo: 0, label: "Doações Previstas", valor: 0, estimativa: null, ico: "doacoes-previstas-616161.svg", color: "#616161" },
+            {  tipo: 1, label: "Novos Doadores", valor: all_doacoes.length, estimativa: null, ico: "novos-doadores-20bf63.svg", color: "#20bf63" },
+            {  tipo: 1, label: "Doadores Recorrentes", valor: total_doadores_recorrente, estimativa: null, ico: "doadores-recorrentes-0984e3.svg", color: "#0984e3" },
+            {  tipo: 1, label: "Doadores Únicos", valor: all_doacoes.length - total_doadores_recorrente, estimativa: null, ico: "doadores-unicos-7fc1e6.svg", color: "#7fc1e6" },
+            {  tipo: 0, label: "Doação Media", valor: media_doacao, estimativa: null, ico: "doacoes-media-2ecc71.svg", color: "#2ecc71" },
+            {  tipo: 1, label: "Doadores Adimplentes", valor: 0, estimativa: null, ico: "doadores-adimplentes-20bf63.svg", color: "#20bf63" },
+            {  tipo: 1, label: "Doadores Inadimplentes", valor: 0, estimativa: null, ico: "doadores-inadimplentes-ff7675.svg", color: "#ff7675" },
         ]
 
         if( this.total<1 ) {

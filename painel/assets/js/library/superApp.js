@@ -126,7 +126,9 @@ class App {
         return await this.get(`/doacoes`, {})
     }
     async all_doacao_by_institution(id) {
-        return await this.get(`/transacao/por-instituicao/${id}`, {})
+        let unica = await this.get(`/transacao/por-instituicao/${id}`, {})
+        let mensal = await this.get(`/assinatura/por-instituicao/${id}`, {})
+        return [ ...unica, ...mensal ]
     }
 
     async all_doadores() {

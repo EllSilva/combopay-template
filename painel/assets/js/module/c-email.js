@@ -16,7 +16,9 @@ export default {
             loading: false,
             is_flag: false,
             id: null,
-            user: {},
+            user: {
+                credencial: null
+            },
             autoForm: [
                 { label: 'Host SMTP', name: 'host_smtp' },
                 { label: 'Porta', name: 'port' },

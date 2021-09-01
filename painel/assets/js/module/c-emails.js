@@ -10,7 +10,9 @@ export default {
             id: null,
             Super,
             cache,
-            user: null,
+            user: {
+                credencial: null
+            },
             is_flag: false,
             templates_emails,
             playload: templates_emails,

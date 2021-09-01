@@ -51,14 +51,8 @@ globalThis.app = new Vue({
         this.boleto_link = localStorage.getItem('LINK_BOLETO')
     },
     methods: {
-        copy() {
-            navigator.clipboard.readText().then(text => outputElem.innerText = text);
-            const texto = document.getElementById("texto");
-            const btnCopiador = document.getElementById("btnCopiador");
-            btnCopiador.addEventListener("click", function () {
-                texto.select();
-                document.execCommand("Copy");
-            });
+        copiar( ref ) {
+            this.$refs[ref].select(); document.execCommand('copy');
         }
     }
 }).$mount("#app");
