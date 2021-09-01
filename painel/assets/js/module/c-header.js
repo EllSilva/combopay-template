@@ -74,7 +74,7 @@ export default {
         this.user = await this.Super.get_admin(this.cache.user_logged_id)
         let todas_intituicoes = {data:[]}
 
-        let minhas_instituicoes = null
+        let minhas_instituicoes = {}
         if(this.user.credencial!=1) {
              minhas_instituicoes = await this.Super.all_email_admin_institution(this.user.email)
             

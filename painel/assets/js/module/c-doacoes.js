@@ -22,7 +22,7 @@ export default {
         }
     },
     filters: {
-        is_price: val => parseInt( val ).toLocaleString('en-US', { style: 'currency', currency: 'BRL', }),        
+        is_price:  val => (val/100).toLocaleString('pt-br', { minimumFractionDigits: 2 }),        
         format_data(data) {
             return data.substr(0, 10).split('-').reverse().join('/')
         },
@@ -33,7 +33,8 @@ export default {
         status(status) {
             let lib = {
                 waiting_payment: 'Pendente',
-                refused: 'Cancelado'
+                refused: 'Cancelado',
+                paid: 'Pago'
             }
             return lib[status] || 'Pendente'
         }
@@ -42,7 +43,6 @@ export default {
         render() {
             // %0A
             let link = 'data:text/csv;charset=utf-8,'
-            console.log('ok')
 
             // created_at: "2021-08-06T01:09:31.000000Z"
             // doador_id: 4294967295
@@ -82,7 +82,6 @@ export default {
         this.doacoes = res
         globalThis._doacoes = res
         this.backup = res
-        console.log(this.backup)
     }
 }
 

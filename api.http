@@ -127,7 +127,7 @@ GET http://api.doardigital.com.br/v1/assinatura/por-doador/59
 
 
 ###
-GET http://api.doardigital.com.br/v1/assinatura/por-instituicao/1
+GET http://api.doardigital.com.br/v1/assinatura/por-instituicao/42
 
 
 ###
@@ -205,3 +205,7 @@ http://api.doardigital.com.br/v1/admin/por-instituicao/1
 
 ###
 http://api.doardigital.com.br/v1/instituicao/por-master/br5@outlook.com
+
+###
+
+http://api.doardigital.com.br/v1/transacao/por-instituicao/42

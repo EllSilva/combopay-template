@@ -234,7 +234,7 @@ export default {
 
     },
     filters: {
-        money: val => val.toLocaleString('en-US', { style: 'currency', currency: 'BRL', })
+        money: val => (val/100).toLocaleString('pt-br', { minimumFractionDigits: 2 })
     },
     methods: {
         graph(el, data) {
