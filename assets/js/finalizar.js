@@ -309,6 +309,7 @@ globalThis.app = new Vue({
 
             if (this.doacao.recorrente == 1) {
                 playload.plano_id = this.doacao.plan_id
+                playload.valor_plano = this.doacao.amount
                 playload.cliente.telefone = this.doacao.telefone.replace(/\D/gi, '').substr(2, 11)
                 playload.cliente.ddd = this.doacao.telefone.replace(/\D/gi, '').substr(0, 2)
             }

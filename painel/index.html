@@ -1203,11 +1203,11 @@
                             <span><img class="gravatar" src="./assets/img/gravatar.png"></span>
                             <span>
                                 <small>Doador</small> <br>
-                                {{doacao.nome||'Não Informado'}}
+                                {{doacao.nome|| doacao.nome_doador || 'Não Informado'}}
                             </span>
                             <span>
                                 <small>Valor</small> <br>
-                                {{doacao.quantia || 0 | is_price }}
+                                {{doacao.quantia || doacao.valor_plano || 0 | is_price }}
                             </span>
                             <span>
                                 <small>Status</small> <br>

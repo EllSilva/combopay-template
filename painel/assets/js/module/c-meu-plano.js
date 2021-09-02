@@ -107,6 +107,7 @@ export default {
                 // plano_id: this.doacao.plan_id,
                 plano_id: 614822,
                 quantia: "5000",
+                valor_plano: "5000",
                 cliente: {
                     nome: this.user.nome,
                     cpf: this.user.cpf.replace(/\D/ig, ''),
@@ -160,7 +161,6 @@ export default {
     async created() {
         this.credencial = localStorage.getItem('user_logged_credential_id')
         this.user = await this.Super.get_admin(this.cache.user_logged_id)
-        console.log(this.user)
         // await this.Super.put_admin(this.user.id, {
         //     credencial: 21
         // }) 

@@ -43,17 +43,6 @@ export default {
         render() {
             // %0A
             let link = 'data:text/csv;charset=utf-8,'
-
-            // created_at: "2021-08-06T01:09:31.000000Z"
-            // doador_id: 4294967295
-            // id: 13657745
-            // instituicao_id: 10
-            // nome: "Bruno"
-            // quantia: "500"
-            // status: "paid"
-            // tipo: "cartao_credito"
-            // updated_at: "2021-08-06T01:09:31.000000Z"
-
             this.doacoes = this.backup.filter(dc => {
                 
                 let corruent_data = Date.parse(dc.updated_at)
@@ -79,6 +68,7 @@ export default {
     },
     async mounted() {
         let res = await this.Super.all_doacao_by_institution(this.cache.institution)
+        console.log(res)
         this.doacoes = res
         globalThis._doacoes = res
         this.backup = res
