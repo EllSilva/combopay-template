@@ -49,6 +49,7 @@ export default {
         if (!globalThis._doadores) {
             globalThis._doadores = await this.Super.all_doadores_by_istitution(this.cache.institution)
         }
+        
         globalThis._doadores = Object.values(globalThis._doadores)
         let doador = globalThis._doadores.find(doador => doador.id == this.id)
         this.cep = doador.cep
@@ -66,6 +67,7 @@ export default {
         this.telefone = doador.telefone
 
         let history = await this.Super.get_doador_history(this.id)
+        console.log(history)
         history = history.map(i => {
             let lib = {
                 waiting_payment: `linear-gradient(#ffff00,#ffff00)`,

@@ -67,8 +67,7 @@ export default {
         tipo(newQuestion, oldQuestion) { this.render() },
     },
     async mounted() {
-        let res = await this.Super.all_doacao_by_institution(this.cache.institution)
-        console.log(res)
+        let res = (await this.Super.all_doacao_by_institution(this.cache.institution)).reverse()
         this.doacoes = res
         globalThis._doacoes = res
         this.backup = res

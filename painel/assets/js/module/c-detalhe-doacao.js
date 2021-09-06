@@ -33,9 +33,10 @@ export default {
             let lib = {
                 waiting_payment: "Pendente",
                 refused: "Cancelado",
-                paid: "pago"
+                paid: "pago",
+                credit_card: "Crédito"
             }
-            return lib[termo] || "Pendente"
+            return lib[termo] || termo
         }
     },
     methods: {
@@ -50,37 +51,18 @@ export default {
         }
         globalThis._doacoes = Object.values(globalThis._doacoes)
         let doacao = globalThis._doacoes.find(doacao => doacao.id == this.id)
+        console.log(doacao)
 
         this.id = doacao.id
         this.plano_id = doacao.plano_id
         this.created_at = doacao.created_at
         this.doador_id = doacao.doador_id
-        this.nome = doacao.nome
-        this.quantia = doacao.quantia
+        this.nome = doacao.nome || doacao.nome_doador
+        this.quantia = doacao.quantia || doacao.valor_plano || 0
         this.status = doacao.status
         this.tipo = doacao.tipo
-        this.boleto_code = doacao?.boleto_code
-        this.boleto_link = doacao?.boleto_link
-
-    
-        
-
-        // this.cep = doador.cep
-        // this.rua = doador.rua
-        // this.numero = doador.numero
-        // this.bairro = doador.bairro
-        // this.complemento = doador.complemento
-        // this.cidade = doador.cidade
-        // this.estado = doador.estado
-        // this.codigo_zoop = doador.codigo_zoop
-        // this.cpf = doador.cpf
-        // this.email = doador.email
-        // this.nome = doador.nome
-        // this.sobrenome = doador.sobrenome
-        // this.telefone = doador.telefone
-
-        
-        console.log(doacao)
+        this.boleto_code = doacao?.codigo_barras
+        this.boleto_link = doacao?.url        
 
     }
 }

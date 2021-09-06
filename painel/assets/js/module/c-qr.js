@@ -27,7 +27,7 @@ export default {
     async mounted() {
         let instituicao = await this.Super.get_institution( localStorage.getItem('institution') )
         var qrcode = new QRCode(this.$refs.print_qr, {
-            text: `https://${instituicao.subdominio}`,
+            text: `https://${instituicao.subdominio}.doardigital.com.br`,
             width: 230,
             height: 230,
             colorDark : "#000000",

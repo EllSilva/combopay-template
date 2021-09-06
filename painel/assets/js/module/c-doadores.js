@@ -26,7 +26,7 @@ export default {
         }
     },
     async mounted() {
-        let res = await this.Super.all_doadores_by_istitution(this.cache.institution)
+        let res = (await this.Super.all_doadores_by_istitution(this.cache.institution)).reverse()
         
         globalThis._doadores = res
         this.doadores = res

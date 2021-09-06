@@ -296,7 +296,7 @@
                             <small>Nome</small> <br>
                             <strong>{{nome}}</strong>
                         </div>
-                        <div>
+                        <div hidden>
                             <small>Sobrenome</small> <br>
                             <strong>{{sobrenome}}</strong>
                         </div>
@@ -308,7 +308,7 @@
                             <small>Email</small> <br>
                             <strong>{{email}}</strong>
                         </div>
-                        <div>
+                        <div hidden>
                             <small>Código</small> <br>
                             <strong>{{codigo_zoop}}</strong>
                         </div>
@@ -423,7 +423,7 @@
                     <div class="g g-2">
                         <div> <small>Nome</small> <br> <strong> {{nome}} </strong></div>
                         <div> <small>Valor</small> <br> <strong> {{quantia|money}} </strong></div>
-                        <div> <small>Tipo</small> <br> <strong> {{tipo}} </strong></div>
+                        <div> <small>Tipo</small> <br> <strong> {{tipo|traduz}} </strong></div>
                         <div> <small>Recorrente</small> <br> <strong> {{plano_id ? 'SIM' : 'NÃO'}} </strong></div>
                         <div> <small>Data</small> <br> <strong> {{created_at | data}} </strong></div>
                         <div> <small>Status</small> <br> <strong> {{status|traduz}} </strong></div>

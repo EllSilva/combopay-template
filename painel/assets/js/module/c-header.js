@@ -6,7 +6,7 @@ export default {
     <div class="a-header">
         <div @click="toggle()"> <img src="./assets/icon/menu.svg"> </div>
         <div> <img src="./assets/logo/logo.svg" class="not-filter"> </div>
-        <strong v-if="id!=0"> ID {{id}} - {{institution_name}} </strong>
+        <strong v-if="id!=0"> ID {{id}} - {{corruente_institution.nome_fantasia}} </strong>
         
         <img v-if="id!=0" @click="toggle_pop" src="./assets/icon/change.svg">
 
@@ -36,6 +36,9 @@ export default {
             user: {
                 credencial: null,
             },
+            corruente_institution: {
+                nome_fantasia: null
+            },
             instituicoes: [],
             institution_name: "Todos",
             resumo: [],
@@ -50,7 +53,6 @@ export default {
         },
         async updade_pop() {
             this.instituicoes = await this.Super.search_institution( this.search )
-            // console.log( search )
             let list_term = this.instituicoes.map( post => {
                     post.terms = `@ ${post.dominio} - ${post.subdominio}`
                     return post
@@ -72,6 +74,8 @@ export default {
     emits: ['toggle-menu'],
     async mounted() {
         this.user = await this.Super.get_admin(this.cache.user_logged_id)
+        this.corruente_institution = await this.Super.get_institution(this.cache.institution)
+        
         let todas_intituicoes = {data:[]}
 
         let minhas_instituicoes = {}
@@ -82,10 +86,10 @@ export default {
                 todas_intituicoes.data = minhas_instituicoes
             }
         }
+        
         if(this.user.credencial==1) {
             todas_intituicoes = await this.Super.all_institution()                
-        }
-        
+        }       
 
         this.id = this.cache.institution
         this.instituicoes = todas_intituicoes.data

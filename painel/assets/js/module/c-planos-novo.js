@@ -52,7 +52,8 @@ export default {
         async save() {
             let playload = {
                 quantia: this.form.amount.replace('.','').replace(',',''),
-                prazo: 30,
+                // prazo: 30,
+                prazo: 1,
                 nome: this.form.nome,
                 instituicao_id: this.form.instituicao_id,
                 instituicao_id: this.form.instituicao_id,
