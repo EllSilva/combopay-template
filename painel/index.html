@@ -85,12 +85,12 @@
                     </div>
                     <div class="space"></div>
 
-                    <div class="box-relatorio" v-if="total>0">
+                    <div class="box-relatorio" >
                         <label for="">Faturas</label>
                         <canvas ref="graph_faturas" width="100%" height="100"></canvas>
                     </div>
 
-                    <div class="g g-2" v-if="total>0">
+                    <div class="g g-2" >
                         <div class="box-relatorio">
                             <label for="">Quantidade de Doações</label>
                             <canvas ref="graph_quantidade_doacao" width="100%" height="100"></canvas>
@@ -101,7 +101,7 @@
                         </div>
                     </div>
 
-                    <div class="g g-3" v-if="total>0">
+                    <div class="g g-3" >
                         <div class="box-relatorio">
                             <label for="">Status Doação</label>
                             <canvas ref="graph_status_doacao" width="100%" height="100"></canvas>

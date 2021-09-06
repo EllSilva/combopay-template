@@ -182,7 +182,6 @@ export default {
         let saldo = await this.Super.institution_saldo(instituicao.recebedor_id)
         let historico = await this.Super.institution_historico(instituicao.recebedor_id)
         
-        console.log(historico)
 
         this.saldo[0].valor = saldo.disponivel
         this.saldo[1].valor = saldo.fundos_espera

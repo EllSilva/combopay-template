@@ -37,9 +37,12 @@ function onError(message) {
 }
 
 async function cadastrar() {
+    let $loading =  document.querySelector('.js-loading')
+    $loading.removeAttribute('hidden')
     closeError()
     if (validarPass(getDados()).length > 0) return onError(validarPass(getDados()))
     let register = await SuperRegisterAdmin(getDados())
+    $loading.setAttribute('hidden','')
     if (register.status) return onError(register.message)
     await SendWhatsapp(getDados().telefone)
     if(window.location.hostname != '127.0.0.1') {
