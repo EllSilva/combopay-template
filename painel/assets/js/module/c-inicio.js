@@ -142,6 +142,7 @@ export default {
         }
         this.graph('graph_faturas', {
             type: 'line',
+            responsive: true,
             data: {
                 labels: labels,
                 datasets: [

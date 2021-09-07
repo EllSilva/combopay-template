@@ -161,7 +161,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .editor {
     display: grid;
-    grid-gap: 15px;
+    gap: 15px;
     padding: 17px;
     background-color: #EEE;
     border-radius: 4px;
@@ -309,7 +309,7 @@ h1, h2, h3, h4, h5, h6 {
     padding: 12px;
     border-radius: 10px;
     grid-template-columns: 50px 1fr 40px;
-    grid-gap: 20px;
+    gap: 20px;
     align-items: center;
     box-shadow: 4px 4px 18px rgba(0, 0, 0, 0.1)
 }
@@ -500,8 +500,9 @@ button[disabled] {
 .l-admin {
     display: grid;
     width: 100%;
+    max-width: 100vw;
     min-height: 100vh;
-    grid-template-areas: "aside header" "aside body" "aside footer";
+    grid-template-areas: "header header" "aside body" "aside footer";
     grid-template-columns: 21% 1fr;
     grid-template-rows: 60px 1fr 50px;
     background-color: #ecf0f1
@@ -534,7 +535,9 @@ button[disabled] {
     background-color: #FFF;
     align-items: center;
     text-align: center;
-    text-transform: uppercase
+    text-transform: uppercase;
+    max-width: 100vw;
+    box-sizing: border-box;
 }
 
 .a-header img {
@@ -557,7 +560,9 @@ button[disabled] {
 }
 
 .a-body {
-    grid-area: body
+    grid-area: body;
+    display: block;
+    max-width: 100vw;
 }
 
 .a-footer {
@@ -825,7 +830,7 @@ button[disabled] {
 .grid-search {
     display: grid;
     grid-template-columns: 1fr 40px;
-    grid-gap: 20px
+    gap: 20px
 }
 
 .grid-search img {
@@ -924,7 +929,9 @@ input:checked~.toogle i::before {
 
 .g {
     display: grid;
-    grid-gap: 20px
+    box-sizing: border-box;
+    max-width: 100vw;
+    gap: 20px;
 }
 
 .g-1 {
@@ -1019,15 +1026,30 @@ input:checked~.toogle i::before {
     grid-template-columns: repeat(23, 1fr)
 }
 
+@media (max-width: 800px) {
+    .s-g-1 { grid-template-columns: repeat(1, 1fr); }
+    .s-g-2 { grid-template-columns: repeat(2, 1fr); }
+    .s-g-3 { grid-template-columns: repeat(3, 1fr); }
+    .s-g-4 { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 500px) {
+    .x-g-1 { grid-template-columns: repeat(1, 1fr); }
+    .x-g-2 { grid-template-columns: repeat(2, 1fr); }
+    .x-g-3 { grid-template-columns: repeat(3, 1fr); }
+    .x-g-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
 .popupo-bg {
     display: flex;
-    width: calc(100vw - 60px);
+    width: 100vw ;
     height: 100vh;
     position: fixed;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
+    z-index: 999999;
     align-items: center;
-    justify-content: center
+    justify-content: center;
+    top: 0;
+    left: 0;
 }
 
 .popupo-bg>div {
@@ -1133,7 +1155,7 @@ input:checked~.toogle i::before {
     border: 1px solid #CCC;
     border-radius: 5px;
     overflow: hidden;
-    grid-gap: 20px
+    gap: 20px
 }
 
 .step-grid img {
@@ -1188,4 +1210,11 @@ input:checked~.toogle i::before {
     border: 0;
     padding: 0;
     margin: 0;
+}
+
+.responsive-graph {
+    display: block;
+    width: 100% !important;
+    max-width: 80vw !important;
+    height: 400px !important;
 }

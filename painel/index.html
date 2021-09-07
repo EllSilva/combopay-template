@@ -70,7 +70,7 @@
                 <c-step></c-step>
                 <div class="a-body padding-20">
                     <div class="space"></div>
-                    <div class="g g-3">
+                    <div class="g g-3 s-g-2 x-g-1">
                         <div class="resumo" v-for="item in resumos">
                             <div :style="{backgroundColor: item.color}">
                                 <img :src="'./assets/icon/'+item.ico">
@@ -87,32 +87,32 @@
 
                     <div class="box-relatorio" >
                         <label for="">Faturas</label>
-                        <canvas ref="graph_faturas" width="100%" height="100"></canvas>
+                        <canvas ref="graph_faturas" class="responsive-graph"></canvas>
                     </div>
 
-                    <div class="g g-2" >
+                    <div class="g g-2 x-g-1" >
                         <div class="box-relatorio">
                             <label for="">Quantidade de Doações</label>
-                            <canvas ref="graph_quantidade_doacao" width="100%" height="100"></canvas>
+                            <canvas ref="graph_quantidade_doacao" ></canvas>
                         </div>
                         <div class="box-relatorio">
                             <label for="">Forma de Pagamento</label>
-                            <canvas ref="graph_forma_pagamento" width="100%" height="100"></canvas>
+                            <canvas ref="graph_forma_pagamento" ></canvas>
                         </div>
                     </div>
 
-                    <div class="g g-3" >
+                    <div class="g g-3 x-g-1" >
                         <div class="box-relatorio">
                             <label for="">Status Doação</label>
-                            <canvas ref="graph_status_doacao" width="100%" height="100"></canvas>
+                            <canvas ref="graph_status_doacao" ></canvas>
                         </div>
                         <div class="box-relatorio">
                             <label for="">Tipos Doadores</label>
-                            <canvas ref="graph_tipos_doadores" width="100%" height="100"></canvas>
+                            <canvas ref="graph_tipos_doadores" width="100%" ></canvas>
                         </div>
                         <div class="box-relatorio">
                             <label for="">Status Doadores</label>
-                            <canvas ref="graph_status_doadores" width="100%" height="100"></canvas>
+                            <canvas ref="graph_status_doadores" width="100%" ></canvas>
                         </div>
                     </div>
 

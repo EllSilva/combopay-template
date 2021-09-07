@@ -12,7 +12,7 @@ export default {
         <div>
             <c-step></c-step>
             <div class="a-body padding-20">
-                <div class="g g-3">
+                <div class="g g-3 s-g-1">
                     <div class="resumo" v-for="item in saldo" >
                         <div :style="{backgroundColor: item.color}">
                             <img :src="'./assets/icon/'+item.ico">
@@ -25,7 +25,7 @@ export default {
                     </div>
                 </div>
                 <div class="space"></div>
-                <div class="g g-2">
+                <div class="g g-2 s-g-1">
                     <div class="body_box form" style="margin:0">
                         <h2>Solicitar Saque</h2>
                         <input type="radio" value="total" v-model="tipo" name="tipo">

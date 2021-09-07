@@ -110,7 +110,7 @@ const app = new Vue({
     router,
     data: {
         title: 'Painel',
-        open: true,
+        open: false,
     },
     created() {
         var corruent = this
