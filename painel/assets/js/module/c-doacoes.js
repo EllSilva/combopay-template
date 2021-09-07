@@ -67,8 +67,14 @@ export default {
         tipo(newQuestion, oldQuestion) { this.render() },
     },
     async mounted() {
-        let res = (await this.Super.all_doacao_by_institution(this.cache.institution)).reverse()
-        this.doacoes = res
+        let res = (await this.Super.all_doacao_by_institution(this.cache.institution))
+        this.doacoes = res.sort((a,b) => {
+            let A = Date.parse(a.created_at)
+            let B = Date.parse(b.created_at)
+            if ( A < B ) return -1
+            if ( A > B ) return 1
+            return 0
+        }).reverse()
         globalThis._doacoes = res
         this.backup = res
     }

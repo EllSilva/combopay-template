@@ -355,35 +355,37 @@
                 <div class="body_box">
                     <h1>Minhas Assinatura</h1>
                     <div>
+
+
                         <div class="table">
-                            <div>
+                            <div v-for="plano in meus_planos">
                                 <span>
                                     <small>Minha Assinatura</small> <br>
                                     <p>
-                                        <i>*</i>
-                                        DD/MM/YYYY
+                                        <i hidden>*</i>
+                                        {{plano.created_at|data}}
                                     </p>
                                 </span>
                                 <span>
                                     <small>Métodos</small> <br>
-                                    <p>Cartão</p>
+                                    <p>{{plano.tipo|traduz}}</p>
                                 </span>
                                 <span>
                                     <small>Valor</small> <br>
-                                    <p>R$0,00</p>
+                                    <p>{{plano.valor_plano|money}}</p>
                                 </span>
-                                <span>
+                                <span hidden>
                                     <small>Próximo pagamento</small> <br>
                                     <p>DD/MM/YYYY</p>
                                 </span>
                                 <span>
                                     <small>Ação</small> <br>
                                     <label>
-                                        <input type="checkbox" hidden>
+                                        <input type="checkbox" :checked="plano.status=='paid'" hidden>
                                         <div class="toogle"><i></i></div>
                                     </label>
                                 </span>
-                                <span>
+                                <span hidden>
                                     <small>Data Acação</small> <br>
                                     <p>DD/MM/YYYY</p>
                                 </span>
@@ -401,7 +403,7 @@
                         <span v-for="item in history" class="available" :style="{background: item.cor}">
                             <b>{{item.status | traduz}}</b> <br>
                             {{item.created_at | data}} <br>
-                            {{item.quantia | money }}
+                            {{item.quantia || item.valor_plano | money }}
                         </span>
 
                     </div>
@@ -1528,8 +1530,8 @@
                         <div v-for="email in playload">
                             <span class="w25">{{ email.cat }}</span>
                             <label class="w25">
-                                <input type="checkbox" :checked="email.status" hidden>
-                                <div class="toogle" @click="tootle_statu(email.id)"><i></i></div>
+                                <input type="checkbox" @input="tootle_statu(email.id)" :checked="email.status" hidden>
+                                <div class="toogle" ><i></i></div>
                             </label>
                             <span>
                                 <a :disabled="is_flag"

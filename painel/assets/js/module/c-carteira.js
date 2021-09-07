@@ -38,12 +38,17 @@ export default {
                     <div class="body_box" style="margin:0">
                         <h2>Histórico</h2>
                         <div class="historico">
-                            <span v-for="post in extrato" :class="post.status">
-                                <b>{{post.type}}</b> <br>
+                            <span v-for="(post, i) in extrato" :class="post.status" v-if=" i < 3 || view_all ">
+                                <b>{{post.type|traduz}}</b> <br>
                                 R\${{post.amount | money}} <br>
                                 {{post.date_created | date }}
                             </span>
                         </div>
+                        <center>
+                            <span @click="mostrar">
+                            {{ view_all ? 'Minimizar' : 'Mostrar Todas' }}
+                            </span>
+                        </center>
                     </div>
                 </div>
             </div>
@@ -60,13 +65,14 @@ export default {
             money,
             tipo: "total",
             valor: 0,
+            view_all: false,
             saldo: [
                 {
                     color: "#6699df",
                     ico: "metas.svg",
                     id: "available",
                     label: "Saldo Liberado",
-                    valor: 3019898,
+                    valor: 0,
                     estimativa: "",
                     
                 },
@@ -83,110 +89,36 @@ export default {
                     ico: "metas.svg",
                     id: "transferred",
                     label: "Total Retirado",
-                    valor: 3163500,
+                    valor: 0,
                     estimativa: "",
                 }
             ],
-            extrato: [
-                {
-                    "object": "balance_operation",
-                    "id": 2499850,
-                    "status": "available",
-                    "type": "payable",
-                    "amount": 100000,
-                    "fee": 115,
-                    "date_created": "2017-08-03T18:20:54.464Z",
-                    "movement_object": {
-                        "object": "payable",
-                        "id": 1966396,
-                        "status": "paid",
-                        "amount": 100000,
-                        "fee": 115,
-                        "anticipation_fee": 0,
-                        "installment": 1,
-                        "transaction_id": 1785151,
-                        "split_rule_id": "sr_cj5tws6kk001oij6d6lw8mmi1",
-                        "bulk_anticipation_id": null,
-                        "recipient_id": "re_cj5idth9i00lc8c6elboaxyhs",
-                        "payment_date": "2017-09-03T03:00:00.000Z",
-                        "original_payment_date": null,
-                        "type": "refund",
-                        "payment_method": "credit_card",
-                        "accrual_date": null,
-                        "date_created": "2017-07-03T18:20:54.457Z"
-                    }
-                }, {
-                    "object": "balance_operation",
-                    "id": 2499858,
-                    "status": "available",
-                    "type": "payable",
-                    "amount": 10000,
-                    "fee": 115,
-                    "date_created": "2017-08-03T18:20:54.464Z",
-                    "movement_object": {
-                        "object": "payable",
-                        "id": 1636196,
-                        "status": "paid",
-                        "amount": 10000,
-                        "fee": 115,
-                        "anticipation_fee": 0,
-                        "installment": 1,
-                        "transaction_id": 1785148,
-                        "split_rule_id": null,
-                        "bulk_anticipation_id": null,
-                        "recipient_id": "re_cj5idth9i00lcer5elboaxyhs",
-                        "payment_date": "2017-05-03T03:00:00.000Z",
-                        "original_payment_date": null,
-                        "type": "credit",
-                        "payment_method": "credit_card",
-                        "accrual_date": null,
-                        "date_created": "2017-03-03T18:20:54.457Z"
-                    }
-                }, {
-                    "object": "balance_operation",
-                    "id": 2499868,
-                    "status": "available",
-                    "type": "payable",
-                    "amount": 30000,
-                    "fee": 115,
-                    "date_created": "2017-08-03T18:20:54.464Z",
-                    "movement_object": {
-                        "object": "payable",
-                        "id": 1966185,
-                        "status": "paid",
-                        "amount": 30000,
-                        "fee": 115,
-                        "anticipation_fee": 0,
-                        "installment": 3,
-                        "transaction_id": 1785141,
-                        "split_rule_id": null,
-                        "bulk_anticipation_id": null,
-                        "recipient_id": "re_cj5idth9i00lc8c6elbeiayhs",
-                        "payment_date": "2017-03-03T03:00:00.000Z",
-                        "original_payment_date": null,
-                        "type": "refund",
-                        "payment_method": "credit_card",
-                        "accrual_date": null,
-                        "date_created": "2017-04-03T18:20:54.457Z"
-                    }
-                }
-            ],
+            extrato: [],
         }
     },
     filters: {
         money: (v) => money( `${v}` ),
-        date: v => v.substr(0, 10).split('-').reverse().join('/')
+        date: v => v.substr(0, 10).split('-').reverse().join('/'),
+        traduz: text => {
+            let lib = {
+                payable: 'Pago'
+            }
+            return lib[text] || text
+        }
     },
     async mounted() {
         let instituicao = await this.Super.get_institution(this.cache.institution)
         let saldo = await this.Super.institution_saldo(instituicao.recebedor_id)
-        let historico = await this.Super.institution_historico(instituicao.recebedor_id)
-        
+        let saques = await this.Super.institution_saques(instituicao.recebedor_id)
+        this.extrato = saques      
 
         this.saldo[0].valor = saldo.disponivel
         this.saldo[1].valor = saldo.fundos_espera
         this.saldo[2].valor = saldo.transferidos_para_conta
     },
     methods: {
+        mostrar() {
+            this.view_all = !this.view_all
+        }
     }
 }

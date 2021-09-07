@@ -119,7 +119,9 @@ class App {
     }
     
     async get_doador_history(id) {
-        return await this.get(`/transacao/por-doador/${id}`, {})
+        let assinatura = await this.get(`/assinatura/por-doador/${id}`, {})
+        let transacao = await this.get(`/transacao/por-doador/${id}`, {})
+        return [...assinatura, ...transacao]
     }
 
     async all_doacao() {
@@ -180,6 +182,10 @@ class App {
     async institution_saldo( id_recebedor ) {
         return await this.get(`/instituicao/saldo/${id_recebedor}`, {})
     }
+    async institution_saques( recebedor_id ) {
+        return await this.get(`/instituicao/saldo-historico/${recebedor_id}`, {})
+    }
+
     async institution_historico( id_recebedor ) {
         return await this.get(`/instituicao/status/${id_recebedor}`, {})
     }

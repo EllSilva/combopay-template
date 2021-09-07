@@ -21,7 +21,8 @@ export default {
             nome: null,
             sobrenome: null,
             telefone: null,
-            history: []
+            history: [],
+            meus_planos: [],
 
         }
     },
@@ -37,11 +38,12 @@ export default {
             let lib = {
                 waiting_payment: "Pendente",
                 refused: "Cancelado",
-                paid: "pago"
+                paid: "Pago",
+                credit_card: "Cartão",
+                boleto: "Boleto"
             }
-            return lib[termo] || "Pendente"
+            return lib[termo] || termo
         }
-        // 2021-07-26T19:00:03.000000Z
     },
     methods: {},
     async mounted() {
@@ -67,7 +69,15 @@ export default {
         this.telefone = doador.telefone
 
         let history = await this.Super.get_doador_history(this.id)
-        console.log(history)
+        history.forEach( pay => {
+            if( pay.plano_id ) {
+                let exits = this.meus_planos.find( p => p.plano_id == pay.plano_id )
+                if( !exits ) {
+                    this.meus_planos.push(pay)
+                }
+            }
+        });
+        console.log(this.meus_planos)
         history = history.map(i => {
             let lib = {
                 waiting_payment: `linear-gradient(#ffff00,#ffff00)`,
@@ -78,7 +88,6 @@ export default {
             return i
         })
         this.history = history
-        console.log(history)
 
     }
 }
