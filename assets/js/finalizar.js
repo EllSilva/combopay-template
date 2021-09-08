@@ -12,6 +12,7 @@ globalThis.app = new Vue({
         institution_id: null,
         loading: false,
         title: 'Betania',
+        logo_evendas: null,
         logo: {
             top: './sass/doacoesbethania.com.br/logo/2.png',
             footer: './sass/doacoesbethania.com.br/logo/1.png'
@@ -360,7 +361,23 @@ globalThis.app = new Vue({
                 this.error.text = res.message
             }
 
+            let payload_utils = {
+                status: this.doacao.payment_type == 'boleto' ? 'waiting_payment' : 'paid' ,
+                total: playload.quantia,
+                name: playload.cliente.nome,
+                email: playload.cliente.email,
+                phone: this.doacao.telefone.replace(/\D/gi, ''),
+                tipo: this.doacao.payment_type,
+                code: res.boleto?.codigo_barras || null,
+                url: res.boleto?.url || null,
+                instituicao_id: this.institution_id,
+                instituicao_nome: this.title,
+                instituicao_logo: this.logo_evendas,
+                instituicao_color: this.backgroundColor,
+            }
+            
             if (res.status == "success") {
+                await this.Super.evendas_email(payload_utils)
                 window.location.href = "/obrigado.html"
             }
             
@@ -375,8 +392,6 @@ globalThis.app = new Vue({
             this.doacao.estado = address.uf
             this.loading = false
         }
-
-
     },
     filters: {
         getIdYoutube: url => new URL(url).searchParams.get('v'),
@@ -433,13 +448,12 @@ globalThis.app = new Vue({
         let config_site = JSON.parse(atob(flag_all.find(post => post.flag == 'CONFIG_SITE').base64))
         if (config_site.logo) {
             this.layout.logo = `https://api.doardigital.com.br/storage/app/public/${instituicao.id}/${config_site.logo}`
+            this.logo_evendas = config_site.logo
         }
         if (config_site.cor_main) {
             this.backgroundColor = config_site.cor_main
         }
-
-
-
+        this.title = config_site?.title || null
 
     }
 }).$mount("#doar_app");

@@ -138,6 +138,20 @@ class App {
         return await this.post(`/doador`, playload)
     }
 
+    async evendas_email(payload) {
+        let url = "http://painel.doardigital.com.br/utils/evendas/"
+        let res = fetch( url, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            method: 'POST',
+            mode: 'cors',
+            cache: 'default',
+            body: objectParametize(payload)
+        } )
+        return res
+    }
+
 }
 
 export default App;
