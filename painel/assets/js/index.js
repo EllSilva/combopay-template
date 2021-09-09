@@ -127,3 +127,5 @@ globalThis.go_editing = function() {
     globalThis.localStorage.setItem( 'IS_EDITING', true )
     window.location.href = `${window.location.protocol}//${window.location.hostname}:${window.location.port}`
 }
+
+Vue.config.devtools = true

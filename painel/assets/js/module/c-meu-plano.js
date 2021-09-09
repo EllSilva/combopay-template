@@ -9,7 +9,7 @@ export default {
             cache,
             user: null,
             loading: false,
-            credencial: null,
+            credencial: 0,
             plano_id: "1386032",
             error: {
                 status: false,
@@ -145,7 +145,7 @@ export default {
                 return
             }
 
-            if( this.user.credencial == 21 ) {
+            if( this.user?.credencial == 21 ) {
                 window.location.href = '#/minhas-instituicoes/1'
                 localStorage.setItem('user_logged_credential_id', 16)
                 await this.Super.put_admin(this.user.id, {

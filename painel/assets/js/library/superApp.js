@@ -153,6 +153,7 @@ class App {
         return await this.get(`/instituicao/por-dominio/${domain}`, {})
     }
     async get_institution(id) {
+        if( id == 0) return {}
         return await this.get(`/instituicao/${id}`, {})
     }
     async all_institution(step = 1) {

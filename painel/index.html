@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./assets/css/index.css">
     <link rel="shortcut icon" href="./assets/logo/ico.png" type="image/x-icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js" defer></script>
+    
     <script src="./assets/js/library/qrcode.js" defer></script>
     <script src="./assets/js/index.js" type="module" defer></script>
 </head>
@@ -620,7 +621,7 @@
                             </div>
                         </div>
                         <div>
-                            <div v-if="user.credencial == 21">
+                            <div v-if="credencial == 21">
                                 <form class="form" @submit="contratar_plano()" action="javascript:void(0)">
                                     <svg style="width: 300px; margin: 0 auto;" viewBox="0 0 141.287 88.635"
                                         xmlns="http://www.w3.org/2000/svg">
