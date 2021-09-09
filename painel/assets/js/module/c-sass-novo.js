@@ -121,6 +121,7 @@ export default {
             this.feedback.message = res?.message
 
             if (res?.status != 'error' && !this.black.includes(this.form.subdominio)) {
+                this.loading = true
                 let subdominio = this.form.subdominio
                 let minha_nova_instituicao = await this.Super.get_institution_by_domain(subdominio)
                 this.cache.institution = minha_nova_instituicao.id
@@ -150,14 +151,17 @@ export default {
                 playload.quantia = "20000"
                 playload.nome = "Plano 200"
                 await this.Super.plano_post(playload)
+                this.loading = false
 
             }
 
             if( this.user.credencial == 16 ) {
                 localStorage.setItem('user_logged_credential_id', 17)
+                this.loading = true
                 await this.Super.put_admin(this.user.id, {
                     credencial: 17
                 }) 
+                this.loading = false
                 window.location.href = '#/planos'
                 return
             }

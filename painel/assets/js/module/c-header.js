@@ -80,17 +80,14 @@ export default {
 
         let minhas_instituicoes = {}
         if(this.user.credencial!=1) {
-             minhas_instituicoes = await this.Super.all_email_admin_institution(this.user.email)
-            
-            if(todas_intituicoes.id) {
-                todas_intituicoes.data = minhas_instituicoes
-            }
+            minhas_instituicoes = await this.Super.all_email_admin_institution(this.user.email)
+            todas_intituicoes.data = [minhas_instituicoes]
         }
         
         if(this.user.credencial==1) {
             todas_intituicoes = await this.Super.all_institution()                
-        }       
-
+        }   
+        
         this.id = this.cache.institution
         this.instituicoes = todas_intituicoes.data
         this.total = todas_intituicoes.total
