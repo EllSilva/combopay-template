@@ -1,0 +1,77 @@
+/* BANNER HOME */
+.banner{width:100%; height:800px; position: relative; clear: both; background-image: url(../imagens/fundo_campanha.png); background-repeat: no-repeat; background-size: auto 100%; background-position: center center; z-index: 7; }
+/*.banner .hero { width:750px; height:300px; position: absolute; margin: 360px 0px 0px 0px; background: url(../imagens/hero.png) no-repeat center center; } */
+
+.doacao {position: relative; text-align: center; clear: both; height: auto; padding: 0px; margin: 0px; width:100%; text-align: center; z-index: 17; }
+.doacao p { font-size: 14px; color: #606060; font-weight: 400; font-family: 'Aleo'; text-align: left; height: auto; line-height: 22px; padding: 0px 0px 50px 0px; }
+.doacao #formulario { width: 100%; background-color: #ffffff; padding: 20px 0px; text-align: center; margin: 0 auto; height: auto; position: relative; float: none; display: inline-block; -webkit-box-shadow: 0px 0px 35px 0px rgba(0,0,0, 0.2); -moz-box-shadow: 0px 0px 35px 0px rgba(0,0,0, 0.2); box-shadow: 0px 0px 35px 0px rgba(0,0,0, 0.2); }
+.doacao #formulario .valores { width: auto; height: 42px; float: left; }
+.doacao #formulario .valores ul { width: auto; height: 42px; }
+.doacao #formulario .valores ul li { padding-left: 40px; font-style: italic; background: #ffffff url(../imagens/espaco.png) no-repeat 10px center; padding-right: 10px; margin-right: 8px; width: auto; height: 42px; float: left; font-size: 30px; color: #396045; font-weight: 700; font-family: 'Aleo'; text-align: left; line-height: 38px; cursor: pointer; -moz-transition: all 0.3s ease; -o-transition: all 0.3s ease; -webkit-transition: all 0.3s ease; transition: all 0.3s ease; -webkit-border-radius:25px; -moz-border-radius:25px; border-radius:25px; letter-spacing: -1px }
+.doacao #formulario .valores ul li.ativo { padding-left: 40px; font-style: italic; background: #c5191c url(../imagens/check-valor.png) no-repeat 10px center; padding-right: 10px; margin-right: 8px; width: auto; height: 42px; float: left; font-size: 30px; color: #ffffff; font-weight: 700; font-family: 'Aleo'; text-align: left; line-height: 38px; cursor: pointer; -moz-transition: all 0.3s ease; -o-transition: all 0.3s ease; -webkit-transition: all 0.3s ease; transition: all 0.3s ease; -webkit-border-radius:25px; -moz-border-radius:25px; border-radius:25px; letter-spacing: -1px }
+.doacao #formulario .valores ul li .cifrao { float: left; font-style: italic; font-size: 12px; padding-right: 5px; }
+.doacao #formulario .doe { float: right; width: 160px; cursor: pointer; margin: 10px 0px 0px 0px; -webkit-border-radius: 30px; -moz-border-radius: 30px; border-radius: 30px; padding: 0px 30px 0px 20px; font-size: 26px; line-height: 26px; color: #ffffff; background-image: url(../imagens/seta.png); background-position:140px center; background-repeat: no-repeat; background-color: #c5191c; font-style: italic; font-weight: 700; font-family: 'Aleo'; text-align: center; height: 42px; position: relative; }
+.doacao #formulario select { width: 240px; float: right; font-style: italic; height: 42px; line-height: 42px; background-color: #ffffff; text-align: center; color: #396045; font-size: 16px; font-weight: 400; font-family: 'Aleo'; }
+.doacao #formulario input[type=text] { float: left; background-color: #ffffff; height: 42px; padding: 0px; width: 195px; margin: 10px 8px 0px 0px; font-size: 16px; border-bottom: #c5191c 1px solid; font-style: italic; font-weight: 400; line-height: 42px; font-family: 'Aleo'; color: #396045; -moz-transition: all 0.3s ease; -o-transition: all 0.3s ease; -webkit-transition: all 0.3s ease; transition: all 0.3s ease; }
+.doacao #formulario .colunas { width: 100%; height: auto; clear: both; position: relative; overflow: hidden; }
+
+.padre { width: 100%; height: auto; position: relative; clear: both; z-index: 11; }
+.padre .sobre { width: 720px; height: auto; position: relative; clear: both; }
+.padre .sobre h2 { width: 600px; height: auto; display: inline-block; vertical-align: top; position: relative; color: #396045; font-size: 18px; line-height: 24px; font-family: 'Aleo'; font-weight: 400; font-style: italic; margin-right: 35px; padding: 100px 0px 50px 0px }
+.padre .sobre h2 strong { font-weight: 700; }
+.padre .util { background: url(../imagens/padreleo.jpg) no-repeat right top; }
+.padre .sobre .fotos { width: 720px; height: 180px; position: relative; clear: both; }
+.padre .sobre .fotos ul { width: 100%; height: auto; position: relative; list-style: none; overflow: hidden; }
+.padre .sobre .fotos ul li { width: 167px; height: 167px; float: left; position: relative; margin: 0px 5px; -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; overflow: hidden; background-color: #ffffff; }
+.padre .sobre .fotos ul li img { width: 167px; height: 167px; }
+.padre .sobre .fotos ul li:hover img { opacity: 0.6; }
+.padre .sobre .fotos #p1 { background:url(../imagens/seta1.png) no-repeat center center; margin-top: -11px; top:50%; position:absolute; margin-left: -380px; width: 8px; height: 14px; left:50%; } 
+.padre .sobre .fotos #n1 { background:url(../imagens/seta2.png) no-repeat center center; margin-top: -11px; top:50%; position:absolute; margin-right: -380px; width: 8px; height: 14px; right: 50%; }
+
+.contas { width: 100%; height: auto; position: relative; clear: both; background-color: #ffffff; z-index: 11; padding: 20px 0px 50px 0px; }
+.contas h3 { width: -moz-calc(100% - 420px); width: -webkit-calc(100% - 420px); width: -o-calc(100% - 420px); width: calc(100% - 420px); height: auto; display: inline-block; vertical-align: top; position: relative;  color: #396045; font-size: 16px; line-height: 20px; font-family: 'Aleo'; font-weight: 300; font-style: italic; margin-right: 35px; padding: 30px 0px 20px 0px }
+.contas .bancos { width: 380px; height: auto; display: inline-block; vertical-align: top; position: relative; }
+.contas .bancos ul { width: 100%; height: auto; position: relative;  list-style-type: none; }
+.contas .bancos ul li { width: -moz-calc(100% - 80px); width: -webkit-calc(100% - 80px); width: -o-calc(100% - 80px); width: calc(100% - 80px); height: auto; min-height: 50px; background-repeat: no-repeat; background-position: left center; color: #396045; font-size: 14px; line-height: 18px; font-family: 'Aleo'; font-weight: 300; font-style: italic; padding-left: 80px; }
+.contas .bancos ul li.caixa { background-image: url(../imagens/caixa.png); }
+.contas .bancos ul li.bb { background-image: url(../imagens/bb.png); }
+.contas .bancos ul li.bradesco { background-image: url(../imagens/bradesco.png); }
+.contas .bancos ul li.itau { background-image: url(../imagens/itau.png); }
+
+.quero { width: 320px; left: 50%; margin-left: -160px; height: auto; padding: 12px 0px; text-align: center; color: #ffffff; background-color: #396045; font-size: 26px; font-family: 'Aleo'; font-weight: 700; font-style: italic; position: fixed; bottom: 10px; -webkit-border-radius: 40px; -moz-border-radius: 40px; border-radius: 40px; overflow: hidden; z-index: 15; -moz-transition: all 0.5s ease; -o-transition: all 0.5s ease; -webkit-transition: all 0.5s ease; transition: all 0.5s ease; }
+.quero1 {color: #ffffff; background-color: #396045; font-size: 26px; font-family: 'Aleo'; font-weight: 700; font-style: italic; border-radius: 40px; padding: 14px 30px;} 
+
+.quero:hover { background-color: #ffb500; -webkit-box-shadow: 0px 4px 4px 0px rgba(0,0,0, 0.3); -moz-box-shadow: 0px 4px 4px 0px rgba(0,0,0, 0.3); box-shadow: 0px 4px 4px 0px rgba(0,0,0, 0.3); bottom: 40px; }
+.quero_seta { left: 50%; margin-left: -31px; position: fixed; width: 52px; height: 36px; background: url(../imagens/seta-cadastro.png) repeat center center; bottom: 90px; z-index: 16; -moz-transition: all 0.5s ease; -o-transition: all 0.5s ease; -webkit-transition: all 0.5s ease; transition: all 0.5s ease; }
+
+@media screen and (max-width: 1100px) {
+	.banner{width:100%; height:530px;  background-image: url(../imagens/fundo_campanha2.jpg); background-repeat: no-repeat; background-position: center center; background-size: auto 100%; }
+	.banner .hero { width:100%; position: absolute; margin: 180px 0px 0px 0px; padding: 0px; background-image: url(../imagens/hero.png); background-repeat: no-repeat; background-position: center center; background-size: 95% auto; } 
+
+	.doacao { width: 100%; background-color: transparent; text-align: center; clear: both; height: auto; padding: 0px 0px 40px 0px; margin: 0px 0px 0px 0px; }
+	.doacao p {  text-align: center; }
+	.doacao #formulario { width: 94%; padding: 20px 3%; text-align: center; margin: 0 auto; height: auto; position: relative; float: none; display: inline-block; -webkit-box-shadow: 0px 0px 35px 0px rgba(0,0,0, 0.2); -moz-box-shadow: 0px 0px 35px 0px rgba(0,0,0, 0.2); box-shadow: 0px 0px 35px 0px rgba(0,0,0, 0.2); }
+	.doacao #formulario .valores { width: 100%; height: auto; float: none; position: relative; }
+	.doacao #formulario .valores ul { width: 100%; height: auto; text-align: center; }
+	.doacao #formulario .valores ul li,
+	.doacao #formulario .valores ul li.ativo { float: none; display: inline-block; }
+	.doacao #formulario .doe { float: none; display: inline-block; }
+	.doacao #formulario select , .doacao #formulario input[type=text] { float: none; padding: 0px 3%; width: 94%; }
+
+	.padre { width: 94%; padding: 0px 3%; }
+	.padre .sobre { width: 100%; }
+	.padre .sobre h2 { width: 100%; margin-right: 0px; padding: 50px 0px; text-align: center; }
+	.padre .util { background: #ffffff url(../imagens/espaco.png) no-repeat right top; }
+	.padre .sobre .fotos { width: 100%; height: auto; }
+	.padre .sobre .fotos ul { text-align: center; height: auto; }
+	.padre .sobre .fotos ul li { width: 150px; height: 150px; float: none; display: inline-block; margin: 5px; vertical-align: top; }
+	.padre .sobre .fotos ul li img { width: 150px; height: 150px; }
+	.padre .sobre .fotos #p1, .padre .sobre .fotos #n1 { display: none; } 
+
+	.contas { width: 94%; padding: 20px 3% 50px 3%; text-align: center; }
+	.contas h3 { width: 100%; text-align: center; padding-bottom: 50px; }
+	.contas .bancos { width: 320px; }
+	.contas .bancos ul li { text-align: left; }
+
+	.quero, .quero_seta  { display: none; }
+}
