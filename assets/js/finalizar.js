@@ -377,14 +377,18 @@ globalThis.app = new Vue({
             }
             
             if (res.status == "success") {
+                this.loading = true
                 await this.Super.evendas_email(payload_utils)
+                this.loading = false
                 window.location.href = "/obrigado.html"
             }
             
         },
         async viaCep() {
+            let cep = this.doacao.cep
+            if(cep.length < 9) return
             this.loading = true
-            let res = await fetch(`https://viacep.com.br/ws/${this.doacao.cep}/json/`)
+            let res = await fetch(`https://viacep.com.br/ws/${cep}/json/`)
             let address = await res.json()
             this.doacao.rua = address.logradouro
             this.doacao.bairro = address.bairro
