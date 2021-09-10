@@ -274,7 +274,7 @@ globalThis.app = new Vue({
                 doador_id: "",
                 metodo: this.doacao.payment_type == "boleto" ? "boleto" : "credit_card",
                 instituicao_id: this.institution_id,
-                quantia: this.doacao.amount,
+                quantia: (this.doacao.amount == 0 ? this.doacao.amount_custon : this.doacao.amount).replace(',',''),
             }
 
             playload.cliente = {
