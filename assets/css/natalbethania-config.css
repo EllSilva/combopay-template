@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css?family=Aleo:300,300i,400,400i,700,700i&amp;display=swap');
+@charset "utf-8";
+
+body { font-size: 16px; font-family: 'Aleo', Calibri, Arial, sans-serif; text-rendering: geometricPrecision !important; -webkit-font-smoothing: antialiased !important; height: auto; font-weight: 400; background-color: #ffffff; color: #545454; }
+* { margin: 0px; padding: 0px; border: none; list-style: none; text-decoration: none; }
+html { overflow-x:hidden; }
+
+/* GERAIS */
+a:link, a:visited, a:hover { color:#000000; text-decoration:none; font-size: 16px; font-family: 'Aleo'; }
+.clearfix, .clearfix2 { width: 100%; position: relative; clear: both; height: 10px; }
+.clearfix:before, .clearfix:after,.clearfix2:before, .clearfix2:after { display: table; content: " "; min-height: 0px !important; margin: 0px !important; }
+.clearfix:after, .clearfix2:after { clear: both; float: none; height: 0px !important; min-height: 0px !important; margin: 0px !important;  }
+.util2, .util { width: 1100px; margin: 0 auto; height: auto; }
+.utilmetade { width: 550px; margin: 0 auto; height: auto; }
+.metade { width: 574px; margin: 0 auto; height: auto; }
+.anima { -moz-transition: all 0.3s ease; -o-transition: all 0.3s ease; -webkit-transition: all 0.3s ease; transition: all 0.3s ease; }
+.anima1 { -moz-transition: all 0.1s ease; -o-transition: all 0.1s ease; -webkit-transition: all 0.1s ease; transition: all 0.1s ease; }
+.anima5 { -moz-transition: all 0.5s ease; -o-transition: all 0.5s ease; -webkit-transition: all 0.5s ease; transition: all 0.5s ease; }
+.animacao { -moz-transition: all 0.5s ease; -o-transition: all 0.5s ease; -webkit-transition: all 0.5s ease; transition: all 0.5s ease; }
+#mascara2 { display: none; position:fixed; width:100%; min-height: 100%; left: 0; top: 0; background-color: rgba(33,105,237,0.85); z-index:1009; }
+#amensagem { display: none; position: fixed; background-size: auto 80px; background-repeat:no-repeat; background-position: 20px center; z-index: 100001; left: 0; top: 0; width: -moz-calc(100% - 40px); width: -webkit-calc(100% - 40px); width: -o-calc(100% - 40px); width: calc(100% - 40px); padding: 50px 20px; font-size: 18px; line-height: 18px; font-family: 'Aleo'; font-weight: 300; color: #ffffff; text-align: center; height: auto; letter-spacing: 0px; }
+.sombra { -webkit-box-shadow: 0px 3px 3px 0px rgba(0,0,0, 0.1); -moz-box-shadow: 0px 3px 3px 0px rgba(0,0,0, 0.1); box-shadow: 0px 3px 3px 0px rgba(0,0,0, 0.1); }
+.esconde { display: none; }
+section { width: 100%; height: auto; position: relative; clear: both; overflow: hidden; padding: 0px; margin: 0px; }
+.botao1 {margin-bottom: 40px;}
+/*LOADING*/
+.carregando{ left:0; top:0; position:fixed; z-index:5000000; background: rgba(255,255,255,1); width:100% !important; height:100% !important;}
+.carregando .spinner { width: 100% !important; height: 100% !important; position: fixed; top: 80%; }
+.carregando .spinner div { width: 10px; height: 10px; position: absolute; left: -10px; top: 40px; background-color: #525252; border-radius: 50%; animation: move 4s infinite cubic-bezier(.2,.64,.81,.23); }
+.carregando .spinner div:nth-child(2) { animation-delay: 150ms; }
+.carregando .spinner div:nth-child(3) { animation-delay: 300ms; }
+.carregando .spinner div:nth-child(4) { animation-delay: 450ms; }
+.carregando2 { left:0; top:0; position:fixed; z-index:5000000; background: rgba(255,255,255,1) url(../imagens/ajax-loader.gif) no-repeat center center; width:100% !important; height:100% !important;}
+
+/* TOPO */
+header { width: 100%; height: 259px; position: fixed; top: 0px; left: 0px; z-index: 1100; -moz-transition: all 0.5s ease; -o-transition: all 0.5s ease; -webkit-transition: all 0.5s ease; transition: all 0.5s ease; }
+header .bethania { width: 144px; height: 68px; margin: 10px 0px; position: relative; float: left; background-image: url(../imagens/bethania.png); background-repeat: no-repeat; background-size: auto 58px; background-position: center center; }
+
+/* RODAPÉ */
+.frase1 { width: 100%; height: auto; position: relative; font-style: italic; text-align: center; margin: 0px; padding: 20px 0px;font-size: 24px; color: #396045; font-weight: 300; font-family: 'Aleo'; }
+
+footer { width: 100%; height: 255px; z-index: 12; position: relative; background: #f5f6fa url(../imagens/rodape2.jpg) no-repeat top center; clear: both; }
+footer .frase { width: 100%; height: auto; position: relative; font-style: italic; text-align: center; margin: 0px; padding: 50px 0px;font-size: 24px; color: #396045; font-weight: 300; font-family: 'Aleo'; }
+footer .frase p { font-size: 36px; color: #ffb500; font-weight: 700; font-style: italic; line-height: 36px; font-family: 'Aleo'; }
+footer .rodape { width: 100%; height: 95px; position: relative; clear: both; padding: 0px; background: url(../imagens/rodape1.jpg) no-repeat top center; }
+footer .rodape .direitos { position: relative; width: 200px; height: auto; padding: 40px 0px 25px 0px; line-height: 14px; font-size: 12px; color: #ffffff; text-align: left; font-style: italic; font-family: 'Aleo'; font-weight: 300; float: left; }
+footer .rodape .betha { width: 106px; height: 43px; margin: 30px 0px 10px 0px; position: relative; float: right; background-image: url(../imagens/bethania.png); background-repeat: no-repeat; background-size: auto 42px; background-position: center center; }
+footer .rodape .redes { width: 76px; height: 40px; margin-top: 35px; position: absolute; left: 50%; margin-left: -38px; text-align: center; }
+footer .rodape .redes .facebook { width: 24px; height: 25px; margin: 0px 5px; position: relative; display: inline-block; vertical-align: top; background: url(../imagens/facebook.png) no-repeat center center; }
+footer .rodape .redes .instagram { width: 24px; height: 25px; margin: 0px 5px; position: relative; display: inline-block; vertical-align: top; background: url(../imagens/instagram.png) no-repeat center center; }
+footer .rodape .redes .facebook:hover, footer .rodape .redes .instagram:hover { opacity: 0.5; }
+.frase { width: 100%; height: auto; position: relative; font-style: italic; text-align: center; margin: 0px; padding: 50px 0px;font-size: 24px; color: #396045; font-weight: 300; font-family: 'Aleo'; }
+.botao {background-color: #396045;}
+@keyframes move {
+  0% {left: 0%;}
+  75% {left:100%;}
+  100% {left:100%;}
+}
+@-webkit-keyframes move {
+  0% {left: 0%;}
+  75% {left:100%;}
+  100% {left:100%;}
+}
+
+@media screen and (max-width: 1000px) {
+	.util, .util2 { width: 100%; }
+
+  /*HEADER*/
+  header { height: 85px; background-color: #072233; }
+  header .logomarca { width: 75px; height: 75px; margin: 5px 0px 5px 20px; background-size: auto 75px; }
+  header .bethania { width: 106px; height: 75px; margin: 5px 20px 5px 0px; background-image: url(../imagens/bethania2.png); background-size: auto auto; }
+
+  /* RODAPÉ */
+  footer { width: 100%; height: 255px; z-index: 12; position: relative; background: url(../imagens/espaco.png); }
+  footer .frase { background: #f5f6fa; }
+  footer .rodape { width: 94%; height: auto; padding: 0px 3% 20px 3%; background: #072233 url(../imagens/rodape1.jpg) no-repeat top center; }
+  footer .rodape .direitos { position: relative; width: 100%; padding: 40px 0px 10px 0px; text-align: center; float: none; }
+  footer .rodape .betha { width: 100%; height: 43px; margin: 10px 0px; float: none; }
+  footer .rodape .redes { display: none; }
+}
