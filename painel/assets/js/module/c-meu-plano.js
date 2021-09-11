@@ -10,14 +10,14 @@ export default {
             user: null,
             loading: false,
             credencial: 0,
-            plano_id: "1386032",
+            plano_id: "626754",
             error: {
                 status: false,
                 text: 'Salvo com sucesso',
                 type: 'success'
             },
             planos: [
-                { preco: 29.90, id: "1386032", instancias: 1 },
+                { preco: 4.00, id: "626754", instancias: 1 },
                 { preco: 56.81, id: "1396159", instancias: 2 },
                 { preco: 80.73, id: "1386052", instancias: 3 },
                 { preco: 152.49, id: "1386056", instancias: 6 },
@@ -26,7 +26,7 @@ export default {
                 { preco: 336.37, id: "1386059", instancias: 15 },
             ],
             cupon: [
-                { code: "#ANJODIGITAL", trial: 30, preco: 29.90, id: "1386061", instancias: 1 },
+                { code: "#ANJODIGITAL", trial: 30, preco: 4.00, id: "626754", instancias: 1 },
                 { code: "#ANJODIGITAL", trial: 30, preco: 56.81, id: "1396162", instancias: 2 },
                 { code: "#ANJODIGITAL", trial: 30, preco: 80.73, id: "1386062", instancias: 3 },
                 { code: "#ANJODIGITAL", trial: 30, preco: 152.49, id: "1386064", instancias: 6 },
@@ -102,12 +102,12 @@ export default {
             let playload = {
                 doador_id: "",
                 metodo: "credit_card",
-                instituicao_id: 1,
-                // instituicao_id: 're_ckq9yr3cf1ign0h9t8bi414jh',
-                // plano_id: this.doacao.plan_id,
-                plano_id: 614822,
-                quantia: "5000",
-                valor_plano: "5000",
+                // instituicao_id: 1,
+                instituicao_id: 're_ckq9yr3cf1ign0h9t8bi414jh',
+                plano_id: this.doacao.plan_id,
+                // plano_id: 614822,
+                quantia: "500",
+                valor_plano: "500",
                 cliente: {
                     nome: this.user.nome,
                     cpf: this.user.cpf.replace(/\D/ig, ''),
