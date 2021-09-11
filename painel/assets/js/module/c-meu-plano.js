@@ -36,13 +36,13 @@ export default {
             ],
             doacao: {
                 plan_id: null,
-                amount: '5000',
-                card: "4111 1111 1111 1111",
-                validade: "09/22",
-                cvv: "123",
-                nome_card: "Morpheus Fishburne",
+                amount: '400',
+                card: "",
+                validade: "",
+                cvv: "",
+                nome_card: "",
                 payment_type: 'card',
-                cupom: "#ANJODIGITA"
+                cupom: ""
             },
             trial: {
                 status: false,
@@ -54,6 +54,7 @@ export default {
         plano_id(x, y) { this.valor() }
     },
     methods: {
+        valor() {},
         cupom() {
             let code = "#ANJODIGITAL"
             if (this.doacao.cupom.replace(' ', '') == code) {
@@ -102,12 +103,12 @@ export default {
             let playload = {
                 doador_id: "",
                 metodo: "credit_card",
-                // instituicao_id: 1,
-                instituicao_id: 're_ckq9yr3cf1ign0h9t8bi414jh',
-                plano_id: this.doacao.plan_id,
+                instituicao_id: 1,
+                // instituicao_id: 're_ckq9yr3cf1ign0h9t8bi414jh',
+                plano_id: this.plano_id,
                 // plano_id: 614822,
-                quantia: "500",
-                valor_plano: "500",
+                quantia: valor,
+                valor_plano: valor,
                 cliente: {
                     nome: this.user.nome,
                     cpf: this.user.cpf.replace(/\D/ig, ''),
@@ -132,7 +133,14 @@ export default {
                     numero: this.doacao.card.replace(/\D/ig, ''),
                     expiracao: this.doacao.validade.replace(/\D/ig, ''),
                 }
-            }         
+            }   
+            
+            // Aqui gente verifica se esta no plano
+            if( this.doacao.cupom == "#ANJODIGITAL" ) {
+                playload.plano_id = 626754
+                playload.quantia = 4.0
+                playload.valor_plano = 4.0
+            }
 
             let res = await this.Super.payPlan(playload)
             this.loading = false
@@ -161,9 +169,7 @@ export default {
     async created() {
         this.credencial = localStorage.getItem('user_logged_credential_id')
         this.user = await this.Super.get_admin(this.cache.user_logged_id)
-        // await this.Super.put_admin(this.user.id, {
-        //     credencial: 21
-        // }) 
+
     }
 }
 
