@@ -20,7 +20,7 @@ export default {
         let all_doacoes = await this.Super.all_doacao_by_institution(this.cache.institution)
         this.total = all_doacoes.length
         
-        let total_doacoes = all_doacoes.map(doacao => parseInt(doacao.quantia))
+        let total_doacoes = all_doacoes.map(doacao => parseInt(doacao.quantia||doacao.valor_plano))
         let total_docacao = total_doacoes.length
         total_doacoes = total_doacoes.map(doacao => !doacao ? 0 : doacao)
 
@@ -28,30 +28,47 @@ export default {
 
         let doacoes_pagas = all_doacoes.filter(doacao => doacao.status == "paid")
         let total_pagas = doacoes_pagas.length
-        doacoes_pagas = doacoes_pagas.map(doacao => parseInt(doacao.quantia))
+        doacoes_pagas = doacoes_pagas.map(doacao => parseInt(doacao.quantia||doacao.valor_plano))
         doacoes_pagas = doacoes_pagas.map(doacao => !doacao ? 0 : doacao)
         doacoes_pagas = doacoes_pagas.reduce((valor, acc) => acc + valor, 0)
 
         let doacoes_canceladas = all_doacoes.filter(doacao => doacao.status == "canceled")
         let total_cancelada = doacoes_canceladas.length
-        doacoes_canceladas = doacoes_canceladas.map(doacao => parseInt(doacao.quantia))
+        doacoes_canceladas = doacoes_canceladas.map(doacao => parseInt(doacao.quantia||doacao.valor_plano))
         doacoes_canceladas = doacoes_canceladas.map(doacao => !doacao ? 0 : doacao)
         doacoes_canceladas = doacoes_canceladas.reduce((valor, acc) => acc + valor, 0)
 
-        let doacoes_boletos = all_doacoes.filter(doacao => doacao.tipo == "boleto")
-        doacoes_boletos = doacoes_boletos.map(doacao => parseInt(doacao.quantia))
+        let doacoes_boletos = all_doacoes.filter(doacao => doacao.tipo == "boleto" && doacao.status != "paid" )
+        doacoes_boletos = doacoes_boletos.map(doacao => parseInt(doacao.quantia||doacao.valor_plano))
         doacoes_boletos = doacoes_boletos.map(doacao => !doacao ? 0 : doacao)
-        doacoes_boletos = doacoes_boletos.reduce((valor, acc) => acc + valor, 0)
+        doacoes_boletos = doacoes_boletos.reduce((valor, acc) => acc + valor, 0)        
 
-        let doacoes_card = all_doacoes.filter(doacao => doacao.tipo == "cartao_credito")
-        doacoes_card = doacoes_card.map(doacao => parseInt(doacao.quantia))
+        let doacoes_boletos_pago = all_doacoes.filter(doacao => doacao.tipo == "boleto" && doacao.status == "paid" )
+        doacoes_boletos_pago = doacoes_boletos_pago.map(doacao => parseInt(doacao.quantia||doacao.valor_plano))
+        doacoes_boletos_pago = doacoes_boletos_pago.map(doacao => !doacao ? 0 : doacao)
+        doacoes_boletos_pago = doacoes_boletos_pago.reduce((valor, acc) => acc + valor, 0)
+
+
+
+        let doacoes_card = all_doacoes.filter(doacao => doacao.tipo == "cartao_credito" && doacao.status != "paid")
+        doacoes_card = doacoes_card.map(doacao => parseInt(doacao.quantia||doacao.valor_plano))
         doacoes_card = doacoes_card.map(doacao => !doacao ? 0 : doacao)
         doacoes_card = doacoes_card.reduce((valor, acc) => acc + valor, 0)
 
-        let doacoes_pix = all_doacoes.filter(doacao => doacao.tipo == "pix")
-        doacoes_pix = doacoes_pix.map(doacao => parseInt(doacao.quantia))
+        let doacoes_card_pago = all_doacoes.filter(doacao => doacao.tipo == "cartao_credito" && doacao.status == "paid")
+        doacoes_card_pago = doacoes_card_pago.map(doacao => parseInt(doacao.quantia||doacao.valor_plano))
+        doacoes_card_pago = doacoes_card_pago.map(doacao => !doacao ? 0 : doacao)
+        doacoes_card_pago = doacoes_card_pago.reduce((valor, acc) => acc + valor, 0)
+
+        let doacoes_pix = all_doacoes.filter(doacao => doacao.tipo == "pix" && doacao.status != "paid")
+        doacoes_pix = doacoes_pix.map(doacao => parseInt(doacao.quantia||doacao.valor_plano))
         doacoes_pix = doacoes_pix.map(doacao => !doacao ? 0 : doacao)
-        doacoes_pix = doacoes_pix.reduce((valor, acc) => acc + valor, 0)
+        doacoes_pix = doacoes_pix.reduce((valor, acc) => acc + valor, 0)        
+        
+        let doacoes_pix_pago = all_doacoes.filter(doacao => doacao.tipo == "pix" && doacao.status == "paid")
+        doacoes_pix_pago = doacoes_pix_pago.map(doacao => parseInt(doacao.quantia||doacao.valor_plano))
+        doacoes_pix_pago = doacoes_pix_pago.map(doacao => !doacao ? 0 : doacao)
+        doacoes_pix_pago = doacoes_pix_pago.reduce((valor, acc) => acc + valor, 0)
 
         let doadores_recorrente = all_doacoes.filter(doacao => doacao.plano_id)
         let total_doadores_recorrente = doadores_recorrente.length
@@ -120,14 +137,19 @@ export default {
         this.link += `Cartão;${doacoes_card}%0A`
         this.link += `PIX;${doacoes_pix}%0A`
 
+        
+
         this.resumos = [
             {  tipo: 0, label: "Total Doações", valor: total_doacoes, estimativa: null, ico: "total-doacoes-0984e3.svg", color: "#0984e3" },
             {  tipo: 0, label: "Doações Concluídas", valor: doacoes_pagas, estimativa: null, ico: "doacoes-concluidas-20bf63.svg", color: "#20bf63" },
             {  tipo: 0, label: "Doações em Aberto", valor: doacoes_aberto, estimativa: null, ico: "doacoes-em-aberto-f9d64b.svg", color: "#f9d64b" },
             {  tipo: 0, label: "Doações Vencidas", valor: doacoes_canceladas, estimativa: null, ico: "doacoes-vencidas-ff7675.svg", color: "#ff7675" },
-            {  tipo: 0, label: "Doações Boletos", valor: doacoes_boletos, estimativa: null, ico: "doacoes-boletos-2eccba.svg", color: "#2eccba" },
-            {  tipo: 0, label: "Doações Créditos", valor: doacoes_card, estimativa: null, ico: "doacoes-creditos-249e90.svg", color: "#249e90" },
-            {  tipo: 0, label: "Doações PIX", valor: doacoes_pix, estimativa: null, ico: "doacoes-pix-5320bf.svg", color: "#5320bf" },
+            {  tipo: 0, label: "Doações Boletos Aberto", valor: doacoes_boletos, estimativa: null, ico: "doacoes-boletos-2eccba.svg", color: "#2eccba" },
+            {  tipo: 0, label: "Doações Boletos Pago", valor: doacoes_boletos_pago, estimativa: null, ico: "doacoes-boletos-2eccba.svg", color: "#2eccba" },
+            {  tipo: 0, label: "Doações Créditos Aberto", valor: doacoes_card, estimativa: null, ico: "doacoes-creditos-249e90.svg", color: "#249e90" },
+            {  tipo: 0, label: "Doações Créditos Pago", valor: doacoes_card_pago, estimativa: null, ico: "doacoes-creditos-249e90.svg", color: "#249e90" },
+            {  tipo: 0, label: "Doações PIX Aberto", valor: doacoes_pix, estimativa: null, ico: "doacoes-pix-5320bf.svg", color: "#5320bf" },
+            {  tipo: 0, label: "Doações PIX Pago", valor: doacoes_pix_pago, estimativa: null, ico: "doacoes-pix-5320bf.svg", color: "#5320bf" },
             {  tipo: 0, label: "Doações Previstas", valor: 0, estimativa: null, ico: "doacoes-previstas-616161.svg", color: "#616161" },
             {  tipo: 1, label: "Novos Doadores", valor: all_doacoes.length, estimativa: null, ico: "novos-doadores-20bf63.svg", color: "#20bf63" },
             {  tipo: 1, label: "Doadores Recorrentes", valor: total_doadores_recorrente, estimativa: null, ico: "doadores-recorrentes-0984e3.svg", color: "#0984e3" },

@@ -48,7 +48,7 @@ export default {
         }
     },
     async mounted() { 
-        this.playload = (await this.Super.split_all()).data
+        this.playload = (await this.Super.split_get_by_institution(this.cache.institution)).data || []
         console.log(this.playload)
     },
     methods: {

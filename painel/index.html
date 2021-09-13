@@ -77,7 +77,7 @@
                                 <img :src="'./assets/icon/'+item.ico">
                             </div>
                             <span>
-                                <small>{{item.label}}</small>
+                                <small>{{item.label}} </small>
                                 <b v-if="item.tipo">{{item.valor}} </b>
                                 <b v-if="!item.tipo">R${{item.valor | money}} </b>
                             </span>

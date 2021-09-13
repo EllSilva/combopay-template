@@ -261,7 +261,7 @@ class App {
         return this.put(`/split/${id}`, { ativo: 0 });
     }
     async split_get_by_institution(id) {
-        return this.get(`split/por-instituicao/${id}`, {});
+        return this.get(`/split/por-instituicao/${id}`, {});
     }
     async split_put(id, playload) {
         return this.put(`/split/${id}`, playload);

@@ -10,6 +10,7 @@ export default {
             Super,
             cache,
             Domain,
+            user: { credencial: null },
             form: {
                 responsavel: null,
                 porcetagem: null,

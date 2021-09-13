@@ -37,7 +37,7 @@
                                     <input v-model="doacao.amount" :value="plano.quantia" type="radio" :id="'for_'+plano.id" name="donative_price"  hidden checked>
                                     <label class="options_pay" @click="setPlan( plano.id )" :for="'for_'+plano.id"> R$ {{plano.quantia | money}} </label>
                                 </div>
-                                <div>
+                                <div v-if="doacao.recorrente!=1">
                                     <input v-model="doacao.amount" value="0" hidden type="radio" id="for_custon"name="donative_price" value="CUSTON">
                                     <label class="options_pay" for="for_custon"> Outro </label>
                                 </div>
@@ -45,7 +45,7 @@
                             <div class="space"></div>
                         </div>
                         <div>
-                            <div v-if="doacao.amount==0" >
+                            <div v-if="doacao.amount==0 && doacao.recorrente!=1" >
                                 <b>Informe um valor</b>
                                 <input type="text" v-model="doacao.amount_custon" @input="money"  name="price_custon" placeholder="150,00">
                                 <div class="space"></div>
