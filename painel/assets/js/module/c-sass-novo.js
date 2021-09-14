@@ -23,6 +23,8 @@ export default {
             admins: [],
             email_admin: null,
             is_edit: false,
+            message_aliases: null,
+            status_aliases: null,
             default_flags: [
                 'VIDEOS', 
                 'DEPOIMENTOS', 

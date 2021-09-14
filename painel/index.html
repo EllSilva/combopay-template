@@ -940,11 +940,12 @@
                         <div>
                             <label for="">Informe seu Domínio</label>
                             <input type="text" v-model="form.dominio" placeholder="seudominio.com.br" >
+                            <small :class="status_aliases">{{message_aliases}}</small>
                         </div>
                          <div>
                             <label for="">.</label>
-                            <button type="submit" class="btn btn--success">
-                                Adicionar Domínio Personalizado
+                            <button type="submit" class="btn btn--success" @click="aliases">
+                                Salvar
                             </button>
                         </div>
                     </div>

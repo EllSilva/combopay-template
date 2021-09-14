@@ -16,6 +16,8 @@ export default {
             admins: [],
             email_admin: null,
             is_edit: true,
+            message_aliases: null,
+            status_aliases: null,
             form: {
                 admin_master: null,
                 domain_person: 'person',
@@ -85,6 +87,17 @@ export default {
         console.log(instituicao )
     },
     methods: {
+        async aliases() {
+            this.loading = true
+            let payload = {
+                ...this.form,
+                dominio_personalizado: 1
+            }
+            let res = await this.Super.put_institution(this.form.id, payload)
+            this.message_aliases = res?.message
+            this.status_aliases = res?.status
+            this.loading = false
+        },
         async save() {
             this.loading = true
             let res = await this.Super.put_institution(this.form.id, this.form)
