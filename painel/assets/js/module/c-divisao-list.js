@@ -48,8 +48,9 @@ export default {
         }
     },
     async mounted() { 
-        this.playload = (await this.Super.split_get_by_institution(this.cache.institution)).data || []
-        console.log(this.playload)
+        // this.playload = (await this.Super.split_get_by_institution(this.cache.institution)).data || []
+        let all = (await this.Super.split_all()).data
+        this.playload = all.filter( i => i.instituicao_id == this.cache.institution)
     },
     methods: {
         async del( id ) {

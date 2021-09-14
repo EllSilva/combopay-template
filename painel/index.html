@@ -1060,30 +1060,28 @@
                         <div>Filtros</div>
                         <div>
                             <small>Periodo</small> <br>
-                            <select v-model="periodo">
-                                <option :value="periodo">Hoje</option>
-                                <option :value="periodo - 86400">Ontem</option>
-                                <option :value="periodo - (7*86400)">Últimos 7 dias</option>
-                                <option value="periodo - (30*86400)">Últimos 30 dias</option>
-                                <option value="periodo - (360*86400)">Este Ano</option>
-                                <option value="1">Escolher Periodo</option>
+                            <select v-model="periodo" @change="select_data">
+                                <option value="0">Hoje</option>
+                                <option value="1">Ontem</option>
+                                <option value="7">Últimos 7 dias</option>
+                                <option value="30">Últimos 30 dias</option>
+                                <option value="365">Este Ano</option>
+                                <option value="366">Escolher Periodo</option>
                             </select>
                         </div>
                         <div>
                             <small>Data Ínicio</small> <br>
-                            <input type="date" :disabled="periodo!=1" v-model="data_min">
+                            <input type="date" @change="de" :disabled="periodo!=366" v-model="data_min">
                         </div>
                         <div>
                             <small>Data Final</small> <br>
-                            <input type="date" :disabled="periodo!=1" v-model="data_max">
+                            <input type="date" @change="ate" :disabled="periodo!=366" v-model="data_max">
                         </div>
                         <div>
-                            <small>Plano</small> <br>
-                            <select disabled>
-                                <option value="">Todos</option>
-                                <option value="">Basico</option>
-                                <option value="">Medio</option>
-                                <option value="">Avançado</option>
+                            <small>Recorrente</small> <br>
+                            <select v-model="recorrente" @change="reco" >
+                                <option value="1">SIM</option>
+                                <option value="0">NÃO</option>
                             </select>
                         </div>
                         <div>
@@ -1098,7 +1096,7 @@
                     <div class="title_form">
                         <h1>Doadores</h1>
                         <form action="javascript:void(0)" class="busca-box">
-                            <input type="text" required placeholder="Buscar...">
+                            <input type="text" v-model="s" required @input="search" placeholder="Buscar...">
                             <button type="submit">
                                 <img src="./assets/icon/search.svg">
                             </button>
@@ -1107,7 +1105,6 @@
                     <div class="space"></div>
                     <div class="table">
                         <div v-for="doador in doadores">
-                            <span> <input type="checkbox"> </span>
                             <span><img class="gravatar" src="./assets/img/gravatar.png"></span>
                             <span class="w-50">
                                 {{ doador.nome }} <br>
@@ -1120,7 +1117,8 @@
                             </span>
                             <span>
                                 <span class="table_btn table_btn_status">
-                                    {{ doador.recorrente ? 'Recorrente' : 'Único'   }}
+                                    {{   }}
+                                    {{ recorrentes.includes(doador.id) ? 'Recorrente' : 'Único'   }}
                                 </span>
                             </span>
                             <span>
