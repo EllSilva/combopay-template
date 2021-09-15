@@ -780,7 +780,14 @@ button[disabled] {
     background-position: left center !important;
     background-repeat: no-repeat !important
 }
-
+.historico a {
+    text-decoration: none;
+    color: #222;
+}
+.historico a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
 .admins-gravatar {
     display: flex;
     align-items: center;

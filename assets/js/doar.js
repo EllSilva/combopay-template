@@ -12,6 +12,7 @@ globalThis.app = new Vue({
         institution_id: null,
         loading: false,
         title: 'Betania',
+        alerta: "",
         logo: {
             top: './sass/doacoesbethania.com.br/logo/2.png',
             footer: './sass/doacoesbethania.com.br/logo/1.png'
@@ -130,15 +131,19 @@ globalThis.app = new Vue({
             this.doacao.amount_custon = val
         },
         async pay() {
-            this.loading = true
-            window.location.href = "/finalizar.html"
-
+            // this.loading = true
+            this.alerta = null
+            let cunston_valor = parseInt( `${this.doacao.amount_custon}`.replace(/\D/gi, '') )
+            if(cunston_valor != 0 && cunston_valor <= 999) {
+                this.alerta = "o valor mínimo é 10"
+                return
+            }            
             localStorage.setItem('recorrente', this.doacao.recorrente )
             localStorage.setItem('amount', this.doacao.amount )
             localStorage.setItem('email', this.doacao.email )
-            localStorage.setItem('amount_custon', this.doacao.amount_custon )
-
-            this.loading = false
+            localStorage.setItem('amount_custon', this.doacao.amount_custon )            
+            window.location.href = "/finalizar.html"
+            // this.loading = false
         },
         setPlan( id ) {
             if(this.doacao.recorrente) {

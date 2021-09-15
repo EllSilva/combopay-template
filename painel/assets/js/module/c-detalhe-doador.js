@@ -40,7 +40,8 @@ export default {
                 refused: "Cancelado",
                 paid: "Pago",
                 credit_card: "Cartão",
-                boleto: "Boleto"
+                boleto: "Boleto",
+                unpaid: "Não Pago"
             }
             return lib[termo] || termo
         }
