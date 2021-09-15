@@ -19,6 +19,9 @@ export default {
             autoForm: [
                 { label: 'Secret', name: 'secret' },
             ],
+            user: {
+                credencial: null
+            },
             error: {
                 status: false,
                 text: 'Salvo com sucesso',

@@ -20,6 +20,9 @@ export default {
                 { label: 'Token', name: 'token' },
                 { label: 'Key', name: 'name' },
             ],
+            user: {
+                credencial: null
+            },
             error: {
                 status: false,
                 text: 'Salvo com sucesso',

@@ -19,6 +19,9 @@ export default {
             autoForm: [
                 { label: 'Chave', name: 'channel' },
             ],
+            user: {
+                credencial: null
+            },
             error: {
                 status: false,
                 text: 'Salvo com sucesso',
