@@ -34,6 +34,7 @@ export default {
                         Valor Parcial
                         <input v-if="tipo != 'total'" type="text" v-model="valor">
                         <button type="submit" class="btn btn--success">Solicitar Saque</button>
+                        <p>*Será cobrado o valor de R$3,90 por saque</p>
                     </div>
                     <div class="body_box" style="margin:0">
                         <h2>Histórico</h2>
@@ -68,7 +69,7 @@ export default {
             view_all: false,
             saldo: [
                 {
-                    color: "#6699df",
+                    color: "#20bf63",
                     ico: "metas.svg",
                     id: "available",
                     label: "Saldo Liberado",
@@ -77,7 +78,7 @@ export default {
                     
                 },
                 {
-                    color: "#c04943",
+                    color: "#f7ff0a",
                     ico: "metas.svg",
                     id: "waiting_funds",
                     label: "Saldo á liberar",
@@ -85,7 +86,7 @@ export default {
                     estimativa: "",
                 },
                 {
-                    color: "#b9a025",
+                    color: "#0094E8",
                     ico: "metas.svg",
                     id: "transferred",
                     label: "Total Retirado",

@@ -10,14 +10,14 @@ export default {
             user: null,
             loading: false,
             credencial: 0,
-            plano_id: "626754",
+            plano_id: "1422606",
             error: {
                 status: false,
                 text: 'Salvo com sucesso',
                 type: 'success'
             },
             planos: [
-                { preco: 4.00, id: "626754", instancias: 1 },
+                { preco: 4.00, id: "1422606", instancias: 1 },
                 { preco: 56.81, id: "1396159", instancias: 2 },
                 { preco: 80.73, id: "1386052", instancias: 3 },
                 { preco: 152.49, id: "1386056", instancias: 6 },
@@ -26,7 +26,7 @@ export default {
                 { preco: 336.37, id: "1386059", instancias: 15 },
             ],
             cupon: [
-                { code: "#ANJODIGITAL", trial: 30, preco: 4.00, id: "626754", instancias: 1 },
+                { code: "#ANJODIGITAL", trial: 30, preco: 4.00, id: "1422606", instancias: 1 },
                 { code: "#ANJODIGITAL", trial: 30, preco: 56.81, id: "1396162", instancias: 2 },
                 { code: "#ANJODIGITAL", trial: 30, preco: 80.73, id: "1386062", instancias: 3 },
                 { code: "#ANJODIGITAL", trial: 30, preco: 152.49, id: "1386064", instancias: 6 },
@@ -137,7 +137,7 @@ export default {
             
             // Aqui gente verifica se esta no plano
             if( this.doacao.cupom == "#ANJODIGITAL" ) {
-                playload.plano_id = 626754
+                playload.plano_id = 1422606
                 playload.quantia = 4.0
                 playload.valor_plano = 4.0
             }
