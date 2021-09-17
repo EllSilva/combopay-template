@@ -17,7 +17,7 @@ export default {
                     </h1>
                     <div class="table">
                         <div v-for="post in playload">
-                            <span><b>Código:</b> {{ post.responsavel }}</span>
+                            <span><b>Recebedor ID:</b> {{ post.recebedor_id || '' }}</span>
                             <span>{{ post.porcetagem }}%</span>
                             <span>
                                 <a :href="'#/divisao-editar/'+post.id" class="table_btn">
@@ -48,9 +48,10 @@ export default {
         }
     },
     async mounted() { 
-        // this.playload = (await this.Super.split_get_by_institution(this.cache.institution)).data || []
         let all = (await this.Super.split_all()).data
         this.playload = all.filter( i => i.instituicao_id == this.cache.institution)
+        this.playload = all
+        // this.playload = (await this.Super.split_get_by_institution(this.cache.institution)).data || []
     },
     methods: {
         async del( id ) {

@@ -12,7 +12,8 @@ export default {
             Domain,
             user: { credencial: null },
             form: {
-                responsavel: null,
+                recebedor_id: null,
+                responsavel: 0,
                 porcetagem: null,
                 instituicao_id: null,
                 restos_taxas: 1
@@ -24,8 +25,8 @@ export default {
             is_flag: false,
             playload: [],
             autoForm: [
-                { label: 'Código Instituição', name: 'responsavel' },
-                { label: 'Porcentagem', name: 'porcetagem' },
+                { label: 'Recebedor ID', name: 'recebedor_id' },
+                { label: 'Porcentagem', type: "number", name: 'porcetagem' },
             ],
             error: {
                 status: false,
@@ -43,6 +44,9 @@ export default {
         },
         async save() {
             this.loading = true
+            if(this.form.porcetagem < 10) {
+                this.form.responsavel = 1
+            }
             await this.Super.split_post(this.form)
             window.location.href = "#/divisao-pagamento"
             this.loading = false

@@ -1562,8 +1562,8 @@
                     <h1>{{title}}</h1>
                     <form action="javascript:void(0)" class="form" @submit="save()">
                         <div v-for=" input in autoForm ">
-                            <label for="">{{input.label}}</label>
-                            <input :disabled="is_flag" type="text" v-model="form[input.name]" placeholder="" required>
+                            <label for="">{{input.label}} </label>
+                            <input :disabled="is_flag" :type="input.type||'text'" v-model="form[input.name]" placeholder="" required>
                         </div>
                         <div class="g g-3">
                             <button :disabled="is_flag" type="submit" class="btn btn--success">Salvar</button>

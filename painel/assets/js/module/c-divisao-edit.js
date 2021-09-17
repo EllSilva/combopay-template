@@ -13,7 +13,8 @@ export default {
             user: { credencial: null },
             form: {
                 id: null,
-                responsavel: null,
+                recebedor_id: null,
+                responsavel: 0,
                 porcetagem: null,
                 instituicao_id: null,
                 restos_taxas: 1
@@ -26,8 +27,8 @@ export default {
             playload: [],
             is_id: null,
             autoForm: [
-                { label: 'Código Instituição', name: 'responsavel' },
-                { label: 'Porcentagem', name: 'porcetagem' },
+                { label: 'Recebedor ID', name: 'recebedor_id' },
+                { label: 'Porcentagem', type: "number", name: 'porcetagem' },
             ],
             error: {
                 status: false,
@@ -44,11 +45,14 @@ export default {
             let split = await this.Super.split_get(this.$route.params.id)
             this.form.instituicao_id = this.cache.institution
             this.form.porcetagem = split.porcetagem
-            this.form.responsavel = split.responsavel
+            this.form.recebedor_id = split.recebedor_id
             this.form.id = split.id
         },
         async save() {
             this.loading = true
+            if(this.form.porcetagem < 10) {
+                this.form.responsavel = 1
+            }
             let res = await this.Super.split_put(this.$route.params.id, this.form)
             window.location.href = "#/divisao-pagamento"
             this.loading = false
