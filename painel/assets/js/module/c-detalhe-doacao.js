@@ -34,7 +34,8 @@ export default {
                 waiting_payment: "Pendente",
                 refused: "Cancelado",
                 paid: "pago",
-                credit_card: "Crédito"
+                credit_card: "Crédito",
+                unpaid: "Não Pago"
             }
             return lib[termo] || termo
         }
@@ -51,7 +52,6 @@ export default {
         }
         globalThis._doacoes = Object.values(globalThis._doacoes)
         let doacao = globalThis._doacoes.find(doacao => doacao.id == this.id)
-        console.log(doacao)
 
         this.id = doacao.id
         this.plano_id = doacao.plano_id

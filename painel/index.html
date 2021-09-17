@@ -432,10 +432,6 @@
                         <div> <small>Recorrente</small> <br> <strong> {{plano_id ? 'SIM' : 'NÃO'}} </strong></div>
                         <div> <small>Data</small> <br> <strong> {{created_at | data}} </strong></div>
                         <div> <small>Status</small> <br> <strong> {{status|traduz}} </strong></div>
-                        <div v-if="tipo=='boleto'"> 
-                            <small>Vencimento</small> <br> 
-                            <strong> {{created_at | data}} </strong>
-                        </div>
                     </div>
                 </div>
                 <div class="body_box" v-if="tipo=='boleto'">
@@ -1169,7 +1165,7 @@
                                 <option value="1">Todos</option>
                                 <option value="paid">Pago</option>
                                 <option value="waiting_payment">Pendente</option>
-                                <option value="canceled">Cancelado</option>
+                                <option value="unpaid">Cancelado</option>
                             </select>
                         </div>
                         <div>
@@ -1192,7 +1188,7 @@
                 <div class="body_box">
                     <div class="title_form">
                         <h1>Doações</h1>
-                        <form action="javascript:void(0)" class="busca-box">
+                        <form hidden action="javascript:void(0)" class="busca-box">
                             <input type="text" v-model="s" required placeholder="Buscar...">
                             <button type="submit">
                                 <img src="./assets/icon/search.svg">

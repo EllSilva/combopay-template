@@ -36,7 +36,7 @@ export default {
                 this.recorrentes.push( parseInt( doacao?.doador_id ))
             }
         })
-        console.log(this.recorrentes)
+
         let todos_doadores = all_doacoes.reduce((acc, iten) => {
             let doador_id = parseInt( iten?.doador_id )
             if(!doador_id) return acc
@@ -69,6 +69,7 @@ export default {
         let link = 'data:text/csv;charset=utf-8,'
         link += this.doadores.map( dc => Object.values(dc).join(';')+'%0A' )
         this.link = link
+
     },
     methods: {
         select_data() {
@@ -85,7 +86,6 @@ export default {
             this.doadores = this.backup.filter( doador => doador.filter_data >= data_min && doador.filter_data <= data_max )
         },
         search() {
-            console.log(this.s)
             this.doadores = this.backup.filter( doador => {
                 let termo = "@@"
                 termo += doador.cpf
@@ -99,7 +99,7 @@ export default {
             }
         },
         reco() {
-            this.doadores = this.backup.filter( doador => (this.recorrentes.includes( doador.id ) > 1) == this.recorrente  )
+            this.doadores = this.backup.filter( doador => this.recorrentes.includes( doador.id ) == this.recorrente  )
         }
     }
 }

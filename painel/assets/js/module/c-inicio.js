@@ -12,6 +12,8 @@ export default {
             link: 'data:text/csv;charset=utf-8,',
             loading: false,
             resumos: [],
+            doador_unico: [],
+            doador_recorrente: [],
             total: 0,
         }
     },
@@ -19,6 +21,25 @@ export default {
         let all_doadores = await this.Super.all_doadores_by_istitution(this.cache.institution)
         let all_doacoes = await this.Super.all_doacao_by_institution(this.cache.institution)
         this.total = all_doacoes.length
+
+        all_doacoes.forEach( doacao => { 
+            let doador_id = parseInt( doacao?.doador_id )
+            if(doacao?.plano_id) {
+                if(!this.doador_recorrente.includes(doador_id)) {
+                    this.doador_recorrente.push( doador_id )
+                }
+            }
+        })
+        all_doacoes.forEach( doacao => { 
+            let doador_id = parseInt( doacao?.doador_id )
+            if(!doacao?.plano_id) {
+                if(!this.doador_recorrente.includes(doador_id)) {
+                    if(!this.doador_unico.includes(doador_id)) {
+                        this.doador_unico.push( doador_id )
+                    }
+                }                
+            }
+        })
         
         let total_doacoes = all_doacoes.map(doacao => parseInt(doacao.quantia||doacao.valor_plano))
         let total_docacao = total_doacoes.length
@@ -137,7 +158,7 @@ export default {
         this.link += `Cartão;${doacoes_card}%0A`
         this.link += `PIX;${doacoes_pix}%0A`
 
-        
+        let doador_novo = this.doador_recorrente.length + this.doador_unico.length      
 
         this.resumos = [
             {  tipo: 0, label: "Total Doações", valor: total_doacoes, estimativa: null, ico: "total-doacoes-0984e3.svg", color: "#0984e3" },
@@ -151,9 +172,9 @@ export default {
             {  tipo: 0, label: "Doações PIX Aberto", valor: doacoes_pix, estimativa: null, ico: "doacoes-pix-5320bf.svg", color: "#5320bf" },
             {  tipo: 0, label: "Doações PIX Pago", valor: doacoes_pix_pago, estimativa: null, ico: "doacoes-pix-5320bf.svg", color: "#5320bf" },
             {  tipo: 0, label: "Doações Previstas", valor: 0, estimativa: null, ico: "doacoes-previstas-616161.svg", color: "#616161" },
-            {  tipo: 1, label: "Novos Doadores", valor: all_doacoes.length, estimativa: null, ico: "novos-doadores-20bf63.svg", color: "#20bf63" },
-            {  tipo: 1, label: "Doadores Recorrentes", valor: total_doadores_recorrente, estimativa: null, ico: "doadores-recorrentes-0984e3.svg", color: "#0984e3" },
-            {  tipo: 1, label: "Doadores Únicos", valor: all_doacoes.length - total_doadores_recorrente, estimativa: null, ico: "doadores-unicos-7fc1e6.svg", color: "#7fc1e6" },
+            {  tipo: 1, label: "Novos Doadores", valor: doador_novo, estimativa: null, ico: "novos-doadores-20bf63.svg", color: "#20bf63" },
+            {  tipo: 1, label: "Doadores Recorrentes", valor: this.doador_recorrente.length, estimativa: null, ico: "doadores-recorrentes-0984e3.svg", color: "#0984e3" },
+            {  tipo: 1, label: "Doadores Únicos", valor: this.doador_unico.length, estimativa: null, ico: "doadores-unicos-7fc1e6.svg", color: "#7fc1e6" },
             {  tipo: 0, label: "Doação Media", valor: media_doacao, estimativa: null, ico: "doacoes-media-2ecc71.svg", color: "#2ecc71" },
             {  tipo: 1, label: "Doadores Adimplentes", valor: 0, estimativa: null, ico: "doadores-adimplentes-20bf63.svg", color: "#20bf63" },
             {  tipo: 1, label: "Doadores Inadimplentes", valor: 0, estimativa: null, ico: "doadores-inadimplentes-ff7675.svg", color: "#ff7675" },

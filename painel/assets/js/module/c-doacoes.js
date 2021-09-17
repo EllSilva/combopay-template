@@ -34,9 +34,10 @@ export default {
             let lib = {
                 waiting_payment: 'Pendente',
                 refused: 'Cancelado',
-                paid: 'Pago'
+                paid: 'Pago',
+                unpaid: 'Não Pago'
             }
-            return lib[status] || 'Pendente'
+            return lib[status] 
         }
     },
     methods: {
