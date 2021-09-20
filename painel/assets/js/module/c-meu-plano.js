@@ -128,6 +128,7 @@ export default {
             this.loading = true
 
             let valor = this.planos.find(p => p.id == this.plano_id).preco.toFixed(2).toString().replace('.', '')
+            let plano = this.planos.find( p => p.id == this.plano_id)
             let instacia_total = this.planos.find(p => p.id == this.plano_id).instancias
 
             let playload = {
