@@ -48,6 +48,13 @@ export default {
         }
     },
     methods: {
+        mask_cep() {
+            let mascara = this.cep
+            mascara = mascara.replace(/\D/gi, '')
+            mascara = mascara.replace(/(\d{5})(.*)/gi, '$1-$2')
+            mascara = mascara.replace(/(\d{4}\s)(\d{1,3})(.*)/gi, '$1-$2')
+            this.cep = mascara.substr(0,9)
+        },
         async alterar_senha() {
             this.loading = true
             this.messageAlterPass.status = false
@@ -119,7 +126,7 @@ export default {
             this.cpf = this.cpf.replace(/(\d{3})\.(\d{3})\.(\d{3})\-(\d{2})(.*)/gi, '$1.$2.$3-$4')
         },
         async viaCep() {
-            if( this.cep.length != 8) {
+            if( this.cep.length != 9) {
                 return
             }
             this.loading = true

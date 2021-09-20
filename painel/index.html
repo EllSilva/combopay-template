@@ -218,7 +218,7 @@
                         <div class="g g-2">
                             <div>
                                 <label for="">CEP</label>
-                                <input v-model="cep" type="text" @blur="viaCep" required>
+                                <input v-model="cep" type="text"  @input="mask_cep" @blur="viaCep" required>
                             </div>
                             <div>
                                 <label for="">Rua</label>
@@ -590,6 +590,13 @@
                                         <b>{{plano.preco|money}}</b> ao mês / <b> {{plano.instancias}} </b> instituição
                                     </label> <br>
                                 </div>
+                                <h3>Planos com WhatsApp</h3>
+                                <div class="form">
+                                    <label v-for="p in plano_whatsapp" >
+                                        <input type="radio" v-model="plano_id_zap" :value="p.id">
+                                        <b>{{p.preco}}</b> <span>{{p.text}}</span>  
+                                    </label> <br>
+                                </div>
                             </div>
                             <div v-if="credencial!=21">
                                 <h3>Historico</h3>
@@ -697,7 +704,7 @@
                                     <div>
                                         <button type="submit" class="btn btn--success">
                                             Pagar Agora
-                                            {{planos.find( p => p.id == plano_id).preco|money}}
+                                            {{total()|money}}
                                         </button>
                                     </div>
                                     <center v-if="trial.status">

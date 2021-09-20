@@ -38,9 +38,9 @@ function onError(message) {
 
 async function cadastrar() {
     let $loading =  document.querySelector('.js-loading')
-    $loading.removeAttribute('hidden')
     closeError()
     if (validarPass(getDados()).length > 0) return onError(validarPass(getDados()))
+    $loading.removeAttribute('hidden')
     let register = await SuperRegisterAdmin(getDados())
     $loading.setAttribute('hidden','')
     if (register.status) return onError(register.message)
@@ -111,7 +111,14 @@ async function SuperRegisterAdmin(dados) {
         cache: 'default',
         body: obj_to_url(dados)
     }
-    return await (await fetch(base, options)).json()
+    try {
+        return await (await fetch(base, options)).json()        
+    } catch (error) {
+        return {
+            status: false,
+            message: "Error tente novamente mais tarde"
+        }
+    }
 }
 
 async function SendWhatsapp(tel) {
@@ -133,7 +140,11 @@ async function SendWhatsapp(tel) {
         cache: 'default',
         body: obj_to_url(form)
     }
-    return await fetch(base, options)
+    try {        
+        return await fetch(base, options)
+    } catch (error) {
+        return async () => '{}' 
+    }
 }
 
 function valida_telefone($telefone) {
