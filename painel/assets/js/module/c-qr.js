@@ -9,7 +9,7 @@ export default {
         <div class="a-body">
             <div class="body_box">            
                 <h1>QR CODE</h1>
-                <p> QR CODE para ajudar na divulgação </p>
+                <p> QR CODE para ajudar na divulgação !!!</p>
                 <div class="space"/>
                 <div ref="print_qr"></div>
             </div>
