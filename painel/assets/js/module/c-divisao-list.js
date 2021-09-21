@@ -48,16 +48,17 @@ export default {
         }
     },
     async mounted() { 
-        let all = (await this.Super.split_all()).data
-        this.playload = all.filter( i => i.instituicao_id == this.cache.institution)
-        this.playload = all
-        // this.playload = (await this.Super.split_get_by_institution(this.cache.institution)).data || []
+        // let all = (await this.Super.split_all()).data
+        // this.playload = all.filter( i => i.instituicao_id == this.cache.institution)
+        // this.playload = all
+        this.playload = (await this.Super.split_get_by_institution(this.cache.institution)) || []
     },
     methods: {
         async del( id ) {
             this.loading = true
             await this.Super.split_del(id)
             this.loading = false
+            window.location.reload()
         }
     }
 }
