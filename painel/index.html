@@ -1217,7 +1217,7 @@
                             </span>
                             <span>
                                 <small>Status</small> <br>
-                                <span class="table_btn table_btn_status">{{doacao.status | status}} </span>
+                                <span :class="'table_btn table_btn_status status_'+doacao.status">{{doacao.status | status}} </span>
                             </span>
                             <span>
                                 <small>Data</small> <br>

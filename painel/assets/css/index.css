@@ -1225,3 +1225,22 @@ input:checked~.toogle i::before {
     max-width: 80vw !important;
     height: 400px !important;
 }
+
+.status_paid {
+    border: 2px solid #006400;
+    color: #006400;
+}
+.status_refused {
+    border: 2px solid #DC143C;
+    color: #DC143C; 
+}
+.status_unpaid {
+    border: 2px solid #DC1430;
+    color: #DC1430; 
+
+}
+.status_waiting_payment {
+    border: 2px solid #808080;
+    color: #808080; 
+}
+

@@ -26,8 +26,13 @@ export default {
     },
     async mounted() {
         let instituicao = await this.Super.get_institution( localStorage.getItem('institution') )
+        let dominio = `https://${instituicao.subdominio}.doardigital.com.br`
+        if( instituicao.dominio_personalizado == 1 && instituicao.dominio.length > 3 ) {
+            dominio = instituicao.dominio
+        }
+        console.log(instituicao)
         var qrcode = new QRCode(this.$refs.print_qr, {
-            text: `https://${instituicao.subdominio}.doardigital.com.br`,
+            text: dominio,
             width: 230,
             height: 230,
             colorDark : "#000000",
