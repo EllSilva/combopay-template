@@ -4,7 +4,7 @@ const App = new Vue({
     data: {
         offset_config: -320,
         valor: '00,00',
-        operacao: 0,
+        operacao: "credit",
         tipo_parcela: 1,
         disabled: false,
         offset_alert: -100,
@@ -133,7 +133,7 @@ const App = new Vue({
                 sellerId: this.configure.seller_id,
                 publishableKey: this.configure.publishable_key,
                 serialPort: this.configure.serial_port_list,
-                paymentType: this.tipo_parcela == '1' ? this.tipo_opercacao(this.operacao) : this.tipo_opercacao(3),
+                paymentType: this.operacao,
                 valueInCents: this.valor_in_centavos(this.valor),
                 numberOfInstallments: this.tipo_parcela,
                 metadata: null,
