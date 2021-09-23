@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinpad Combopay</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="shortcut icon" href="./assets/logo/ico.png" type="image/x-icon">
+</head>
+<body>
+    <div id="app">
+        <div class="loading" hidden>
+            <img src="./assets/logo/icone-white.svg" alt="combopay">
+        </div>
+        <div class="grid">
+            <div>
+                <img class="logo" src="./assets/logo/combopay.svg" alt="combopay">
+            </div>
+            <div class="actions">
+                <div>
+                    <strong class="legenda">PREENCHA OS CAMPOS ABAIXO PARA SE COMUNICAR COM O PINPAD</strong>
+                    <span class="error" v-html="error.message" v-if="error.status"></span>
+                    <span class="pinpad_messages" v-html="pinpad_messages"></span>
+                    <span class="pinpad_messages" style="color: #C00; !important" v-html="pinpad_error"></span>
+                    <span class="pinpad_messages" style="color: #2ecc71; !important" v-html="pinpad_success"></span>
+                </div>
+            </div>
+            <div>
+                <form action="javascript:void(0)" method="POST" @submit="vender()" name="pvd" class="form form--white">
+                    <span>
+                        <label for="">Valor</label>
+                        <input type="text" @input="format_val()" v-model="valor" name="valor" placeholder="00,00" required>
+                    </span>
+                    <div class="col col-2">                        
+                        <span>
+                            <label for="">Operação</label>
+                            <select v-model="operacao" name="operacao" required>
+                                <option value="0">CRÉDITO</option>
+                                <option value="1">DÉBITO</option>
+                                <!-- 
+                                    <option value="2">CRÉDITO PARCELADO</option>
+                                    <option value="3">VOUCHER</option> 
+                                -->
+                            </select>
+                        </span>
+                        <span>
+                            <label for="">Número de Vezes</label>
+                            <select v-model="tipo_parcela" name="tipo_parcela" :disabled="disabled" required>
+                                <option v-for="parcela in max_parcelas" :key="parcela.id" :value="parcela.id">{{ parcela.text }}</option>
+                            </select>
+                        </span>
+                    </div>
+                    <button class="btn btn--success" type="submit">EFETUAR VENDA</button>
+                    <div class="col col-2">
+                        <a @click="cancelar()" class="btn btn--white" href="javascript:void(0)">Cancelar</a>
+                        <a @click="estorno()" class="btn btn--white" href="javascript:void(0)">Estornar</a>
+                    </div>
+                </form>
+            </div>
+            <div>
+                <p class="copy"> &copy; 2019 - Todos os direitos reservados a <strong>ComboPay</strong> </p>
+            </div>
+        </div>
+        <img @click="offset_config = 0" class="btn__open_config" src="./assets/icon/settings.svg">
+        <form action="javascript:void(0)" @submit="config_save()" name="config" class="configure form" v-bind:style="{right: offset_config + 'px'}">
+            <img @click="offset_config = -320" class="close" src="./assets/icon/close.svg" alt="close">
+            <span>
+                <label for="">marketplace id</label>
+                <input type="text" v-model="configure.marketplace_id" name="marketplace_id" placeholder="informe seu id" required>
+            </span>
+            <span>
+                <label for="">seller id</label>
+                <input type="text" v-model="configure.seller_id" name="seller_id" placeholder="digite codigo seller" required>
+            </span>
+            <span>
+                <label for="">chave zpk</label>
+                <input type="text" v-model="configure.publishable_key" name="publishable_key" placeholder="escreve sua chave zpk" required>
+            </span>
+            <span>
+                <label for="">Porta USB</label>
+                <select v-model="configure.serial_port_list" name="serial_port_list">
+                    <option value="AUTO">SELECIONE</option>
+                    <option value="COM1">COM1</option>
+                    <option value="COM2">COM2</option>
+                    <option value="COM3">COM3</option>
+                    <option value="COM4">COM4</option>
+                    <option value="COM5">COM5</option>
+                    <option value="COM6">COM6</option>
+                    <option value="COM7">COM7</option>
+                    <option value="COM8">COM8</option>
+                    <option value="COM9">COM9</option>
+                    <option value="COM10">COM10</option>
+                    <option value="COM11">COM11</option>
+                    <option value="COM12">COM12</option>
+                    <option value="COM13">COM13</option>
+                    <option value="COM14">COM14</option>
+                    <option value="COM15">COM15</option>
+                </select>
+            </span>
+            <button type="submit" class="btn btn--blue">Salvar</button>
+            <p class="text--center">
+                Para Baixar os arquivos de configuração
+                <a class="link" href="./assets/client/files.zip" download="files.zip">Clique Aqui</a>
+            </p>
+        </form>
+        <div class="popup" v-bind:style="{top: offset_alert + 'px'}">
+            <div>
+                <img src="./assets/icon/message.svg" alt="message">
+                <span v-html="message">Atualizado com sucesso!</span>
+            </div>
+        </div>
+        <div class="modal" v-if="popups == 'sucesso'">
+            <div>
+                <img src="./assets/cards/success.png">
+                <span>Compra realizada com sucesso.</span> <br>
+                <span>Remova seu cartão</span> <br>
+                <button @click="popups=null" >confirmar!</button>
+            </div>
+        </div> 
+        <div class="modal" v-if="popups == 'estornado'">
+            <div>
+                <img src="./assets/cards/success.png">
+                <span>Estornado com sucesso.</span> <br>
+                <span>Remova seu cartão</span> <br>
+                <button @click="popups=null" >confirmar!</button>
+            </div>
+        </div>
+        <div class="modal" v-if="popups == 'insira'">
+            <div>
+                <img src="./assets/cards/insert.png">
+                <span>Insira seu cartão</span> <br>
+            </div>
+        </div>
+        <div class="modal" v-if="popups == 'remova'">
+            <div>
+                <img src="./assets/cards/remove.png">
+                <span>Remova seu cartão</span> <br>
+            </div>
+        </div>
+        <div class="modal" v-if="popups == 'erro'">
+            <div>
+                <img src="./assets/cards/error.png">
+                <span>Erro ao tentar fazer transação</span> <br>
+                <span>Remova seu cartão</span> <br>
+                <button @click="popups=null" >fechar!</button>
+            </div>
+        </div>
+        <div class="modal" v-if="popups == 'wifi'">
+            <div>
+                <img src="./assets/cards/wifi.png">
+                <span>Erro ao Conectar maquininha</span> <br>
+            </div>
+        </div>
+        <div class="modal" v-if="popups == 'pass'">
+            <div>
+                <img src="./assets/cards/pass.png">
+                <span>Dígite sua senha</span> <br>
+            </div>
+        </div>
+    </div>
+    <script src="./assets/js/index.js" type="module"></script>
+</body>
+</html>

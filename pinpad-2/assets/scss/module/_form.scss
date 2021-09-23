@@ -1,0 +1,95 @@
+.form {
+    select,
+    input {
+        display: block;
+        width: 100%;
+        background-color: transparent;
+        border: 0px solid $cinza;
+        border-bottom: 2px solid $cinza;
+        line-height: 40px;
+        min-height: 40px;
+        text-indent: 12px;
+        margin-bottom: 20px;
+        font-weight: 700;
+        &:focus {
+            border-bottom: 2px solid $azul;
+
+        }
+    }
+    label {
+        font-family: sans-serif;
+        text-transform: uppercase;
+        display: block;
+        font-size: 12px;
+    }
+    [disabled] {
+        cursor: not-allowed;
+        color: $laranja;
+        border-bottom: 2px solid $laranja;
+    }
+    &--white {
+        label {
+            color: #F7f7f7;
+        }
+        select {
+            border: 1px solid #316d9f;
+            option {
+                color: $azul;
+            }
+        }
+        select,
+        input {
+            border-bottom: 2px solid #F7f7f7;
+            color: #F7f7f7;
+            font-weight: 700;
+            &::placeholder {
+                color: #F7f7f7;
+            }
+        }
+    }
+}
+.btn {
+    $size: 40px;
+    display: block;
+    line-height: $size;
+    min-height: $size;
+    padding: 0 15px;
+    text-decoration: none;
+    border: none;
+    width: 98%;
+    text-align: center;
+    border-radius: 5px;
+    border: 2px solid $cinza;
+    margin: 1%;
+    text-transform: uppercase;
+    font-family: $font;
+    font-weight: 900;
+    color: $cinza;
+    background-color: transparent;
+    cursor: pointer;
+    &:hover {
+        filter: brightness(1.1);
+    }
+    &--success {
+        color: #F7f7f7;;
+        background-color: #27ae60;
+        border: 2px solid #27ae60;
+    }
+    &--white {
+        color: #EEE;
+        border: 2px solid #EEE;
+    }
+    &--blue {
+        color: #F7f7f7;;
+        background-color: $azul;
+        border: 2px solid $azul;
+    }
+}
+.link {
+    display: inline-block;
+    text-decoration: none;
+    color: $azul;
+    &:hover {
+        text-decoration: underline;
+    }
+}

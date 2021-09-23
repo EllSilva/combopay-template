@@ -1,0 +1,205 @@
+.btn {
+    &__open_config {
+        $size: 30px;
+        $ditance: 20px;
+        width: $size;
+        height: $size;
+        display: block;
+        position: fixed;
+        right: $ditance;
+        top: $ditance;
+        cursor: pointer;
+        transition: all .3s ease-in-out;
+        filter: opacity(.5) invert(100);
+        &:hover {
+            filter: opacity(.7) invert(100);
+            top: $ditance - 2;
+        }
+        z-index: 999999;
+    }
+}
+
+.configure {
+    display: block;
+    width: 300px;
+    height: 100vh;
+    background-color: $branco;
+    position: fixed;
+    top: 0;
+    right: -320px;
+    padding: 30px;
+    transition: all 1s ease-in-out;
+    padding-top: 50px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, .2);
+    z-index: 99999999999;
+}
+
+.logo {
+    display: block;
+    width: 100px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+.copy {
+    font-family: $font;
+    display: block;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 12px;
+    color: #f7f7f7;
+}
+.legenda {
+    display: block;
+    text-align: center;
+    font-family: $font;
+    color: #f7f7f7;
+}
+.grid {
+    display: grid;
+    width: 700px;
+    max-width: 95vw;
+    margin: 0 auto;
+    min-height: 100vh;
+    grid-template-rows: 70px 30vh 1fr 30px;
+}
+.col {
+    display: grid;
+    grid-gap: 30px;
+    &-2 {
+        grid-template-columns: repeat(2, 1fr);
+        @media (max-width: 761px ) {
+            grid-template-columns: repeat(1, 1fr);
+            
+        }
+    }
+}
+
+body {
+    background-color: #2980b9;
+    background-image: url('../bg/foto.jpg');
+    background-size: cover;
+    font-family: $font;
+}
+.close {
+    display: block;
+    width: 40px;
+    padding: 12px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    filter: opacity(.5);
+    transition: all .3s ease-in-out;
+    &:hover {
+        top: 9px;
+        filter: opacity(.7);
+    }
+}
+.text {
+
+    &--center {
+        display: block;
+        text-align: center;
+    }
+}
+.popup {
+    display: flex;
+    width: 100vw;
+    position: fixed;
+    top: 20px;
+    right: 0;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    transition: all 1s ease-in-out;
+    div {
+        background-color: $laranja;
+        display: grid;
+        grid-template-columns: 40px 1fr;
+        align-items: center;
+        font-weight: 700;
+        color: #FFF;
+        padding: 7px 20px;
+        border-radius: 7px;
+        box-shadow: 3px 3px 3px rgba(0, 0, 0, .5);
+        z-index: 999999;
+        pointer-events: all;
+        img {
+            display: block;
+            $size: 40px;
+            width: $size;
+            height: $size;
+            padding: 7px;
+            filter: invert(100)
+        }
+    }
+}
+.actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.error {
+    display: block;
+    padding: 7px 20px;
+    border-radius: 4px;
+    background-color: #C00;
+    margin: 10px 0;
+    color: #f1c40f;
+    font-weight: 700;
+    box-shadow: 1px 2px 3px 1px rgba(0, 0, 0, .2);
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, .5);
+}
+.pinpad_messages {
+    display: block;
+    text-align: center;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $laranja;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, .5);
+    font-size: 24px;
+}
+.modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: $azul;
+    color: #f7f7f7;
+    text-transform: uppercase;
+    background-image: url(../bg/foto.jpg);
+    background-size: cover;
+    text-align: center;
+    img {
+        filter: invert(1);
+        display: block;
+        width: 150px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+    }
+    button {
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: 0;
+        margin-top: 20px;
+        background-color: $laranja;
+        color: #EEE;
+        font-weight: 700 !important;
+        cursor: pointer;
+        font-size: 18px !important;
+        text-transform: uppercase;
+        &:hover {
+            filter: brightness(1.2);
+        }
+    }
+    span {
+        font-size: 24px;
+        font-weight: bolder;
+    }
+}
