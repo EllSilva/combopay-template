@@ -46,7 +46,7 @@
                         </span>
                         <span>
                             <label for="">Número de Vezes</label>
-                            <select v-model="tipo_parcela" name="tipo_parcela" :disabled="disabled" required>
+                            <select v-model="tipo_parcela" name="tipo_parcela" :disabled="operacao!='credit_with_installments'" required>
                                 <option v-for="parcela in max_parcelas" :key="parcela.id" :value="parcela.id">{{ parcela.text }}</option>
                             </select>
                         </span>

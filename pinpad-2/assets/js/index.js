@@ -12,7 +12,7 @@ const App = new Vue({
         pinpad_messages: '',
         pinpad_error: '',
         pinpad_success: '',
-        max_parcelas: [{ id: 1, text: 'A VISTA' }],
+        max_parcelas: [],
         configure: {
             marketplace_id: null,
             seller_id: null,
@@ -154,7 +154,7 @@ const App = new Vue({
         },
         cancelar() {
             this.valor = '00,00'
-            this.operacao = 0
+            this.operacao = "credit"
             this.tipo_parcela = 1
             this.pinpad_messages = ''
         },
