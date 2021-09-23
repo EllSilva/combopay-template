@@ -24,8 +24,8 @@ export default {
                 { id: 5, preco: "R$ 190,00", text: "5 mil disparos por mês"}
             ],
             planos: [
-                { preco: 29.90  , id: "1386061", instancias: 1 },
-                { preco: 56.81 , id: "1396159", instancias: 2 },
+                { preco: 29.90, id: "1386061", instancias: 1 },
+                { preco: 56.81, id: "1396159", instancias: 2 },
                 { preco: 80.73,  id: "1386052", instancias: 3 },
                 { preco: 152.49, id: "1386056", instancias: 6 },
                 { preco: 220.66, id: "1386057", instancias: 9 },
