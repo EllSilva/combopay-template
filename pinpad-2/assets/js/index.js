@@ -46,7 +46,7 @@ const App = new Vue({
 
             parcelas = parcelas.map((item, key) => valor / (key + 1))
             parcelas = parcelas.filter(x => x >= 5)
-            this.max_parcelas = parcelas.map((item, id) => ({ id: id + 1, text: id == 0 ? 'A VISTA' : `PARCELADO ${id + 1}X` }))
+            this.max_parcelas = parcelas.map((item, id) => ({ id: id + 1, text: id == 0 ? 'Escolha número de parcelas' : `PARCELADO ${id + 1}X` }))
 
             console.log(parcelas.length)
         }
