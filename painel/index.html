@@ -69,6 +69,46 @@
             <c-header></c-header>
             <div>
                 <c-step></c-step>
+
+
+
+
+
+
+
+
+
+                <div class="body_box">
+                    <div class="filtros">
+                        <div>Filtros</div>
+                        <div>
+                            <small>Periodo</small> <br>
+                            <select v-model="periodo" @change="select_data">
+                                <option value="0">Hoje</option>
+                                <option value="1">Ontem</option>
+                                <option value="7">Últimos 7 dias</option>
+                                <option value="30">Últimos 30 dias</option>
+                                <option value="365">Este Ano</option>
+                                <option value="366">Escolher Periodo</option>
+                            </select>
+                        </div>
+                        <div>
+                            <small>Data Ínicio</small> <br>
+                            <input type="date" @change-="de" :disabled="periodo!=366" v-model="data_min">
+                        </div>
+                        <div>
+                            <small>Data Final</small> <br>
+                            <input type="date" @change-="ate" :disabled="periodo!=366" v-model="data_max">
+                        </div>
+                       
+                    </div>
+                </div>
+
+
+
+
+
+
                 <div class="a-body padding-20">
                     <div class="space"></div>
                     <div class="g g-3 s-g-2 x-g-1">
@@ -857,7 +897,7 @@
                         <div class="note" v-if="!is_edit">
                             <div class="input-note subdomain">
                                 <input type="text" v-model="form.subdominio" placeholder="subdominio" class="input-note"
-                                    :disabled="is_edit">
+                                    :disabled="is_edit" required>
                                 <strong>.doardigital.com.br</strong>
                             </div>
                         </div>

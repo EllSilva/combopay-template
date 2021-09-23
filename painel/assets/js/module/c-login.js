@@ -10,7 +10,15 @@ export default {
             email: '',
             password: '',
             message_error: false,
-            loading: false
+            loading: false,
+            redirect: {
+                15:"#/perfil",
+                21:"#/meu-plano",
+                16:"#/minhas-instituicoes",
+                17:"#/planos",
+                18:"#/email",
+                19:"#/modelo-de-emails",
+            }
         }
     },
     methods: {
@@ -26,7 +34,12 @@ export default {
                 this.cache.bearer = res?.token?.access_token
                 let corruente_user = await this.App.get_admin(res?.admin?.id)
                 this.cache.institution = minha_instituicao.id
-                window.location.href = "#/inicio"
+                let credencial = res?.admin?.credencial
+                if( credencial < 22 && credencial != 20 && credencial != 1 ) {
+                    window.location.href = this.redirect[credencial]
+                }else {
+                    window.location.href = "#/inicio"
+                }
             } else {
                 this.message_error = true
             }

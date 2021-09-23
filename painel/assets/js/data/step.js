@@ -21,7 +21,7 @@ export default [
         titulo: "Complete seu Cadastro",
         description: "Precisamos que você complete seu cadastro com os dados referente a sua Instituição ou Igreja.",
         btn_text: "Completar Cadastro",
-        link: "#/instituicao",
+        link: "#/minhas-instituicoes",
     },
     // {
     //     title: "Dados Bancário",
