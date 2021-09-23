@@ -8,7 +8,7 @@ export default {
         <div> <img src="./assets/logo/logo.svg" class="not-filter"> </div>
         <strong v-if="id!=0"> ID {{id}} - {{corruente_institution.nome_fantasia}} </strong>
         
-        <img v-if="id!=0" @click="toggle_pop" src="./assets/icon/change.svg">
+        <img v-if="id!=0&&show" @click="toggle_pop" src="./assets/icon/change.svg">
 
         <div class="popupo-bg" v-if="status_pop">
             <div>
@@ -33,6 +33,7 @@ export default {
             status: true,
             total: 0,
             id: 0,
+            show:false,
             user: {
                 credencial: null,
             },
@@ -91,6 +92,7 @@ export default {
         this.id = this.cache.institution
         this.instituicoes = todas_intituicoes.data
         this.total = todas_intituicoes.total
+        this.show = this.instituicoes.length > 1
         this.resumo = Array.from(this.instituicoes).splice(0, 3)
         this.institution_name = minhas_instituicoes.nome_fantasia
     }

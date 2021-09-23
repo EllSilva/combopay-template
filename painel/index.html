@@ -449,6 +449,13 @@
                         </div>
                     </center>
                 </div>
+                <div class="body_box" v-if="tipo=='boleto'">
+                    <h1>Devolução de valores</h1>
+                    <center>
+                        <span class="button-export button-export-danger" @click="copiar('boleto_link')">Estornar</span>
+                    </center>
+
+                </div>
             </div>
             <c-footer></c-footer>
         </div>
