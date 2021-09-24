@@ -69,7 +69,74 @@ export default {
             this.doacoes = this.backup.filter(doador => doador.filter_data >= data_min && doador.filter_data <= data_max)
             this.render()
         },
-        render() {
+        faturamento(doacoes, metas) {
+            metas =  metas.map( m => parseInt(m.replace('.','').replace(',','')) )
+            let total_arrecadado = Array(12).fill(0)
+            let total_pagos = Array(12).fill(0)
+            let total_aberto = Array(12).fill(0)
+            doacoes.forEach( d=>  {
+                console.log(d)
+                let indice = parseInt( d.created_at.substr(5,2) )
+                let valor = parseInt( d.quantia || d.valor_plano )
+                total_arrecadado[indice] += valor
+
+                if(d.status == 'paid') {
+                    total_pagos[indice] += valor
+                }                
+                
+                if(d.status == "waiting_payment") {
+                    total_aberto[indice] += valor
+                }
+
+            } )
+            this.graph('graph_faturas', {
+                type: 'bar',
+				data: {
+					labels:["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"],
+					datasets: [
+					{
+						label:'Meta',
+						data:metas,
+						borderColor: '#B002BC',
+						borderWidth: 3,
+						type: 'line'
+
+
+					},
+					{
+						label:'Total Arrecadado',
+						data:total_arrecadado,
+						backgroundColor: '#4791FF',
+						borderColor: '#4791FF',
+						borderWidth: 3
+					},
+					{
+						label:'Total Pago',
+						data: total_pagos,
+						backgroundColor: '#02BC77',
+						borderColor: '#02BC77',
+						borderWidth: 3
+					},
+					{
+						label:'Total Aberto',
+						data: total_aberto, 
+						backgroundColor: '#FFD950',
+						borderColor: '#FFD950',
+						borderWidth: 3
+
+
+					}
+					]
+                },              
+            })
+        },
+        async render() {
+            let allflags = []
+            let metas = []
+            allflags = (await this.Super.flag_get_by_institution(this.cache.institution)).reverse()
+            metas = allflags.find(post => post.flag == 'METAS_2021').base64
+            metas = atob(metas)
+            metas = JSON.parse(metas)
             this.doacoes.forEach( doacao => { 
                 let doador_id = parseInt( doacao?.doador_id )
                 if(doacao?.plano_id) {
@@ -231,21 +298,28 @@ export default {
             if( this.total<1 ) {
                 return
             }
-            this.graph('graph_faturas', {
-                type: 'line',
-                responsive: true,
-                data: {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: "Ganho Dia",
-                            data: ganho_dia,
-                            borderColor: "#05f",
-                        }
-                    ]
-                }
+            
+            this.faturamento(this.doacoes, metas)
+
+            // this.graph('graph_faturas', {
+            //     type: 'line',
+            //     responsive: true,
+            //     data: {
+            //         labels: labels,
+            //         datasets: [
+            //             {
+            //                 label: "Ganho Dia",
+            //                 data: ganho_dia,
+            //                 borderColor: "#05f",
+            //             }
+            //         ]
+            //     }
     
-            })
+            // })
+
+            
+
+           
     
             this.graph('graph_forma_pagamento', {
                 type: 'line',
