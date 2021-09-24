@@ -62,7 +62,8 @@ export default {
 
         
         // let res = (await this.Super.all_doadores_by_istitution(this.cache.institution)).reverse()
-        
+        todos_doadores = todos_doadores.reverse()
+
         globalThis._doadores = todos_doadores
         this.doadores = todos_doadores
         this.backup = todos_doadores

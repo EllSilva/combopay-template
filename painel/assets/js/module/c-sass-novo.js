@@ -82,15 +82,15 @@ export default {
                 birthdate: "",
                 atividade: '1',
                 banco_conta: {
-                    codigo_banco: "341",
-                    agencia: "0932",
-                    agencia_dv: "5",
-                    conta: "teste",
-                    tipo: "teste",
-                    conta: "58054",
+                    codigo_banco: "",
+                    agencia: "",
+                    agencia_dv: "",
+                    conta: "",
+                    tipo: "",
+                    conta: "",
                     conta_dv: "1",
-                    cnpj: "26268738888",
-                    nome: "API BANK ACCOUNT",
+                    cnpj: "",
+                    nome: "",
                     tipo: "conta_corrente"
                 },
                 anotacao: btoa(JSON.stringify({ status: 1 }))
