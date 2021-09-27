@@ -14,4 +14,5 @@ class RdStation
     {
         $this->domain_base =  "https://api.rd.services";
     }
+
 }
