@@ -26,8 +26,11 @@ export default {
         money: valor => 'R$' + (valor/100).toLocaleString('pt-br', { minimumFractionDigits: 2 }),
         data: horario => {            
             let data2 = horario?.substr(0,10)?.split('-')?.reverse()?.join('/')
-            let hora = horario?.substr(11,5)
-            return data2 + ' - ' + hora
+            let hora = horario?.substr(11,2)
+            hora -= 3
+            hora = hora > 9 ? hora : `0${hora}`
+            let min = horario?.substr(13,3)
+            return data2 + ' - ' + hora + '' + min
         },
         traduz: termo => {
             let lib = {
