@@ -19,6 +19,7 @@ const App = new Vue({
             publishable_key: null,
             serial_port_list: 'AUTO',
         },
+        historico: [],
         error: {
             message: '',
             status: false
@@ -52,6 +53,14 @@ const App = new Vue({
         }
     },
     methods: {
+        cache() {
+            this.historico.push({
+                id: this.transactionId,
+                valor: this.valor,
+                data: Date.now()
+            })
+            localStorage.setItem('historico', JSON.stringify( this.historico ))            
+        },
         onopen(event) {
             // console.log('websocket conectado com sucesso')
             // console.log( event )
@@ -83,6 +92,7 @@ const App = new Vue({
                 case "paymentSuccessful":
                     this.transactionId = data.id
                     this.popups = 'sucesso'
+                    // this.cache()
                     break;
                 case "paymentFailed":
                     this.popups = 'erro'
@@ -204,11 +214,13 @@ const App = new Vue({
 
             this.valor = val
         },
+    
 
     },
     mounted() {
         this.configure = { ...this.configure, ...this.config_info() }
         this.start_ws()
+        this.historico = JSON.parse( localStorage.getItem('historico') || '[]' )
     }
 })
 

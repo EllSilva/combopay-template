@@ -103,6 +103,21 @@
                 Para Baixar os arquivos de configuração
                 <a class="link" href="./assets/client/files.zip" download="files.zip">Clique Aqui</a>
             </p>
+            <h2>Historico</h2>
+            <div>
+                <div>
+                    <span>ID</span>
+                    <span>VALOR</span>
+                    <span>DATA</span>
+                    <br>
+                </div>  
+                <div v-for="venda in historico">
+                    <span>{{venda.id}}</span>
+                    <span>{{venda.valor}}</span>
+                    <span>{{venda.data}}</span>
+                    <br>
+                </div>
+            </div>
         </form>
         <div class="popup" v-bind:style="{top: offset_alert + 'px'}">
             <div>
