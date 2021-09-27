@@ -6,3 +6,4 @@ docs/
 .json
 
 /utils/csv/
+/api/config.php
