@@ -70,7 +70,7 @@ export default {
             this.render()
         },
         faturamento(doacoes, metas) {
-            metas =  metas.map( m => parseInt(m.replace('.','').replace(',','')) )
+            metas =  metas.map( m => parseInt(m.replace('.','').replace(',','')) / 100 )
             let total_arrecadado = Array(12).fill(0)
             let total_pagos = Array(12).fill(0)
             let total_aberto = Array(12).fill(0)
@@ -78,14 +78,14 @@ export default {
                 console.log(d)
                 let indice = parseInt( d.created_at.substr(5,2) )
                 let valor = parseInt( d.quantia || d.valor_plano )
-                total_arrecadado[indice] += valor
+                total_arrecadado[indice] += valor / 100
 
                 if(d.status == 'paid') {
-                    total_pagos[indice] += valor
+                    total_pagos[indice] += valor / 100
                 }                
                 
                 if(d.status == "waiting_payment") {
-                    total_aberto[indice] += valor
+                    total_aberto[indice] += valor / 100
                 }
 
             } )
