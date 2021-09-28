@@ -1,5 +1,6 @@
 class App {
     base = '//api.doardigital.com.br/v1'
+    base_2 = '//super.doardigital.com.br/api'
     options = {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -117,7 +118,7 @@ class App {
     async get_doador_by_institution_id(id) {
         return await this.get(`/doador/por-instituicao/${id}`, {})
     }
-    
+
     async get_doador_history(id) {
         let assinatura = await this.get(`/assinatura/por-doador/${id}`, {})
         let transacao = await this.get(`/transacao/por-doador/${id}`, {})
@@ -130,7 +131,7 @@ class App {
     async all_doacao_by_institution(id) {
         let unica = await this.get(`/transacao/por-instituicao/${id}`, {})
         let mensal = await this.get(`/assinatura/por-instituicao/${id}`, {})
-        return [ ...unica, ...mensal ]
+        return [...unica, ...mensal]
     }
 
     async all_doadores() {
@@ -148,12 +149,12 @@ class App {
     async post_doador(playload = {}) {
         return await this.post(`/doador`, playload)
     }
-   
+
     async get_institution_by_domain(domain) {
         return await this.get(`/instituicao/por-dominio/${domain}`, {})
     }
     async get_institution(id) {
-        if( id == 0) return {}
+        if (id == 0) return {}
         return await this.get(`/instituicao/${id}`, {})
     }
     async all_institution(step = 1) {
@@ -176,18 +177,18 @@ class App {
     }
     async add_anotacao_institution({ instituicao_id, anotacao }) {
         return await this.post(`/instituicao/anotacao`, { instituicao_id, anotacao })
-    }    
-    async status_institution( id, playload) {
+    }
+    async status_institution(id, playload) {
         return await this.put(`/instituicao/status/${id}`, playload)
     }
-    async institution_saldo( id_recebedor ) {
+    async institution_saldo(id_recebedor) {
         return await this.get(`/instituicao/saldo/${id_recebedor}`, {})
     }
-    async institution_saques( recebedor_id ) {
+    async institution_saques(recebedor_id) {
         return await this.get(`/instituicao/saldo-historico/${recebedor_id}`, {})
     }
 
-    async institution_historico( id_recebedor ) {
+    async institution_historico(id_recebedor) {
         return await this.get(`/instituicao/status/${id_recebedor}`, {})
     }
 
@@ -274,7 +275,7 @@ class App {
         return await this.post(`/assinatura`, playload)
     }
 
-    async upload(form) {       
+    async upload(form) {
         let res = await fetch(`${this.base}/upload`, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('bearer') || ''}`
@@ -285,6 +286,35 @@ class App {
             body: form
         })
         return await res.json()
+    }
+
+    async get_evendas(instituicao_id) {
+        let full_url = this.base_2
+        full_url += `/evendas`
+        full_url += `?instituicao_id=${instituicao_id}`
+        let res = await fetch(full_url)
+        return await res.json()
+    }
+
+    async save_evendas({ instituicao_id, identificacao_id }) {
+
+        let full_url = this.base_2
+        full_url += `/evendas`
+
+        let form = new FormData()
+        form.append('instituicao_id', instituicao_id)
+        form.append('identificacao_id', identificacao_id)
+
+        let options = {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'default',
+            body: form
+        }
+
+        let res = await fetch(full_url, options)
+        return await res.json()
+
     }
 
 

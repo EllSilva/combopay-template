@@ -10,7 +10,9 @@ export default {
             Super,
             cache,
             Domain,
-            form: {},
+            form: {
+                channel: null
+            },
             title: 'E-vendas',
             flag: 'E_VENDAS',
             loading: false,
@@ -34,28 +36,20 @@ export default {
     },
     methods: {
         async load() {
-            let all_flags = await this.Super.flag_get_by_institution(this.cache.institution)
-            let flag = all_flags.find(post => post.flag == this.flag)
-            if (flag) {
-                this.id = flag.id
-                this.form = JSON.parse(atob(flag.base64))
-            } else {
-                this.is_flag = true
-            }
-
+            let res = await this.Super.get_evendas(this.cache.institution)
+            this.form.channel = res.identificacao_id
         },
         async save() {
-            this.loading = true
-            let playload = {
-                base64: btoa(JSON.stringify(this.form)),
-                flag: this.flag,
-                instituicao_id: this.cache.institution
+            let payload = {
+                instituicao_id: this.cache.institution,
+                identificacao_id: this.form.channel
             }
-            let res = await this.Super.flag_put(this.id, playload)
-            this.error.status = true
-            this.error.text = res.message
-            this.error.type = res.status
+            this.loading = true
+            let res = await this.Super.save_evendas(payload)
             this.loading = false
+            this.error.status = res.next
+            this.error.text = res.message
+            this.error.type =  res.next ? "success" : "error"
 
         }
     }
