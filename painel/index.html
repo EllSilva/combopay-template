@@ -199,7 +199,7 @@
                             <div v-for="(mes, index) in meses">
                                 <label for=""> {{ mes }} </label>
                                 <input type="text" @input="playload[index] = mask_money(playload[index]) "
-                                    :disabled="is_flag" v-model="playload[index]" placeholder="12.000" class="i-monei">
+                                    :disabled="is_flag" v-model="playload[index]" placeholder="00,00" class="i-monei" required>
                             </div>
                             <div>
                                 <button type="submit" :disabled="is_flag" class="btn btn--success">Salvar</button>
@@ -1157,14 +1157,14 @@
                     <div class="space"></div>
                     <div class="table">
                         <div v-for="doador in doadores">
-                            <span><img class="gravatar" src="./assets/img/gravatar.png"></span>
+                            <span><img class="gravatar" :src="'http://super.doardigital.com.br/api/gravatar?email='+doador.email"></span>
                             <span class="w-50">
                                 {{ doador.nome }} <br>
                                 {{ doador.email }} <br>
                                 {{ doador.telefone }} <br>
                             </span>
                             <span>
-                                <small>Dada Cadastro</small> <br>
+                                <small>Data Cadastro</small> <br>
                                 {{ doador.created_at | format_data }}
                             </span>
                             <span>

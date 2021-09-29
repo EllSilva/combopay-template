@@ -100,8 +100,6 @@ export default {
 						borderColor: '#B002BC',
 						borderWidth: 3,
 						type: 'line'
-
-
 					},
 					{
 						label:'Total Arrecadado',

@@ -50,12 +50,24 @@ export default {
             let doador = await this.Super.get_doador(id)
             return doador
         } ) )
+
+        todos_doadores = todos_doadores.sort((a, b) => {
+            let A = Date.parse(a.created_at)
+            let B = Date.parse(b.created_at)
+            if (A < B) return -1
+            if (A > B) return 1
+            return 0
+        })
         
         todos_doadores = todos_doadores.map( doador => {
             doador.filter_data = Date.parse(doador.created_at)
             doador.recorrente = this.recorrentes.includes(doador.id ) 
             return doador
         } )
+
+       
+
+        console.log(todos_doadores)
 
 
        
