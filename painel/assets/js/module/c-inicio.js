@@ -75,7 +75,6 @@ export default {
             let total_pagos = Array(12).fill(0)
             let total_aberto = Array(12).fill(0)
             doacoes.forEach( d=>  {
-                console.log(d)
                 let indice = parseInt( d.created_at.substr(5,2) )
                 let valor = parseInt( d.quantia || d.valor_plano )
                 total_arrecadado[indice] += valor / 100
@@ -153,6 +152,13 @@ export default {
                     }                
                 }
             })
+
+            let doacoes_em_aberto = this.doacoes.reduce( (acc, doacao) => {
+                if(doacao.status == "waiting_payment") {
+                    acc += (doacao.quantia || doacao.valor_plano)  / 100
+                }
+                return acc
+            }, 0 )
             
             let total_doacoes = this.doacoes.map(doacao => parseInt(doacao.quantia||doacao.valor_plano))
             let total_docacao = total_doacoes.length
@@ -259,7 +265,7 @@ export default {
             }, {})
             quantidade_boleto_por_dia = Object.values(quantidade_boleto_por_dia)
     
-            let doacoes_aberto = total_doacoes - doacoes_pagas
+            let doacoes_aberto = doacoes_em_aberto
     
             this.link += `Total ;${total_doacoes}%0A`
             this.link += `Pagas;${doacoes_pagas}%0A`

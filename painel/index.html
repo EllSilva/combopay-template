@@ -1157,7 +1157,7 @@
                     <div class="space"></div>
                     <div class="table">
                         <div v-for="doador in doadores">
-                            <span><img class="gravatar" :src="'http://super.doardigital.com.br/api/gravatar?email='+doador.email"></span>
+                            <span><img class="gravatar" :src="'http://painel.doardigital.com.br/api/gravatar?email='+doador.email"></span>
                             <span class="w-50">
                                 {{ doador.nome }} <br>
                                 {{ doador.email }} <br>
@@ -1253,7 +1253,7 @@
                     <div class="table">
                         <div v-for="doacao in doacoes">
                             <!-- <span> <input type="checkbox"> </span> -->
-                            <span><img class="gravatar" src="./assets/img/gravatar.png"></span>
+                            <span><img class="gravatar":src="'http://painel.doardigital.com.br/api/gravatar?email='+doacao.email"></span>
                             <span>
                                 <small>Doador</small> <br>
                                 {{doacao.nome|| doacao.nome_doador || 'Não Informado'}}

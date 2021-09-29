@@ -1,6 +1,6 @@
 class App {
     base = '//api.doardigital.com.br/v1'
-    base_2 = '//super.doardigital.com.br/api'
+    base_2 = '//painel.doardigital.com.br/api'
     options = {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
