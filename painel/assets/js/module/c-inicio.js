@@ -155,7 +155,7 @@ export default {
 
             let doacoes_em_aberto = this.doacoes.reduce( (acc, doacao) => {
                 if(doacao.status == "waiting_payment") {
-                    acc += (doacao.quantia || doacao.valor_plano)  / 100
+                    acc += parseInt( doacao.quantia || doacao.valor_plano )
                 }
                 return acc
             }, 0 )
