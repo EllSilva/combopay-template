@@ -77,9 +77,125 @@ class Evendas
 
         echo json_encode($caso_nao_encontre);
     }
+
+    static function curl($payload, $token)
+    {
+        $defaults = [
+            CURLOPT_POST           => true,
+            CURLOPT_HEADER         => 0,
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_URL            => "http://api.e-vendas.net.br/api/pedidos",
+            CURLOPT_POSTFIELDS     => json_encode($payload),
+            CURLOPT_HTTPHEADER     => [
+                'Content-Type:application/json',
+                'Token:' . $token
+            ]
+        ];
+        $con = curl_init();
+        curl_setopt_array($con, $defaults);
+        $ex = curl_exec($con);
+        curl_close($con);
+        return $ex;
+    }
+
+    static function send($pay, $token)
+    {
+        $pay = (object) $pay;
+
+        $id_fix = 1;
+        $id_unico = intval( (time() / 50) + rand(1, 99) );
+        $email = $pay->email;
+        $nome = $pay->nome;
+        $ddd = $pay->ddd;
+        $telefone = $pay->telefone;
+        $endereco = $pay->endereco;
+        $status = $pay->status;
+        $tipo = $pay->tipo;
+        $data = date('Y-m-d');
+        $codigo_boleto = $pay->codigo_boleto;
+        $valor = $pay->valor;
+        $boleto_url = $pay->boleto_url;
+        $id_plataforma = time() . rand(1, 9);
+
+        $payload = [
+            "NUMERO" => $id_fix,
+            "NUMEROID" => $id_fix,
+            "TRANSACAO" => $id_unico,
+            "COMPRADOREMAIL" => $email,
+            "COMPRADORNOME" => $nome,
+            "COMPRADORDDD" => $ddd,
+            "COMPRADORTELEFONE" => $telefone,
+            "COMPRADORENDERECO" => $endereco,
+            "STATUSPEDIDO" => $status,
+            "TIPOPAGAMENTO" => $tipo,
+            "DATAPEDIDO" => $data,
+            "BOLETOCODIGOBARRA" => $codigo_boleto,
+            "VALORPEDIDO" => $valor,
+            "URLCHECKOUT" => "",
+            "CODIGORASTREIO" => "",
+            "URLRASTREIO" => "",
+            "BoletoUrl" => $boleto_url,
+            "IDPLATAFORMA" => $id_plataforma,
+            "PedidosProdutos" => [
+                [
+                    "Produtos" => [
+                        "CODIGO" => time(),
+                        "DESCRICAO" => "Doação R$" . $valor
+                    ]
+                ]
+            ]
+        ];
+
+        return Evendas::curl($payload, $token);
+    }
+
     static function router()
     {
         Evendas::me();
         Evendas::post();
+    }
+
+    static function send_message()
+    {
+        $con = new Banco;
+        
+        $instituicao_id = intval( $_REQUEST['instituicao_id'] ) ?? null;
+
+        if(!$instituicao_id) {
+            echo json_encode([
+                "next" => false,
+                "message" => "Informe o numero de instituicao"
+            ]);
+            return null;
+        }
+
+        $sql = "SELECT * FROM integracao 
+        WHERE instituicao_id=$instituicao_id AND tipo='EVENDAS'";
+        
+        $result = $con->query($sql);
+
+        if(empty($result[0]["identificacao_id"])) {
+            echo json_encode([
+                "next" => false,
+                "message" => "Canal do evendas não definido"
+            ]);
+            return null;
+        }
+
+        $token = $result[0]["identificacao_id"];
+
+        $payload = [
+            'email' => $_REQUEST['email'] ?? null,
+            'nome' => $_REQUEST['nome'] ?? null,
+            'ddd' => $_REQUEST['ddd'] ?? null,
+            'telefone' => $_REQUEST['telefone'] ?? null,
+            'endereco' => $_REQUEST['endereco'] ?? null,
+            'status' => $_REQUEST['status'] ?? null,
+            'tipo' => $_REQUEST['tipo'] ?? null,
+            'codigo_boleto' => $_REQUEST['codigo_boleto'] ?? null,
+            'valor' => $_REQUEST['valor'] ?? null,
+            'boleto_url' => $_REQUEST['boleto_url'] ?? null            
+        ];
+        echo Evendas::send($payload, $token);        
     }
 }
