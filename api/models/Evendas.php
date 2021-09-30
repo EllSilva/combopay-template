@@ -115,7 +115,6 @@ class Evendas
         $codigo_boleto = $pay->codigo_boleto;
         $valor = $pay->valor;
         $boleto_url = $pay->boleto_url;
-        $id_plataforma = time() . rand(1, 9);
 
         $payload = [
             "NUMERO" => $id_fix,
@@ -135,7 +134,7 @@ class Evendas
             "CODIGORASTREIO" => "",
             "URLRASTREIO" => "",
             "BoletoUrl" => $boleto_url,
-            "IDPLATAFORMA" => $id_plataforma,
+            "IDPLATAFORMA" => 17,
             "PedidosProdutos" => [
                 [
                     "Produtos" => [

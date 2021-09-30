@@ -152,6 +152,20 @@ class App {
         return res
     }
 
+    async send_mensagem(payload) {
+        let url = "https://painel.doardigital.com.br/api/enviar-mensagem"
+        let res = fetch( url, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            method: 'POST',
+            mode: 'cors',
+            cache: 'default',
+            body: objectParametize(payload)
+        } )
+        return res
+    }
+
 }
 
 export default App;

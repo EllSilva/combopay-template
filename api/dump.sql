@@ -6,3 +6,14 @@ CREATE TABLE integracao (
     chave varchar(255),
     token varchar(255)
 );
+
+CREATE TABLE recuperacao_doacao (
+    id int not null auto_increment primary key,
+
+);
+
+
+CREATE TABLE doacao (
+    id int not null auto_increment primary key,
+
+);

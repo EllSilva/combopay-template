@@ -361,24 +361,26 @@ globalThis.app = new Vue({
                 this.error.text = res.message
             }
 
+            let full_phone = this.doacao.telefone.replace(/\D/gi, '') + ''
+            let full_address = `${this.doacao.cep} - ${this.doacao.rua}, ${this.doacao.numero} - ${this.doacao.bairro} - ${this.doacao.cidade} - ${this.doacao.estado}`
+            
             let payload_utils = {
-                status: this.doacao.payment_type == 'boleto' ? 'waiting_payment' : 'paid' ,
-                total: playload.quantia,
-                name: playload.cliente.nome,
                 email: playload.cliente.email,
-                phone: this.doacao.telefone.replace(/\D/gi, ''),
+                nome: playload.cliente.nome,
+                ddd: full_phone.substr(0,2),
+                telefone: full_phone.substr(2,11),
+                endereco: full_address,
+                status: this.doacao.payment_type == 'boleto' ? 'waiting_payment' : 'paid',
                 tipo: this.doacao.payment_type,
-                code: res.boleto?.codigo_barras || null,
-                url: res.boleto?.url || null,
+                codigo_boleto: res.boleto?.codigo_barras || null,
+                valor: playload.quantia,
+                boleto_url: res.boleto?.url || null,
                 instituicao_id: this.institution_id,
-                instituicao_nome: this.title,
-                instituicao_logo: this.logo_evendas,
-                instituicao_color: this.backgroundColor,
             }
             
             if (res.status == "success") {
                 this.loading = true
-                await this.Super.evendas_email(payload_utils)
+                await this.Super.send_mensagem(payload_utils)
                 this.loading = false
                 window.location.href = "/obrigado.html"
             }
