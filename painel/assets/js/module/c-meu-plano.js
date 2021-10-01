@@ -206,6 +206,9 @@ export default {
     async created() {
         this.credencial = localStorage.getItem('user_logged_credential_id')
         this.user = await this.Super.get_admin(this.cache.user_logged_id)
+        // let historico = await this.Super.historico_assinatura("1386061")
+        // let all_trasacoes = await this.Super.all_doacao_by_institution(1)
+
 
     }
 }

@@ -185,7 +185,7 @@ class App {
         return await this.get(`/instituicao/saldo/${id_recebedor}`, {})
     }
     async institution_saques(recebedor_id) {
-        return await this.get(`/instituicao/saldo-historico/${recebedor_id}`, {})
+        return await this.get(`/transacao/lista`, {})
     }
 
     async institution_historico(id_recebedor) {
@@ -273,6 +273,14 @@ class App {
 
     async payPlan(playload) {
         return await this.post(`/assinatura`, playload)
+    }
+
+    async historico_assinatura(id) {
+        return await this.get(`/assinatura/transacao/${id}`,{})
+    }
+
+    async cancelar_assinatura({ assinatura_id, nome_doador, email_doador }) {
+        return await this.post(`/assinatura/cancela`, { assinatura_id, nome_doador, email_doador })
     }
 
     async upload(form) {
