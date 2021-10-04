@@ -144,7 +144,7 @@ globalThis.app = new Vue({
             this.loading = true
             let res = await this.Super.next_pass({
                 instituicao_id: this.institution_id,
-                token: Date.now(),
+                token: 1,
                 email: this.doacao.email,
                 valor: this.doacao.amount,
                 callback: ''
