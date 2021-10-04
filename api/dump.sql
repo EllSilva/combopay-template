@@ -22,7 +22,7 @@ CREATE TABLE recuperacao_doacao (
     nome varchar(175),
     email varchar(175),
     valor int,
-    callback varchar(255)
+    callback varchar(255),
     data_para_envio varchar(25)
 );
 
@@ -69,4 +69,40 @@ CREATE TABLE template_email (
 CREATE TABLE categoria (
     id int not null auto_increment primary key,
     titulo varchar(75),
+);
+
+
+CREATE TABLE instituicao (
+    id
+    razao_social
+    nome_fantasia
+    email
+    telefone
+    rua
+    cidade
+    estado
+    bairro
+    complemento
+    cnpj
+    subdominio
+    dominio
+    dominio_personalizado
+    created_at
+    updated_at
+    ativo
+    cep
+    atividade
+    recebedor_id
+    admin_master
+    anotacao
+);
+
+CREATE TABLE configuracao (
+    id
+    instituicao_id
+    flag
+    base64
+    ativo
+    created_at
+    updated_at
 );

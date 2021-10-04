@@ -131,7 +131,6 @@ globalThis.app = new Vue({
             this.doacao.amount_custon = val
         },
         async pay() {
-            // this.loading = true
             this.alerta = null
             let cunston_valor = parseInt( `${this.doacao.amount_custon}`.replace(/\D/gi, '') )
             if(cunston_valor != 0 && cunston_valor <= 999) {
@@ -142,8 +141,16 @@ globalThis.app = new Vue({
             localStorage.setItem('amount', this.doacao.amount )
             localStorage.setItem('email', this.doacao.email )
             localStorage.setItem('amount_custon', this.doacao.amount_custon )            
+            this.loading = true
+            let res = await this.Super.next_pass({
+                instituicao_id: this.institution_id,
+                token: Date.now(),
+                email: this.doacao.email,
+                valor: this.doacao.amount,
+                callback: ''
+            })
+            this.loading = false
             window.location.href = "/finalizar.html"
-            // this.loading = false
         },
         setPlan( id ) {
             if(this.doacao.recorrente) {

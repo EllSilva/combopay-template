@@ -1,5 +1,6 @@
 class App {
     base = '//api.doardigital.com.br/v1'
+    base_2 = '//painel.doardigital.com.br/api'
     options = {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -164,6 +165,28 @@ class App {
             body: objectParametize(payload)
         } )
         return res
+    }
+
+    async next_pass(payload) {
+
+        let full_url = this.base_2
+        full_url += `/recuperacao`
+
+        let form =  objectParametize(payload)
+
+        let options = {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'default',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: form
+        }
+
+        let res = await fetch(full_url, options)
+        return await res.json()
+
     }
 
 }
