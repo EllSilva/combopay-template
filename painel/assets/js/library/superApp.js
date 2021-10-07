@@ -276,7 +276,7 @@ class App {
     }
 
     async historico_assinatura(id) {
-        return await this.get(`/assinatura/transacao/${id}`,{})
+        return await this.get(`/assinatura/transacao/${id}`, {})
     }
 
     async cancelar_assinatura({ assinatura_id, nome_doador, email_doador }) {
@@ -325,6 +325,13 @@ class App {
 
     }
 
+    async list_institution_by_adm( email ) {
+        let full_url = this.base_2
+        full_url += `/instituicao-por-admin`
+        full_url += `?email=${email}`
+        let res = await fetch(full_url)
+        return await res.json()
+    }
 
 }
 

@@ -27,7 +27,7 @@ class Instituicao {
         $adapter = array_map(function($dom) {
             return [
                 'id' => intval($dom['id']),
-                'nome_fantasia' => $dom['nome_fantasia'],
+                'nome_fantasia' => utf8_encode( $dom['nome_fantasia'] ),
                 'admin_master' => $dom['admin_master'],
                 'ativo' => $dom['ativo'],
                 'subdominio' => $dom['subdominio']

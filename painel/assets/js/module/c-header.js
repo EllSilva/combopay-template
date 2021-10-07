@@ -79,10 +79,12 @@ export default {
         
         let todas_intituicoes = {data:[]}
 
+        let instituicoes = []
         let minhas_instituicoes = {}
         if(this.user.credencial!=1) {
-            minhas_instituicoes = await this.Super.all_email_admin_institution(this.user.email)
-            todas_intituicoes.data = [minhas_instituicoes]
+            instituicoes = await this.Super.list_institution_by_adm(this.cache.email)
+            minhas_instituicoes = instituicoes[0]
+            todas_intituicoes.data = instituicoes
         }
         
         if(this.user.credencial==1) {
@@ -92,8 +94,11 @@ export default {
         this.id = this.cache.institution
         this.instituicoes = todas_intituicoes.data
         this.total = todas_intituicoes.total
-        this.show = this.instituicoes.length > 1
+        this.show = todas_intituicoes.data.length > 1
         this.resumo = Array.from(this.instituicoes).splice(0, 3)
+        if(this.user.credencial!=1) {
+            this.resumo = Array.from(this.instituicoes)
+        }
         this.institution_name = minhas_instituicoes.nome_fantasia
     }
 }
