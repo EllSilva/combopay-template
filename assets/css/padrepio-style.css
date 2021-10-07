@@ -1,7 +1,26 @@
+/*=================================================== 
+01 - CONFIGURAÇÕES GERAIS
+02 - HEADER
+03 - HERO
+04 - AÇÃO
+05 - TITULO
+06 - VIDEOS
+07 - CARTA
+08 - PALAVRA
+09 - AÇÃO 02
+10 - RODAPE
+11 - RESPONSIVO
+======================================================
+
+0 - IMPORTAÇÕES  ===========================*/
+
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
 
+/*=================================================== 
+01 - CONFIGURAÇÕES GERAIS
+======================================================*/
 * {
-  box-sizing: border-box;
+
   margin: 0;
   padding: 0;
   outline: 0;
@@ -10,6 +29,7 @@
 html {
   /* a cada 1rem será considera 10px */
   font-size: 62.5%;
+  box-sizing: border-box;
 }
 
 html,
@@ -24,83 +44,22 @@ body {
   font-size: 1.6rem;
 }
 
-.imagem {
-  border-radius: 20px;
-  width: 100%;
-  box-shadow: 0 0 10px 0 rgb(0 0 0 / 50%);
-}
-
-
-
-
-.icone {
-  width: 32px;
-  filter: invert(100);
-  padding-left: 11px;
-}
-
-/* TOPO */
-
-.topo {  
-  padding: 10px 0;
-  text-align: center;
-}
-
-.imagem-logo {
-
-  width: 40%;
-
-}
-
-
-/* CURVA DO TOPO */
-
-.curva-topo {
-	background-image: linear-gradient(to right, #021E52, blue);
-	color: #fff;
-	text-align: center;
-}
-
-.curva-topo h1 {
-	font-size: 2rem;
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-	margin-top: 0;
-	margin-bottom: 0;
-	padding-top: 2rem;
-}
-
-.curva-topo p {
-	font-size: 1rem;
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.curva-topo svg {
-	display:block;
-	margin-top: -10%;
-}
-
-
-/* TÍTULOS E BOTÃO */
-
 h2 {
-  color: rgb(75, 75, 75);
+  color: #5B4540;
   font-size: 2.5rem;
   line-height: 4.6rem;
 }
 
 h3 {
-  color: rgb(75, 75, 75);
+  color: #5B4540;
   font-size: 2.8rem;
   line-height: 3.8rem;
 }
 
-.div-botao{
-  margin-top: 40px;
-}
-
-.div-botao-1{
-  margin-top: 40px;
-  text-align:center
+.icone {
+  width: 32px;
+  filter: invert(100);
+  padding-left: 11px;
 }
 
 .button {
@@ -109,41 +68,70 @@ h3 {
   font-weight: 600;
   color: rgb(255, 255, 255);
   background-color: #23A455;
-  padding: 20px 22%;
+  padding: 20px 18%;
   text-decoration: none;
   border-radius: 20px;
   transition: all 150ms linear 0s;
+  box-shadow: 0 0 10px 0 rgb(0 0 0 / 50%);
 }
 
 .button:hover {
   opacity: 0.9;
 }
 
-
-/*=============== 
-HERO
-==================*/
-section.hero {
-  margin: 0 0 20px 0;
-  background-color: #F6EEE9;
-  padding: 45px 0;
+/*=================================================== 
+02 - HEADER
+======================================================*/
+.topo {  
+  padding: 10px 0;
+  text-align: center;
 }
 
-section.hero .container {
-  width: 90%;
-  max-width: 1200px;
+.imagem-logo {
+
+  width: 35%;
+
+}
+
+/*=================================================== 
+03 - HERO
+======================================================*/
+.container-hero {
+  padding: 55px 10% 40px 10%;
+  display: flex;
   margin: auto;
   align-items: center;
+  background-color: #F6EEE9;
+}
+
+.c-hero {
+  width:90%;
+  padding: 10px;
+}
+
+.c-hero h2 {
+  padding: 10px 30px;
+  font-size: 2.7rem;
+  line-height: normal;
+}
+
+.c-hero iframe {
+  border-radius: 20px;
+}
+
+
+
+/*=================================================== 
+04 - ACAO
+======================================================*/
+.container-acao {
+  width: 90%;
+  max-width: 1100px;
   display: flex;
-}
+  margin: auto;
+  align-items: center;
 
-section.hero p {
-  color: blue;
-  font-size: 2.4rem;
-  line-height: 3rem;
-  margin: 10px 0px 0px;
 }
-
 
 .container-1 {
   width: 90%;
@@ -154,8 +142,65 @@ section.hero p {
 
 }
 
-.container-2 {
-  padding: 55px 0 40px 0;
+.c-acao-txt {
+  width:100%;
+  text-align: center;
+  padding: 40px 0 15px 0;
+  font-size: 3.5rem;
+}
+
+.c-acao-btn{
+  margin-top: 40px;
+  text-align:center
+}
+
+
+/*=================================================== 
+05 - TITULO
+======================================================*/
+.container-h2 {
+  width: 90%;
+  max-width: 1100px;
+  display: flex;
+  margin: auto;
+  align-items: center;
+
+}
+
+.c-h2 {
+  width:100%;
+}
+
+.c-h2 h2 {
+  text-align: center;
+  padding: 40px 0 15px 0;
+  font-size: 3.5rem;
+}
+
+.container-h3 {
+  width: 90%;
+  max-width: 1100px;
+  display: flex;
+  margin: auto;
+  align-items: center;
+
+}
+
+.c-h3 {
+  width:100%;
+}
+
+.c-h3 h3 {
+  text-align: center;
+  padding: 40px 0 15px 0;
+  font-size: 3.5rem;
+}
+
+/*=================================================== 
+06 - VIDEOS
+======================================================*/
+.container-videos {
+  padding: 20px 0 0 0;
   width: 90%;
   max-width: 1200px;
   display: flex;
@@ -164,68 +209,295 @@ section.hero p {
  
 }
 
-.container-3 {
-    padding: 55px 10% 40px 10%;
-    display: flex;
-    margin: auto;
-    align-items: center;
-    background-color: #F6EEE9;
-  }
-
-
-.child a{
-  
-  text-align: center;
-  align-items: center;
-}
-
-.child {
+.c-videos {
   width:100%;
-}
-
-
-.child-2 {
-  width:50%;
   padding: 10px;
 }
 
-.child-3 {
-    width:50%;
-    padding: 10px;
-  }
-
-.child-3-video {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%;
-  height: 0;
-  }
-
-.child-3-video iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;  
-  }
- 
-
-
-.child h2{
+.c-videos h2{
   text-align: center;
   padding: 40px 0 15px 0;
   font-size: 3.5rem;
 }
 
-.child p{
-  font-size: 2.2rem;
+.container-videos .c-videos iframe {
+  border-radius: 20px;
 }
 
-/*=============== 
-MAIN
-==================*/
-main {
-  margin-bottom: 80px;
+#container {
+  background-color: #567890;
+  width: 90%;
+  margin: 0 auto;
+  border: 4px solid #222;
+  display: flex;}
+
+.vidwrapper {
+  width: 100%;
+  max-width: 800px;
+  border-radius: 20px;   
+    
+}
+
+.vidcontainer {
+  width: 100%;
+  max-width: 100%;
+  height: 0;
+  padding-bottom: 56.25%; 
+  position: relative;
+  border-radius: 20px;
+}
+
+.vidcontainer iframe {
+  width: 100%;
+  max-width: 100%;
+  height: 100%; 
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 20px;
+
+}
+
+/*=================================================== 
+07 - CARTA
+======================================================*/
+.container-carta {
+  background-color: #5B4540;
 }
 
 
+
+.container-carta-txt {
+  width: 90%;
+  max-width: 1100px;
+  display: flex;
+  margin: auto;
+  align-items: center;
+  
+
+}
+
+.c-carta-txt a, .c-carta-txt p{
+  
+  align-items: center;
+  color:#fff;
+}
+
+.c-carta-txt {
+  width:100%;
+}
+
+.c-carta-txt h2{
+  text-align: center;
+  padding: 40px 0 15px 0;
+  font-size: 3.5rem;
+  color:#fff;
+}
+
+.container-carta-img {
+  width: 90%;
+  max-width: 1100px;
+  display: flex;
+  margin: auto;
+  align-items: center;
+  
+  
+}
+
+.c-carta-img {
+  width:100%;
+}
+
+.imagem-carta {
+  border-radius: 20px;
+  box-shadow: 0 0 10px 0 rgb(0 0 0 / 50%);
+  width:92%;
+}
+
+/*=================================================== 
+08 - PALAVRA
+======================================================*/
+.container-palavra {
+  padding: 20px 0 0 0;
+  width: 90%;
+  max-width: 1200px;
+  display: flex;
+  margin: auto;
+  align-items: center;
+ 
+}
+
+.c-palavra-img {
+  width:40%;
+  padding: 10px;
+  text-align: center;
+}
+
+.c-palavra-txt {
+  width:60%;
+  padding: 10px;
+}
+
+.imagem-palavra {
+  border-radius: 20px;
+  width: 40%;
+  box-shadow: 0 0 10px 0 rgb(0 0 0 / 50%);
+  
+
+}
+
+/*=================================================== 
+9 - AÇÃO 2
+======================================================*/
+
+.container-acao2 {
+  padding: 20px 0 0 0;
+  width: 90%;
+  max-width: 1200px;
+  display: flex;
+  margin: auto;
+  align-items: center;
+ 
+}
+
+.c-acao2-txt {
+  width:50%;
+  padding: 10px;
+  font-size: 26px;
+  text-align: center;
+  
+}
+
+.c-acao2-btn {
+  width:50%;
+  padding: 10px;
+  vertical-align: top;
+}
+
+
+.c-acao2-btn-div{
+  text-align: center;
+}
+/*=================================================== 
+10 - RODAPE
+======================================================*/
+
+.imagem-rodape {
+  max-width: 120px;
+}
+
+.container-rodape {
+  display: flex;
+  text-align: center;
+}
+
+.c-rodape {
+  width:100%;
+}
+
+/*=================================================== 
+FIM
+======================================================*/
+/* INICIO */
+/* DO */
+/* RESPONSIVO */
+
+
+
+
+/*================= RESPONSIVO < 600PX  ==================*/
+@media only screen and (max-width: 600px) {
+  .container-hero {
+    padding: 10px 2% 40px 2%;
+    display: flex;
+    flex-direction: column-reverse;
+    flex: 0 0 100%; 
+    margin: auto;
+    align-items: center;
+    background-color: #F6EEE9;
+  }
+
+  .imagem-logo {
+
+    width: 85%;
+  
+  }
+
+  .vidwrapper {
+    width: 100%;
+    max-width: 800px;
+    border-radius: 20px;   
+      
+  }
+
+  .c-hero h2 {
+    padding: 5px;
+    font-size: 2rem;
+  }
+
+  .container-videos {
+    padding: 10px 0 0 0;
+    width: 90%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column-reverse;
+    margin: auto;
+    align-items: center;
+}
+
+  .c-acao-txt h2 {
+    line-height: normal;
+
+}
+
+  .c-h2 h2, .c-h3 h3, .c-carta-txt h2 {
+    font-size: 2.9rem;
+  }
+
+  .container-carta-img {
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    
+    
+  }
+
+  .c-carta-img {
+    padding: 5px 0;
+  }
+
+  .container-palavra {
+    flex-direction: column;
+  }
+
+  .container-acao2 {
+    flex-direction: column;
+  }
+
+  .c-palavra-txt {
+  width: 85%;
+  }
+
+  .c-acao2-txt {
+    width: 100%;
+  }
+
+  .c-acao2-btn {
+    width: 100%;
+  }
+
+  .imagem-palavra {
+    width: 100%;
+  }
+
+  h3 {
+    line-height: 3rem;
+  }
+
+  .c-acao2-txt {
+    padding-bottom: 30px;
+  }
+
+}

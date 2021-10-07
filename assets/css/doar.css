@@ -59,6 +59,7 @@ img {
     justify-content: center;
     font-size: 13px;
     color: #333;
+    background-color: #fff;
 }
 .inner {
     display: flex;
@@ -75,7 +76,7 @@ img {
     padding: 25px;
     border-radius: 5px;
     grid-gap: 25px;
-    /* box-shadow: 0 0 4px rgba(0, 0, 0, .3); */
+    box-shadow: 0 0 4px rgba(0, 0, 0, .3);
 }
 select,
 input:not([type=radio],[type=checkbox]) {
@@ -252,4 +253,13 @@ label {
     font-size: 12px;
     border-radius: 4px;
     
+}
+
+.bandeiras {
+    max-width: 380px;
+}
+
+.branco {
+    background-color: #fff;
+    border-radius: 5px;
 }
