@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            padding-top: 30px; /* size of chrome */
+            height: 0; 
+            overflow: hidden;
+        }
+        
+        .video-container iframe,
+        .video-container object,
+        .video-container #overlay,
+        .video-container embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #overlay {
+            background:#000;
+            opacity:0.5;
+            /*background:rgba(255,255,255,0.8); or just this*/
+            z-index:50;
+            color:#fff;
+        }
+          </style>
+        
+          <script>
+        /*
+More good info here: http://alistapart.com/article/creating-intrinsic-ratios-for-video
+*/
+
+
+(function(scope){
+
+function videoPlaylist(){
+//private variable
+    var list=["EStjTZ9VwbE", "1Bz7QStnYN4"];
+//the index of the current video
+var pointer = 0;
+this.getList = function(){
+ return list; 
+}
+this.getPointer = function(){
+  return pointer;
+};
+this.setPointer = function(value){
+  document.getElementById("info").innerHTML = "Next Video: "+value;
+  pointer = value;
+}
+}
+function getCurrentVideoPrivate(context){
+var pointer = context.getPointer();
+var list = context.getList();
+
+var currentVideo = list[pointer];
+
+  if(pointer<list.length-1){
+   pointer +=1; 
+  }else{
+    pointer = 0;
+  }  
+  context.setPointer(pointer);
+  return currentVideo;
+}
+//public method getter for private variable
+videoPlaylist.prototype.getVideo = function(){
+return getCurrentVideoPrivate(this);
+};
+
+scope.videoPlaylist = videoPlaylist;
+}(window));
+
+var playList = new videoPlaylist();
+
+//because you can have more than one element
+//belonging to  class, we must select the
+//first one for our use
+
+//get the video-container element
+var elems = document.getElementsByClassName("video-container");
+
+//this advances the playlist
+function nextVideo(){
+elems[0].innerHTML = '<iframe width="560" height="315" src="//www.youtube.com/embed/FRlwCIGFFRg" frameborder="0" allowfullscreen></iframe>';
+}
+
+//This function is activated by the button
+nextVideo();
+
+
+
+          </script>
+</head>
+<body>
+<div id="info">
+    Responsive Youtube......
+    </div>
+    <div class="holder">
+      <div class="video-container">
+        
+      </div>
+      </div>
+    <button onclick="nextVideo()">Next Video</button>
+    </div>
+    
+</body>
+</html>
+
+
+
+
+
+  
