@@ -377,6 +377,13 @@ globalThis.app = new Vue({
                 boleto_url: res.boleto?.url || null,
                 instituicao_id: this.institution_id,
             }
+
+            let send_notify = await this.Super.notificacao_email({
+                status: res.status, 
+                instituicao_id: this.institution_id, 
+                to: playload.cliente.email, 
+                nome: playload.cliente.nome
+            })
             
             if (res.status == "success") {
                 this.loading = true
