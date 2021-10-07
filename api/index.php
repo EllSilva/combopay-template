@@ -8,5 +8,6 @@ date_default_timezone_set('America/Sao_Paulo');
 // ini_set('display_errors', 1);
 
 include __DIR__ . "/core/Banco.php";
+include __DIR__ . "/core/BancoM.php";
 include __DIR__ . "/core/help.php";
 include __DIR__ . "/core/autoload.php";

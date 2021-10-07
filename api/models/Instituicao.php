@@ -19,4 +19,21 @@ class Instituicao {
         $result = json_decode($result);
         return $result;
     }
+    static function listByAdm() {
+        $con = new BancoM;
+        $email = $_REQUEST['email'] ?? null;
+        $sql = "SELECT * FROM instituicao WHERE admin_master='$email'";
+        $result = $con->query( $sql );
+        $adapter = array_map(function($dom) {
+            return [
+                'id' => intval($dom['id']),
+                'nome_fantasia' => $dom['nome_fantasia'],
+                'admin_master' => $dom['admin_master'],
+                'ativo' => $dom['ativo'],
+                'subdominio' => $dom['subdominio']
+            ];
+        }, $result);
+        echo json_encode($adapter, JSON_UNESCAPED_UNICODE );
+    }
+
 }
