@@ -89,6 +89,11 @@ globalThis.app = new Vue({
     },
 
     methods: {
+        random_int(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min;
+        },
         error_image(e) {
             e.target.src = './assets/img/default.png'
         },
@@ -132,6 +137,7 @@ globalThis.app = new Vue({
         },
         async pay() {
             this.alerta = null
+            let token = this.random_int(1, 999)
             let cunston_valor = parseInt( `${this.doacao.amount_custon}`.replace(/\D/gi, '') )
             if(cunston_valor != 0 && cunston_valor <= 999) {
                 this.alerta = "o valor mínimo é 10"
@@ -141,10 +147,11 @@ globalThis.app = new Vue({
             localStorage.setItem('amount', this.doacao.amount )
             localStorage.setItem('email', this.doacao.email )
             localStorage.setItem('amount_custon', this.doacao.amount_custon )            
+            localStorage.setItem('token', token )            
             this.loading = true
             let res = await this.Super.next_pass({
                 instituicao_id: this.institution_id,
-                token: 1,
+                token: token,
                 email: this.doacao.email,
                 valor: this.doacao.amount,
                 callback: ''
