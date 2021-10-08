@@ -1,5 +1,12 @@
 /* BANNER HOME */
-.banner{width:100%; height:800px; position: relative; clear: both; background-image: url(../imagens/fundo_campanha.png); background-repeat: no-repeat; background-size: auto 100%; background-position: center center; z-index: 7; }
+.banner{width:100%; height:800px; position: relative; clear: both; background-image: url(../imagens/bethania/Landing\ page\ Campanha\ de\ Natal\ \(2021\)\ -\ Comunidade\ Bethânia\ 1.png); background-repeat: no-repeat; background-size: auto 100%; background-position: center center; z-index: 7; }
+.banner2{width:100%; height:800px; position: relative; clear: both; background-image: url(../imagens/bethania/Landing\ page\ Campanha\ de\ Natal\ \(2021\)\ -\ Comunidade\ Bethânia\ 2.png); background-repeat: no-repeat; background-size: auto 100%; background-position: center center; z-index: 7; }
+
+
+.banner3{width:100%; height:800px; position: relative; clear: both; background-image: url(../imagens/bethania/Landing\ page\ Campanha\ de\ Natal\ \(2021\)\ -\ Comunidade\ Bethânia\ 3.png); background-repeat: no-repeat; background-size: auto 100%; background-position: center center; z-index: 7; }
+
+
+
 /*.banner .hero { width:750px; height:300px; position: absolute; margin: 360px 0px 0px 0px; background: url(../imagens/hero.png) no-repeat center center; } */
 
 .doacao {position: relative; text-align: center; clear: both; height: auto; padding: 0px; margin: 0px; width:100%; text-align: center; z-index: 17; }
