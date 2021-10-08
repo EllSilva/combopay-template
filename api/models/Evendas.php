@@ -84,11 +84,11 @@ class Evendas
             CURLOPT_POST           => true,
             CURLOPT_HEADER         => 0,
             CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_URL            => "http://api.e-vendas.net.br/api/pedidos",
+            CURLOPT_URL            => "http://api.e-vendas.net.br/api/pedidos/",
             CURLOPT_POSTFIELDS     => json_encode($payload),
             CURLOPT_HTTPHEADER     => [
                 'Content-Type:application/json',
-                'Token:' . $token
+                'token:' . $token
             ]
         ];
         $con = curl_init();
@@ -144,6 +144,7 @@ class Evendas
                 ]
             ]
         ];
+
 
         return Evendas::curl($payload, $token);
     }

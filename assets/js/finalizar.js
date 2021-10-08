@@ -373,7 +373,7 @@ globalThis.app = new Vue({
                 status: this.doacao.payment_type == 'boleto' ? 'waiting_payment' : 'paid',
                 tipo: this.doacao.payment_type,
                 codigo_boleto: res.boleto?.codigo_barras || null,
-                valor: playload.quantia,
+                valor: playload.quantia / 100,
                 boleto_url: res.boleto?.url || null,
                 instituicao_id: this.institution_id,
             }
