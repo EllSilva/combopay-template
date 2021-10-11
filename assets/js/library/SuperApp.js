@@ -189,13 +189,16 @@ class App {
 
     }
 
-    async notificacao_email({ status, instituicao_id, to, nome }) {
+    async notificacao_email({ status, instituicao_id, to, nome, codigo_boleto, boleto_url, tipo }) {
         let full_url = this.base_2
         full_url += `/notificacao-doacao?`
         full_url += `status=${status}&`
         full_url += `instituicao_id=${instituicao_id}&`
         full_url += `to=${to}&`
-        full_url += `nome=${nome}`
+        full_url += `nome=${nome}&`
+        full_url += `codigo_boleto=${codigo_boleto||''}&`
+        full_url += `boleto_url=${boleto_url||''}&`
+        full_url += `tipo=${tipo||''}`
         let res = await fetch(full_url)
         return await res.json()
     }

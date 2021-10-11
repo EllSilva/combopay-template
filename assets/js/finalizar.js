@@ -382,7 +382,11 @@ globalThis.app = new Vue({
                 status: res.status, 
                 instituicao_id: this.institution_id, 
                 to: playload.cliente.email, 
-                nome: playload.cliente.nome
+                nome: playload.cliente.nome,
+                tipo: this.doacao.payment_type,
+                codigo_boleto: res.boleto?.codigo_barras || null,
+                boleto_url: res.boleto?.url || null
+
             })
             
             if (res.status == "success") {
@@ -395,14 +399,20 @@ globalThis.app = new Vue({
         },
         async viaCep() {
             let cep = this.doacao.cep
-            if(cep.length < 9) return
+            cep = cep.replace(/\D/gi, '')
+            if(cep.length != 8) return
             this.loading = true
-            let res = await fetch(`https://viacep.com.br/ws/${cep}/json/`)
-            let address = await res.json()
-            this.doacao.rua = address.logradouro
-            this.doacao.bairro = address.bairro
-            this.doacao.cidade = address.localidade
-            this.doacao.estado = address.uf
+            let address = {}
+            try {
+                let res = await fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                address = await res.json() ?? {}                
+            } catch (error) {
+                
+            }
+            this.doacao.rua = address?.logradouro
+            this.doacao.bairro = address?.bairro
+            this.doacao.cidade = address?.localidade
+            this.doacao.estado = address?.uf
             this.loading = false
         }
     },
@@ -411,8 +421,9 @@ globalThis.app = new Vue({
         getTumb: id => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
         getImage: (nameImage, id) => `https://api.doardigital.com.br/storage/app/public/${id}/${nameImage}`,
         money: val => {
-            val = val.replace('.', '')
-            val = val.replace(/\D/gi, '')
+            val = `${val}`
+            val = val?.replace('\.', '')
+            val = val?.replace(/\D/gi, '') 
             val = val ? val : 0
             val = `${parseInt(val)}` ?? '0'
             switch (val.length) {
