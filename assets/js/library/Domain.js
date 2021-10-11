@@ -5,7 +5,7 @@ export default {
     corruent() {
         let domain = window.location.hostname
         if ( domain == '127.0.0.1' ) {
-            domain = 'tillman.com'
+            domain = 'natal.doacoesbethania.com.br'
         }
         domain = domain.replace('.doardigital.com.br', '')        
         return domain
