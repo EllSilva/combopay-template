@@ -4,5 +4,6 @@ return [
     "host" => "",
     "banco" => "",
     "user" => "",
-    "senha" => ""
+    "senha" => "",
+    "api_key" => ""
 ];
