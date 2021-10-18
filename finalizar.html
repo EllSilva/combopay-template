@@ -20,17 +20,16 @@
                     <div class="container">
                         <div>
                             <h3>DIGITE SUAS INFORMAÇÕES</h3>
-                            <div class="g g-2">
+                            <div class="g g-2-">
                                 <div>
                                     <label for="">Nome*</label>
                                     <input type="text" placeholder="Nome*" v-model="doacao.nome" required>
                                 </div>                              
-                                <div>
+                                <div hidden>
                                     <label for="">Data Nascimento*</label>
-                                    <input type="date" placeholder="Data Nascimento*" v-model="doacao.dataNascimento"
-                                        required>
+                                    <input type="date" placeholder="Data Nascimento*" v-model="doacao.dataNascimento">
                                 </div>
-                                <div>
+                                <div hidden>
                                     <label for="">Gênero*</label>
                                     <select v-model="doacao.sexo">
                                         <option value="feminino">feminino</option>
