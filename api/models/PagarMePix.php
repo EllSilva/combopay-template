@@ -10,7 +10,7 @@ class PagarMePix extends PagarMe
         $payload = [
             'payment_method' => 'pix',
             'amount' => $amount,
-            'pix_expiration_date' => date('Y-m-d', strtotime('+1 days')),
+            'pix_expiration_date' => date('Y-m-d', strtotime('+7 days')),
             'pix_additional_fields' => [
                 [
                     'name' => 'Doação',

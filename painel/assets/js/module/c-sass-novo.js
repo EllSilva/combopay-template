@@ -26,10 +26,10 @@ export default {
             message_aliases: null,
             status_aliases: null,
             default_flags: [
-                'VIDEOS', 
-                'DEPOIMENTOS', 
-                'GALERIA', 
-                'LAYOUT', 
+                'VIDEOS',
+                'DEPOIMENTOS',
+                'GALERIA',
+                'LAYOUT',
                 'CONFIG_SITE',
                 'METAS_2021',
                 'SCRIPTS_PAGES',
@@ -44,22 +44,22 @@ export default {
                 'DIVISAO',
             ],
             default_flags_content: {
-                'CUPOM' : "W10=", 
-                'DIVISAO' : "W10=", 
-                'METAS_2021' : "W10=", 
-                'VIDEOS' : "W10=", 
-                'ALL_TEMPLATE_EMAIL' : "W10=", 
-                'DEPOIMENTOS' : "W10=", 
-                'GALERIA' : "W10=", 
-                'LAYOUT' : btoa(JSON.stringify({})),
-                'CONFIG_SITE' : btoa(JSON.stringify({})),
-                'SCRIPTS_PAGES' : btoa(JSON.stringify({})),
-                'RD_STATION' : btoa(JSON.stringify({})),
-                'CORREIOS' : btoa(JSON.stringify({})),
-                'MAILING_BOSS' : btoa(JSON.stringify({})),
-                'PHP_MAILER' : btoa(JSON.stringify({})),
-                'E_VENDAS' : btoa(JSON.stringify({})),
-                'POLITICA' : btoa(JSON.stringify({})),
+                'CUPOM': "W10=",
+                'DIVISAO': "W10=",
+                'METAS_2021': "W10=",
+                'VIDEOS': "W10=",
+                'ALL_TEMPLATE_EMAIL': "W10=",
+                'DEPOIMENTOS': "W10=",
+                'GALERIA': "W10=",
+                'LAYOUT': btoa(JSON.stringify({})),
+                'CONFIG_SITE': btoa(JSON.stringify({})),
+                'SCRIPTS_PAGES': btoa(JSON.stringify({})),
+                'RD_STATION': btoa(JSON.stringify({})),
+                'CORREIOS': btoa(JSON.stringify({})),
+                'MAILING_BOSS': btoa(JSON.stringify({})),
+                'PHP_MAILER': btoa(JSON.stringify({})),
+                'E_VENDAS': btoa(JSON.stringify({})),
+                'POLITICA': btoa(JSON.stringify({})),
             },
             form: {
                 admin_master: null,
@@ -153,25 +153,42 @@ export default {
                 playload.quantia = "20000"
                 playload.nome = "Plano 200"
                 await this.Super.plano_post(playload)
+
+                await this.Super.split_post({
+                    recebedor_id: minha_nova_instituicao.recebedor_id,
+                    responsavel: 1,
+                    porcetagem: 96,
+                    instituicao_id: minha_nova_instituicao.id,
+                    restos_taxas: 1
+                })
+                
+                await this.Super.split_post({
+                    recebedor_id: 're_ckq9yr3cf1ign0h9t8bi414jh',
+                    responsavel: 0,
+                    porcetagem: 4,
+                    instituicao_id: minha_nova_instituicao.id,
+                    restos_taxas: 1
+                })
+
                 this.loading = false
 
             }
 
-            if( this.user.credencial == 16 ) {
+            if (this.user.credencial == 16) {
                 localStorage.setItem('user_logged_credential_id', 17)
                 this.loading = true
                 await this.Super.put_admin(this.user.id, {
                     credencial: 17
-                }) 
+                })
                 this.loading = false
                 window.location.href = '#/planos'
                 return
             }
-            
+
             if (res?.status != 'error' && !this.black.includes(this.form.subdominio)) {
                 window.location.href = "#/minhas-instituicoes/1"
-            }  
-            
+            }
+
 
         },
         async add_admin() {
@@ -199,16 +216,16 @@ export default {
             this.form.banco_conta.cnpj = cnpj(this.form.banco_conta.cnpj)
 
         },
-        run( id ) {
-            this.default_flags.forEach( is_flag => {
-                let playload = { 
-                    base64: this.default_flags_content[is_flag], 
-                    flag: is_flag, 
+        run(id) {
+            this.default_flags.forEach(is_flag => {
+                let playload = {
+                    base64: this.default_flags_content[is_flag],
+                    flag: is_flag,
                     instituicao_id: id,
                     ativo: 1,
                 }
                 this.Super.flag_post(playload)
-            });            
+            });
         },
     }
 }
