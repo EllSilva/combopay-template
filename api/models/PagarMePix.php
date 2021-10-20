@@ -14,10 +14,20 @@ class PagarMePix extends PagarMe
             'pix_additional_fields' => [
                 [
                     'name' => 'Doação',
-                    'value' => 'R$'.number_format($amount/100, 2, ',', '.')
+                    'value' => 'R$' . number_format($amount / 100, 2, ',', '.')
                 ]
             ]
         ];
         return $this->post('/transactions', $payload);
+    }
+    static function route()
+    {
+        $pix = new PagarMePix();
+        echo json_encode([
+            'next' => true,
+            'message' => null,
+            'qr' => null,
+            'id_transaction' => null
+        ]);
     }
 }
