@@ -23,11 +23,13 @@ class PagarMePix extends PagarMe
     static function route()
     {
         $pix = new PagarMePix();
+        $quantia = intval( $_REQUEST['quantia'] );
+        $resposta = $pix->pay($quantia);
         echo json_encode([
-            'next' => true,
-            'message' => null,
-            'qr' => null,
-            'id_transaction' => null
+            'status' => 'success',
+            'message' => 'Sucesso',
+            'qr' => $resposta['pix_qr_code'],
+            'id_transaction' => $resposta['id']
         ]);
     }
 }

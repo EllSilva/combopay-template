@@ -272,16 +272,16 @@ globalThis.app = new Vue({
 
             let playload = {
                 doador_id: "",
-                metodo: this.doacao.payment_type == "boleto" ? "boleto" : "credit_card",
+                metodo: this.doacao.payment_type == "card" ? "credit_card" : this.doacao.payment_type,
                 instituicao_id: this.institution_id,
-                quantia: (this.doacao.amount == 0 ? this.doacao.amount_custon : this.doacao.amount).replace(',',''),
+                quantia: (this.doacao.amount == 0 ? this.doacao.amount_custon : this.doacao.amount).replace(',', ''),
             }
 
             playload.cliente = {
                 nome: this.doacao.nome,
                 cpf: this.doacao.cpf.replace(/\D/gi, ''),
                 email: this.doacao.email,
-                telefone:'%2B55'+this.doacao.telefone.replace(/\D/gi, ''),
+                telefone: '%2B55' + this.doacao.telefone.replace(/\D/gi, ''),
                 dataNascimento: this.doacao.dataNascimento,
                 sexo: this.doacao.sexo
             }
@@ -353,8 +353,11 @@ globalThis.app = new Vue({
                 } else {
                     this.cache.boleto_code = false
                     this.cache.boleto_link = false
-                }                
-            } 
+                }
+                if (this.doacao.payment_type == 'pix') {
+                    localStorage.setItem('qr', res?.qr || null)
+                }
+            }
 
             if (res.status != "success") {
                 this.error.status = true
@@ -363,12 +366,12 @@ globalThis.app = new Vue({
 
             let full_phone = this.doacao.telefone.replace(/\D/gi, '') + ''
             let full_address = `${this.doacao.cep} - ${this.doacao.rua}, ${this.doacao.numero} - ${this.doacao.bairro} - ${this.doacao.cidade} - ${this.doacao.estado}`
-            
+
             let payload_utils = {
                 email: playload.cliente.email,
                 nome: playload.cliente.nome,
-                ddd: full_phone.substr(0,2),
-                telefone: full_phone.substr(2,11),
+                ddd: full_phone.substr(0, 2),
+                telefone: full_phone.substr(2, 11),
                 endereco: full_address,
                 status: this.doacao.payment_type == 'boleto' ? 'waiting_payment' : 'paid',
                 tipo: this.doacao.payment_type,
@@ -379,35 +382,35 @@ globalThis.app = new Vue({
             }
 
             let send_notify = await this.Super.notificacao_email({
-                status: res.status, 
-                instituicao_id: this.institution_id, 
-                to: playload.cliente.email, 
+                status: res.status,
+                instituicao_id: this.institution_id,
+                to: playload.cliente.email,
                 nome: playload.cliente.nome,
                 tipo: this.doacao.payment_type,
                 codigo_boleto: res.boleto?.codigo_barras || null,
                 boleto_url: res.boleto?.url || null
 
             })
-            
+
             if (res.status == "success") {
                 this.loading = true
                 await this.Super.send_mensagem(payload_utils)
                 this.loading = false
                 window.location.href = "/obrigado.html"
             }
-            
+
         },
         async viaCep() {
             let cep = this.doacao.cep
             cep = cep.replace(/\D/gi, '')
-            if(cep.length != 8) return
+            if (cep.length != 8) return
             this.loading = true
             let address = {}
             try {
                 let res = await fetch(`https://viacep.com.br/ws/${cep}/json/`)
-                address = await res.json() ?? {}                
+                address = await res.json() ?? {}
             } catch (error) {
-                
+
             }
             this.doacao.rua = address?.logradouro
             this.doacao.bairro = address?.bairro
@@ -423,7 +426,7 @@ globalThis.app = new Vue({
         money: val => {
             val = `${val}`
             val = val?.replace('\.', '')
-            val = val?.replace(/\D/gi, '') 
+            val = val?.replace(/\D/gi, '')
             val = val ? val : 0
             val = `${parseInt(val)}` ?? '0'
             switch (val.length) {
@@ -456,6 +459,7 @@ globalThis.app = new Vue({
         }
     },
     async mounted() {
+        
 
         this.doacao.recorrente = localStorage.getItem('recorrente')
         this.doacao.amount = localStorage.getItem('amount')

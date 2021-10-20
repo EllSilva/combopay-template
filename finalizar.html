@@ -98,7 +98,7 @@
                                         Boleto
                                     </label>
                                 </div>
-                                <div>
+                                <div v-if="localStorage.getItem('recorrente') != 1">
                                     <input type="radio" v-model="doacao.payment_type" value="pix" id="for_pix" hidden>
                                     <label class="options_pay" for="for_pix">
                                         <img src="./assets/icon/qr.png"> <br>

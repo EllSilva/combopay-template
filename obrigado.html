@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/obrigado.css">
     <title>Obrigado</title>
+    <script src="./assets/js/library/qrcode.js"  defer></script>
     <script src="./assets/js/obrigado.js" type="module" defer></script>
     <link rel="shortcut icon" href="./assets/logo/ico.svg" type="image/x-icon">
 </head>
@@ -38,6 +39,17 @@
             </div>
 
             <p><b>Importante: Este boleto é uma contribuição espontânea e não gera protesto.</b></p>
+        </div>
+        <center>
+            <div ref="print_qr"></div>
+        </center>
+        <div id="block2" v-if="type=='pix'">
+            <p>Seu codigo pix.</p>
+            <div id="inpContainer">
+                <input type="text" ref="codigo_pix" v-model="qr">
+                <button  @click="copiar('codigo_pix')"><b>Copiar</b></button>
+            </div>
+
         </div>
 
         <div id="block3" :style="{ backgroundColor: backgroundColor }">

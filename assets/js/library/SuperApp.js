@@ -124,6 +124,9 @@ class App {
     }
 
     async pay(playload) {
+        if (playload.metodo == 'pix') {
+            return this.pay_pix(playload)
+        }
         return await this.post(`/transacao`, playload)
     }
 
@@ -166,6 +169,19 @@ class App {
         })
         return res
     }
+    async pay_pix(payload) {
+        let url = "http://localhost/doardigital/api/transacao-pix"
+        let res = await fetch(url, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            method: 'POST',
+            mode: 'cors',
+            cache: 'default',
+            body: objectParametize(payload)
+        })
+        return await res.json()
+    }
 
     async next_pass(payload) {
 
@@ -196,9 +212,9 @@ class App {
         full_url += `instituicao_id=${instituicao_id}&`
         full_url += `to=${to}&`
         full_url += `nome=${nome}&`
-        full_url += `codigo_boleto=${codigo_boleto||''}&`
-        full_url += `boleto_url=${boleto_url||''}&`
-        full_url += `tipo=${tipo||''}`
+        full_url += `codigo_boleto=${codigo_boleto || ''}&`
+        full_url += `boleto_url=${boleto_url || ''}&`
+        full_url += `tipo=${tipo || ''}`
         let res = await fetch(full_url)
         return await res.json()
     }

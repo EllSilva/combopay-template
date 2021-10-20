@@ -30,7 +30,6 @@ export default {
         if( instituicao.dominio_personalizado == 1 && instituicao.dominio.length > 3 ) {
             dominio = instituicao.dominio
         }
-        console.log(instituicao)
         var qrcode = new QRCode(this.$refs.print_qr, {
             text: dominio,
             width: 230,
