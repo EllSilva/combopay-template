@@ -170,7 +170,7 @@ class App {
         return res
     }
     async pay_pix(payload) {
-        let url = "http://localhost/doardigital/api/transacao-pix"
+        let url = "https://painel.doardigital.com.br/api/transacao-pix"
         let res = await fetch(url, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',

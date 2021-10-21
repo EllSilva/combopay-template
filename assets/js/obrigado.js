@@ -53,14 +53,14 @@ globalThis.app = new Vue({
         this.qr = localStorage.getItem('qr')
 
         if (this.type == 'pix') {
-
+            let code_pix =  `${this.qr}`
             var qrcode = new QRCode(this.$refs.print_qr, {
-                text: btoa(this.qr),
+                text: code_pix,
                 width: 230,
                 height: 230,
                 colorDark: "#000000",
                 colorLight: "#ffffff",
-                correctLevel: QRCode.CorrectLevel.H
+                correctLevel: QRCode.CorrectLevel.L
             });
         }
     },
