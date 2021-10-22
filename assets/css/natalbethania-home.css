@@ -82,3 +82,16 @@
 
 	.quero, .quero_seta  { display: none; }
 }
+
+.imagem-responsiva img {
+
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+.imagem-responsiva img {
+
+	padding: 0;
+	margin: 0;
+}
