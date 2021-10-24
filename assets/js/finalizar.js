@@ -373,7 +373,7 @@ globalThis.app = new Vue({
                 ddd: full_phone.substr(0, 2),
                 telefone: full_phone.substr(2, 11),
                 endereco: full_address,
-                status: this.doacao.payment_type == 'boleto' ? 'waiting_payment' : 'paid',
+                status: this.doacao.payment_type == 'boleto' || 'pix' ? 'waiting_payment' : 'paid',
                 tipo: this.doacao.payment_type,
                 codigo_boleto: res.boleto?.codigo_barras || null,
                 valor: playload.quantia / 100,
