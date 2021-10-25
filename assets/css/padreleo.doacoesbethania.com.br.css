@@ -1,3 +1,157 @@
+@import url(https://fonts.googleapis.com/css?family=Overlock);
+* {
+  padding: 0%;
+  margin: 0%;
+}
+
+.banner-topo {
+  max-width: 300%;
+  background-color: red;
+  height: 500%;
+  background-image: url("../img/padreleo.doacoesbethania.com.br/campanha-padre-leo.png");
+  background-size: cover;
+}
+iframe#iframe-central {
+  border-radius: 30px;
+  width: 844px;
+  height: 430px;
+  padding: 5px;
+}
+iframe#iframe-centrals {
+  border-radius: 30px;
+}
+#video {
+  width: 560px;
+  height: 315px;
+}
+#video1 {
+  width: 560px;
+  height: 315px;
+}
+#feito {
+}
+.rodape-two {
+  max-width: 300;
+  background-color: #ffffff;
+  padding: 5px;
+  color: #110e0e;
+}
+
+#rodape-one {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  color: white;
+  justify-content: space-between;
+}
+#rodape {
+  width: 100%;
+  background-color: #072233;
+}
+#contain {
+  width: 100%;
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+}
+.panel-body {
+  background-color: #072233;
+  color: #ffffff;
+}
+
+.panel-footer {
+  background-color: #0a161d;
+  color: #ffffff;
+}
+
+#btn-doacoes-lg {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 20px;
+  background-color: #5cb85c;
+  border: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  width: 500px;
+  font-size: 19pt;
+
+  display: flex;
+  justify-content: center;
+}
+#btn-doacoes {
+  display: inline;
+  font-size: 2rem;
+  border: none;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  background-color: #23a455;
+  padding: 20px;
+  text-decoration: none;
+  border-radius: 20px;
+  transition: all 150ms linear 0s;
+  box-shadow: 0 0 10px 0 rgb(0 0 0 / 50%);
+}
+
+#general-text {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  color: #0a27aa;
+  font-family: "Overlock", Sans-serif;
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1.1em;
+}
+#p-general {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  color: #000000;
+  font-family: "Arial", Sans-serif;
+  font-size: 19px;
+  line-height: 1.1em;
+  font-weight: 200;
+}
+
+#text-big {
+  color: #0a27aa;
+  font-family: "Arial", Sans-serif;
+  font-size: 29px;
+  font-weight: 700;
+
+  text-align: center;
+}
+#text-big-2 {
+  color: #0a27aa;
+  font-family: "Arial", Sans-serif;
+  font-size: 39px;
+  font-weight: bold;
+  line-height: 1.5em;
+  text-shadow: 0px 0px 1px rgb(0 0 0 / 30%);
+  text-align: center;
+}
+#general-text-modal {
+  color: #45b0be;
+  text-align: center;
+}
+
+.panel {
+  width: 100%;
+}
+
+#nasa {
+  display: flex;
+  justify-content: space-between;
+  background-color: #5cb85c;
+}
+#nasas {
+  display: flex;
+  justify-content: space-between;
+  background-color: #b8725c;
+}
+
 /*=================================================== 
 01 - CONFIGURAÇÕES GERAIS
 02 - HEADER
@@ -20,7 +174,6 @@
 01 - CONFIGURAÇÕES GERAIS
 ======================================================*/
 * {
-
   margin: 0;
   padding: 0;
   outline: 0;
@@ -45,13 +198,13 @@ body {
 }
 
 h2 {
-  color: #25B3C2;
+  color: #25b3c2;
   font-size: 2.5rem;
   line-height: 4.6rem;
 }
 
 h3 {
-  color: #25B3C2;
+  color: #25b3c2;
   font-size: 2.8rem;
   line-height: 3.8rem;
 }
@@ -67,7 +220,7 @@ h3 {
   font-size: 2rem;
   font-weight: 600;
   color: rgb(255, 255, 255);
-  background-color: #23A455;
+  background-color: #5cb85c;
   padding: 20px 18%;
   text-decoration: none;
   border-radius: 20px;
@@ -77,31 +230,28 @@ h3 {
 
 .button:hover {
   opacity: 0.9;
+    color: rgb(255, 255, 255);
 }
 
 p {
-    font-family: Arial, Sans-serif;
-    font-size: 1.8rem;
-    font-weight: 600;
+  font-family: Arial, Sans-serif;
+  font-size: 1.8rem;
+  font-weight: 600;
 }
 
-.espaco{
- padding: 20px 0;
+.espaco {
+  padding: 20px 0;
 }
 
 /*=================================================== 
 02 - HEADER
 ======================================================*/
-.topo {  
-  padding: 10px 0;
+.topo {
   text-align: center;
-  background-color: #25B3C2;
 }
 
 .imagem-logo {
-
   width: 35%;
-
 }
 
 /*=================================================== 
@@ -115,7 +265,7 @@ p {
 }
 
 .c-hero {
-  width:90%;
+  width: 90%;
   padding: 10px;
   text-align: center;
 }
@@ -131,11 +281,8 @@ p {
 }
 
 .c-hero img {
-    max-width: 90%;
-    
+  max-width: 90%;
 }
-
-
 
 /*=================================================== 
 04 - ACAO
@@ -146,7 +293,6 @@ p {
   display: flex;
   margin: auto;
   align-items: center;
-
 }
 
 .container-1 {
@@ -155,21 +301,24 @@ p {
   display: flex;
   margin: auto;
   align-items: center;
-
 }
 
 .c-acao-txt {
-  width:100%;
+  width: 100%;
   text-align: center;
   padding: 40px 0 15px 0;
-  font-size: 3.5rem;
+  color: #0a27aa;
+  font-family: "Arial", Sans-serif;
+  font-size: 29px;
+  font-weight: 700;
+  line-height: 0em;
+  letter-spacing: -0.4px;
 }
 
-.c-acao-btn{
+.c-acao-btn {
   margin-top: 40px;
-  text-align:center
+  text-align: center;
 }
-
 
 /*=================================================== 
 05 - TITULO
@@ -180,17 +329,20 @@ p {
   display: flex;
   margin: auto;
   align-items: center;
-
 }
 
 .c-h2 {
-  width:100%;
+  width: 100%;
 }
 
 .c-h2 h2 {
   text-align: center;
   padding: 40px 0 15px 0;
-  font-size: 3.5rem;
+  color: #0a27aa;
+  font-family: "Arial", Sans-serif;
+  font-size: 37px;
+  font-weight: 600;
+  text-shadow: 0px 0px 1px rgb(0 0 0 / 30%);
 }
 
 .container-h3 {
@@ -199,17 +351,21 @@ p {
   display: flex;
   margin: auto;
   align-items: center;
-
 }
 
 .c-h3 {
-  width:100%;
+  width: 100%;
 }
 
 .c-h3 h3 {
   text-align: center;
   padding: 40px 0 15px 0;
-  font-size: 3.5rem;
+  color: #0a27aa;
+  font-family: "Arial", Sans-serif;
+  font-size: 39px;
+  font-weight: 700;
+  line-height: 1.5em;
+  text-shadow: 0px 0px 1px rgb(0 0 0 / 30%);
 }
 
 /*=================================================== 
@@ -222,66 +378,70 @@ p {
   display: flex;
   margin: auto;
   align-items: center;
- 
+  justify-content: center;
 }
 
 .c-videos {
-  width:100%;
+  width: 100%;
   padding: 10px;
 }
 
-.c-videos h2{
+.c-videos h2 {
   text-align: center;
   padding: 40px 0 15px 0;
   font-size: 3.5rem;
 }
-
-.container-videos .c-videos iframe {
+#video-rounded iframe {
   border-radius: 20px;
 }
-
+.container-videos .c-videos iframe {
+  /* border-radius: 20px;*/
+}
+#cv iframe {
+  border: none;
+  width: 100%;
+}
 #container {
   background-color: #567890;
   width: 90%;
   margin: 0 auto;
   border: 4px solid #222;
-  display: flex;}
+  display: flex;
+}
 
 .vidwrapper {
   width: 100%;
   max-width: 800px;
-  border-radius: 20px;   
-    
 }
 
 .vidcontainer {
   width: 100%;
   max-width: 100%;
   height: 0;
-  padding-bottom: 56.25%; 
+  padding-bottom: 56.25%;
   position: relative;
-  border-radius: 20px;
 }
-
+.vidcontainer-meio {
+  width: 100%;
+  max-width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+  position: relative;
+}
 .vidcontainer iframe {
   width: 100%;
   max-width: 100%;
-  height: 100%; 
+  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  border-radius: 20px;
-
 }
-
 /*=================================================== 
 07 - CARTA
 ======================================================*/
 .container-carta {
-  background-color: #25B3C2;
+  background-color: #25b3c2;
 }
-
-
 
 .container-carta-txt {
   width: 90%;
@@ -289,25 +449,23 @@ p {
   display: flex;
   margin: auto;
   align-items: center;
-  
-
 }
 
-.c-carta-txt a, .c-carta-txt p{
-  
+.c-carta-txt a,
+.c-carta-txt p {
   align-items: center;
-  color:#fff;
+  color: #fff;
 }
 
 .c-carta-txt {
-  width:100%;
+  width: 100%;
 }
 
-.c-carta-txt h2{
+.c-carta-txt h2 {
   text-align: center;
   padding: 40px 0 15px 0;
   font-size: 3.5rem;
-  color:#fff;
+  color: #fff;
 }
 
 .container-carta-img {
@@ -316,26 +474,23 @@ p {
   display: flex;
   margin: auto;
   align-items: center;
-  
-  
 }
 
 .c-carta-img {
-  width:100%;
+  width: 100%;
 }
 
 .imagem-carta {
   border-radius: 20px;
   box-shadow: 0 0 10px 0 rgb(0 0 0 / 50%);
-  width:92%;
+  width: 92%;
 }
 
 .container-carta-img .c-carta-img p {
-    color: white;
-    text-align: center;
-    padding-top: 5px;
+  color: white;
+  text-align: center;
+  padding-top: 5px;
 }
-
 
 /*=================================================== 
 08 - PALAVRA
@@ -347,24 +502,27 @@ p {
   display: flex;
   margin: auto;
   align-items: center;
- 
 }
 
 .c-palavra-img {
-  width:40%;
+  width: 100%;
   padding: 10px;
   text-align: center;
 }
 
 .c-palavra-txt {
-  width:60%;
+  width: 80%;
+  font-size: 25pt;
   padding: 10px;
+  color: #0a27aa;
+  font-family: "Overlock", Sans-serif;
+  font-size: 34px;
+  font-weight: 600;
+  text-align: center;
 }
 
 .imagem-palavra {
   width: 70%;
-  
-
 }
 
 /*=================================================== 
@@ -378,25 +536,22 @@ p {
   display: flex;
   margin: auto;
   align-items: center;
- 
 }
 
 .c-acao2-txt {
-  width:50%;
+  width: 50%;
   padding: 10px;
   font-size: 26px;
   text-align: center;
-  
 }
 
 .c-acao2-btn {
-  width:50%;
+  width: 50%;
   padding: 10px;
   vertical-align: top;
 }
 
-
-.c-acao2-btn-div{
+.c-acao2-btn-div {
   text-align: center;
 }
 /*=================================================== 
@@ -405,22 +560,27 @@ p {
 
 .imagem-rodape {
   max-width: 120px;
-  padding-bottom: 20px;
+  padding: 0 0 20px 0;
 }
 
 .container-rodape {
   display: flex;
   text-align: center;
-  background-color: #F0EEF0;
+  background-color: #f0eef0;
+}
+.container-rodape p {
+  color: #1578bc;
+  padding-top: 20px;
 }
 
 .c-rodape {
-  width:100%;
+  width: 100%;
 }
-
-.c-rodape p {
-  color:#2D85C1;
-  padding-top: 20px;
+.topos {
+  height: 80vh;
+  background: url("../img/padreleo.doacoesbethania.com.br/campanha-padre-leo.png");
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 /*=================================================== 
@@ -430,38 +590,39 @@ FIM
 /* DO */
 /* RESPONSIVO */
 
-
-
-
 /*================= RESPONSIVO < 600PX  ==================*/
 @media only screen and (max-width: 600px) {
   .container-hero {
     padding: 10px 2% 40px 2%;
     display: flex;
     flex-direction: column-reverse;
-    flex: 0 0 100%; 
+    flex: 0 0 100%;
     margin: auto;
     align-items: center;
   }
 
   .imagem-logo {
-
     width: 85%;
-  
   }
 
   .vidwrapper {
     width: 100%;
     max-width: 800px;
-    border-radius: 20px;   
-      
+    border-radius: 20px;
   }
-
+  .topos {
+    height: 50vh;
+    background: url("../img/padreleo.doacoesbethania.com.br/campanha-menor.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
   .c-hero h2 {
     padding: 5px;
     font-size: 2rem;
   }
-
+  #cont {
+    width: 100%;
+  }
   .container-videos {
     padding: 10px 0 0 0;
     width: 90%;
@@ -470,15 +631,23 @@ FIM
     flex-direction: column-reverse;
     margin: auto;
     align-items: center;
-}
+  }
 
   .c-acao-txt h2 {
     line-height: normal;
+  }
 
-}
-
-  .c-h2 h2, .c-h3 h3, .c-carta-txt h2 {
+  .c-h2 h2,
+  .c-h3 h3,
+  .c-carta-txt h2,
+  .c-acao-txt {
     font-size: 2.9rem;
+    color: #0a27aa;
+    font-family: "Arial", Sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.5em;
+    text-shadow: 0px 0px 1px rgb(0 0 0 / 30%);
   }
 
   .container-carta-img {
@@ -487,8 +656,6 @@ FIM
     flex-direction: column;
     align-items: center;
     text-align: center;
-    
-    
   }
 
   .c-carta-img {
@@ -504,15 +671,34 @@ FIM
   }
 
   .c-palavra-txt {
-  width: 85%;
+    width: 100%;
+
+    width: 60%;
+    font-size: 25pt;
+    padding: 10px;
+    color: #0a27aa;
+    font-family: "Overlock", Sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
   }
 
   .c-acao2-txt {
     width: 100%;
     padding-bottom: 30px;
     padding: 30px 0 0 0;
-  }
 
+    font-family: "Arial", Sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    color: #2e2b2b;
+  }
+  .c-acao-btn span {
+    font-size: 12pt;
+  }
+  .c-acao2-btn-div span {
+    font-size: 12pt;
+  }
   .c-acao2-btn {
     width: 100%;
   }
@@ -524,8 +710,4 @@ FIM
   h3 {
     line-height: 3rem;
   }
-
-  
-
-
 }
