@@ -34,14 +34,14 @@ class EndDoacao
         $codigo_boleto = $_REQUEST['codigo_boleto'] ?? null;
 
         $conteudo = "
-            Olá $nome, sua Doação foi concluída com sucesso. <br>
+            Olá $nome, sua Doação foi processada com sucesso. <br>
             Somos imensamente gratos por sua doação. <br>
             Ela ajuda a manter todo projeto vivo e com pleno funcionamento 
             Deus lhe abençoe poderosamente. <br>
             Codigo boleto: $codigo_boleto <br>
             <a href=\"$boleto_url\">Clique aqui para imprimir</a>
         ";
-        $title = "Doação Concluída";
+        $title = "Doação Processada";
         if ($status == 'error') return null;
         if ($tipo != 'boleto') return null;
         EndDoacao::send($instituicao_id, $conteudo, $to, $title);
@@ -112,9 +112,9 @@ class EndDoacao
         $con = new Banco;
 
         $horarios = [
-            EndDoacao::somar_minutos(2880),
-            EndDoacao::somar_minutos(5760),
-            EndDoacao::somar_minutos(8640),
+            // EndDoacao::somar_minutos(2880),
+            // EndDoacao::somar_minutos(5760),
+            // EndDoacao::somar_minutos(8640),
         ];
 
         foreach ($horarios as $data_hora) {
