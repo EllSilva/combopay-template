@@ -32,9 +32,9 @@ class RecuperacaoDoacao
         }        
         
         $horarios = [
-            RecuperacaoDoacao::somar_minutos(15),
-            RecuperacaoDoacao::somar_minutos(24*60),
-            RecuperacaoDoacao::somar_minutos(48*60),
+            // RecuperacaoDoacao::somar_minutos(15),
+            // RecuperacaoDoacao::somar_minutos(24*60),
+            // RecuperacaoDoacao::somar_minutos(48*60),
         ];
 
         foreach( $horarios as $data_hora ) {
